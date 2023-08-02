@@ -1,3 +1,6 @@
+from read_FASTA import read_FASTA
+
+
 class Segment:
     chr_name: str
     start: int
@@ -173,49 +176,16 @@ class Chromosome:
 
 
 class Genome:
-    full_KT: {str: [Chromosome]}  # has exactly 24 slots, corresponding to the 24 possible chromosome types
-    motherboard: Arm  # using the Arm object to use generate breakpoint method
+    full_KT: {str: [Chromosome]}               # has exactly 24 slots, corresponding to the 24 possible chromosome types
+    motherboard: Arm                                # using the Arm object to use generate breakpoint method
     centromere_segments = [Segment]
-    history: [(str, Arm, Chromosome, Chromosome)]  # event type, event segments, chr from, chr to
+    history: [(str, Arm, Chromosome, Chromosome)]   # event type, event segments, chr from, chr to
 
-    def __init__(self, copy_number: int, chr_of_interest: [str], genome_index_file: str):
-        # construct KT slots
-        self.full_KT = {}
-        self.motherboard = Arm([])
-        self.centromere_segments = []
+    def __init__(self, full_KT, motherboard_segments, centromere_segments):
+        self.full_KT = full_KT
+        self.motherboard = Arm(motherboard_segments)
+        self.centromere_segments = centromere_segments
         self.history = []
-        for slot in chr_of_interest:
-            self.full_KT[slot] = []
-        # prepare Raw KT
-        with open(genome_index_file) as fp_read:
-            for line in fp_read:
-                line = line.replace('\n', '').split('\t')
-                if line[0] in chr_of_interest:
-                    chr_name = line[0]
-                    p_arm_segment = Segment(chr_name, int(line[2]), int(line[3]))
-                    q_arm_segment = Segment(chr_name, int(line[4]), int(line[5]))
-                    t1_len = int(line[2])
-                    t2_len = int(line[1]) - int(line[5]) - 1
-                    centromere_segment = Segment(chr_name, int(line[3]) + 1, int(line[4]) - 1)
-
-                    self.full_KT[chr_name].append(Chromosome(chr_name, Arm([p_arm_segment]), Arm([q_arm_segment]),
-                                                             t1_len, t2_len, Arm([centromere_segment])))
-                    self.motherboard.segments.extend([p_arm_segment.duplicate(),
-                                                      q_arm_segment.duplicate()])
-                    self.centromere_segments.append(centromere_segment.duplicate())
-
-        # setup copy numbers
-        if copy_number <= 0:
-            raise ValueError('copy number')
-        for slot in self.full_KT:
-            first_chromosome = self.full_KT[slot][0]
-            for i in range(copy_number - 1):
-                self.full_KT[slot].append(first_chromosome.duplicate())
-        # rename each chromosome with unique name
-        for slot in self.full_KT:
-            current_slot = self.full_KT[slot]
-            for i in range(copy_number):
-                current_slot[i].name = current_slot[i].name + chr(i + 97)
 
     def __str__(self):
         return_str = ''
@@ -477,3 +447,66 @@ class Genome:
         event_arm2.delete_segments_by_index(arm2_segment_indices)
         event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
         event_arm1.segments[arm1_start_segment_index:arm1_start_segment_index] = arm2_segments
+
+    def output_KT(self, output_file):
+        with open(output_file, 'w') as fp_write:
+            fp_write.write(self.motherboard_tostring())
+            fp_write.write('---\n')
+            fp_write.write(self.KT_tostring())
+            fp_write.write('---\n')
+            fp_write.write(self.history_tostring())
+
+    def output_FASTA(self, genome_path: str, chr_name_file: str, output_file: str):
+        chr_name_conversion = {}
+        full_name_list = []
+        with open(chr_name_file) as fp_read:
+            for line in fp_read:
+                line = line.replace("\n", "").split("\t")
+                if line[0] in self.full_KT:
+                    chr_name_conversion[line[0]] = line[1]
+                    full_name_list.append(line[1])
+        sequence_dict = read_FASTA(genome_path, full_name_list)
+
+        output_dict = {}
+        for slot in self.full_KT:
+            for chromosome in self.full_KT[slot]:
+                new_sequence = []
+                # telomere 1
+                new_sequence.append('N' * chromosome.t1_len)
+                # p-arm
+                for segment in chromosome.p_arm.segments:
+                    if segment.direction():
+                        new_sequence.append(
+                            sequence_dict[chr_name_conversion[segment.chr]][segment.start: segment.end + 1])
+                    else:
+                        new_sequence.append(
+                            sequence_dict[chr_name_conversion[segment.chr]][segment.end: segment.start + 1]
+                            [::-1])
+                # centromere
+                for segment in chromosome.centromere.segments:
+                    if segment.direction():
+                        new_sequence.append(
+                            sequence_dict[chr_name_conversion[segment.chr]][segment.start: segment.end + 1])
+                    else:
+                        new_sequence.append(
+                            sequence_dict[chr_name_conversion[segment.chr]][segment.end: segment.start + 1]
+                            [::-1])
+                # q-arm
+                for segment in chromosome.q_arm.segments:
+                    if segment.direction():
+                        new_sequence.append(
+                            sequence_dict[chr_name_conversion[segment.chr]][segment.start: segment.end + 1])
+                    else:
+                        new_sequence.append(
+                            sequence_dict[chr_name_conversion[segment.chr]][segment.end: segment.start + 1]
+                            [::-1])
+                # telomere 2
+                new_sequence.append('N' * chromosome.t2_len)
+
+                output_dict[chromosome.name] = ''.join(new_sequence)
+
+        # output
+        with open(output_file, 'w') as fp_write:
+            for header, sequence in output_dict.items():
+                fp_write.writelines(">{}\n".format(header))
+                fp_write.writelines(sequence + "\n")
