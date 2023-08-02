@@ -9,12 +9,12 @@ chr_1a = new_genome.full_KT['Chr1'][0]
 chr_1b = new_genome.full_KT['Chr1'][1]
 chr_2a = new_genome.full_KT['Chr2'][0]
 chr_2b = new_genome.full_KT['Chr2'][1]
-chr_1a.p_arm.segments = [Segment('Chr1', 0, 25), Segment('Chr1', 26, 37),
-                         Segment('Chr1', 38, 39), Segment('Chr1', 40, 50),
-                         Segment('Chr1', 51, 76), Segment('Chr1', 77, 100)]
-chr_1b.p_arm.segments = [Segment('Chr1', 0, 25), Segment('Chr1', 26, 37),
-                         Segment('Chr1', 38, 39), Segment('Chr1', 40, 50),
-                         Segment('Chr1', 51, 76), Segment('Chr1', 77, 100)]
+# chr_1a.p_arm.segments = [Segment('Chr1', 0, 25), Segment('Chr1', 26, 37),
+#                          Segment('Chr1', 38, 39), Segment('Chr1', 40, 50),
+#                          Segment('Chr1', 51, 76), Segment('Chr1', 77, 100)]
+# chr_1b.p_arm.segments = [Segment('Chr1', 0, 25), Segment('Chr1', 26, 37),
+#                          Segment('Chr1', 38, 39), Segment('Chr1', 40, 50),
+#                          Segment('Chr1', 51, 76), Segment('Chr1', 77, 100)]
 # chr_2a.p_arm.segments = [Segment('Chr1', 0, 25), Segment('Chr1', 26, 37),
 #                          Segment('Chr1', 38, 39), Segment('Chr1', 40, 50),
 #                          Segment('Chr1', 51, 76), Segment('Chr1', 77, 100)]
@@ -22,6 +22,10 @@ chr_1b.p_arm.segments = [Segment('Chr1', 0, 25), Segment('Chr1', 26, 37),
 #                          Segment('Chr1', 38, 39), Segment('Chr1', 40, 50),
 #                          Segment('Chr1', 51, 76), Segment('Chr1', 77, 100)]
 
-new_genome.deletion(chr_1a, chr_1a.p_arm, 27, 53)
-new_genome.deletion(chr_2a, chr_2a.p_arm, 27, 53)
-print(new_genome)
+new_genome.inversion(chr_1a, chr_1a.p_arm, 27, 53)
+new_genome.deletion(chr_1a, chr_1a.p_arm, 28, 29)
+new_genome.inversion(chr_2a, chr_2a.p_arm, 27, 53)
+# print(new_genome)
+print(new_genome.motherboard_tostring())
+print(new_genome.history_tostring())
+print(new_genome.KT_tostring())

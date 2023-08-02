@@ -40,6 +40,8 @@ class Segment:
         return "({}, {}, {})".format(self.chr_name, self.start, self.end)
 
     def same_segment_ignore_dir(self, other):
+        if self.chr_name != other.chr_name:
+            return False
         if self.start != other.start and self.start != other.end:
             return False
         if self.end != other.start and self.end != other.end:
@@ -79,7 +81,7 @@ class Segment:
         if self.direction():
             self.end = self.end - bp_to_delete
         else:
-            self.end = self.start + bp_to_delete
+            self.end = self.end + bp_to_delete
 
     def invert(self):
         temp_start = self.start
@@ -173,12 +175,14 @@ class Chromosome:
 class Genome:
     full_KT: {str: [Chromosome]}  # has exactly 24 slots, corresponding to the 24 possible chromosome types
     motherboard: Arm  # using the Arm object to use generate breakpoint method
-    history: [(str, [Segment], Chromosome, Chromosome)]  # event type, event segments, chr from, chr to
+    centromere_segments = [Segment]
+    history: [(str, Arm, Chromosome, Chromosome)]  # event type, event segments, chr from, chr to
 
     def __init__(self, copy_number: int, chr_of_interest: [str], genome_index_file: str):
         # construct KT slots
         self.full_KT = {}
         self.motherboard = Arm([])
+        self.centromere_segments = []
         self.history = []
         for slot in chr_of_interest:
             self.full_KT[slot] = []
@@ -197,8 +201,8 @@ class Genome:
                     self.full_KT[chr_name].append(Chromosome(chr_name, Arm([p_arm_segment]), Arm([q_arm_segment]),
                                                              t1_len, t2_len, Arm([centromere_segment])))
                     self.motherboard.segments.extend([p_arm_segment.duplicate(),
-                                                      centromere_segment.duplicate(),
                                                       q_arm_segment.duplicate()])
+                    self.centromere_segments.append(centromere_segment.duplicate())
 
         # setup copy numbers
         if copy_number <= 0:
@@ -229,8 +233,61 @@ class Genome:
         :param chr_from: object reference
         :return: None
         """
-        new_history = tuple([event_type, segments, chr_from, chr_to])
+        new_history = tuple([event_type, Arm(segments), chr_from, chr_to])
         self.history.append(new_history)
+
+    def history_tostring(self):
+        segment_dict = self.segment_indexing()
+        return_str = ''
+        for history_itr in self.history:
+            segment_str = ''
+            for segment_itr in history_itr[1].segments:
+                if segment_itr.direction():
+                    segment_str += segment_dict[segment_itr] + '+'
+                else:
+                    new_segment_itr = segment_itr.duplicate()
+                    new_segment_itr.invert()
+                    segment_str += segment_dict[new_segment_itr] + '-'
+            return_str += '{} on segments [{}], from {} to {}\n'.format(history_itr[0], segment_str,
+                                                                        history_itr[2].name, history_itr[3].name)
+        return return_str
+
+    def segment_indexing(self):
+        segment_dict = {}
+        current_index = 1
+        for segment_itr in self.motherboard.segments:
+            segment_dict[segment_itr] = str(current_index)
+            current_index += 1
+        for centromere_itr in self.centromere_segments:
+            centromere_name = centromere_itr.chr_name.replace('Chr', 'CEN')
+            segment_dict[centromere_itr] = centromere_name
+        return segment_dict
+
+    def motherboard_tostring(self):
+        segment_dict = self.segment_indexing()
+        sorted_segments = sorted(segment_dict)
+        return_str = 'index\torigin\tstart\tend\n'
+        for segment_itr in sorted_segments:
+            return_str += '{}\t{}\t{}\t{}\n'.format(segment_dict[segment_itr], segment_itr.chr_name,
+                                                    segment_itr.start, segment_itr.end)
+        return return_str
+
+    def KT_tostring(self):
+        segment_dict = self.segment_indexing()
+        return_str = 'chromosome\tKT\ttelo1_len\ttelo2_len\n'
+        for slot in self.full_KT:
+            for chr_itr in self.full_KT[slot]:
+                tostring_segment_list = []
+                for segment_itr in chr_itr.p_arm.segments:
+                    if segment_itr.direction():
+                        tostring_segment_list.append(segment_dict[segment_itr] + '+')
+                    else:
+                        new_segment_itr = segment_itr.duplicate()
+                        new_segment_itr.invert()
+                        tostring_segment_list.append(segment_dict[new_segment_itr] + '-')
+                return_str += '{}\t{}\t{}\t{}\n'.format(chr_itr.name, ','.join(tostring_segment_list),
+                                                        str(chr_itr.t1_len), str(chr_itr.t2_len))
+        return return_str
 
     def generate_breakpoint(self, event_arm: Arm, breakpoint_index: int):
         """
@@ -270,18 +327,36 @@ class Genome:
             left_segment.right_delete(right_delete_len)
             right_segment.left_delete(left_delete_len)
 
-            segment_indices_on_this_arm = \
+            same_direction_match = \
                 [index for index, value in enumerate(current_arm.segments) if value == segment_to_break]
-            for segment_index_itr in reversed(segment_indices_on_this_arm):
+            for segment_index_itr in reversed(same_direction_match):
                 current_arm.segments.pop(segment_index_itr)
                 current_arm.segments.insert(segment_index_itr, left_segment.duplicate())
                 current_arm.segments.insert(segment_index_itr + 1, right_segment.duplicate())
+
+            all_match = \
+                [index for index, value in enumerate(current_arm.segments)
+                 if segment_to_break.same_segment_ignore_dir(value)]
+            same_direction_match = \
+                [index for index, value in enumerate(current_arm.segments) if value == segment_to_break]
+            reversed_direction_match = [element for element in all_match if element not in same_direction_match]
+            for segment_index_itr in reversed(reversed_direction_match):
+                current_arm.segments.pop(segment_index_itr)
+                new_right_segment = right_segment.duplicate()
+                new_left_segment = left_segment.duplicate()
+                new_right_segment.invert()
+                new_left_segment.invert()
+                current_arm.segments.insert(segment_index_itr, new_right_segment)
+                current_arm.segments.insert(segment_index_itr + 1, new_left_segment)
 
         break_segment(self.motherboard)
         for slot in self.full_KT:
             for chromosome in self.full_KT[slot]:
                 break_segment(chromosome.p_arm)
                 break_segment(chromosome.q_arm)
+        for history_itr in self.history:
+            event_arm_itr = history_itr[1]
+            break_segment(event_arm_itr)
 
     def locate_segments_for_event(self, event_arm: Arm, left_event_index: int, right_event_index: int) \
             -> ([Segment], [int]):
