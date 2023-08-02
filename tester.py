@@ -24,7 +24,10 @@ chr_2b = new_genome.full_KT['Chr2'][1]
 
 new_genome.inversion(chr_1a, chr_1a.p_arm, 27, 53)
 new_genome.deletion(chr_1a, chr_1a.p_arm, 28, 29)
-new_genome.inversion(chr_2a, chr_2a.p_arm, 27, 53)
+new_genome.right_duplication_inversion(chr_2a, chr_2a.p_arm, 27, 53)
+new_genome.left_duplication_inversion(chr_2b, chr_2b.p_arm, 27, 53)
+new_genome.translocation_reciprocal(chr_1a, chr_1a.p_arm, 1, 20,
+                                    chr_2a, chr_2a.q_arm, 1, 20)
 # print(new_genome)
 print(new_genome.motherboard_tostring())
 print(new_genome.history_tostring())

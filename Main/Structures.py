@@ -285,6 +285,14 @@ class Genome:
                         new_segment_itr = segment_itr.duplicate()
                         new_segment_itr.invert()
                         tostring_segment_list.append(segment_dict[new_segment_itr] + '-')
+                tostring_segment_list.append(segment_dict[chr_itr.centromere.segments[0]])
+                for segment_itr in chr_itr.q_arm.segments:
+                    if segment_itr.direction():
+                        tostring_segment_list.append(segment_dict[segment_itr] + '+')
+                    else:
+                        new_segment_itr = segment_itr.duplicate()
+                        new_segment_itr.invert()
+                        tostring_segment_list.append(segment_dict[new_segment_itr] + '-')
                 return_str += '{}\t{}\t{}\t{}\n'.format(chr_itr.name, ','.join(tostring_segment_list),
                                                         str(chr_itr.t1_len), str(chr_itr.t2_len))
         return return_str
@@ -432,3 +440,40 @@ class Genome:
         self.append_history('inversion', event_segments, event_chromosome, event_chromosome)
         # invert segments
         event_arm.invert_segments_by_index(event_segments_indices)
+
+    def right_duplication_inversion(self, event_chromosome: Chromosome, event_arm: Arm,
+                                    left_event_index: int, right_event_index: int):
+        event_segments, event_segment_indices = self.locate_segments_for_event(event_arm, left_event_index,
+                                                                               right_event_index)
+        self.append_history('right duplication inversion', event_segments, event_chromosome, event_chromosome)
+        new_segment_start_index = event_segment_indices[-1] + 1
+        new_segment_end_index = new_segment_start_index + len(event_segments) - 1
+        event_arm.duplicate_segments_by_index(event_segment_indices)
+        segments_for_inversion_indices = range(new_segment_start_index, new_segment_end_index + 1)
+        event_arm.invert_segments_by_index(segments_for_inversion_indices)
+
+    def left_duplication_inversion(self, event_chromosome: Chromosome, event_arm: Arm,
+                                   left_event_index: int, right_event_index: int):
+        event_segments, event_segment_indices = self.locate_segments_for_event(event_arm, left_event_index,
+                                                                               right_event_index)
+        self.append_history('left duplication inversion', event_segments, event_chromosome, event_chromosome)
+        event_arm.duplicate_segments_by_index(event_segment_indices)
+        event_arm.invert_segments_by_index(event_segment_indices)
+
+    def translocation_reciprocal(self,
+                                 event_chromosome1, event_arm1: Arm, arm1_left_index: int, arm1_right_index: int,
+                                 event_chromosome2, event_arm2: Arm, arm2_left_index: int, arm2_right_index: int):
+        arm1_segments, arm1_segment_indices = \
+            self.locate_segments_for_event(event_arm1, arm1_left_index, arm1_right_index)
+        arm2_segments, arm2_segment_indices = \
+            self.locate_segments_for_event(event_arm2, arm2_left_index, arm2_right_index)
+        arm1_start_segment_index = arm1_segment_indices[0]
+        arm2_start_segment_index = arm2_segment_indices[0]
+
+        self.append_history('reciprocal translocation', arm1_segments, event_chromosome1, event_chromosome2)
+        self.append_history('reciprocal translocation', arm2_segments, event_chromosome2, event_chromosome1)
+
+        event_arm1.delete_segments_by_index(arm1_segment_indices)
+        event_arm2.delete_segments_by_index(arm2_segment_indices)
+        event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
+        event_arm1.segments[arm1_start_segment_index:arm1_start_segment_index] = arm2_segments
