@@ -179,13 +179,16 @@ class Genome:
     full_KT: {str: [Chromosome]}               # has exactly 24 slots, corresponding to the 24 possible chromosome types
     motherboard: Arm                                # using the Arm object to use generate breakpoint method
     centromere_segments = [Segment]
+    history_block_markings = {}             # history enumerate index: block name
     history: [(str, Arm, Chromosome, Chromosome)]   # event type, event segments, chr from, chr to
+    initialization_string: str              # contains information with the initialization of the genome
 
-    def __init__(self, full_KT, motherboard_segments, centromere_segments):
+    def __init__(self, full_KT, motherboard_segments, centromere_segments, initialization_string):
         self.full_KT = full_KT
         self.motherboard = Arm(motherboard_segments)
         self.centromere_segments = centromere_segments
         self.history = []
+        self.initialization_string = initialization_string
 
     def __str__(self):
         return_str = ''
@@ -206,20 +209,33 @@ class Genome:
         new_history = tuple([event_type, Arm(segments), chr_from, chr_to])
         self.history.append(new_history)
 
+    def mark_history(self, block_name):
+        last_event_in_block = len(self.history) - 1
+        self.history_block_markings[last_event_in_block] = block_name
+
     def history_tostring(self):
         segment_dict = self.segment_indexing()
-        return_str = ''
-        for history_itr in self.history:
-            segment_str = ''
-            for segment_itr in history_itr[1].segments:
-                if segment_itr.direction():
-                    segment_str += segment_dict[segment_itr] + '+'
-                else:
-                    new_segment_itr = segment_itr.duplicate()
-                    new_segment_itr.invert()
-                    segment_str += segment_dict[new_segment_itr] + '-'
-            return_str += '{} on segments [{}], from {} to {}\n'.format(history_itr[0], segment_str,
-                                                                        history_itr[2].name, history_itr[3].name)
+        return_str = self.initialization_string + '\n'
+
+        sorted_block_marking_keys = sorted(self.history_block_markings, key=self.history_block_markings.get)
+        start_index = 0
+        block_counter = 1
+        for history_block_itr in sorted_block_marking_keys:
+            return_str += 'block {}: {}\n'.format(str(block_counter), self.history_block_markings[history_block_itr])
+            for history_itr_index in range(start_index, history_block_itr + 1):
+                segment_str = ''
+                history_itr = self.history[history_itr_index]
+                for segment_itr in history_itr[1].segments:
+                    if segment_itr.direction():
+                        segment_str += segment_dict[segment_itr] + '+'
+                    else:
+                        new_segment_itr = segment_itr.duplicate()
+                        new_segment_itr.invert()
+                        segment_str += segment_dict[new_segment_itr] + '-'
+                return_str += '\t{} on segments [{}], from {} to {}\n'.format(history_itr[0], segment_str,
+                                                                              history_itr[2].name, history_itr[3].name)
+            start_index = history_block_itr + 1
+            block_counter += 1
         return return_str
 
     def segment_indexing(self):
@@ -255,7 +271,7 @@ class Genome:
                         new_segment_itr = segment_itr.duplicate()
                         new_segment_itr.invert()
                         tostring_segment_list.append(segment_dict[new_segment_itr] + '-')
-                tostring_segment_list.append(segment_dict[chr_itr.centromere.segments[0]])
+                tostring_segment_list.append(segment_dict[chr_itr.centromere.segments[0]])  # add centromere
                 for segment_itr in chr_itr.q_arm.segments:
                     if segment_itr.direction():
                         tostring_segment_list.append(segment_dict[segment_itr] + '+')
@@ -470,9 +486,8 @@ class Genome:
         output_dict = {}
         for slot in self.full_KT:
             for chromosome in self.full_KT[slot]:
-                new_sequence = []
                 # telomere 1
-                new_sequence.append('N' * chromosome.t1_len)
+                new_sequence = ['N' * chromosome.t1_len]
                 # p-arm
                 for segment in chromosome.p_arm.segments:
                     if segment.direction():
