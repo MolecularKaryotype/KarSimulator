@@ -23,13 +23,13 @@ CENY	ChrY	21	29
 18	ChrY	30	49
 ---
 chromosome	KT	telo1_len	telo2_len
-Chr1a	1+,13+,3+,6+,4-,7+,CEN1,8+	0	0
-Chr1b	1+,2+,3+,4+,5+,6+,7+,CEN1,8+	0	0
+ChrYa	17+,CENY,18+	0	0
 Chr2a	9+,10+,10-,11+,CEN2,12+,2+,14+	0	0
 Chr2b	9+,10-,10+,11+,CEN2,12+,13+,14+	0	0
 ChrXa	15+,CENX,16+	0	0
 ChrXb	15+,CENX,16+	0	0
-ChrYa	17+,CENY,18+	0	0
+Chr1a	1+,13+,3+,6+,4-,7+,CEN1,8+	0	0
+Chr1b	1+,2+,3+,4+,5+,6+,7+,CEN1,8+	0	0
 ---
 initialization
 	autosomes: ['Chr1', 'Chr2']

@@ -98,6 +98,8 @@ def generate_genome_from_KT(input_file: str) -> Genome:
     centromere_segments = []
     chromosome_of_interest = set()
     segment_dict = {}
+    histories = []
+    history_markers = {}
 
     # read-in segment indexing
     with open(input_file) as fp_read:
@@ -163,37 +165,61 @@ def generate_genome_from_KT(input_file: str) -> Genome:
         # read in initialization information
         line = fp_read.readline()  # initialization title
         initialization_string = line
-        while True:
+        for i in range(3):
             line = fp_read.readline()
-            if line[0] != '\t':
+            if i == 2:
+                initialization_string += line.replace('\n', '')
                 break
             initialization_string += line
 
-    return Genome(full_KT, motherboard_segments, centromere_segments, '')
+        # read in history
+        block_name = 'null_block'
+        first_block_passed = False
+        while True:
+            line = fp_read.readline().replace('\n', '')
+            if not line:
+                break
+            if line[0] != '\t':
+                if first_block_passed:
+                    history_markers[len(histories) - 1] = block_name
+                block_name = line.split(': ')[1]
+                first_block_passed = True
+            else:
+                line = line.replace('\t', '')
+                line = line.split('], ')
+                event_type = line[0].split(' on')[0]
+                segment_list = line[0].split('segments [')[1].split(',')
+                line = line[1].replace('from ', '').split(' to ')
+                chr_from_name = line[0]
+                chr_to_name = line[1]
 
+                def segment_list_to_segments(input_segment_list):
+                    output_segments = []
+                    for segment_index_reference in input_segment_list:
+                        sign = segment_index_reference[-1]
+                        segment_index_reference = segment_index_reference[:-1]
+                        this_segment = segment_dict[segment_index_reference]
+                        if sign == '+':
+                            output_segments.append(this_segment)
+                        else:
+                            reversed_this_segment = this_segment.duplicate()
+                            reversed_this_segment.invert()
+                            output_segments.append(reversed_this_segment)
+                    return output_segments
 
-new_genome = generate_raw_genome(2, ['Chr1', 'Chr2'], ['ChrX', 'ChrX', 'ChrY'],
-                                 '../Metadata/test_Full_Genome_Indices.txt')
-chr_1a = new_genome.full_KT['Chr1'][0]
-chr_1b = new_genome.full_KT['Chr1'][1]
-chr_2a = new_genome.full_KT['Chr2'][0]
-chr_2b = new_genome.full_KT['Chr2'][1]
-new_genome.inversion(chr_1a, chr_1a.p_arm, 27, 53)
-new_genome.deletion(chr_1a, chr_1a.p_arm, 28, 29)
-new_genome.mark_history('test_1')
-new_genome.right_duplication_inversion(chr_2a, chr_2a.p_arm, 27, 53)
-new_genome.left_duplication_inversion(chr_2b, chr_2b.p_arm, 27, 53)
-new_genome.translocation_reciprocal(chr_1a, chr_1a.p_arm, 1, 20,
-                                    chr_2a, chr_2a.q_arm, 1, 20)
-new_genome.mark_history('test_2')
-new_genome.output_KT('RAW_test_genome4_1.txt')
+                def get_chromosome_from_unique_id(unique_id):
+                    this_slot = unique_id[:-1]
+                    current_slot = full_KT[this_slot]
+                    for chromosome_itr in current_slot:
+                        if chromosome_itr.name == unique_id:
+                            return chromosome_itr
+                    raise IndexError('get_chromosome_from_unique_id ID not found in Full_KT')
 
-# new_genome = generate_genome_from_KT('../RAW_KT_hg38.txt')
-# new_genome = generate_genome_from_KT('./RAW_test_genome.txt')
-# new_genome = generate_genome_from_KT('./RAW_test_genome4.txt')
-# print(new_genome.motherboard_tostring())
-# print(new_genome.history_tostring())
-# print(new_genome.KT_tostring())
+                history_segments = segment_list_to_segments(segment_list)
+                history_chr_from = get_chromosome_from_unique_id(chr_from_name)
+                history_chr_to = get_chromosome_from_unique_id(chr_to_name)
+                histories.append(tuple([event_type, Arm(history_segments), history_chr_from, history_chr_to]))
 
-# new_genome = generate_raw_genome(2, ['ALL'], '../Metadata/Full_Genome_Indices.txt')
-# new_genome.output_KT('RAW_full_genome.txt')
+        history_markers[len(histories) - 1] = block_name    # append last block
+
+    return Genome(full_KT, motherboard_segments, centromere_segments, initialization_string, histories, history_markers)

@@ -179,19 +179,27 @@ class Chromosome:
 
 
 class Genome:
-    full_KT: {str: [Chromosome]}               # has exactly 24 slots, corresponding to the 24 possible chromosome types
-    motherboard: Arm                                # using the Arm object to use generate breakpoint method
+    full_KT: {str: [Chromosome]}  # has exactly 24 slots, corresponding to the 24 possible chromosome types
+    motherboard: Arm  # using the Arm object to use generate breakpoint method
     centromere_segments = [Segment]
-    history_block_markings = {}             # history enumerate index: block name
-    history: [(str, Arm, Chromosome, Chromosome)]   # event type, event segments, chr from, chr to
-    initialization_string: str              # contains information with the initialization of the genome
+    history_block_markings = {}  # history enumerate index: block name
+    history: [(str, Arm, Chromosome, Chromosome)]  # event type, event segments, chr from, chr to
+    initialization_string: str  # contains information with the initialization of the genome
 
-    def __init__(self, full_KT, motherboard_segments, centromere_segments, initialization_string):
+    def __init__(self, full_KT, motherboard_segments, centromere_segments, initialization_string,
+                 history=None, history_markers=None):
         self.full_KT = full_KT
         self.motherboard = Arm(motherboard_segments)
         self.centromere_segments = centromere_segments
-        self.history = []
         self.initialization_string = initialization_string
+        if history is not None:
+            self.history = history
+        else:
+            self.history = []
+        if history_markers is not None:
+            self.history_block_markings = history_markers
+        else:
+            self.history_block_markings = {}
 
     def __str__(self):
         return_str = ''
@@ -226,16 +234,16 @@ class Genome:
         for history_block_itr in sorted_block_marking_keys:
             return_str += 'block {}: {}\n'.format(str(block_counter), self.history_block_markings[history_block_itr])
             for history_itr_index in range(start_index, history_block_itr + 1):
-                segment_str = ''
+                segment_str = []
                 history_itr = self.history[history_itr_index]
                 for segment_itr in history_itr[1].segments:
                     if segment_itr.direction():
-                        segment_str += segment_dict[segment_itr] + '+'
+                        segment_str.append(segment_dict[segment_itr] + '+')
                     else:
                         new_segment_itr = segment_itr.duplicate()
                         new_segment_itr.invert()
-                        segment_str += segment_dict[new_segment_itr] + '-'
-                return_str += '\t{} on segments [{}], from {} to {}\n'.format(history_itr[0], segment_str,
+                        segment_str.append(segment_dict[new_segment_itr] + '+')
+                return_str += '\t{} on segments [{}], from {} to {}\n'.format(history_itr[0], ','.join(segment_str),
                                                                               history_itr[2].name, history_itr[3].name)
             start_index = history_block_itr + 1
             block_counter += 1
@@ -262,9 +270,20 @@ class Genome:
         return return_str
 
     def KT_tostring(self):
+        def custom_sort_chr(key):
+            chr_part = key[3:]  # Extract the part after "Chr"
+            if chr_part.isdigit():
+                return int(chr_part)
+            elif chr_part == "X":
+                return int(23)  # Put ChrX at the end
+            elif chr_part == "Y":
+                return int(24)  # Put ChrY after ChrX
+            return key
+
         segment_dict = self.segment_indexing()
         return_str = 'chromosome\tKT\ttelo1_len\ttelo2_len\n'
-        for slot in self.full_KT:
+        sorted_keys = sorted(self.full_KT.keys(), key=custom_sort_chr)
+        for slot in sorted_keys:
             for chr_itr in self.full_KT[slot]:
                 tostring_segment_list = []
                 for segment_itr in chr_itr.p_arm.segments:
