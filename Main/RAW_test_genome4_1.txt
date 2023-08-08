@@ -1,0 +1,45 @@
+index	origin	start	end
+1	Chr1	0	0
+2	Chr1	1	20
+3	Chr1	21	26
+4	Chr1	27	50
+5	Chr1	51	52
+6	Chr1	53	53
+7	Chr1	54	100
+CEN1	Chr1	101	119
+8	Chr1	120	199
+9	Chr2	0	26
+10	Chr2	27	53
+11	Chr2	54	100
+CEN2	Chr2	101	119
+12	Chr2	120	120
+13	Chr2	121	140
+14	Chr2	141	199
+15	ChrX	0	50
+CENX	ChrX	51	59
+16	ChrX	60	99
+17	ChrY	0	20
+CENY	ChrY	21	29
+18	ChrY	30	49
+---
+chromosome	KT	telo1_len	telo2_len
+Chr1a	1+,13+,3+,6+,4-,7+,CEN1,8+	0	0
+Chr1b	1+,2+,3+,4+,5+,6+,7+,CEN1,8+	0	0
+Chr2a	9+,10+,10-,11+,CEN2,12+,2+,14+	0	0
+Chr2b	9+,10-,10+,11+,CEN2,12+,13+,14+	0	0
+ChrYa	17+,CENY,18+	0	0
+ChrXa	15+,CENX,16+	0	0
+ChrXb	15+,CENX,16+	0	0
+---
+initialization
+	autosomes: ['Chr1', 'Chr2']
+	autosomal copy number: 2
+	sex chromosomes: ['ChrX', 'ChrX', 'ChrY']
+block 1: test_1
+	inversion on segments [4+5+6+], from Chr1a to Chr1a
+	deletion on segments [5-], from Chr1a to Chr1a
+block 2: test_2
+	right duplication inversion on segments [10+], from Chr2a to Chr2a
+	left duplication inversion on segments [10+], from Chr2b to Chr2b
+	reciprocal translocation on segments [2+], from Chr1a to Chr2a
+	reciprocal translocation on segments [13+], from Chr2a to Chr1a

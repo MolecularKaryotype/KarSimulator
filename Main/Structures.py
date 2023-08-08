@@ -104,6 +104,9 @@ class Arm:
             current_sum += len(segment)
         return current_sum
 
+    def __contains__(self, item):
+        return any(item == e for e in self.segments)
+
     def __str__(self):
         return_str = ''
         for segment in self.segments:
