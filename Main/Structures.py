@@ -150,19 +150,23 @@ class Chromosome:
     centromere: Arm
     t1_len: int
     t2_len: int
+    deleted: bool
 
-    def __init__(self, name: str, p_arm: Arm, q_arm: Arm, t1_len: int, t2_len: int, centromere: Arm):
+    def __init__(self, name: str, p_arm: Arm, q_arm: Arm, t1_len: int, t2_len: int, centromere: Arm, deleted=False):
         self.name = name
         self.p_arm = p_arm
         self.q_arm = q_arm
         self.t1_len = t1_len
         self.t2_len = t2_len
         self.centromere = centromere
+        self.deleted = deleted
 
     def __len__(self):
         return self.p_arm_len() + self.q_arm_len()
 
     def __str__(self):
+        if self.deleted:
+            return '{}: deleted'.format(self.name)
         return_str = '{}: t1-{} t2-{}\n\tp-arm: {}\n\tq-arm: {}\n\tCEN: {}' \
             .format(self.name, self.t1_len, self.t2_len, str(self.p_arm), str(self.q_arm), str(self.centromere))
         return return_str
@@ -228,7 +232,7 @@ class Genome:
         segment_dict = self.segment_indexing()
         return_str = self.initialization_string + '\n'
 
-        sorted_block_marking_keys = sorted(self.history_block_markings, key=self.history_block_markings.get)
+        sorted_block_marking_keys = sorted(self.history_block_markings)
         start_index = 0
         block_counter = 1
         for history_block_itr in sorted_block_marking_keys:
@@ -285,7 +289,12 @@ class Genome:
         sorted_keys = sorted(self.full_KT.keys(), key=custom_sort_chr)
         for slot in sorted_keys:
             for chr_itr in self.full_KT[slot]:
+                if chr_itr.deleted:
+                    return_str += '{}\tdeleted\t0\t0\n'.format(chr_itr.name)
+                    continue
+
                 tostring_segment_list = []
+                # add p-arm
                 for segment_itr in chr_itr.p_arm.segments:
                     if segment_itr.direction():
                         tostring_segment_list.append(segment_dict[segment_itr] + '+')
@@ -293,7 +302,11 @@ class Genome:
                         new_segment_itr = segment_itr.duplicate()
                         new_segment_itr.invert()
                         tostring_segment_list.append(segment_dict[new_segment_itr] + '-')
-                tostring_segment_list.append(segment_dict[chr_itr.centromere.segments[0]])  # add centromere
+
+                # add centromere
+                tostring_segment_list.append(segment_dict[chr_itr.centromere.segments[0]])
+
+                # add q-arm
                 for segment_itr in chr_itr.q_arm.segments:
                     if segment_itr.direction():
                         tostring_segment_list.append(segment_dict[segment_itr] + '+')
@@ -301,6 +314,7 @@ class Genome:
                         new_segment_itr = segment_itr.duplicate()
                         new_segment_itr.invert()
                         tostring_segment_list.append(segment_dict[new_segment_itr] + '-')
+
                 return_str += '{}\t{}\t{}\t{}\n'.format(chr_itr.name, ','.join(tostring_segment_list),
                                                         str(chr_itr.t1_len), str(chr_itr.t2_len))
         return return_str
@@ -485,6 +499,22 @@ class Genome:
         event_arm2.delete_segments_by_index(arm2_segment_indices)
         event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
         event_arm1.segments[arm1_start_segment_index:arm1_start_segment_index] = arm2_segments
+
+    def chromosomal_deletion(self, event_chromosome: Chromosome):
+        event_chromosome.deleted = True
+        event_segments = \
+            event_chromosome.p_arm.segments + event_chromosome.centromere.segments + event_chromosome.q_arm.segments
+        self.append_history('chromosomal deletion', event_segments, event_chromosome, event_chromosome)
+
+    def chromosomal_duplication(self, event_chromosome: Chromosome):
+        if event_chromosome.deleted:
+            raise ValueError('selected chromosome for duplication is already deleted')
+        new_chromosome = event_chromosome.duplicate()
+        self.full_KT[new_chromosome.name[:-1]].append(new_chromosome)
+        new_chromosome.name = new_chromosome.name[:-1] + chr(len(self.full_KT[new_chromosome.name[:-1]]) + 96)
+        event_segments = \
+            event_chromosome.p_arm.segments + event_chromosome.centromere.segments + event_chromosome.q_arm.segments
+        self.append_history('chromosomal duplication', event_segments, event_chromosome, new_chromosome)
 
     def output_KT(self, output_file):
         with open(output_file, 'w') as fp_write:

@@ -129,6 +129,13 @@ def generate_genome_from_KT(input_file: str) -> Genome:
             if line[0] == '-':
                 break
             info = line.split('\t')
+
+            if info[1] == 'deleted':
+                new_chromosome = Chromosome(info[0], Arm([]), Arm([]), int(info[2]),
+                                            int(info[3]), Arm([]), True)
+                full_KT[info[0][:-1]].append(new_chromosome)
+                continue
+
             p_arm_segments = []
             q_arm_segments = []
             current_centromere_segments = []

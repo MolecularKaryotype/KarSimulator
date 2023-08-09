@@ -33,6 +33,6 @@ initialization
 	sex chromosomes: ['ChrX', 'ChrX', 'ChrY']
 block 1: Prader Willi Signature
 	deletion on segments [6+], from Chr15a to Chr15a
-block 2: Random Mutations
+block 2: Random Mutations1
 	inversion on segments [5+,7+], from Chr15a to Chr15a
 	deletion on segments [11+], from ChrXa to ChrXa
