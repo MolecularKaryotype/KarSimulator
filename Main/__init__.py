@@ -7,3 +7,7 @@ def generate_raw_genome(copy_number: int, autosomes: [str], sex_chromosomes: [st
 
 def generate_genome_from_KT(input_file: str):
     return Genome
+
+#
+# def read_FASTA(genome_path: str, chr_of_interest: [str]):
+#     return {}

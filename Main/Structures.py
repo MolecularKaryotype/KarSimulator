@@ -1,4 +1,4 @@
-from read_FASTA import read_FASTA
+from IO.read_FASTA import read_FASTA
 
 
 class Segment:
@@ -394,24 +394,42 @@ class Genome:
         create breakpoint and select the Segment between the breakpoints
         :param event_arm: chromosome arm that the event will happen in
         :param left_event_index: beginning of deletion, this index will be deleted
-        :param right_event_index: end of deletion, this index will be deleted
+        :param right_event_index: end of deletion, this index will be deleted; if -1, then only left_event_index is used
         :return: a list of Segment for processing the event
         """
-        self.generate_breakpoint(event_arm, left_event_index - 1)
-        self.generate_breakpoint(event_arm, right_event_index)
-
         segments_selected = []
         segments_selected_indices = []
-        current_segment_index = 0
-        current_bp_index = -1  # corrects 0-index off-shift
-        for segment in event_arm.segments:
-            current_bp_index += len(segment)
-            if left_event_index <= current_bp_index <= right_event_index:
-                segments_selected.append(segment)
-                segments_selected_indices.append(current_segment_index)
-            elif current_bp_index > right_event_index:
-                break
-            current_segment_index += 1
+
+        if right_event_index >= 0:
+            # for an interval
+            self.generate_breakpoint(event_arm, left_event_index - 1)
+            self.generate_breakpoint(event_arm, right_event_index)
+
+            current_segment_index = 0
+            current_bp_index = -1  # corrects 0-index off-shift
+            for segment in event_arm.segments:
+                current_bp_index += len(segment)
+                if left_event_index <= current_bp_index <= right_event_index:
+                    segments_selected.append(segment)
+                    segments_selected_indices.append(current_segment_index)
+                elif current_bp_index > right_event_index:
+                    break
+                current_segment_index += 1
+        elif right_event_index == -1:
+            # for a single index, likely as an insertion location
+            self.generate_breakpoint(event_arm, left_event_index - 1)
+
+            current_segment_index = 0
+            current_bp_index = -1  # corrects 0-index off-shift
+            for segment in event_arm.segments:
+                current_bp_index += len(segment)
+                if left_event_index <= current_bp_index:
+                    segments_selected.append(segment)
+                    segments_selected_indices.append(current_segment_index)
+                    break
+                current_segment_index += 1
+        else:
+            raise ValueError('locate segment for event index right_event_index error')
 
         return segments_selected, segments_selected_indices
 
@@ -499,6 +517,20 @@ class Genome:
         event_arm2.delete_segments_by_index(arm2_segment_indices)
         event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
         event_arm1.segments[arm1_start_segment_index:arm1_start_segment_index] = arm2_segments
+
+    def translocation_nonreciprocal(self,
+                                    event_chromosome1, event_arm1: Arm, arm1_left_index: int, arm1_right_index: int,
+                                    event_chromosome2, event_arm2: Arm, arm2_index: int):
+        arm1_segments, arm1_segment_indices = \
+            self.locate_segments_for_event(event_arm1, arm1_left_index, arm1_right_index)
+        arm2_segments, arm2_segment_indices = \
+            self.locate_segments_for_event(event_arm2, arm2_index, -1)
+        arm2_start_segment_index = arm2_segment_indices[0]
+
+        self.append_history('nonreciprocal translocation', arm1_segments, event_chromosome1, event_chromosome2)
+
+        event_arm1.delete_segments_by_index(arm1_segment_indices)
+        event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
 
     def chromosomal_deletion(self, event_chromosome: Chromosome):
         event_chromosome.deleted = True

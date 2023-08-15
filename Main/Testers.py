@@ -1,6 +1,3 @@
-from read_FASTA import read_FASTA
-
-
 def output_KT_FASTA_correspondence(chr_of_interest, output_KT_file, output_FASTA_file, genome_file):
     """
     align the FASTA output back to the genome to check if it matches up with the KT output

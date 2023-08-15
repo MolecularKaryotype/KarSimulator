@@ -80,13 +80,10 @@ new_genome = generate_raw_genome(2, ['Chr1', 'Chr2'], ['ChrX', 'ChrX', 'ChrY'],
                                  '../Metadata/test_Full_Genome_Indices.txt')
 chr_1a = new_genome.full_KT['Chr1'][0]
 new_genome.chromosomal_duplication(chr_1a)
-chr_1c = new_genome.full_KT['Chr1'][2]
-new_genome.chromosomal_duplication(chr_1c)
+chr_2a = new_genome.full_KT['Chr2'][0]
+new_genome.chromosomal_deletion(chr_2a)
 new_genome.mark_history('duplication')
-new_genome.deletion(chr_1c, chr_1c.p_arm, 27, 53)
-new_genome.chromosomal_duplication(chr_1c)
-new_genome.mark_history('duplication2')
-new_genome.output_KT('test_chromosomal_duplication.txt')
+new_genome.output_KT('test_chromosomal_duplicate_delete.txt')
 
-new_genome = generate_genome_from_KT('./test_chromosomal_duplication.txt')
-new_genome.output_KT('test_chromosomal_duplication2.txt')
+new_genome = generate_genome_from_KT('./test_chromosomal_duplicate_delete.txt')
+new_genome.output_KT('test_chromosomal_duplicate_delete2.txt')
