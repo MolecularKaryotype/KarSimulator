@@ -1,0 +1,32 @@
+index	origin	start	end
+1	Chr14	16000000	16000000
+CEN14	Chr14	16000001	18173523
+2	Chr14	18173524	106883717
+3	Chr21	5010000	10864560
+CEN21	Chr21	10864561	12915808
+4	Chr21	12915809	46699982
+5	ChrX	10000	58605579
+CENX	ChrX	58605580	62412542
+6	ChrX	62412543	156030894
+7	ChrY	10000	10316944
+CENY	ChrY	10316945	10544039
+8	ChrY	10544040	57217414
+---
+chromosome	KT	telo1_len	telo2_len
+Chr14a	1+,CEN14,4+	16000000	160000
+Chr14b	1+,CEN14,2+	16000000	160000
+Chr21a	3+,CEN21,4+	5010000	10000
+Chr21b	3+,CEN21,4+	5010000	10000
+Chr21c	deleted	0	0
+ChrXa	5+,CENX,6+	10000	10000
+ChrYa	7+,CENY,8+	10000	10000
+---
+initialization
+	autosomes: ['Chr14', 'Chr21']
+	autosomal copy number: 2
+	sex chromosomes: ['ChrX', 'ChrY']
+block 1: Translocation Down Syndrome
+	chromosomal duplication on segments [3+,CEN21+,4+], from Chr21a to Chr21c
+	reciprocal translocation on segments [2+], from Chr14a to Chr21c
+	reciprocal translocation on segments [4+], from Chr21c to Chr14a
+	chromosomal deletion on segments [3+,CEN21+,2+], from Chr21c to Chr21c

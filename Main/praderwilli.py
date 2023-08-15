@@ -1,5 +1,4 @@
 from Main import generate_raw_genome, generate_genome_from_KT
-from Structures import *
 
 new_genome = generate_raw_genome(2, ['Chr1', 'Chr15'], ['ChrX', 'ChrX', 'ChrY'],
                                  '../Metadata/Full_Genome_Indices.txt')

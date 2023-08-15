@@ -327,6 +327,10 @@ class Genome:
             (left_event_index - 1) OR (right_event_index)
         :return: None
         """
+        if breakpoint_index == -1:
+            # this happens when the break point is at the very beginning of the event_arm, no breaking required
+            return
+
         segment_to_break = Segment('temp', -1, -1)
         left_delete_len = -1
         right_delete_len = -1

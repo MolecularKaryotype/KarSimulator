@@ -1,0 +1,31 @@
+index	origin	start	end
+1	Chr1	0	100
+CEN1	Chr1	101	119
+2	Chr1	120	199
+3	Chr2	0	100
+CEN2	Chr2	101	119
+4	Chr2	120	199
+5	ChrX	0	50
+CENX	ChrX	51	59
+6	ChrX	60	99
+7	ChrY	0	20
+CENY	ChrY	21	29
+8	ChrY	30	49
+---
+chromosome	KT	telo1_len	telo2_len
+Chr1a	1+,CEN1,2+	0	0
+Chr1b	1+,CEN1,2+	0	0
+Chr1c	1+,CEN1,2+	0	0
+Chr2a	deleted	0	0
+Chr2b	3+,CEN2,4+	0	0
+ChrXa	5+,CENX,6+	0	0
+ChrXb	5+,CENX,6+	0	0
+ChrYa	7+,CENY,8+	0	0
+---
+initialization
+	autosomes: ['Chr1', 'Chr2']
+	autosomal copy number: 2
+	sex chromosomes: ['ChrX', 'ChrX', 'ChrY']
+block 1: duplication
+	chromosomal duplication on segments [1+,CEN1+,2+], from Chr1a to Chr1c
+	chromosomal deletion on segments [3+,CEN2+,4+], from Chr2a to Chr2a
