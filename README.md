@@ -5,7 +5,7 @@
 ## Table of contents:
 1. [Introduction](#introduction)
 2. [Workflow](#workflow)
-3. [Supported SVs](#supported-SVs)
+3. [Supported SVs](#supported-svs)
 4. [Installation](#installation)
 5. [Prerequisites](#prerequisites)
 6. [Usage](#usage)
