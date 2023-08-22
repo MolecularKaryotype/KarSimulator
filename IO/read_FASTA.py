@@ -1,4 +1,4 @@
-def read_FASTA(genome_path: str, chr_of_interest):
+def read_FASTA(genome_path: str, chr_of_interest: [str]):
     sequence_dict = {}
     with open(genome_path) as fp_read:
         recording = False
@@ -8,7 +8,7 @@ def read_FASTA(genome_path: str, chr_of_interest):
                 if recording:
                     sequence_dict[header] = ''.join(segment_sequence)
                     recording = False
-                if line[1:].replace('\n', '') in chr_of_interest:
+                if line[1:].replace('\n', '') in chr_of_interest or chr_of_interest[0] == 'all':
                     recording = True
                     segment_sequence = []
                     header = line[1:].replace('\n', '')

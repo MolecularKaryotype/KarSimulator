@@ -25,3 +25,11 @@ def Extract_Genome(chr_of_interest: [str], genome_path: str, chr_name_file: str,
 #            'Chr22', 'ChrX', 'ChrY']
 # Extract_Genome(all_chr, '../Genomes/GCF_000001405.26_GRCh38_genomic.fasta', '../Metadata/Chr_Names.txt',
 #                'All24Chr.fasta')
+
+# Extract_Genome(['Chr14', 'Chr21', 'ChrX', 'ChrY'],
+#                '../Genomes/GCF_000001405.26_GRCh38_genomic.fasta', '../Metadata/Chr_Names.txt',
+#                'Chr14Chr21ChrXY.fasta')
+
+Extract_Genome(['Chr12', 'Chr21', 'ChrX', 'ChrY'],
+               '../Genomes/GCF_000001405.26_GRCh38_genomic.fasta', '../Metadata/Chr_Names.txt',
+               'Chr12Chr21ChrXY.fasta')

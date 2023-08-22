@@ -1,4 +1,4 @@
-from IO.read_FASTA import read_FASTA
+import IO
 
 
 class Segment:
@@ -465,7 +465,7 @@ class Genome:
         event_segments, event_segment_indices = \
             self.locate_segments_for_event(event_arm, left_event_index, right_event_index)
         # document segments duplicated
-        self.append_history('duplication', event_segments, event_chromosome, event_chromosome)
+        self.append_history('tandem duplication', event_segments, event_chromosome, event_chromosome)
         # duplicate segments
         event_arm.duplicate_segments_by_index(event_segment_indices)
 
@@ -560,56 +560,42 @@ class Genome:
             fp_write.write('---\n')
             fp_write.write(self.history_tostring())
 
-    def output_FASTA(self, genome_path: str, chr_name_file: str, output_file: str):
-        chr_name_conversion = {}
-        full_name_list = []
-        with open(chr_name_file) as fp_read:
-            for line in fp_read:
-                line = line.replace("\n", "").split("\t")
-                if line[0] in self.full_KT:
-                    chr_name_conversion[line[0]] = line[1]
-                    full_name_list.append(line[1])
-        sequence_dict = read_FASTA(genome_path, full_name_list)
-
+    def output_FASTA(self, genome_path: str, output_file: str):
+        """
+        :param genome_path: require the header names to match the genome's chromosome names
+        :param output_file:
+        :return:
+        """
+        sequence_dict = IO.read_FASTA(genome_path, ['all'])
         output_dict = {}
         for slot in self.full_KT:
             for chromosome in self.full_KT[slot]:
+                if chromosome.deleted:
+                    continue
+
                 # telomere 1
                 new_sequence = ['N' * chromosome.t1_len]
                 # p-arm
                 for segment in chromosome.p_arm.segments:
                     if segment.direction():
-                        new_sequence.append(
-                            sequence_dict[chr_name_conversion[segment.chr]][segment.start: segment.end + 1])
+                        new_sequence.append(sequence_dict[segment.chr_name][segment.start: segment.end + 1])
                     else:
-                        new_sequence.append(
-                            sequence_dict[chr_name_conversion[segment.chr]][segment.end: segment.start + 1]
-                            [::-1])
+                        new_sequence.append(sequence_dict[segment.chr_name][segment.end: segment.start + 1][::-1])
                 # centromere
                 for segment in chromosome.centromere.segments:
                     if segment.direction():
-                        new_sequence.append(
-                            sequence_dict[chr_name_conversion[segment.chr]][segment.start: segment.end + 1])
+                        new_sequence.append(sequence_dict[segment.chr_name][segment.start: segment.end + 1])
                     else:
-                        new_sequence.append(
-                            sequence_dict[chr_name_conversion[segment.chr]][segment.end: segment.start + 1]
-                            [::-1])
+                        new_sequence.append(sequence_dict[segment.chr_name][segment.end: segment.start + 1][::-1])
                 # q-arm
                 for segment in chromosome.q_arm.segments:
                     if segment.direction():
-                        new_sequence.append(
-                            sequence_dict[chr_name_conversion[segment.chr]][segment.start: segment.end + 1])
+                        new_sequence.append(sequence_dict[segment.chr_name][segment.start: segment.end + 1])
                     else:
-                        new_sequence.append(
-                            sequence_dict[chr_name_conversion[segment.chr]][segment.end: segment.start + 1]
-                            [::-1])
+                        new_sequence.append(sequence_dict[segment.chr_name][segment.end: segment.start + 1][::-1])
                 # telomere 2
                 new_sequence.append('N' * chromosome.t2_len)
 
                 output_dict[chromosome.name] = ''.join(new_sequence)
 
-        # output
-        with open(output_file, 'w') as fp_write:
-            for header, sequence in output_dict.items():
-                fp_write.writelines(">{}\n".format(header))
-                fp_write.writelines(sequence + "\n")
+        IO.sequence_dict_to_FASTA(output_dict, output_file)
