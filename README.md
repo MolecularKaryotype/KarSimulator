@@ -3,12 +3,12 @@
 ### Version v0.1
 
 ## Table of contents:
-1. [Introduction](#Introduction)
-2. [Workflow](#Workflow)
-3. [Supported SVs](#Supported SVs)
-4. [Installation](#Installation)
-5. [Prerequisites](#Prerequisites)
-6. [Usage](#Usage)
+1. [Introduction](#introduction)
+2. [Workflow](#workflow)
+3. [Supported SVs](#supported-SVs)
+4. [Installation](#installation)
+5. [Prerequisites](#prerequisites)
+6. [Usage](#usage)
 
 ## Introduction
 This tool randomly generates structural variations from a given genome, outputting the karyotype of the 
