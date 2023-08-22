@@ -59,6 +59,7 @@ Then, select the karyotype of interest and output the corresponding FASTA.
 | `--json`   | FILE | JSON file containing Random Mode parameters                        |
 | `--genome` | FILE | Karyotype file containing the input karyotype                      |
 | `-o`       | PATH | (Optional) output directory (default: same directory as JSON file) |
+
 **NOTE1:** template JSON file can be found in `Sample_JSON/`
 - Manual mode: not recommended in later layers as the indices are relative to the current genome, not the 
 standard hg38 genome. Manual calculation needs to be done to account for off-shifts.
