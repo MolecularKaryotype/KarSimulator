@@ -41,6 +41,9 @@ Then, select the karyotype of interest and output the corresponding FASTA.
 ### Prepare a starting genome
 - Load a prepared starting genome, this includes standard male and female and some common disorders:
    `python KarSimulator/src/KarSimulator.py selectGenome`
+
+#### TODO: INSERT IMAGE OF PRE-COMPILED GENOME
+
 - Start with a custom unedited genome: `python KarSimulator/src/KarSimulator.py rawGenome`
 
 #### Arguments:
