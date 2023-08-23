@@ -239,9 +239,8 @@ class Genome:
 
     def __str__(self):
         return_str = ''
-        for slot in self.full_KT:
-            for chromosome in self.full_KT[slot]:
-                return_str += str(chromosome) + '\n'
+        for chromosome in self:
+            return_str += str(chromosome) + '\n'
         return return_str
 
     def __iter__(self):
@@ -340,49 +339,25 @@ class Genome:
         return return_str
 
     def KT_tostring(self):
-        def custom_sort_chr(key):
-            chr_part = key[3:]  # Extract the part after "Chr"
-            if chr_part.isdigit():
-                return int(chr_part)
-            elif chr_part == "X":
-                return int(23)  # Put ChrX at the end
-            elif chr_part == "Y":
-                return int(24)  # Put ChrY after ChrX
-            return key
-
         segment_dict = self.segment_indexing()
         return_str = 'chromosome\tKT\ttelo1_len\ttelo2_len\n'
-        sorted_keys = sorted(self.full_KT.keys(), key=custom_sort_chr)
-        for slot in sorted_keys:
-            for chr_itr in self.full_KT[slot]:
-                if chr_itr.deleted:
-                    return_str += '{}\tdeleted\t0\t0\n'.format(chr_itr.name)
-                    continue
 
-                tostring_segment_list = []
-                # add p-arm
-                for segment_itr in chr_itr.p_arm.segments:
-                    if segment_itr.direction():
-                        tostring_segment_list.append(segment_dict[segment_itr] + '+')
-                    else:
-                        new_segment_itr = segment_itr.duplicate()
-                        new_segment_itr.invert()
-                        tostring_segment_list.append(segment_dict[new_segment_itr] + '-')
+        for chr_itr in self:
+            if chr_itr.deleted:
+                return_str += '{}\tdeleted\t0\t0\n'.format(chr_itr.name)
+                continue
 
-                # add centromere
-                tostring_segment_list.append(segment_dict[chr_itr.centromere.segments[0]])
+            tostring_segment_list = []
+            for segment_itr in chr_itr:
+                if segment_itr.direction():
+                    tostring_segment_list.append(segment_dict[segment_itr] + '+')
+                else:
+                    new_segment_itr = segment_itr.duplicate()
+                    new_segment_itr.invert()
+                    tostring_segment_list.append(segment_dict[new_segment_itr] + '-')
 
-                # add q-arm
-                for segment_itr in chr_itr.q_arm.segments:
-                    if segment_itr.direction():
-                        tostring_segment_list.append(segment_dict[segment_itr] + '+')
-                    else:
-                        new_segment_itr = segment_itr.duplicate()
-                        new_segment_itr.invert()
-                        tostring_segment_list.append(segment_dict[new_segment_itr] + '-')
-
-                return_str += '{}\t{}\t{}\t{}\n'.format(chr_itr.name, ','.join(tostring_segment_list),
-                                                        str(chr_itr.t1_len), str(chr_itr.t2_len))
+            return_str += '{}\t{}\t{}\t{}\n'.format(chr_itr.name, ','.join(tostring_segment_list),
+                                                    str(chr_itr.t1_len), str(chr_itr.t2_len))
         return return_str
 
     def generate_breakpoint(self, event_arm: Arm, breakpoint_index: int):
@@ -634,34 +609,23 @@ class Genome:
         """
         sequence_dict = IO.read_FASTA(genome_path, ['all'])
         output_dict = {}
-        for slot in self.full_KT:
-            for chromosome in self.full_KT[slot]:
-                if chromosome.deleted:
-                    continue
+        for chromosome in self:
+            if chromosome.deleted:
+                continue
 
-                # telomere 1
-                new_sequence = ['N' * chromosome.t1_len]
-                # p-arm
-                for segment in chromosome.p_arm.segments:
-                    if segment.direction():
-                        new_sequence.append(sequence_dict[segment.chr_name][segment.start: segment.end + 1])
-                    else:
-                        new_sequence.append(sequence_dict[segment.chr_name][segment.end: segment.start + 1][::-1])
-                # centromere
-                for segment in chromosome.centromere.segments:
-                    if segment.direction():
-                        new_sequence.append(sequence_dict[segment.chr_name][segment.start: segment.end + 1])
-                    else:
-                        new_sequence.append(sequence_dict[segment.chr_name][segment.end: segment.start + 1][::-1])
-                # q-arm
-                for segment in chromosome.q_arm.segments:
-                    if segment.direction():
-                        new_sequence.append(sequence_dict[segment.chr_name][segment.start: segment.end + 1])
-                    else:
-                        new_sequence.append(sequence_dict[segment.chr_name][segment.end: segment.start + 1][::-1])
-                # telomere 2
-                new_sequence.append('N' * chromosome.t2_len)
+            # telomere 1
+            new_sequence = ['N' * chromosome.t1_len]
 
-                output_dict[chromosome.name] = ''.join(new_sequence)
+            # p-arm, centromere, q-arm
+            for segment in chromosome:
+                if segment.direction():
+                    new_sequence.append(sequence_dict[segment.chr_name][segment.start: segment.end + 1])
+                else:
+                    new_sequence.append(sequence_dict[segment.chr_name][segment.end: segment.start + 1][::-1])
+
+            # telomere 2
+            new_sequence.append('N' * chromosome.t2_len)
+
+            output_dict[chromosome.name] = ''.join(new_sequence)
 
         IO.sequence_dict_to_FASTA(output_dict, output_file)
