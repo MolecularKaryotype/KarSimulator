@@ -1,5 +1,11 @@
-from IO.read_FASTA import read_FASTA
+import IO
+from Start_Genome import *
 
-seq_dict = read_FASTA('../Genomes/GCF_000001405.26_GRCh38_genomic.fasta',
-                      ['NC_000001.11 Homo sapiens chromosome 1, GRCh38 Primary Assembly'])
-print(seq_dict['NC_000001.11 Homo sapiens chromosome 1, GRCh38 Primary Assembly'][10000:10100])
+genome = generate_genome_from_KT('TDS2.txt')
+chr_12a = genome.full_KT['Chr12'][0]
+
+for chromosome in genome:
+    print(chromosome.name)
+    for segment in chromosome:
+        print(segment)
+# print(genome)

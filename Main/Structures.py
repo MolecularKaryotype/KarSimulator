@@ -171,6 +171,38 @@ class Chromosome:
             .format(self.name, self.t1_len, self.t2_len, str(self.p_arm), str(self.q_arm), str(self.centromere))
         return return_str
 
+    def __iter__(self):
+        class ChromosomeIterator:
+            def __init__(self, chromosome: Chromosome):
+                self.chromosome = chromosome
+                self.arms = [chromosome.p_arm, chromosome.centromere, chromosome.q_arm]
+                self.current_arm_index = 0
+                self.current_segment_index = 0
+
+            def __next__(self):
+                if self.current_arm_index < len(self.arms):
+                    current_arm = self.arms[self.current_arm_index]
+                    if self.current_segment_index < len(current_arm.segments):
+                        segment = current_arm.segments[self.current_segment_index]
+                        self.current_segment_index += 1
+                        return segment
+                    else:
+                        self.current_arm_index += 1
+                        self.current_segment_index = 0
+                        return next(self)
+                else:
+                    raise StopIteration
+        return ChromosomeIterator(self)
+
+    def get_segment_from_range(self, left_bound, right_bound):
+        """
+        return a list of segments that are between (inclusive) the two bounds on this Chromosome object
+        :param left_bound:
+        :param right_bound:
+        :return:
+        """
+        pass
+
     def p_arm_len(self):
         return len(self.p_arm)
 
@@ -183,7 +215,7 @@ class Chromosome:
 
 
 class Genome:
-    full_KT: {str: [Chromosome]}  # has exactly 24 slots, corresponding to the 24 possible chromosome types
+    full_KT: {str: [Chromosome]}  # has as many slots as there are chromosome type, i.e. 24 for a male, 23 for a female
     motherboard: Arm  # using the Arm object to use generate breakpoint method
     centromere_segments = [Segment]
     history_block_markings = {}  # history enumerate index: block name
@@ -211,6 +243,40 @@ class Genome:
             for chromosome in self.full_KT[slot]:
                 return_str += str(chromosome) + '\n'
         return return_str
+
+    def __iter__(self):
+        def custom_sort_chr(key):
+            chr_part = key[3:]  # Extract the part after "Chr"
+            if chr_part.isdigit():
+                return int(chr_part)
+            elif chr_part == "X":
+                return int(23)  # Put ChrX at the end
+            elif chr_part == "Y":
+                return int(24)  # Put ChrY after ChrX
+            return key
+
+        class GenomeIterator:
+            def __init__(self, genome: Genome):
+                self.genome = genome
+                self.KT_slots = genome.full_KT
+                self.KT_slot_keys = sorted(genome.full_KT.keys(), key=custom_sort_chr)
+                self.current_slot_index = 0
+                self.current_chromosome_index = 0
+
+            def __next__(self):
+                if self.current_slot_index < len(self.KT_slots):
+                    current_slot = self.KT_slots[self.KT_slot_keys[self.current_slot_index]]
+                    if self.current_chromosome_index < len(current_slot):
+                        chromosome = current_slot[self.current_chromosome_index]
+                        self.current_chromosome_index += 1
+                        return chromosome
+                    else:
+                        self.current_slot_index += 1
+                        self.current_chromosome_index = 0
+                        return next(self)
+                else:
+                    raise StopIteration
+        return GenomeIterator(self)
 
     def append_history(self, event_type: str, segments: [Segment], chr_from: Chromosome, chr_to: Chromosome):
         """
