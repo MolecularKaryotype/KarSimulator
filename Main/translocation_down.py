@@ -1,4 +1,4 @@
-from Main import generate_raw_genome, generate_genome_from_KT
+from Start_Genome import generate_raw_genome, generate_genome_from_KT
 
 new_genome = generate_raw_genome(2, ['Chr12', 'Chr21'], ['male'],
                                  '../Metadata/Full_Genome_Indices.txt')

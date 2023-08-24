@@ -25,12 +25,13 @@ def generate_raw_genome(copy_number: int, autosomes: [str], sex_chromosomes: [st
         full_KT[slot] = []
 
     # setup sex chromosomes
-    if sex_chromosomes[0].lower() == 'male':
-        sex_chromosomes = ['ChrX', 'ChrY']
-    elif sex_chromosomes[0].lower() == 'female':
-        sex_chromosomes = ['ChrX', 'ChrX']
-    for slot in set(sex_chromosomes):
-        full_KT[slot] = []
+    if len(sex_chromosomes) > 0:
+        if sex_chromosomes[0].lower() == 'male':
+            sex_chromosomes = ['ChrX', 'ChrY']
+        elif sex_chromosomes[0].lower() == 'female':
+            sex_chromosomes = ['ChrX', 'ChrX']
+        for slot in set(sex_chromosomes):
+            full_KT[slot] = []
 
     # prepare Raw KT
     def add_chromosome(chr_of_interest):
@@ -151,7 +152,10 @@ def generate_genome_from_KT(input_file: str) -> Genome:
                 p_arm_segments.append(current_segment)
                 current_index += 1
             # centromere
-            current_segment = segment_dict[segment_indices[current_index]].duplicate()
+            index_direction = segment_indices[current_index][-1]
+            current_segment = segment_dict[segment_indices[current_index][:-1]].duplicate()
+            if index_direction == "-":
+                current_segment.invert()
             current_centromere_segments.append(current_segment)
             current_index += 1
             # q_arm
