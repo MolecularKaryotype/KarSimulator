@@ -74,9 +74,10 @@ def fasta_mode(args):
 
 
 def main():
-    current_directory = os.getcwd()
-    parent_directory = os.path.dirname(current_directory)
-    os.chdir(parent_directory)
+    # current_directory = os.getcwd()
+    # parent_directory = os.path.dirname(current_directory)
+    # os.chdir(parent_directory)
+    print(os.getcwd())
 
     parser = argparse.ArgumentParser(description="KarSimulator command-line interface")
     subparsers = parser.add_subparsers(dest="mode", help="Choose a mode")
