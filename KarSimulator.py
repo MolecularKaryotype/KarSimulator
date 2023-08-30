@@ -3,7 +3,7 @@ import os
 import json
 import random
 
-from Start_Genome import *
+from Main.Start_Genome import *
 
 
 def rawGenome_mode(args):
