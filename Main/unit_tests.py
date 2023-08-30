@@ -34,7 +34,7 @@ from Structures import *
 # # print(new_genome.history_tostring())
 # # print(new_genome.KT_tostring())
 #
-# # new_genome = generate_raw_genome(2, ['ALL'], '../Metadata/Full_Genome_Indices.txt')
+# # new_genome = generate_raw_genome(2, ['ALL'], '../Metadata/hg38_index.txt')
 # # new_genome.output_KT('RAW_full_genome.txt')
 #
 # new_genome = generate_raw_genome(2, ['Chr1', 'Chr2'], ['ChrX', 'ChrX', 'ChrY'],

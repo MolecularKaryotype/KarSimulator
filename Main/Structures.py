@@ -277,6 +277,12 @@ class Genome:
                     raise StopIteration
         return GenomeIterator(self)
 
+    def get_chromosome_list(self):
+        chr_list = []
+        for chromosome in self:
+            chr_list.append(chromosome)
+        return chr_list
+
     def append_history(self, event_type: str, segments: [Segment], chr_from: Chromosome, chr_to: Chromosome):
         """
         add the newest event to history log

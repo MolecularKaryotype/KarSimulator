@@ -1,0 +1,82 @@
+{
+  "job_name": "UT",
+  "template_KT": "KT_file_path",
+  "number_of_parallel_universe": 3,
+  "number_of_events": 4,
+  "event_setting": [
+    {
+      "type": "deletion",
+      "likelihood_weight": 1,
+      "min_size": 100000,
+      "max_size": 200000,
+      "terminal_occurrence_likelihood": 0.5
+    },
+    {
+      "type": "inversion",
+      "likelihood_weight": 1,
+      "min_size": 100000,
+      "max_size": 200000,
+      "terminal_occurrence_likelihood": 0.5
+    },
+    {
+      "type": "tandem_duplication",
+      "likelihood_weight": 1,
+      "min_size": 100000,
+      "max_size": 200000,
+      "terminal_occurrence_likelihood": 0.5
+    },
+    {
+      "type": "segmental_duplication",
+      "likelihood_weight": 1,
+      "min_size": 100000,
+      "max_size": 200000,
+      "inter_chromosomal_occurrence_likelihood": 0.5,
+      "terminal_occurrence_likelihood": 0.5
+    },
+    {
+      "type": "duplication_inversion",
+      "likelihood_weight": 1,
+      "min_size": 100000,
+      "max_size": 200000,
+      "left_dupinv_to_right_dupinv_ratio": 1,
+      "terminal_occurrence_likelihood": 0.5
+    },
+    {
+      "type": "reciprocal_translocation",
+      "likelihood_weight": 1,
+      "min_size1": 100000,
+      "max_size1": 200000,
+      "min_size2": 100000,
+      "max_size2": 200000
+    },
+    {
+    "type": "inter_chromosomal_reciprocal_translocation",
+    "likelihood_weight": 1,
+    "min_size1": 100000,
+    "max_size1": 200000,
+    "min_size2": 100000,
+    "max_size2": 200000,
+    "inter_chromosomal_occurrence_likelihood": 0.5
+    },
+    {
+    "type": "arm_deletion",
+    "likelihood_weight": 1
+    },
+    {
+    "type": "arm_tandem_duplication",
+    "likelihood_weight": 1
+    },
+    {
+    "type": "arm_segmental_duplication",
+    "likelihood_weight": 1
+    },
+    {
+    "type": "chromosomal_deletion",
+    "likelihood_weight": 1
+    },
+    {
+    "type": "chromosomal_duplication",
+    "likelihood_weight": 1
+    }
+  ]
+}

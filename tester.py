@@ -33,7 +33,7 @@ ALL_chr = ['Chr1', 'Chr2', 'Chr3', 'Chr4', 'Chr5', 'Chr6', 'Chr7', 'Chr8', 'Chr9
 # print(new_genome.history_tostring())
 # print(new_genome.KT_tostring())
 
-new_genome = Genome(2, ALL_chr, './Metadata/Full_Genome_Indices.txt')
+new_genome = Genome(2, ALL_chr, './Metadata/hg38_index.txt')
 with open('RAW_KT_hg38.txt', 'w') as fp_write:
     fp_write.write(new_genome.motherboard_tostring())
     fp_write.write('---\n')

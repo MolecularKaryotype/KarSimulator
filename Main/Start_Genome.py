@@ -8,7 +8,7 @@ def generate_raw_genome(copy_number: int, autosomes: [str], sex_chromosomes: [st
     :param autosomes: ALL for all chromosomes, else input ['Chr1', 'Chr12', etc.]
     :param sex_chromosomes: Male for ['ChrX', 'ChrY'], Female for ['ChrX', 'ChrX'], else input directly
     :param genome_index_file: file containing the positioning information of the genome,
-    see Metadata/Full_Genome_Indices.txt for example
+    see Metadata/hg38_index.txt for example
     :return: Genome Object
     """
     # construct KT slots

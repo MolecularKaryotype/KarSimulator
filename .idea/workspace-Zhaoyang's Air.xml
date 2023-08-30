@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="23b8cfb3-acb1-4fd3-9108-ffbfa713d8be" name="Changes" comment="test_KT_FASTA_Correspondance tester implemented and tested" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2TOgQWMQ326aQ5vbVNtI6x137aX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/zhaoyangjia/Library/CloudStorage/OneDrive-UCSanDiego/Bafna_Lab/KarSimulator",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.sourceCode",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\30532\OneDrive - UC San Diego\Bafna_Lab\KarSimulator\Main" />
+      <recent name="C:\Users\30532\OneDrive - UC San Diego\Bafna_Lab\KarSimulator" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\30532\OneDrive - UC San Diego\Bafna_Lab\KarSimulator\Main" />
+      <recent name="C:\Users\30532\OneDrive - UC San Diego\Bafna_Lab\KarSimulator\Preparation" />
+      <recent name="C:\Users\30532\OneDrive - UC San Diego\Bafna_Lab\KarSimulator\Metadata" />
+      <recent name="C:\Users\30532\OneDrive - UC San Diego\Bafna_Lab\KarSimulator\IO" />
+      <recent name="C:\Users\30532\OneDrive - UC San Diego\Bafna_Lab\KarSimulator\" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.tester_MISC (1)">
+    <configuration name="Extract_Genome" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="KarSimulator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Preparation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Preparation/Extract_Genome.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Structures" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="KarSimulator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Main" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main/Structures.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="python KarSimulator/src/KarSimulator.py selectGenome" type="PythonConfigurationType" factoryName="Python">
+      <module name="KarSimulator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\30532\OneDrive - UC San Diego\Bafna_Lab\KarSimulator\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="KarSimulator/src/KarSimulator.py" />
+      <option name="PARAMETERS" value="selectGenome" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tester_FASTA_output" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="KarSimulator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Main" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main/tester_FASTA_output.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tester_MISC (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="KarSimulator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Main" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main/tester_MISC.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="translocation_down" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="KarSimulator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Main" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main/translocation_down.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.tester_MISC (1)" />
+        <item itemvalue="Python.translocation_down" />
+        <item itemvalue="Python.tester_FASTA_output" />
+        <item itemvalue="Python.Extract_Genome" />
+        <item itemvalue="Python.Structures" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="23b8cfb3-acb1-4fd3-9108-ffbfa713d8be" name="Changes" comment="" />
+      <created>1690919524784</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1690919524784</updated>
+      <workItem from="1690919527782" duration="22989000" />
+      <workItem from="1690951917841" duration="8634000" />
+      <workItem from="1691458619876" duration="10422000" />
+      <workItem from="1691525047726" duration="7211000" />
+      <workItem from="1691556763764" duration="5179000" />
+      <workItem from="1691600744053" duration="521000" />
+      <workItem from="1691968124874" duration="1427000" />
+      <workItem from="1692036813082" duration="20993000" />
+      <workItem from="1692728867365" duration="10621000" />
+      <workItem from="1692816274105" duration="4048000" />
+      <workItem from="1692822992232" duration="8396000" />
+    </task>
+    <task id="LOCAL-00001" summary="preliminary test on multi-chromosomal deletion, inversion, and duplication completed">
+      <created>1690935336999</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1690935336999</updated>
+    </task>
+    <task id="LOCAL-00002" summary="secondary test on multi-chromosomal deletion, inversion, and duplication completed. Indexing, KT, and history output completed">
+      <created>1690946111855</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1690946111855</updated>
+    </task>
+    <task id="LOCAL-00003" summary="before implementing history read-in for generate_genome_from_KT()">
+      <created>1691472700181</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1691472700181</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fixed minor indexing issue caused by appending multiple sex chromosomes' segments to the motherboard.&#10;Fix done by checking whether same segment already added.">
+      <created>1691473601480</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1691473601480</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Genome from KT file implemented&#10;Initial example included (Prader Willi)">
+      <created>1691530060787</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1691530060787</updated>
+    </task>
+    <task id="LOCAL-00006" summary="IO and nonreciprocal translocation implemented">
+      <created>1692072910087</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1692072910087</updated>
+    </task>
+    <task id="LOCAL-00007" summary="README added&#10;Restructuring pending">
+      <created>1692737793088</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1692737793088</updated>
+    </task>
+    <task id="LOCAL-00008" summary="attempted to fix anchored links">
+      <created>1692738154222</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1692738154222</updated>
+    </task>
+    <task id="LOCAL-00009" summary="attempted to fix anchored links v2">
+      <created>1692738259226</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1692738259226</updated>
+    </task>
+    <task id="LOCAL-00010" summary="anchored links fixed">
+      <created>1692738358649</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1692738358649</updated>
+    </task>
+    <task id="LOCAL-00011" summary="edited README">
+      <created>1692740199500</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1692740199500</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Structure updated with Iterator class">
+      <created>1692824046757</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1692824046757</updated>
+    </task>
+    <task id="LOCAL-00013" summary="test_KT_FASTA_Correspondance tester implemented and tested">
+      <created>1692835536819</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1692835536819</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="preliminary test on multi-chromosomal deletion, inversion, and duplication completed" />
+    <MESSAGE value="secondary test on multi-chromosomal deletion, inversion, and duplication completed. Indexing, KT, and history output completed" />
+    <MESSAGE value="before implementing history read-in for generate_genome_from_KT()" />
+    <MESSAGE value="Fixed minor indexing issue caused by appending multiple sex chromosomes' segments to the motherboard.&#10;Fix done by checking whether same segment already added." />
+    <MESSAGE value="Genome from KT file implemented&#10;Initial example included (Prader Willi)" />
+    <MESSAGE value="IO and nonreciprocal translocation implemented" />
+    <MESSAGE value="fixed a bug when segmentation happens at the very beginning of an arm" />
+    <MESSAGE value="README added&#10;Restructuring pending" />
+    <MESSAGE value="attempted to fix anchored links" />
+    <MESSAGE value="attempted to fix anchored links v2" />
+    <MESSAGE value="anchored links fixed" />
+    <MESSAGE value="edited README" />
+    <MESSAGE value="Structure updated with Iterator class" />
+    <MESSAGE value="test_KT_FASTA_Correspondance tester implemented and tested" />
+    <option name="LAST_COMMIT_MESSAGE" value="test_KT_FASTA_Correspondance tester implemented and tested" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/KarSimulator$tester_MISC__1_.coverage" NAME="tester_MISC (1) Coverage Results" MODIFIED="1692834831079" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Main" />
+    <SUITE FILE_PATH="coverage/KarSimulator$Main.coverage" NAME="Main Coverage Results" MODIFIED="1691528127201" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Main" />
+    <SUITE FILE_PATH="coverage/KarSimulator$test.coverage" NAME="test Coverage Results" MODIFIED="1690926406610" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KarSimulator$translocation_down.coverage" NAME="translocation_down Coverage Results" MODIFIED="1692834676467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Main" />
+    <SUITE FILE_PATH="coverage/KarSimulator$tester_FASTA_output.coverage" NAME="tester_FASTA_output Coverage Results" MODIFIED="1692834545775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Main" />
+    <SUITE FILE_PATH="coverage/KarSimulator$unit_tests.coverage" NAME="unit_tests Coverage Results" MODIFIED="1691600844801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Main" />
+    <SUITE FILE_PATH="coverage/KarSimulator$Extract_Genome.coverage" NAME="Extract_Genome Coverage Results" MODIFIED="1692078459004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Preparation" />
+    <SUITE FILE_PATH="coverage/KarSimulator$Structures.coverage" NAME="Structures Coverage Results" MODIFIED="1692076211928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Main" />
+    <SUITE FILE_PATH="coverage/KarSimulator$tester_MISC.coverage" NAME="tester_MISC Coverage Results" MODIFIED="1692070253439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KarSimulator$python_KarSimulator_src_KarSimulator_py_selectGenome.coverage" NAME="python KarSimulator/src/KarSimulator.py selectGenome Coverage Results" MODIFIED="1692734353438" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/KarSimulator$read_FASTA.coverage" NAME="read_FASTA Coverage Results" MODIFIED="1692071602660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/IO" />
+    <SUITE FILE_PATH="coverage/KarSimulator$praderwilli.coverage" NAME="praderwilli Coverage Results" MODIFIED="1691531445274" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Main" />
+    <SUITE FILE_PATH="coverage/KarSimulator$tester__1_.coverage" NAME="tester (1) Coverage Results" MODIFIED="1690960592128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
