@@ -11,7 +11,7 @@ def rawGenome_mode(args):
     autosome_list = args.autosomes.replace('[', '').replace(']', '').split(',')
     sex_chromosome_list = args.sex_chromosomes.replace('[', '').replace(']', '').split(',')
     genome = generate_raw_genome(args.copy_number, autosome_list, sex_chromosome_list, args.index_file)
-    genome.output_KT(args.output_dir)
+    genome.output_KT(args.output_dir + args.name + '.kt.txt')
 
 
 def random_mode(args):
@@ -77,13 +77,14 @@ def main():
     # current_directory = os.getcwd()
     # parent_directory = os.path.dirname(current_directory)
     # os.chdir(parent_directory)
-    print(os.getcwd())
 
     parser = argparse.ArgumentParser(description="KarSimulator command-line interface")
     subparsers = parser.add_subparsers(dest="mode", help="Choose a mode")
 
     # rawGenome mode
     rawGenome_parser = subparsers.add_parser("rawGenome", help="Run rawGenome mode: generate an unedited karyotype")
+    rawGenome_parser.add_argument("--name", type=str, default='unnamed', dest="name",
+                                  help="Name of the output KT file")
     rawGenome_parser.add_argument("--copy", type=int, default=2, dest="copy_number",
                                   help="Copy number for the autosomes")
     rawGenome_parser.add_argument("--auto", type=str, default='[all]', dest="autosomes",
@@ -93,7 +94,7 @@ def main():
                                   help="Sex chromosome selection, "
                                        "[male],[female] for XY and XX, respectively; "
                                        "[ChrX,ChrY,etc.] for custom selection")
-    rawGenome_parser.add_argument("--index", type=str, default='./Genome/hg38_index.txt', dest="index_file",
+    rawGenome_parser.add_argument("--index", type=str, default='Genomes/hg38_index.txt', dest="index_file",
                                   help="Genome Index File path")
     rawGenome_parser.add_argument("-o", type=str, default='./', dest="output_dir",
                                   help="output directory")

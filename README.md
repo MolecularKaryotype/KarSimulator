@@ -45,6 +45,7 @@ Then, select the karyotype of interest and output the corresponding FASTA.
 #### Arguments:
 | Argument  | Type  | Description                                                                                                |
 |-----------|-------|------------------------------------------------------------------------------------------------------------|
+| `--name`  | STR   | (default: unnamed) <br /> name of the output KT file                                                       |
 | `--copy`  | STR   | (default: 2) <br /> Copy number for the autosomes                                                          |
 | `--auto`  | [STR] | (default: all 22 autosomes) <br /> `[all]` for all 22 autosomes, `[Chr1, Chr2, etc.]` for custom selection |
 | `--sex`   | [STR] | (default: female) <br /> `[male]`, `[female]` for XY and XX,  `[ChrX, ChrY, etc.]` for custom selection    |
