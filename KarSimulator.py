@@ -1,6 +1,7 @@
 import argparse
 import json
 import random
+import os
 
 from Main.Start_Genome import *
 
@@ -90,24 +91,62 @@ def random_mode(args):
                 if current_event in [5, 6]:
                     current_event_start_location2 = random.randint(0, len(current_arm2) - current_event2_length - 1)
 
+            def run_terminal_likelihood():
+                terminal_likelihood = event_settings[current_event]['terminal_occurrence_likelihood']
+                non_terminal_likelihood = 1 - terminal_likelihood
+                terminal_status = \
+                    random.choices([True, False], [terminal_likelihood, non_terminal_likelihood])[0]
+                return terminal_status
+
             # perform event
             if current_event == 0:
+                terminal_event = run_terminal_likelihood()
+                if terminal_event:
+                    if current_arm1 == current_chr1.p_arm:
+                        current_event_start_location1 = 0
+                    else:
+                        current_event_start_location1 = len(current_arm1) - current_event1_length
+
                 genome.deletion(current_chr1, current_arm1,
                                 current_event_start_location1,
                                 current_event_start_location1 + current_event1_length)
             elif current_event == 1:
+                terminal_event = run_terminal_likelihood()
+                if terminal_event:
+                    if current_arm1 == current_chr1.p_arm:
+                        current_event_start_location1 = 0
+                    else:
+                        current_event_start_location1 = len(current_arm1) - current_event1_length
                 genome.inversion(current_chr1, current_arm1,
                                  current_event_start_location1,
                                  current_event_start_location1 + current_event1_length)
             elif current_event == 2:
+                terminal_event = run_terminal_likelihood()
+                if terminal_event:
+                    if current_arm1 == current_chr1.p_arm:
+                        current_event_start_location1 = 0
+                    else:
+                        current_event_start_location1 = len(current_arm1) - current_event1_length
                 genome.duplication(current_chr1, current_arm1,
                                    current_event_start_location1,
                                    current_event_start_location1 + current_event1_length)
             elif current_event == 3:
+                terminal_event = run_terminal_likelihood()
+                if terminal_event:
+                    if current_arm1 == current_chr1.p_arm:
+                        current_event_start_location1 = 0
+                    else:
+                        current_event_start_location1 = len(current_arm1) - current_event1_length
                 genome.duplication(current_chr1, current_arm1,
                                    current_event_start_location1,
                                    current_event_start_location1 + current_event1_length)
             elif current_event == 4:
+                terminal_event = run_terminal_likelihood()
+                if terminal_event:
+                    if current_arm1 == current_chr1.p_arm:
+                        current_event_start_location1 = 0
+                    else:
+                        current_event_start_location1 = len(current_arm1) - current_event1_length
                 left_dup_inv_likelihood = event_settings[current_event]['left_dupinv_to_right_dupinv_likelihood']
                 right_dup_inv_likelihood = 1 - left_dup_inv_likelihood
                 event_direction = \
@@ -118,9 +157,9 @@ def random_mode(args):
                                                       current_event_start_location1,
                                                       current_event_start_location1 + current_event1_length)
                 else:
-                    genome.left_duplication_inversion(current_chr1, current_arm1,
-                                                      current_event_start_location1,
-                                                      current_event_start_location1 + current_event1_length)
+                    genome.right_duplication_inversion(current_chr1, current_arm1,
+                                                       current_event_start_location1,
+                                                       current_event_start_location1 + current_event1_length)
             elif current_event in [5, 6]:
                 genome.translocation_reciprocal(current_chr1, current_arm1, current_event_start_location1,
                                                 current_event_start_location1 + current_event1_length,
