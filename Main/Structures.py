@@ -599,6 +599,22 @@ class Genome:
             event_chromosome.p_arm.segments + event_chromosome.centromere.segments + event_chromosome.q_arm.segments
         self.append_history('chromosomal duplication', event_segments, event_chromosome, new_chromosome)
 
+    def arm_deletion(self, event_chromosome: Chromosome, event_arm: Arm):
+        event_segments, event_segments_indices = \
+            self.locate_segments_for_event(event_arm, 0, len(event_arm) - 1)
+        # document segments deleted
+        self.append_history('arm deletion', event_segments, event_chromosome, event_chromosome)
+        # remove empty segments
+        event_arm.delete_segments_by_index(event_segments_indices)
+
+    def arm_tandem_duplication(self, event_chromosome: Chromosome, event_arm: Arm):
+        event_segments, event_segment_indices = \
+            self.locate_segments_for_event(event_arm, 0, len(event_arm) - 1)
+        # document segments duplicated
+        self.append_history('arm tandem duplication', event_segments, event_chromosome, event_chromosome)
+        # duplicate segments
+        event_arm.duplicate_segments_by_index(event_segment_indices)
+
     def output_KT(self, output_file):
         with open(output_file, 'w') as fp_write:
             fp_write.write(self.motherboard_tostring())

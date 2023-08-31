@@ -3,12 +3,20 @@
 ### Version v0.1
 
 ## Table of contents:
-1. [Introduction](#introduction)
-2. [Workflow](#workflow)
-3. [Supported SVs](#supported-svs)
-4. [Installation](#installation)
-5. [Prerequisites](#prerequisites)
-6. [Usage](#usage)
+1. [Known Issues](#known-issues)
+2. [Introduction](#introduction)
+3. [Workflow](#workflow)
+4. [Supported SVs](#supported-svs)
+5. [Installation](#installation)
+6. [Prerequisites](#prerequisites)
+7. [Usage](#usage)
+
+## Known Issues
+1. Manual mode under development
+2. segmental duplication and arm-segmental duplication disabled
+3. non-reciprocal translocation under development
+4. scope for the random event under development (to limit events to only happen on a certain
+set of chromosomes)
 
 ## Introduction
 This tool randomly generates structural variations from a given genome, outputting the karyotype of the 
@@ -102,6 +110,6 @@ and Chr1:150,000-250,000): <br />
 | Argument   | Type | Description                                                                      |
 |------------|------|----------------------------------------------------------------------------------|
 | `--name`   | STR  | (default: the prefix of the input kar file) <br /> name of the output FASTA file |
-| `--genome` | FILE | Genome FASTA file                                                                |
+| `--genome` | FILE | (default: gh38 in ./Genomes/) Genome FASTA file                                  |
 | `--kar`    | FILE | Karyotype file containing the input karyotype                                    |
-| `-o`       | FILE | (default: current directory) output directory                                    |
+| `-o`       | FILE | (default: same directory as Karyotype file) output directory                     |

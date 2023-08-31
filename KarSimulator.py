@@ -14,7 +14,7 @@ def rawGenome_mode(args):
 
 
 def random_mode(args):
-    num_supported_SV = 7
+    num_supported_SV = 12
     print("Running random mode with arguments:", args)
 
     with open(args.json_file) as file:
@@ -71,20 +71,24 @@ def random_mode(args):
                 current_arm2 = current_chr2.q_arm
 
             # choose length
-            current_event1_length = random.randint(event_settings[current_event]['min_size'],
-                                                   event_settings[current_event]['max_size'])
-            current_event1_length = min(current_event1_length, len(current_arm1) - 1)
+            current_event1_length = -1
             current_event2_length = -1
-            if current_event in [5, 6]:
-                current_event2_length = random.randint(event_settings[current_event]['min_size2'],
-                                                       event_settings[current_event]['max_size2'])
-                current_event2_length = min(current_event2_length, len(current_arm2) - 1)
+            if current_event not in [7, 8, 9, 10, 11]:
+                current_event1_length = random.randint(event_settings[current_event]['min_size'],
+                                                       event_settings[current_event]['max_size'])
+                current_event1_length = min(current_event1_length, len(current_arm1) - 1)
+                if current_event in [5, 6]:
+                    current_event2_length = random.randint(event_settings[current_event]['min_size2'],
+                                                           event_settings[current_event]['max_size2'])
+                    current_event2_length = min(current_event2_length, len(current_arm2) - 1)
 
             # choose start location
-            current_event_start_location1 = random.randint(0, len(current_arm1) - current_event1_length - 1)
+            current_event_start_location1 = -1
             current_event_start_location2 = -1
-            if current_event in [5, 6]:
-                current_event_start_location2 = random.randint(0, len(current_arm2) - current_event2_length - 1)
+            if current_event not in [7, 8, 9, 10, 11]:
+                current_event_start_location1 = random.randint(0, len(current_arm1) - current_event1_length - 1)
+                if current_event in [5, 6]:
+                    current_event_start_location2 = random.randint(0, len(current_arm2) - current_event2_length - 1)
 
             # perform event
             if current_event == 0:
@@ -122,6 +126,15 @@ def random_mode(args):
                                                 current_event_start_location1 + current_event1_length,
                                                 current_chr2, current_arm2, current_event_start_location2,
                                                 current_event_start_location2 + current_event2_length)
+            elif current_event == 7:
+                genome.arm_deletion(current_chr1, current_arm1)
+            elif current_event in [8, 9]:
+                genome.arm_tandem_duplication(current_chr1, current_arm1)
+            elif current_event == 10:
+                genome.chromosomal_deletion(current_chr1)
+            elif current_event == 11:
+                genome.chromosomal_duplication(current_chr1)
+
         genome.mark_history(job_name)
         genome.output_KT(full_output_file_path)
 
@@ -150,20 +163,20 @@ def main():
     # rawGenome mode
     rawGenome_parser = subparsers.add_parser("rawGenome", help="Run rawGenome mode: generate an unedited karyotype")
     rawGenome_parser.add_argument("--name", type=str, default='unnamed', dest="name",
-                                  help="Name of the output KT file")
+                                  help="(default: unnamed) Name of the output KT file")
     rawGenome_parser.add_argument("--copy", type=int, default=2, dest="copy_number",
-                                  help="Copy number for the autosomes")
+                                  help="(default: 2) Copy number for the autosomes")
     rawGenome_parser.add_argument("--auto", type=str, default='[all]', dest="autosomes",
-                                  help="Autosomes selection, "
+                                  help="(default: all 22 autosomes) Autosomes selection, "
                                        "[all] for all 22 autosomes; [Chr1,Chr2,etc.] for custom selection")
     rawGenome_parser.add_argument("--sex", type=str, default='[female]', dest="sex_chromosomes",
                                   help="Sex chromosome selection, "
-                                       "[male],[female] for XY and XX, respectively; "
+                                       "(default: female) [male],[female] for XY and XX, respectively; "
                                        "[ChrX,ChrY,etc.] for custom selection")
     rawGenome_parser.add_argument("--index", type=str, default='Genomes/hg38_index.txt', dest="index_file",
-                                  help="Genome Index File path")
+                                  help="(default: pre-compiled hg38 index) Genome Index File path")
     rawGenome_parser.add_argument("-o", type=str, default='./', dest="output_dir",
-                                  help="output directory")
+                                  help="(default: current directory) output directory")
 
     # random mode
     random_parser = subparsers.add_parser("random", help="Run random mode: introduces a set number of SVs on top of "
@@ -180,21 +193,21 @@ def main():
                                                          "current karyotype")
     manual_parser.add_argument("--json", type=str, dest='json_file',
                                help="JSON file containing Random Mode parameters")
-    manual_parser.add_argument("--kar", type=str, dest='input_kar_file',
-                               help="Karyotype file containing the input karyotype")
-    manual_parser.add_argument("-o", type=str, default='./', dest="output_dir",
-                               help="output directory")
+    # manual_parser.add_argument("--kar", type=str, dest='input_kar_file',
+    #                            help="Karyotype file containing the input karyotype")
+    # manual_parser.add_argument("-o", type=str, default='./', dest="output_dir",
+    #                            help="output directory")
 
     # fasta mode
     fasta_parser = subparsers.add_parser("fasta", help="Run fasta mode: output fasta from karyotype")
     fasta_parser.add_argument("--name", type=str, dest="name",
-                              help="Name of the output FASTA file")
+                              help="(default: the prefix of the input kar file) Name of the output FASTA file")
     fasta_parser.add_argument("--genome", type=str, dest='genome_file', default='./Genomes/hg38.fasta',
-                              help="Genome FASTA file")
+                              help="(default: gh38 in ./Genomes/) Genome FASTA file")
     fasta_parser.add_argument("--kar", type=str, dest='input_kar_file',
                               help="Karyotype file containing the input karyotype")
     fasta_parser.add_argument("-o", type=str, default='./', dest="output_dir",
-                              help="output directory")
+                              help="(default: same directory as Karyotype file) output directory")
 
     # call corresponding mode
     args = parser.parse_args()
