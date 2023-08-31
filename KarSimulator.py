@@ -2,6 +2,7 @@ import argparse
 import json
 import random
 import os
+import shutil
 
 from Main.Start_Genome import *
 
@@ -16,6 +17,7 @@ def rawGenome_mode(args):
 
 def random_mode(args):
     num_supported_SV = 12
+    error_logs_path = "./error_logs/"
     print("Running random mode with arguments:", args)
 
     with open(args.json_file) as file:
@@ -36,6 +38,20 @@ def random_mode(args):
         event_likelihoods.append(float(event_settings[index]['likelihood_weight']) / sum_weight)
 
     for event_iteration_index in range(number_of_iterations):
+        # dump error logs
+        for file in os.listdir(error_logs_path):
+            file_path = os.path.join(error_logs_path, file)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+        # copy KT input into error logs
+        shutil.copy(KT_input_file, error_logs_path)
+        random_parameter_error_logs = os.path.join(error_logs_path, 'random_parameters.txt')
+        open(random_parameter_error_logs, 'w').close()
+
+        def error_log_tostring(function_name, *function_args):
+            params = ', '.join(map(str, function_args))
+            return f"{function_name}: {params}"
+
         genome = generate_genome_from_KT(KT_input_file)
         full_output_file_path = output_file_prefix + "_r" + str(event_iteration_index + 1) + ".kt.txt"
         for event_index in range(number_of_events):
@@ -107,6 +123,11 @@ def random_mode(args):
                     else:
                         current_event_start_location1 = len(current_arm1) - current_event1_length
 
+                with open(random_parameter_error_logs, 'a') as fp_write:
+                    command_append = error_log_tostring('deletion', current_arm1,
+                                                        current_event_start_location1,
+                                                        current_event_start_location1 + current_event1_length)
+                    fp_write.write(command_append + '\n')
                 genome.deletion(current_chr1, current_arm1,
                                 current_event_start_location1,
                                 current_event_start_location1 + current_event1_length)
@@ -117,6 +138,12 @@ def random_mode(args):
                         current_event_start_location1 = 0
                     else:
                         current_event_start_location1 = len(current_arm1) - current_event1_length
+
+                with open(random_parameter_error_logs, 'a') as fp_write:
+                    command_append = error_log_tostring('inversion', current_arm1,
+                                                        current_event_start_location1,
+                                                        current_event_start_location1 + current_event1_length)
+                    fp_write.write(command_append + '\n')
                 genome.inversion(current_chr1, current_arm1,
                                  current_event_start_location1,
                                  current_event_start_location1 + current_event1_length)
@@ -127,6 +154,12 @@ def random_mode(args):
                         current_event_start_location1 = 0
                     else:
                         current_event_start_location1 = len(current_arm1) - current_event1_length
+
+                with open(random_parameter_error_logs, 'a') as fp_write:
+                    command_append = error_log_tostring('tandem duplication', current_arm1,
+                                                        current_event_start_location1,
+                                                        current_event_start_location1 + current_event1_length)
+                    fp_write.write(command_append + '\n')
                 genome.duplication(current_chr1, current_arm1,
                                    current_event_start_location1,
                                    current_event_start_location1 + current_event1_length)
@@ -137,6 +170,12 @@ def random_mode(args):
                         current_event_start_location1 = 0
                     else:
                         current_event_start_location1 = len(current_arm1) - current_event1_length
+
+                with open(random_parameter_error_logs, 'a') as fp_write:
+                    command_append = error_log_tostring('segmental duplication', current_arm1,
+                                                        current_event_start_location1,
+                                                        current_event_start_location1 + current_event1_length)
+                    fp_write.write(command_append + '\n')
                 genome.duplication(current_chr1, current_arm1,
                                    current_event_start_location1,
                                    current_event_start_location1 + current_event1_length)
@@ -153,25 +192,54 @@ def random_mode(args):
                     random.choices(['left', 'right'], [left_dup_inv_likelihood, right_dup_inv_likelihood])[0]
 
                 if event_direction == 'left':
+                    with open(random_parameter_error_logs, 'a') as fp_write:
+                        command_append = error_log_tostring('left_duplication_inversion', current_arm1,
+                                                            current_event_start_location1,
+                                                            current_event_start_location1 + current_event1_length)
+                        fp_write.write(command_append + '\n')
                     genome.left_duplication_inversion(current_chr1, current_arm1,
                                                       current_event_start_location1,
                                                       current_event_start_location1 + current_event1_length)
                 else:
+                    with open(random_parameter_error_logs, 'a') as fp_write:
+                        command_append = error_log_tostring('right_duplication_inversion', current_arm1,
+                                                            current_event_start_location1,
+                                                            current_event_start_location1 + current_event1_length)
+                        fp_write.write(command_append + '\n')
                     genome.right_duplication_inversion(current_chr1, current_arm1,
                                                        current_event_start_location1,
                                                        current_event_start_location1 + current_event1_length)
             elif current_event in [5, 6]:
+                with open(random_parameter_error_logs, 'a') as fp_write:
+                    command_append = error_log_tostring('reciprocal translocation', current_chr1, current_arm1,
+                                                        current_event_start_location1,
+                                                        current_event_start_location1 + current_event1_length,
+                                                        current_chr2, current_arm2, current_event_start_location2,
+                                                        current_event_start_location2 + current_event2_length)
+                    fp_write.write(command_append + '\n')
                 genome.translocation_reciprocal(current_chr1, current_arm1, current_event_start_location1,
                                                 current_event_start_location1 + current_event1_length,
                                                 current_chr2, current_arm2, current_event_start_location2,
                                                 current_event_start_location2 + current_event2_length)
             elif current_event == 7:
+                with open(random_parameter_error_logs, 'a') as fp_write:
+                    command_append = error_log_tostring('arm_deletion', current_chr1, current_arm1)
+                    fp_write.write(command_append + '\n')
                 genome.arm_deletion(current_chr1, current_arm1)
             elif current_event in [8, 9]:
+                with open(random_parameter_error_logs, 'a') as fp_write:
+                    command_append = error_log_tostring('arm_tandem_duplication', current_chr1, current_arm1)
+                    fp_write.write(command_append + '\n')
                 genome.arm_tandem_duplication(current_chr1, current_arm1)
             elif current_event == 10:
+                with open(random_parameter_error_logs, 'a') as fp_write:
+                    command_append = error_log_tostring('chromosomal_deletion', current_chr1)
+                    fp_write.write(command_append + '\n')
                 genome.chromosomal_deletion(current_chr1)
             elif current_event == 11:
+                with open(random_parameter_error_logs, 'a') as fp_write:
+                    command_append = error_log_tostring('chromosomal_duplication', current_chr1)
+                    fp_write.write(command_append + '\n')
                 genome.chromosomal_duplication(current_chr1)
 
         genome.mark_history(job_name)

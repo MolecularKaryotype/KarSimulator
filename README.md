@@ -12,6 +12,9 @@
 7. [Usage](#usage)
 
 ## Known Issues
+If a bug is met while running random generation, please DO NOT proceed further. There is a constantly updating error log folder.
+Please copy the content of the folder and share it with me, so I can replicate the issue.
+Thank you!
 1. Manual mode under development
 2. segmental duplication and arm-segmental duplication disabled
 3. non-reciprocal translocation under development

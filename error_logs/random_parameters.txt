@@ -1,0 +1,2 @@
+left_duplication_inversion: (Chr1, 125184588, 248946421), 123638408, 123761834
+left_duplication_inversion: (Chr2, 94090558, 242183528), 147943089, 148092971
