@@ -62,23 +62,23 @@
     },
     {
     "type": "arm_deletion",
-    "likelihood_weight": 1
+    "likelihood_weight": 0
     },
     {
     "type": "arm_tandem_duplication",
-    "likelihood_weight": 1
+    "likelihood_weight": 0
     },
     {
     "type": "arm_segmental_duplication",
-    "likelihood_weight": 1
+    "likelihood_weight": 0
     },
     {
     "type": "chromosomal_deletion",
-    "likelihood_weight": 1
+    "likelihood_weight": 0
     },
     {
     "type": "chromosomal_duplication",
-    "likelihood_weight": 1
+    "likelihood_weight": 0
     }
   ]
 }
