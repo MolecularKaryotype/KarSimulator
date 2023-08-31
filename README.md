@@ -51,7 +51,7 @@ Then, select the karyotype of interest and output the corresponding FASTA.
 ## Usage
 ### Prepare an unedited starting genome
 - If genome of interest is included, skip this step. List of precompiled genomes is in the next step.
-- Start with a custom unedited genome: `python ./Main/KarSimulator.py rawGenome`
+- Start with a custom unedited genome: `python KarSimulator.py rawGenome`
 
 #### Arguments:
 | Argument  | Type  | Description                                                                                                |
@@ -64,7 +64,7 @@ Then, select the karyotype of interest and output the corresponding FASTA.
 | `-o`      | PATH  | (default: current directory) <br /> output directory                                                       |
 
 ### Work on an input genome
-- Full random mode: `python ./Main/KarSimulator.py random`
+- Full random mode: `python KarSimulator.py random`
 #### Arguments:
 | Argument | Type | Description                                   |
 |----------|------|-----------------------------------------------|
@@ -98,7 +98,7 @@ standard hg38 genome. Manual calculation needs to be done to account for off-shi
 on Chr1:50,000-100,000, the manual parameter needs to address deletion range Chr1:50,000-150,000;
 if deletion is made on Chr1:100,000-200,000, then the actual deleted region would be Chr1:50,000-100,000
 and Chr1:150,000-250,000): <br />
-`python ./Main/KarSimulator.py manual`
+`python KarSimulator.py manual`
 #### Arguments:
 | Argument | Type | Description                                                                   |
 |----------|------|-------------------------------------------------------------------------------|
@@ -108,7 +108,7 @@ and Chr1:150,000-250,000): <br />
 **NOTE2:** the required parameters for each SV is the same as addressed in the **supported SV** image
 
 ### Output FASTA
-`python ./Main/KarSimulator.py fasta`
+`python KarSimulator.py fasta`
 #### Arguments:
 | Argument   | Type | Description                                                                      |
 |------------|------|----------------------------------------------------------------------------------|
