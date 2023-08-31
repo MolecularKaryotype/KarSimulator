@@ -2,7 +2,7 @@ import IO
 from Start_Genome import *
 from Testers import test_KT_FASTA_Correspondence
 
-# genome = generate_genome_from_KT('Down_Extra21q.txt')
+# genome = generate_genome_from_KT('TDS2v7.txt')
 # chr_12a = genome.full_KT['Chr12'][0]
 
 # for chromosome in genome:

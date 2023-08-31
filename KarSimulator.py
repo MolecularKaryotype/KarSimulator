@@ -1,5 +1,4 @@
 import argparse
-import os
 import json
 import random
 
@@ -15,30 +14,34 @@ def rawGenome_mode(args):
 
 
 def random_mode(args):
+    num_supported_SV = 7
     print("Running random mode with arguments:", args)
+
     with open(args.json_file) as file:
         instruction = json.load(file)
-
+    job_name = instruction['job_name']
+    KT_input_file = instruction['template_KT']
+    output_file_prefix = instruction['output_directory'] + instruction['output_file_name']
     event_settings = instruction['event_setting']
     number_of_events = instruction['number_of_events']
-    number_of_iterations = instruction['number_of_parallel_universe']
+    number_of_iterations = instruction['number_of_iterations']
+
     # scale event weights
     sum_weight = 0.0
-    for index in range(2):
+    for index in range(num_supported_SV):
         sum_weight += event_settings[index]['likelihood_weight']
     event_likelihoods = []
-    for index in range(2):
+    for index in range(num_supported_SV):
         event_likelihoods.append(float(event_settings[index]['likelihood_weight']) / sum_weight)
 
     for event_iteration_index in range(number_of_iterations):
-        genome = generate_genome_from_KT(args.input_kar_file)
+        genome = generate_genome_from_KT(KT_input_file)
+        full_output_file_path = output_file_prefix + "_r" + str(event_iteration_index + 1) + ".kt.txt"
         for event_index in range(number_of_events):
             # choose event
-            current_event = random.choices(range(2), weights=event_likelihoods)[0]
+            current_event = random.choices(range(num_supported_SV), weights=event_likelihoods)[0]
 
             # choose chr
-            current_chr1 = -1
-            current_chr2 = -1
             chr_weights = []
             sum_length = 0.0
             for chromosome in genome:
@@ -46,20 +49,81 @@ def random_mode(args):
             for chromosome in genome:
                 chr_weights.append(float(len(chromosome)) / sum_length)
             current_chr1 = random.choices(genome.get_chromosome_list(), chr_weights)[0]
+            current_chr2 = current_chr1
+            if current_event != 6:
+                while current_chr1 == current_chr2:
+                    current_chr2 = random.choices(genome.get_chromosome_list(), chr_weights)[0]
 
             # choose arm
-            arm_weights = [float(current_chr1.p_arm_len()) / len(current_chr1),
-                           float(current_chr1.q_arm_len()) / len(current_chr1)]
-            current_arm1_value = random.choices(["p", "q"], arm_weights)[0]
+            arm1_weights = [float(current_chr1.p_arm_len()) / len(current_chr1),
+                            float(current_chr1.q_arm_len()) / len(current_chr1)]
+            arm2_weights = [float(current_chr2.p_arm_len()) / len(current_chr2),
+                            float(current_chr2.q_arm_len()) / len(current_chr2)]
+            current_arm1_value = random.choices(["p", "q"], arm1_weights)[0]
+            current_arm2_value = random.choices(["p", "q"], arm2_weights)[0]
             if current_arm1_value == 'p':
                 current_arm1 = current_chr1.p_arm
             else:
                 current_arm1 = current_chr1.q_arm
+            if current_arm2_value == 'p':
+                current_arm2 = current_chr2.p_arm
+            else:
+                current_arm2 = current_chr2.q_arm
 
             # choose length
             current_event1_length = random.randint(event_settings[current_event]['min_size'],
                                                    event_settings[current_event]['max_size'])
             current_event1_length = min(current_event1_length, len(current_arm1) - 1)
+            current_event2_length = -1
+            if current_event in [5, 6]:
+                current_event2_length = random.randint(event_settings[current_event]['min_size2'],
+                                                       event_settings[current_event]['max_size2'])
+                current_event2_length = min(current_event2_length, len(current_arm2) - 1)
+
+            # choose start location
+            current_event_start_location1 = random.randint(0, len(current_arm1) - current_event1_length - 1)
+            current_event_start_location2 = -1
+            if current_event in [5, 6]:
+                current_event_start_location2 = random.randint(0, len(current_arm2) - current_event2_length - 1)
+
+            # perform event
+            if current_event == 0:
+                genome.deletion(current_chr1, current_arm1,
+                                current_event_start_location1,
+                                current_event_start_location1 + current_event1_length)
+            elif current_event == 1:
+                genome.inversion(current_chr1, current_arm1,
+                                 current_event_start_location1,
+                                 current_event_start_location1 + current_event1_length)
+            elif current_event == 2:
+                genome.duplication(current_chr1, current_arm1,
+                                   current_event_start_location1,
+                                   current_event_start_location1 + current_event1_length)
+            elif current_event == 3:
+                genome.duplication(current_chr1, current_arm1,
+                                   current_event_start_location1,
+                                   current_event_start_location1 + current_event1_length)
+            elif current_event == 4:
+                left_dup_inv_likelihood = event_settings[current_event]['left_dupinv_to_right_dupinv_likelihood']
+                right_dup_inv_likelihood = 1 - left_dup_inv_likelihood
+                event_direction = \
+                    random.choices(['left', 'right'], [left_dup_inv_likelihood, right_dup_inv_likelihood])[0]
+
+                if event_direction == 'left':
+                    genome.left_duplication_inversion(current_chr1, current_arm1,
+                                                      current_event_start_location1,
+                                                      current_event_start_location1 + current_event1_length)
+                else:
+                    genome.left_duplication_inversion(current_chr1, current_arm1,
+                                                      current_event_start_location1,
+                                                      current_event_start_location1 + current_event1_length)
+            elif current_event in [5, 6]:
+                genome.translocation_reciprocal(current_chr1, current_arm1, current_event_start_location1,
+                                                current_event_start_location1 + current_event1_length,
+                                                current_chr2, current_arm2, current_event_start_location2,
+                                                current_event_start_location2 + current_event2_length)
+        genome.mark_history(job_name)
+        genome.output_KT(full_output_file_path)
 
 
 def manual_mode(args):
@@ -68,9 +132,11 @@ def manual_mode(args):
 
 
 def fasta_mode(args):
+    if args.name is None:
+        args.name = args.input_kar_file.split('/')[-1].split('.')[0]
     print("Running fasta mode with arguments:", args)
     genome = generate_genome_from_KT(args.input_kar_file)
-    genome.output_FASTA(args.genome, args.output_dir)
+    genome.output_FASTA(args.genome_file, args.output_dir + args.name + '.fasta')
 
 
 def main():
@@ -104,10 +170,10 @@ def main():
                                                          "current karyotype")
     random_parser.add_argument("--json", type=str, dest='json_file',
                                help="JSON file containing Random Mode parameters")
-    random_parser.add_argument("--kar", type=str, dest='input_kar_file',
-                               help="Karyotype file containing the input karyotype")
-    random_parser.add_argument("-o", type=str, default='./', dest="output_dir",
-                               help="output directory")
+    # random_parser.add_argument("--kar", type=str, dest='input_kar_file',
+    #                            help="Karyotype file containing the input karyotype")
+    # random_parser.add_argument("-o", type=str, default='./', dest="output_dir",
+    #                            help="output directory")
 
     # manual mode
     manual_parser = subparsers.add_parser("manual", help="Run manual mode: introduces a series of SVs on top of "
@@ -121,6 +187,8 @@ def main():
 
     # fasta mode
     fasta_parser = subparsers.add_parser("fasta", help="Run fasta mode: output fasta from karyotype")
+    fasta_parser.add_argument("--name", type=str, dest="name",
+                              help="Name of the output FASTA file")
     fasta_parser.add_argument("--genome", type=str, dest='genome_file', default='./Genomes/hg38.fasta',
                               help="Genome FASTA file")
     fasta_parser.add_argument("--kar", type=str, dest='input_kar_file',

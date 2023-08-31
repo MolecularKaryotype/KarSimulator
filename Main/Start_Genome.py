@@ -231,6 +231,7 @@ def generate_genome_from_KT(input_file: str) -> Genome:
                 history_chr_to = get_chromosome_from_unique_id(chr_to_name)
                 histories.append(tuple([event_type, Arm(history_segments), history_chr_from, history_chr_to]))
 
-        history_markers[len(histories) - 1] = block_name    # append last block
+        if first_block_passed:
+            history_markers[len(histories) - 1] = block_name    # append last block
 
     return Genome(full_KT, motherboard_segments, centromere_segments, initialization_string, histories, history_markers)

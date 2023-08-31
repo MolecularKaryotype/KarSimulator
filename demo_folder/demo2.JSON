@@ -1,7 +1,7 @@
 {
-  "job_name": "demo_random1",
-  "output_file_name": "demo_after_random1",
-  "template_KT": "./test_output/demo_small.kt.txt",
+  "job_name": "demo_random2",
+  "output_file_name": "demo_after_random2",
+  "template_KT": "./test_output/demo_after_random1_r1.kt.txt",
   "output_directory": "./test_output/",
   "number_of_iterations": 5,
   "number_of_events": 10,

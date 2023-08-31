@@ -1,4 +1,4 @@
-from Start_Genome import generate_raw_genome, generate_genome_from_KT
+from Main.Start_Genome import generate_raw_genome, generate_genome_from_KT
 
 new_genome = generate_raw_genome(2, ['Chr12', 'Chr21'], ['male'],
                                  '../Metadata/Full_Genome_Indices.txt')
@@ -24,5 +24,5 @@ new_genome.inversion(chr_12b, chr_12b.q_arm, 29563405, 73563405)
 new_genome.duplication(chr_21a, chr_21a.q_arm, 12915809, 17915809)
 new_genome.right_duplication_inversion(chr_Xa, chr_Xa.q_arm, 9915809, 25915809)
 new_genome.mark_history('random mutations')
-new_genome.output_KT('Down_Extra21q.txt')
+new_genome.output_KT('TDS2v7.txt')
 new_genome.output_FASTA('../Preparation/All24Chr.fasta', 'TDS2v7.fasta')
