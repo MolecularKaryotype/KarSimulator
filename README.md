@@ -7,9 +7,10 @@
 2. [Introduction](#introduction)
 3. [Workflow](#workflow)
 4. [Supported SVs](#supported-svs)
-5. [Installation](#installation)
-6. [Prerequisites](#prerequisites)
-7. [Usage](#usage)
+5. [Output Karyotype Format](#output-karyotype-format)
+6. [Installation](#installation)
+7. [Prerequisites](#prerequisites)
+8. [Usage](#usage)
 
 ## Known Issues
 If a bug is met while running random generation, please DO NOT proceed further. There is a constantly updating error log folder.
@@ -38,6 +39,9 @@ Then, select the karyotype of interest and output the corresponding FASTA.
 
 ## Supported SVs
 ![Supported SVs](/pics/Supported_SV.png)
+
+## Output Karyotype Format
+![KT Format](/pics/KT_Format.png)
 
 ## Installation
 `git clone https://github.com/Zhaoyang-Jia/KarSimulator.git`
