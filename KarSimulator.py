@@ -254,16 +254,14 @@ def manual_mode(args):
 def fasta_mode(args):
     if args.name is None:
         args.name = args.input_kar_file.split('/')[-1].split('.')[0]
+    if args.output_dir is None:
+        args.output_dir = '/'.join(args.input_kar_file.split('/')[:-1]) + '/'
     print("Running fasta mode with arguments:", args)
     genome = generate_genome_from_KT(args.input_kar_file)
     genome.output_FASTA(args.genome_file, args.output_dir + args.name + '.fasta')
 
 
 def main():
-    # current_directory = os.getcwd()
-    # parent_directory = os.path.dirname(current_directory)
-    # os.chdir(parent_directory)
-
     parser = argparse.ArgumentParser(description="KarSimulator command-line interface")
     subparsers = parser.add_subparsers(dest="mode", help="Choose a mode")
 
@@ -290,20 +288,12 @@ def main():
                                                          "current karyotype")
     random_parser.add_argument("--json", type=str, dest='json_file',
                                help="JSON file containing Random Mode parameters")
-    # random_parser.add_argument("--kar", type=str, dest='input_kar_file',
-    #                            help="Karyotype file containing the input karyotype")
-    # random_parser.add_argument("-o", type=str, default='./', dest="output_dir",
-    #                            help="output directory")
 
     # manual mode
     manual_parser = subparsers.add_parser("manual", help="Run manual mode: introduces a series of SVs on top of "
                                                          "current karyotype")
     manual_parser.add_argument("--json", type=str, dest='json_file',
                                help="JSON file containing Random Mode parameters")
-    # manual_parser.add_argument("--kar", type=str, dest='input_kar_file',
-    #                            help="Karyotype file containing the input karyotype")
-    # manual_parser.add_argument("-o", type=str, default='./', dest="output_dir",
-    #                            help="output directory")
 
     # fasta mode
     fasta_parser = subparsers.add_parser("fasta", help="Run fasta mode: output fasta from karyotype")
@@ -313,7 +303,7 @@ def main():
                               help="(default: gh38 in ./Genomes/) Genome FASTA file")
     fasta_parser.add_argument("--kar", type=str, dest='input_kar_file',
                               help="Karyotype file containing the input karyotype")
-    fasta_parser.add_argument("-o", type=str, default='./', dest="output_dir",
+    fasta_parser.add_argument("-o", type=str, dest="output_dir",
                               help="(default: same directory as Karyotype file) output directory")
 
     # call corresponding mode

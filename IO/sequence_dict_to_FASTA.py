@@ -1,7 +1,7 @@
 def sequence_dict_to_FASTA(sequence_dict, output_file):
     with open(output_file, 'w') as fp_write:
         def custom_sort_chr(key):
-            chr_part = key[3:]  # Extract the part after "Chr"
+            chr_part = key[3:-1]  # Extract the part after "Chr"
             if chr_part.isdigit():
                 return int(chr_part)
             elif chr_part == "X":

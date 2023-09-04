@@ -107,6 +107,7 @@ and Chr1:150,000-250,000): <br />
 | Argument | Type | Description                                                                   |
 |----------|------|-------------------------------------------------------------------------------|
 | `--json` | FILE | JSON file containing a list of SVs to be operated on, to be executed in-order |
+
 **NOTE1:** template JSON file can be found in `./Sample_JSON/manual.json`
 
 **NOTE2:** the required parameters for each SV is the same as addressed in the **supported SV** image
