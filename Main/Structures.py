@@ -214,6 +214,34 @@ class Chromosome:
                           self.t1_len, self.t2_len, self.centromere.duplicate())
 
 
+def index_global_to_arm(chromosome: Chromosome, left_index: int, right_index: int) -> (Chromosome, Arm, int, int):
+    """
+    given an absolute index range on a chromosome, locate the arm the range is on, and return the relative index range
+    on that arm
+    the index range cannot span different sections of a chromosome (sections: t1, p-arm, centromere, q-arm, t2)
+    currently only support the index range that is on either p-arm or q-arm
+    :param chromosome:
+    :param left_index:
+    :param right_index:
+    :return: chromosome, arm on that chromosome, relative-left-index, relative-right-index
+    """
+    centromere_left_bound = chromosome.t1_len + chromosome.p_arm_len()
+    centromere_right_bound = chromosome.t1_len + chromosome.p_arm_len() + len(chromosome.centromere) - 1
+    if right_index < left_index:
+        raise ValueError('absolute-left-index greater than absolute-right_index')
+    elif left_index < chromosome.t1_len:
+        raise ValueError('absolute-left-index in t1 region')
+    elif right_index > len(chromosome) + len(chromosome.centromere):
+        raise ValueError('absolute-right-index in t2 region')
+    elif centromere_left_bound <= left_index <= centromere_right_bound:
+        raise ValueError('absolute-left-index in centromere region')
+    elif centromere_left_bound <= right_index <= centromere_right_bound:
+        raise ValueError('absolute-right-index in centromere region')
+
+    # locate the Arm left_index is on
+    pass
+
+
 class Genome:
     full_KT: {str: [Chromosome]}  # has as many slots as there are chromosome type, i.e. 24 for a male, 23 for a female
     motherboard: Arm  # using the Arm object to use generate breakpoint method
