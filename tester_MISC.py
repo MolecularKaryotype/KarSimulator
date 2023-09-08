@@ -10,4 +10,9 @@ from Preparation.Get_Chr_Names import *
 #
 # outer_f(1, *inner_f(2, 3))
 
-Get_All_Chr_Names('./Precompiled_Kar/Down_Extra21q.fasta', 'fullset_names.txt')
+# Get_All_Chr_Names('./Precompiled_Kar/Down_Extra21q.fasta', 'fullset_names.txt')
+
+a = [1]
+b = [2, 3]
+c = [4, 5]
+print([*a, *b, *c])
