@@ -21,6 +21,7 @@ Thank you!
 3. non-reciprocal translocation under development
 4. scope for the random event under development (to limit events to only happen on a certain
 set of chromosomes)
+5. implementing a catch when all chromosomes are deleted
 
 ## Introduction
 This tool randomly generates structural variations from a given genome, outputting the karyotype of the 

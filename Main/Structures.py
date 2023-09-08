@@ -657,6 +657,13 @@ class Genome:
         :param output_file:
         :return:
         """
+        def reverse_complement(dna_sequence):
+            complement_dict = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C',
+                               'a': 't', 't': 'a', 'c': 'g', 'g': 'c'}
+            reverse_sequence = dna_sequence[::-1]
+            complement_sequence = ''.join(complement_dict[base] for base in reverse_sequence)
+            return complement_sequence
+
         sequence_dict = IO.read_FASTA(genome_path, ['all'])
         output_dict = {}
         for chromosome in self:
@@ -671,7 +678,8 @@ class Genome:
                 if segment.direction():
                     new_sequence.append(sequence_dict[segment.chr_name][segment.start: segment.end + 1])
                 else:
-                    new_sequence.append(sequence_dict[segment.chr_name][segment.end: segment.start + 1][::-1])
+                    new_sequence.append(reverse_complement
+                                        (sequence_dict[segment.chr_name][segment.end: segment.start + 1]))
 
             # telomere 2
             new_sequence.append('N' * chromosome.t2_len)

@@ -4,7 +4,7 @@
   "template_KT": "./demo_folder/demo.kt.txt",
   "output_directory": "./demo_folder/round1/",
   "number_of_iterations": 10,
-  "number_of_events": 3,
+  "number_of_events": 10,
   "event_setting": [
     {
       "type": "deletion",
@@ -66,7 +66,7 @@
     },
     {
     "type": "arm_tandem_duplication",
-    "likelihood_weight": 1
+    "likelihood_weight": 0
     },
     {
     "type": "arm_segmental_duplication",
@@ -74,7 +74,7 @@
     },
     {
     "type": "chromosomal_deletion",
-    "likelihood_weight": 0
+    "likelihood_weight": 1
     },
     {
     "type": "chromosomal_duplication",

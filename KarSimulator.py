@@ -59,16 +59,30 @@ def random_mode(args):
             current_event = random.choices(range(num_supported_SV), weights=event_likelihoods)[0]
 
             # choose chr
+            # check if there exist non-deleted chromosomes
+            all_deleted = True
+            for chromosome in genome:
+                if not chromosome.deleted:
+                    all_deleted = False
+                    break
+            if all_deleted:
+                raise RuntimeError('all chromosomes deleted, aborted')
             chr_weights = []
             sum_length = 0.0
             for chromosome in genome:
-                sum_length += len(chromosome)
+                if chromosome.deleted:
+                    sum_length += 0
+                else:
+                    sum_length += len(chromosome)
             for chromosome in genome:
                 chr_weights.append(float(len(chromosome)) / sum_length)
-            current_chr1 = random.choices(genome.get_chromosome_list(), chr_weights)[0]
+            current_chr1 = None
+            while current_chr1 is None or current_chr1.deleted:
+                # make sure the chromosome selected is not in the deleted list
+                current_chr1 = random.choices(genome.get_chromosome_list(), chr_weights)[0]
             current_chr2 = current_chr1
             if current_event != 6:
-                while current_chr1 == current_chr2:
+                while current_chr1 == current_chr2 or current_chr2.deleted:
                     current_chr2 = random.choices(genome.get_chromosome_list(), chr_weights)[0]
 
             # choose arm

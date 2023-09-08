@@ -1,4 +1,4 @@
-from read_FASTA import read_FASTA
+import IO
 
 
 def fasta_diff(fasta1, fasta2, header_conversion: {str: str}):

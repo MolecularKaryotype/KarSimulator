@@ -1,2 +1,40 @@
-left_duplication_inversion: (Chr1, 125184588, 248946421), 123638408, 123761834
-left_duplication_inversion: (Chr2, 94090558, 242183528), 147943089, 148092971
+chromosomal_deletion: Chr6a: t1-60000 t2-60000
+	p-arm: (Chr6, 60000, 58553888)
+	q-arm: (Chr6, 59829935, 170745978)
+	CEN: (Chr6, 58553889, 59829934)
+chromosomal_duplication: Chr16a: t1-10000 t2-110000
+	p-arm: (Chr16, 10000, 36311158)
+	q-arm: (Chr16, 38280683, 90228344)
+	CEN: (Chr16, 36311159, 38280682)
+chromosomal_duplication: Chr8a: t1-60000 t2-60000
+	p-arm: (Chr8, 60000, 44033744)
+	q-arm: (Chr8, 45877266, 145078635)
+	CEN: (Chr8, 44033745, 45877265)
+chromosomal_duplication: ChrXb: t1-10000 t2-10000
+	p-arm: (ChrX, 10000, 58605579)
+	q-arm: (ChrX, 62412543, 156030894)
+	CEN: (ChrX, 58605580, 62412542)
+chromosomal_deletion: Chr4a: t1-10000 t2-10000
+	p-arm: (Chr4, 10000, 49708100)
+	q-arm: (Chr4, 51743952, 190204554)
+	CEN: (Chr4, 49708101, 51743951)
+chromosomal_deletion: Chr1a: t1-10000 t2-10000
+	p-arm: (Chr1, 10000, 122026459)
+	q-arm: (Chr1, 125184588, 248946421)
+	CEN: (Chr1, 122026460, 125184587)
+chromosomal_deletion: Chr20a: t1-60000 t2-110000
+	p-arm: (Chr20, 60000, 26436232)
+	q-arm: (Chr20, 30038349, 64334166)
+	CEN: (Chr20, 26436233, 30038348)
+chromosomal_duplication: Chr17a: t1-60000 t2-10000
+	p-arm: (Chr17, 60000, 22813679)
+	q-arm: (Chr17, 26885981, 83247440)
+	CEN: (Chr17, 22813680, 26885980)
+chromosomal_duplication: Chr10a: t1-10000 t2-10000
+	p-arm: (Chr10, 10000, 39686682)
+	q-arm: (Chr10, 41593522, 133787421)
+	CEN: (Chr10, 39686683, 41593521)
+chromosomal_duplication: Chr5a: t1-10000 t2-60000
+	p-arm: (Chr5, 10000, 46485900)
+	q-arm: (Chr5, 50059808, 181478258)
+	CEN: (Chr5, 46485901, 50059807)
