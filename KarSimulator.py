@@ -26,6 +26,7 @@ def random_mode(args):
     supported_SVs = ['deletion', 'inversion',
                      *duplication_events, *reciprocal_translocation_events, *arm_events, *chromosomal_events]
     num_supported_SV = len(supported_SVs)
+    access_setting_events = {name: index for index, name in enumerate(supported_SVs)}
 
     error_logs_path = "./error_logs/"
     print("Running random mode with arguments:", args)
@@ -67,7 +68,6 @@ def random_mode(args):
         for event_index in range(number_of_events):
             # choose event
             current_event = random.choices(supported_SVs, weights=event_likelihoods)[0]
-
             # choose chr
             # check if there exist non-deleted chromosomes
             all_deleted = True
@@ -116,12 +116,13 @@ def random_mode(args):
             current_event2_length = -1
             if current_event not in [*arm_events, *chromosomal_events]:
                 # skip if it is an arm or chromosomal event, since they don't have a length generation
-                current_event1_length = random.randint(event_settings[current_event]['min_size'],
-                                                       event_settings[current_event]['max_size'])
+                current_event1_length = random.randint(event_settings[access_setting_events[current_event]]['min_size'],
+                                                       event_settings[access_setting_events[current_event]]['max_size'])
                 current_event1_length = min(current_event1_length, len(current_arm1) - 1)
                 if current_event in reciprocal_translocation_events:
-                    current_event2_length = random.randint(event_settings[current_event]['min_size2'],
-                                                           event_settings[current_event]['max_size2'])
+                    current_event2_length = \
+                        random.randint(event_settings[access_setting_events[current_event]]['min_size2'],
+                                       event_settings[access_setting_events[current_event]]['max_size2'])
                     current_event2_length = min(current_event2_length, len(current_arm2) - 1)
 
             # choose start location
@@ -135,7 +136,8 @@ def random_mode(args):
                     current_event_start_location2 = random.randint(0, len(current_arm2) - current_event2_length - 1)
 
             def run_terminal_likelihood():
-                terminal_likelihood = event_settings[current_event]['terminal_occurrence_likelihood']
+                terminal_likelihood = \
+                    event_settings[access_setting_events[current_event]]['terminal_occurrence_likelihood']
                 non_terminal_likelihood = 1 - terminal_likelihood
                 terminal_status = \
                     random.choices([True, False], [terminal_likelihood, non_terminal_likelihood])[0]
@@ -197,7 +199,8 @@ def random_mode(args):
                         current_event_start_location1 = 0
                     else:
                         current_event_start_location1 = len(current_arm1) - current_event1_length
-                left_dup_inv_likelihood = event_settings[current_event]['left_dupinv_to_right_dupinv_likelihood']
+                left_dup_inv_likelihood = \
+                    event_settings[access_setting_events[current_event]]['left_dupinv_to_right_dupinv_likelihood']
                 right_dup_inv_likelihood = 1 - left_dup_inv_likelihood
                 event_direction = \
                     random.choices(['left', 'right'], [left_dup_inv_likelihood, right_dup_inv_likelihood])[0]

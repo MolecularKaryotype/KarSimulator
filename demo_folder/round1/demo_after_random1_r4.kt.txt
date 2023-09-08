@@ -1,0 +1,183 @@
+index	origin	start	end
+1	Chr1	10000	124703
+2	Chr1	124704	143913
+3	Chr1	143914	81880296
+4	Chr1	81880297	82000332
+5	Chr1	82000333	93568143
+6	Chr1	93568144	93673972
+7	Chr1	93673973	122026459
+CEN1	Chr1	122026460	125184587
+8	Chr1	125184588	248946421
+9	Chr2	10000	92188145
+CEN2	Chr2	92188146	94090557
+10	Chr2	94090558	217455060
+11	Chr2	217455061	217565757
+12	Chr2	217565758	242030112
+13	Chr2	242030113	242183528
+14	Chr3	10000	7673571
+15	Chr3	7673572	7811767
+16	Chr3	7811768	90772458
+CEN3	Chr3	90772459	93655574
+17	Chr3	93655575	114415454
+18	Chr3	114415455	114555192
+19	Chr3	114555193	159766370
+20	Chr3	159766371	159933035
+21	Chr3	159933036	198126060
+22	Chr3	198126061	198235558
+23	Chr4	10000	8988213
+24	Chr4	8988214	9171763
+25	Chr4	9171764	49708100
+CEN4	Chr4	49708101	51743951
+26	Chr4	51743952	190204554
+27	Chr5	10000	46485900
+CEN5	Chr5	46485901	50059807
+28	Chr5	50059808	67295798
+29	Chr5	67295799	67431569
+30	Chr5	67431570	97642488
+31	Chr5	97642489	97751777
+32	Chr5	97751778	123856869
+33	Chr5	123856870	123985304
+34	Chr5	123985305	159791969
+35	Chr5	159791970	159943141
+36	Chr5	159943142	181330699
+37	Chr5	181330700	181478258
+38	Chr6	60000	1168055
+39	Chr6	1168056	1270749
+40	Chr6	1270750	58553888
+CEN6	Chr6	58553889	59829934
+41	Chr6	59829935	125928157
+42	Chr6	125928158	126056860
+43	Chr6	126056861	170745978
+44	Chr7	10000	58169653
+CEN7	Chr7	58169654	60828234
+45	Chr7	60828235	159335972
+46	Chr8	60000	44033744
+CEN8	Chr8	44033745	45877265
+47	Chr8	45877266	144892080
+48	Chr8	144892081	145078635
+49	Chr9	10000	43236167
+CEN9	Chr9	43236168	45518558
+50	Chr9	45518559	138334716
+51	Chr10	10000	15724855
+52	Chr10	15724856	15843342
+53	Chr10	15843343	39686682
+CEN10	Chr10	39686683	41593521
+54	Chr10	41593522	133787421
+55	Chr11	60000	36347142
+56	Chr11	36347143	36466707
+57	Chr11	36466708	51078348
+CEN11	Chr11	51078349	54425074
+58	Chr11	54425075	135076621
+59	Chr12	10000	34769407
+CEN12	Chr12	34769408	37185252
+60	Chr12	37185253	58640728
+61	Chr12	58640729	58798002
+62	Chr12	58798003	96371910
+63	Chr12	96371911	96504818
+64	Chr12	96504819	133265308
+65	Chr13	16000000	16000000
+CEN13	Chr13	16000001	18051248
+66	Chr13	18051249	114354327
+67	Chr14	16000000	16000000
+CEN14	Chr14	16000001	18173523
+68	Chr14	18173524	106883717
+69	Chr15	17000000	17000000
+CEN15	Chr15	17000001	19725254
+70	Chr15	19725255	40166307
+71	Chr15	40166308	40353629
+72	Chr15	40353630	101981188
+73	Chr16	10000	36311158
+CEN16	Chr16	36311159	38280682
+74	Chr16	38280683	90228344
+75	Chr17	60000	22813679
+CEN17	Chr17	22813680	26885980
+76	Chr17	26885981	83247440
+77	Chr18	10000	15460899
+CEN18	Chr18	15460900	20861206
+78	Chr18	20861207	80263284
+79	Chr19	60000	24498980
+CEN19	Chr19	24498981	27190874
+80	Chr19	27190875	58607615
+81	Chr20	60000	26436232
+CEN20	Chr20	26436233	30038348
+82	Chr20	30038349	64334166
+83	Chr21	5010000	10864560
+CEN21	Chr21	10864561	12915808
+84	Chr21	12915809	46699982
+85	Chr22	10510000	12954788
+CEN22	Chr22	12954789	15054318
+86	Chr22	15054319	50808467
+87	ChrX	10000	58605579
+CENX	ChrX	58605580	62412542
+88	ChrX	62412543	156030894
+---
+chromosome	KT	telo1_len	telo2_len
+Chr1a	1+,2+,2-,2+,2-,1-,1-,3+,6+,5+,6+,4+,CEN1+,8+	10000	10000
+Chr2a	9+,CEN2+,10+,11+,12+,13+,10+,11-,12+,13+,13+	10000	10000
+Chr3a	14+,15+,16+,14+,15+,16+,14+,18+,16+,14+,15+,16+,CEN3+,17+,15+,19+,56+,21+,22+,17+,18+,19+,20+,21+	10000	60000
+Chr4a	23+,24+,24+,25+,CEN4+,26+	10000	10000
+Chr5a	27+,CEN5+,28+,30+,31+,32+,33+,34+,35+,36+,37+,37+	10000	60000
+Chr5b	27+,27+,CEN5+,28+,29+,30+,31-,32+,35+,34+,35+,33+	10000	60000
+Chr6a	38+,42+,40+,CEN6+,41+,39+,43+	60000	60000
+Chr6b	38+,42+,40+,CEN6+,41+,39+,43+	60000	60000
+Chr7a	44+,CEN7+,45+	10000	10000
+Chr8a	46+,CEN8+,47+	60000	60000
+Chr9a	49+,CEN9+,50+	10000	60000
+Chr10a	51+,71+,53+,CEN10+,54+	10000	10000
+Chr11a	55+,20+,57+,CEN11+,58+	60000	10000
+Chr12a	59+,CEN12+,60+,61+,63+,63+,64+,60+,61+,62+,63+,64+	10000	10000
+Chr13a	65+,CEN13+,66+	16000000	10000
+Chr14a	67+,CEN14+,68+	16000000	160000
+Chr15a	69+,CEN15+,70+,52+,72+	17000000	10000
+Chr16a	73+,CEN16+,74+	10000	110000
+Chr17a	75+,CEN17+,76+,76+	60000	10000
+Chr18a	deleted	0	0
+Chr19a	79+,CEN19+,80+	60000	10000
+Chr20a	81+,CEN20+,82+	60000	110000
+Chr21a	deleted	0	0
+Chr22a	85+,CEN22+,86+	10510000	10000
+ChrXa	87+,CENX+,88+	10000	10000
+ChrXb	87+,CENX+,88+	10000	10000
+---
+initialization
+	autosomes: ['Chr1', 'Chr2', 'Chr3', 'Chr4', 'Chr5', 'Chr6', 'Chr7', 'Chr8', 'Chr9', 'Chr10', 'Chr11', 'Chr12', 'Chr13', 'Chr14', 'Chr15', 'Chr16', 'Chr17', 'Chr18', 'Chr19', 'Chr20', 'Chr21', 'Chr22']
+	autosomal copy number: 1
+	sex chromosomes: ['ChrX', 'ChrX']
+block 1: demo_random1
+	arm tandem duplication on segments [10+,11+,12+,13+], from Chr2a to Chr2a
+	arm tandem duplication on segments [14+,15+,16+], from Chr3a to Chr3a
+	chromosomal deletion on segments [83+,CEN21+,84+], from Chr21a to Chr21a
+	arm tandem duplication on segments [60+,61+,62+,63+,64+], from Chr12a to Chr12a
+	chromosomal duplication on segments [27+,CEN5+,28+,29+,30+,31+,32+,33+,34+,35+,36+,37+], from Chr5a to Chr5b
+	arm tandem duplication on segments [78+], from Chr18a to Chr18a
+	reciprocal translocation on segments [63+], from Chr12a to Chr12a
+	reciprocal translocation on segments [61+], from Chr12a to Chr12a
+	arm tandem duplication on segments [17+,18+,19+,20+,21+,22+], from Chr3a to Chr3a
+	deletion on segments [22+], from Chr3a to Chr3a
+	right duplication inversion on segments [1+,2+], from Chr1a to Chr1a
+	reciprocal translocation on segments [56+], from Chr11a to Chr3a
+	reciprocal translocation on segments [20+], from Chr3a to Chr11a
+	reciprocal translocation on segments [33+], from Chr5b to Chr5b
+	reciprocal translocation on segments [35+], from Chr5b to Chr5b
+	right duplication inversion on segments [1+,2+,2+], from Chr1a to Chr1a
+	reciprocal translocation on segments [71+], from Chr15a to Chr10a
+	reciprocal translocation on segments [52+], from Chr10a to Chr15a
+	deletion on segments [29+], from Chr5a to Chr5a
+	arm tandem duplication on segments [14+,15+,16+,14+,15+,16+], from Chr3a to Chr3a
+	arm tandem duplication on segments [76+], from Chr17a to Chr17a
+	tandem duplication on segments [13+], from Chr2a to Chr2a
+	deletion on segments [48+], from Chr8a to Chr8a
+	tandem duplication on segments [37+], from Chr5a to Chr5a
+	reciprocal translocation on segments [18+], from Chr3a to Chr3a
+	reciprocal translocation on segments [15+], from Chr3a to Chr3a
+	arm tandem duplication on segments [78+,78+], from Chr18a to Chr18a
+	arm tandem duplication on segments [27+], from Chr5b to Chr5b
+	reciprocal translocation on segments [39+], from Chr6a to Chr6a
+	reciprocal translocation on segments [42+], from Chr6a to Chr6a
+	inversion on segments [31+], from Chr5b to Chr5b
+	tandem duplication on segments [24+], from Chr4a to Chr4a
+	chromosomal deletion on segments [77+,CEN18+,78+,78+,78+,78+], from Chr18a to Chr18a
+	chromosomal duplication on segments [38+,42+,40+,CEN6+,41+,39+,43+], from Chr6a to Chr6b
+	reciprocal translocation on segments [4+], from Chr1a to Chr1a
+	reciprocal translocation on segments [6+], from Chr1a to Chr1a
+	inversion on segments [11+], from Chr2a to Chr2a
