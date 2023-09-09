@@ -27,3 +27,13 @@ def read_FASTA(genome_path: str, chr_of_interest: [str]):
 # d2 = read_FASTA('../Genomes/GCF_000001405.26_GRCh38_genomic.fasta',
 #                 ['NC_000001.11 Homo sapiens chromosome 1, GRCh38 Primary Assembly'])
 # print(d1['Chr1'] == d2['NC_000001.11 Homo sapiens chromosome 1, GRCh38 Primary Assembly'])
+
+def test():
+    seq_dict = read_FASTA("../Genomes/hg38.fasta", ['ChrX'])
+    for char in seq_dict['ChrX'][10000:2406768]:
+        if char in ['N', 'n', 'M', 'm']:
+            print(char)
+
+
+if __name__ == "__main__":
+    test()

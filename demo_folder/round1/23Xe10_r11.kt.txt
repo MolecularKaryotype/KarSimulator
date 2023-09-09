@@ -1,0 +1,32 @@
+index	origin	start	end
+1	Chr1	10000	223890
+2	Chr1	223891	122026459
+CEN1	Chr1	122026460	125184587
+3	Chr1	125184588	248946421
+4	Chr2	10000	92188145
+CEN2	Chr2	92188146	94090557
+5	Chr2	94090558	147496681
+6	Chr2	147496682	148593411
+7	Chr2	148593412	242183528
+8	ChrX	10000	880528
+9	ChrX	880529	58605579
+CENX	ChrX	58605580	62412542
+10	ChrX	62412543	80249657
+11	ChrX	80249658	81714875
+12	ChrX	81714876	156030894
+---
+chromosome	KT	telo1_len	telo2_len
+Chr1a	2+,CEN1+,3+	10000	10000
+Chr2a	4+,CEN2+,5+,11+,7+	10000	10000
+ChrXa	9+,CENX+,10+,11+,12+	10000	10000
+ChrXb	8+,9+,CENX+,10+,6+,12+	10000	10000
+---
+initialization
+	autosomes: ['Chr1', 'Chr2']
+	autosomal copy number: 1
+	sex chromosomes: ['ChrX', 'ChrX']
+block 1: 10 random events
+	deletion on segments [1+], from Chr1a to Chr1a
+	deletion on segments [8+], from ChrXa to ChrXa
+	reciprocal translocation on segments [11+], from ChrXb to Chr2a
+	reciprocal translocation on segments [6+], from Chr2a to ChrXb
