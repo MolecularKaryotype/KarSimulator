@@ -660,7 +660,13 @@ class Genome:
         def reverse_complement(dna_sequence):
             complement_dict = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C',
                                'a': 't', 't': 'a', 'c': 'g', 'g': 'c',
-                               'N': 'N', 'n': 'n'}
+                               'M': 'K', 'm': 'k', 'K': 'M', 'k': 'm',
+                               'R': 'Y', 'r': 'y', 'Y': 'R', 'y': 'r',
+                               'W': 'W', 'w': 'w',
+                               'S': 'S', 's': 's',
+                               'B': 'V', 'b': 'v', 'V': 'B', 'v': 'b',
+                               'H': 'D', 'h': 'd', 'D': 'H', 'd': 'h',
+                               'N': 'N', 'n': 'n',}
             reverse_sequence = dna_sequence[::-1]
             complement_sequence = ''.join(complement_dict[base] for base in reverse_sequence)
             return complement_sequence

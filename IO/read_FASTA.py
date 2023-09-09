@@ -29,10 +29,15 @@ def read_FASTA(genome_path: str, chr_of_interest: [str]):
 # print(d1['Chr1'] == d2['NC_000001.11 Homo sapiens chromosome 1, GRCh38 Primary Assembly'])
 
 def test():
-    seq_dict = read_FASTA("../Genomes/hg38.fasta", ['ChrX'])
-    for char in seq_dict['ChrX'][10000:2406768]:
-        if char in ['N', 'n', 'M', 'm']:
-            print(char)
+    all_chrom = ['Chr1', 'Chr2', 'Chr3', 'Chr4', 'Chr5', 'Chr6', 'Chr7', 'Chr8', 'Chr9', 'Chr10', 'Chr11',
+                'Chr12', 'Chr13', 'Chr14', 'Chr15', 'Chr16', 'Chr17', 'Chr18', 'Chr19', 'Chr20', 'Chr21',
+                'Chr22', 'ChrX', 'ChrY']
+    seq_dict = read_FASTA("../Genomes/hg38.fasta", all_chrom)
+    for chrom in all_chrom:
+        # seq_dict['ChrX'][10000:2406768]
+        for index, char in enumerate(seq_dict[chrom]):
+            if char.lower() not in ['a', 'c', 'g', 't', 'n', 'm', 'r', 'k', 'w', 'y', 's', 'b', 'v', 'h', 'd']:
+                print(chrom, index, char)
 
 
 if __name__ == "__main__":
