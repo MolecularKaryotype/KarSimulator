@@ -8,6 +8,8 @@ from Main.Start_Genome import *
 
 
 def rawGenome_mode(args):
+    # TODO: update all address calls to use the Code's folder as absolute path; this fixes dependencies of where the
+    #  code is called
     print("Running rawGenome mode with arguments:", args)
     autosome_list = args.autosomes.replace('[', '').replace(']', '').split(',')
     sex_chromosome_list = args.sex_chromosomes.replace('[', '').replace(']', '').split(',')
@@ -18,7 +20,7 @@ def rawGenome_mode(args):
 def random_mode(args):
     # this needs to be in the exact same order as listed in the JSON file
     duplication_events = ['tandem_duplication', 'duplication_inversion',
-                          'segmental_duplication',]
+                          'segmental_duplication', ]
     reciprocal_translocation_events = ['intra_chromosomal_reciprocal_translocation',
                                        'inter_chromosomal_reciprocal_translocation']
     arm_events = ['arm_deletion', 'arm_tandem_duplication', 'arm_segmental_duplication']
@@ -157,9 +159,11 @@ def random_mode(args):
                                                         current_event_start_location1,
                                                         current_event_start_location1 + current_event1_length)
                     fp_write.write(command_append + '\n')
-                genome.deletion(current_chr1, current_arm1,
-                                current_event_start_location1,
-                                current_event_start_location1 + current_event1_length)
+                event_segments = genome.deletion(current_chr1, current_arm1,
+                                                 current_event_start_location1,
+                                                 current_event_start_location1 + current_event1_length)
+                genome.append_history('deletion', event_segments, current_chr1, current_chr1)
+
             elif current_event == 'inversion':
                 terminal_event = run_terminal_likelihood()
                 if terminal_event:
@@ -173,9 +177,11 @@ def random_mode(args):
                                                         current_event_start_location1,
                                                         current_event_start_location1 + current_event1_length)
                     fp_write.write(command_append + '\n')
-                genome.inversion(current_chr1, current_arm1,
-                                 current_event_start_location1,
-                                 current_event_start_location1 + current_event1_length)
+                event_segments = genome.inversion(current_chr1, current_arm1,
+                                                  current_event_start_location1,
+                                                  current_event_start_location1 + current_event1_length)
+                genome.append_history('inversion', event_segments, current_chr1, current_chr1)
+
             elif current_event == 'tandem_duplication':
                 terminal_event = run_terminal_likelihood()
                 if terminal_event:
@@ -189,9 +195,11 @@ def random_mode(args):
                                                         current_event_start_location1,
                                                         current_event_start_location1 + current_event1_length)
                     fp_write.write(command_append + '\n')
-                genome.duplication(current_chr1, current_arm1,
-                                   current_event_start_location1,
-                                   current_event_start_location1 + current_event1_length)
+                event_segments = genome.tandem_duplication(current_chr1, current_arm1,
+                                                           current_event_start_location1,
+                                                           current_event_start_location1 + current_event1_length)
+                genome.append_history('tandem duplication', event_segments, current_chr1, current_chr1)
+
             elif current_event == 'duplication_inversion':
                 terminal_event = run_terminal_likelihood()
                 if terminal_event:
@@ -211,18 +219,24 @@ def random_mode(args):
                                                             current_event_start_location1,
                                                             current_event_start_location1 + current_event1_length)
                         fp_write.write(command_append + '\n')
-                    genome.left_duplication_inversion(current_chr1, current_arm1,
-                                                      current_event_start_location1,
-                                                      current_event_start_location1 + current_event1_length)
+                    event_segments = genome.left_duplication_inversion(current_chr1, current_arm1,
+                                                                       current_event_start_location1,
+                                                                       current_event_start_location1 + current_event1_length)
+                    genome.append_history('left duplication inversion', event_segments, current_chr1, current_chr1)
+
                 else:
                     with open(random_parameter_error_logs, 'a') as fp_write:
                         command_append = error_log_tostring('right_duplication_inversion', current_arm1,
                                                             current_event_start_location1,
                                                             current_event_start_location1 + current_event1_length)
                         fp_write.write(command_append + '\n')
-                    genome.right_duplication_inversion(current_chr1, current_arm1,
-                                                       current_event_start_location1,
-                                                       current_event_start_location1 + current_event1_length)
+                    event_segments = genome.right_duplication_inversion(current_chr1, current_arm1,
+                                                                        current_event_start_location1,
+                                                                        current_event_start_location1 + current_event1_length)
+
+                    genome.append_history('right duplication inversion', event_segments, current_chr1, current_chr1)
+
+            # TODO: waiting for bug fix
             elif current_event == 'segmental_duplication':
                 terminal_event = run_terminal_likelihood()
                 if terminal_event:
@@ -236,9 +250,10 @@ def random_mode(args):
                                                         current_event_start_location1,
                                                         current_event_start_location1 + current_event1_length)
                     fp_write.write(command_append + '\n')
-                genome.duplication(current_chr1, current_arm1,
-                                   current_event_start_location1,
-                                   current_event_start_location1 + current_event1_length)
+                genome.tandem_duplication(current_chr1, current_arm1,
+                                          current_event_start_location1,
+                                          current_event_start_location1 + current_event1_length)
+
             elif current_event in reciprocal_translocation_events:
                 with open(random_parameter_error_logs, 'a') as fp_write:
                     command_append = error_log_tostring('reciprocal translocation', current_chr1, current_arm1,
@@ -247,30 +262,46 @@ def random_mode(args):
                                                         current_chr2, current_arm2, current_event_start_location2,
                                                         current_event_start_location2 + current_event2_length)
                     fp_write.write(command_append + '\n')
-                genome.translocation_reciprocal(current_chr1, current_arm1, current_event_start_location1,
-                                                current_event_start_location1 + current_event1_length,
-                                                current_chr2, current_arm2, current_event_start_location2,
-                                                current_event_start_location2 + current_event2_length)
+                event_segments_list = genome.translocation_reciprocal(current_chr1, current_arm1,
+                                                                      current_event_start_location1,
+                                                                      current_event_start_location1 + current_event1_length,
+                                                                      current_chr2, current_arm2,
+                                                                      current_event_start_location2,
+                                                                      current_event_start_location2 + current_event2_length)
+                genome.append_history('reciprocal translocation', event_segments_list[0], current_chr1, current_chr2)
+                genome.append_history('reciprocal translocation', event_segments_list[1], current_chr2, current_chr1)
+
+            # TODO: add nonreciprocal translocation
+
             elif current_event == 'arm_deletion':
                 with open(random_parameter_error_logs, 'a') as fp_write:
                     command_append = error_log_tostring('arm_deletion', current_chr1, current_arm1)
                     fp_write.write(command_append + '\n')
-                genome.arm_deletion(current_chr1, current_arm1)
+                event_segments = genome.arm_deletion(current_chr1, current_arm1)
+                genome.append_history('arm deletion', event_segments, current_chr1, current_chr1)
+
+            # TODO: add arm segmental duplication
+
             elif current_event in ['arm_tandem_duplication', 'arm_segmental_duplication']:
                 with open(random_parameter_error_logs, 'a') as fp_write:
                     command_append = error_log_tostring('arm_tandem_duplication', current_chr1, current_arm1)
                     fp_write.write(command_append + '\n')
-                genome.arm_tandem_duplication(current_chr1, current_arm1)
+                event_segments = genome.arm_tandem_duplication(current_chr1, current_arm1)
+                genome.append_history('arm tandem duplication', event_segments, current_chr1, current_chr1)
+
             elif current_event == 'chromosomal_deletion':
                 with open(random_parameter_error_logs, 'a') as fp_write:
                     command_append = error_log_tostring('chromosomal_deletion', current_chr1)
                     fp_write.write(command_append + '\n')
-                genome.chromosomal_deletion(current_chr1)
+                event_segments = genome.chromosomal_deletion(current_chr1)
+                genome.append_history('chromosomal deletion', event_segments, current_chr1, current_chr1)
+
             elif current_event == 'chromosomal_duplication':
                 with open(random_parameter_error_logs, 'a') as fp_write:
                     command_append = error_log_tostring('chromosomal_duplication', current_chr1)
                     fp_write.write(command_append + '\n')
-                genome.chromosomal_duplication(current_chr1)
+                event_segments = genome.chromosomal_duplication(current_chr1)
+                genome.append_history('chromosomal duplication', event_segments, current_chr1, current_chr1)
 
         genome.mark_history(job_name)
         genome.output_KT(full_output_file_path)

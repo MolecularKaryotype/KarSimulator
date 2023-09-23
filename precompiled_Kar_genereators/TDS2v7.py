@@ -21,7 +21,7 @@ chr_21a = new_genome.full_KT['Chr21'][0]
 chr_Xa = new_genome.full_KT['ChrX'][0]
 new_genome.deletion(chr_12a, chr_12a.p_arm, 14563405, 21563405)
 new_genome.inversion(chr_12b, chr_12b.q_arm, 29563405, 73563405)
-new_genome.duplication(chr_21a, chr_21a.q_arm, 12915809, 17915809)
+new_genome.tandem_duplication(chr_21a, chr_21a.q_arm, 12915809, 17915809)
 new_genome.right_duplication_inversion(chr_Xa, chr_Xa.q_arm, 9915809, 25915809)
 new_genome.mark_history('random mutations')
 new_genome.output_KT('TDS2v7.txt')

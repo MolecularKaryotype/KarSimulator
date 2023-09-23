@@ -523,12 +523,11 @@ class Genome:
         """
         event_segments, event_segments_indices = \
             self.locate_segments_for_event(event_arm, left_event_index, right_event_index)
-        # document segments deleted
-        self.append_history('deletion', event_segments, event_chromosome, event_chromosome)
         # remove empty segments
         event_arm.delete_segments_by_index(event_segments_indices)
+        return event_segments
 
-    def duplication(self, event_chromosome: Chromosome, event_arm: Arm, left_event_index: int, right_event_index: int):
+    def tandem_duplication(self, event_chromosome: Chromosome, event_arm: Arm, left_event_index: int, right_event_index: int):
         """
         duplication even, inplace
         :param event_chromosome: chromosome that the Arm is located on
@@ -539,10 +538,9 @@ class Genome:
         """
         event_segments, event_segment_indices = \
             self.locate_segments_for_event(event_arm, left_event_index, right_event_index)
-        # document segments duplicated
-        self.append_history('tandem duplication', event_segments, event_chromosome, event_chromosome)
         # duplicate segments
         event_arm.duplicate_segments_by_index(event_segment_indices)
+        return event_segments
 
     def inversion(self, event_chromosome: Chromosome, event_arm: Arm, left_event_index: int, right_event_index: int):
         """
@@ -555,29 +553,28 @@ class Genome:
         """
         event_segments, event_segments_indices = \
             self.locate_segments_for_event(event_arm, left_event_index, right_event_index)
-        # document segments inverted
-        self.append_history('inversion', event_segments, event_chromosome, event_chromosome)
         # invert segments
         event_arm.invert_segments_by_index(event_segments_indices)
+        return event_segments
 
     def right_duplication_inversion(self, event_chromosome: Chromosome, event_arm: Arm,
                                     left_event_index: int, right_event_index: int):
         event_segments, event_segment_indices = self.locate_segments_for_event(event_arm, left_event_index,
                                                                                right_event_index)
-        self.append_history('right duplication inversion', event_segments, event_chromosome, event_chromosome)
         new_segment_start_index = event_segment_indices[-1] + 1
         new_segment_end_index = new_segment_start_index + len(event_segments) - 1
         event_arm.duplicate_segments_by_index(event_segment_indices)
         segments_for_inversion_indices = range(new_segment_start_index, new_segment_end_index + 1)
         event_arm.invert_segments_by_index(segments_for_inversion_indices)
+        return event_segments
 
     def left_duplication_inversion(self, event_chromosome: Chromosome, event_arm: Arm,
                                    left_event_index: int, right_event_index: int):
         event_segments, event_segment_indices = self.locate_segments_for_event(event_arm, left_event_index,
                                                                                right_event_index)
-        self.append_history('left duplication inversion', event_segments, event_chromosome, event_chromosome)
         event_arm.duplicate_segments_by_index(event_segment_indices)
         event_arm.invert_segments_by_index(event_segment_indices)
+        return event_segments
 
     def translocation_reciprocal(self,
                                  event_chromosome1, event_arm1: Arm, arm1_left_index: int, arm1_right_index: int,
@@ -589,13 +586,11 @@ class Genome:
         arm1_start_segment_index = arm1_segment_indices[0]
         arm2_start_segment_index = arm2_segment_indices[0]
 
-        self.append_history('reciprocal translocation', arm1_segments, event_chromosome1, event_chromosome2)
-        self.append_history('reciprocal translocation', arm2_segments, event_chromosome2, event_chromosome1)
-
         event_arm1.delete_segments_by_index(arm1_segment_indices)
         event_arm2.delete_segments_by_index(arm2_segment_indices)
         event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
         event_arm1.segments[arm1_start_segment_index:arm1_start_segment_index] = arm2_segments
+        return [arm1_segments, arm2_segments]
 
     def translocation_nonreciprocal(self,
                                     event_chromosome1, event_arm1: Arm, arm1_left_index: int, arm1_right_index: int,
@@ -615,7 +610,7 @@ class Genome:
         event_chromosome.deleted = True
         event_segments = \
             event_chromosome.p_arm.segments + event_chromosome.centromere.segments + event_chromosome.q_arm.segments
-        self.append_history('chromosomal deletion', event_segments, event_chromosome, event_chromosome)
+        return event_segments
 
     def chromosomal_duplication(self, event_chromosome: Chromosome):
         if event_chromosome.deleted:
@@ -625,23 +620,21 @@ class Genome:
         new_chromosome.name = new_chromosome.name[:-1] + chr(len(self.full_KT[new_chromosome.name[:-1]]) + 96)
         event_segments = \
             event_chromosome.p_arm.segments + event_chromosome.centromere.segments + event_chromosome.q_arm.segments
-        self.append_history('chromosomal duplication', event_segments, event_chromosome, new_chromosome)
+        return event_segments
 
     def arm_deletion(self, event_chromosome: Chromosome, event_arm: Arm):
         event_segments, event_segments_indices = \
             self.locate_segments_for_event(event_arm, 0, len(event_arm) - 1)
-        # document segments deleted
-        self.append_history('arm deletion', event_segments, event_chromosome, event_chromosome)
         # remove empty segments
         event_arm.delete_segments_by_index(event_segments_indices)
+        return event_segments
 
     def arm_tandem_duplication(self, event_chromosome: Chromosome, event_arm: Arm):
         event_segments, event_segment_indices = \
             self.locate_segments_for_event(event_arm, 0, len(event_arm) - 1)
-        # document segments duplicated
-        self.append_history('arm tandem duplication', event_segments, event_chromosome, event_chromosome)
         # duplicate segments
         event_arm.duplicate_segments_by_index(event_segment_indices)
+        return event_segments
 
     def output_KT(self, output_file):
         with open(output_file, 'w') as fp_write:
