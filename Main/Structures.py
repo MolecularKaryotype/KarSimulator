@@ -113,6 +113,27 @@ class Arm:
             return_str += str(segment)
         return return_str
 
+    def get_segment_indices(self, input_data):
+        """
+        :param input_data: Segment or [Segment]
+        :return: int or [int]
+        """
+        # the same segment ID (segment object) will occur only once per Genome, no exception
+        if isinstance(input_data, Segment):
+            for arm_segment_ind in range(0, len(self.segments)):
+                if self.segments[arm_segment_ind] is input_data:
+                    return arm_segment_ind
+        elif isinstance(input_data, list) and all(isinstance(item, Segment) for item in input_data):
+            return_indices = []
+            for segment_to_find in input_data:
+                for arm_segment_ind in range(0, len(self.segments)):
+                    if self.segments[arm_segment_ind] is segment_to_find:
+                        return_indices.append(arm_segment_ind)
+                        break
+            return return_indices
+        else:
+            raise TypeError('get_segment_indices wrong type')
+
     def duplicate(self):
         new_segments = []
         for segment in self.segments:
@@ -616,75 +637,83 @@ class Genome:
     def translocation_reciprocal_balanced(self,
                                           event_arm1: Arm, arm1_left_index: int, arm1_right_index: int,
                                           event_arm2: Arm, arm2_left_index: int, arm2_right_index: int):
-        # TODO: need a refactoring, the current implementation increment arm1_indices if arm1 and arm2 are the same and
-        #  indices1 come before indices2. This compensation is needed as locate_segments_for_event performs the breaking
-        #  We also cannot unique identify the segment index as all segment of the same values (like duplicates) will
-        #  be matched if using __eq__; let's try matching the object ID, if possible, as duplicate segments are of
-        #  different object (deep copy). Idea2: rebuild the arm from scratch and copy over
-
-        n_breaks_arm2_segments = \
-            self.need_breakpoint(event_arm2, arm2_left_index - 1) + self.need_breakpoint(event_arm2, arm2_right_index)
-        arm1_segments, arm1_segment_indices = \
+        arm1_segments, _ = \
             self.locate_segments_for_event(event_arm1, arm1_left_index, arm1_right_index)
-        arm2_segments, arm2_segment_indices = \
+        arm2_segments, _ = \
             self.locate_segments_for_event(event_arm2, arm2_left_index, arm2_right_index)
-        if event_arm1 == event_arm2 and arm1_segment_indices[0] >= arm2_segment_indices[0]:
-            for index_ind in range(0, len(arm1_segment_indices)):
-                arm1_segment_indices[index_ind] += n_breaks_arm2_segments
-        arm1_start_segment_index = arm1_segment_indices[0]
-        arm2_start_segment_index = arm2_segment_indices[0]
 
-        if event_arm1 != event_arm2:
-            event_arm1.delete_segments_by_index(arm1_segment_indices)
-            event_arm2.delete_segments_by_index(arm2_segment_indices) # this will be shifted if on the same arm
-            event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
-            event_arm1.segments[arm1_start_segment_index:arm1_start_segment_index] = arm2_segments
+        # notate the segment right before our segments, None if our segment is the first
+        # this fix the problem when two segments are on the same arm, creating index-shifts
+        # this is reliable because
+        # 1) segment object ID is ALWAYS unique on a genome
+        # 2) the range of segments are always continuous
+        arm1_start_segment_index = event_arm1.get_segment_indices(arm1_segments[0])
+        arm2_start_segment_index = event_arm2.get_segment_indices(arm2_segments[0])
+        arm1_prior_segment = 'None'
+        arm2_prior_segment = 'None'
+        if arm1_start_segment_index != 0:
+            arm1_prior_segment = event_arm1.segments[arm1_start_segment_index - 1]
+        if arm2_start_segment_index != 0:
+            arm2_prior_segment = event_arm2.segments[arm2_start_segment_index - 1]
+
+        arm1_segment_indices = event_arm1.get_segment_indices(arm1_segments)
+        event_arm1.delete_segments_by_index(arm1_segment_indices)
+        arm2_segment_indices = event_arm2.get_segment_indices(arm2_segments)
+        event_arm2.delete_segments_by_index(arm2_segment_indices)
+
+        if arm1_prior_segment == 'None':
+            arm1_add_index = 0
         else:
-            if arm1_start_segment_index < arm2_start_segment_index:
-                event_arm2.delete_segments_by_index(arm2_segment_indices)
-                event_arm1.delete_segments_by_index(arm1_segment_indices)
-                event_arm1.segments[arm1_start_segment_index:arm1_start_segment_index] = arm2_segments
-                shift_factor = len(arm2_segment_indices) - len(arm1_segment_indices)
-                shifted_insert_site = arm2_start_segment_index + shift_factor
-                event_arm2.segments[shifted_insert_site:shifted_insert_site] = arm1_segments
-            else:
-                event_arm1.delete_segments_by_index(arm1_segment_indices)
-                event_arm2.delete_segments_by_index(arm2_segment_indices)
-                event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
-                shift_factor = len(arm1_segment_indices) - len(arm2_segment_indices)
-                shifted_insert_site = arm1_start_segment_index + shift_factor
-                event_arm1.segments[shifted_insert_site:shifted_insert_site] = arm2_segments
+            arm1_add_index = event_arm1.get_segment_indices(arm1_prior_segment) + 1
+        if arm2_prior_segment == 'None':
+            arm2_add_index = 0
+        else:
+            arm2_add_index = event_arm2.get_segment_indices(arm2_prior_segment) + 1
+
+        event_arm1.segments[arm1_add_index:arm1_add_index] = arm2_segments
+        event_arm2.segments[arm2_add_index:arm2_add_index] = arm1_segments
 
         return [arm1_segments, arm2_segments]
 
     def translocation_reciprocal_unbalanced(self,
                                             event_arm1: Arm, arm1_left_index: int, arm1_right_index: int,
                                             event_arm2: Arm, arm2_left_index: int, arm2_right_index: int):
-        n_breaks_arm2_segments = \
-            self.need_breakpoint(event_arm2, arm2_left_index - 1) + self.need_breakpoint(event_arm2, arm2_right_index)
-        arm1_segments, arm1_segment_indices = \
+        arm1_segments, _ = \
             self.locate_segments_for_event(event_arm1, arm1_left_index, arm1_right_index)
-        arm2_segments, arm2_segment_indices = \
+        arm2_segments, _ = \
             self.locate_segments_for_event(event_arm2, arm2_left_index, arm2_right_index)
-        arm2_start_segment_index = arm2_segment_indices[0]
 
+        arm2_prior_segment = 'None'
+        arm2_start_segment_index = event_arm2.get_segment_indices(arm2_segments[0])
+        if arm2_start_segment_index != 0:
+            arm2_prior_segment = event_arm2.segments[arm2_start_segment_index - 1]
+
+        arm1_segment_indices = event_arm1.get_segment_indices(arm1_segments)
         event_arm1.delete_segments_by_index(arm1_segment_indices)
+        arm2_segment_indices = event_arm2.get_segment_indices(arm2_segments)
         event_arm2.delete_segments_by_index(arm2_segment_indices)
-        event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
+
+        if arm2_prior_segment == 'None':
+            arm2_add_index = 0
+        else:
+            arm2_add_index = event_arm2.get_segment_indices(arm2_prior_segment) + 1
+
+        event_arm2.segments[arm2_add_index:arm2_add_index] = arm1_segments
 
         return [arm1_segments, arm2_segments]
 
     def translocation_nonreciprocal(self,
                                     event_arm1: Arm, arm1_left_index: int, arm1_right_index: int,
                                     event_arm2: Arm, arm2_index: int):
-        arm1_segments, arm1_segment_indices = \
+        arm1_segments, _ = \
             self.locate_segments_for_event(event_arm1, arm1_left_index, arm1_right_index)
-        arm2_segments, arm2_segment_indices = \
+        arm2_latter_segment, _ = \
             self.locate_segments_for_event(event_arm2, arm2_index, -1)
-        arm2_start_segment_index = arm2_segment_indices[0]
 
+        arm1_segment_indices = event_arm1.get_segment_indices(arm1_segments)
         event_arm1.delete_segments_by_index(arm1_segment_indices)
-        event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
+        arm2_add_index = event_arm2.get_segment_indices(arm2_latter_segment[0])
+        event_arm2.segments[arm2_add_index:arm2_add_index] = arm1_segments
 
         return arm1_segments
 

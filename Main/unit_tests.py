@@ -93,7 +93,7 @@ from Structures import *
 new_genome = generate_raw_genome(1, ['Chr1', 'Chr2', 'Chr3', 'Chr4'], ['ChrX', 'ChrY'],
                                  '../Metadata/Full_Genome_Indices.txt')
 chr_2a = new_genome.full_KT['Chr2'][0]
-new_genome.translocation_reciprocal_balanced(chr_2a.p_arm, 60000, 79999,
-                                             chr_2a.p_arm, 20000, 39999)
+new_genome.translocation_nonreciprocal(chr_2a.p_arm, 60000, 79999,
+                                       chr_2a.p_arm, 20000)
 new_genome.mark_history('trans')
-new_genome.output_KT('/media/zhaoyang-new/workspace/KarSim/0922_test/test_trans.txt')
+new_genome.output_KT('/media/zhaoyang-new/workspace/KarSim/0922_test/test_nonreciprocal_trans.txt')
