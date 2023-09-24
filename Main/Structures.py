@@ -192,6 +192,7 @@ class Chromosome:
                         return next(self)
                 else:
                     raise StopIteration
+
         return ChromosomeIterator(self)
 
     def get_segment_from_range(self, left_bound, right_bound):
@@ -303,6 +304,7 @@ class Genome:
                         return next(self)
                 else:
                     raise StopIteration
+
         return GenomeIterator(self)
 
     def get_chromosome_list(self):
@@ -393,6 +395,42 @@ class Genome:
             return_str += '{}\t{}\t{}\t{}\n'.format(chr_itr.name, ','.join(tostring_segment_list),
                                                     str(chr_itr.t1_len), str(chr_itr.t2_len))
         return return_str
+
+    def need_breakpoint(self, event_arm: Arm, breakpoint_index: int):
+        """
+        split segment such that the breakpoint_index is garenteed to be the end index of a Segment
+        :param event_arm: Arm which the event happens on, and the breakpoint_index point at
+        :param breakpoint_index: the position of break on the current Arm
+            (left_event_index - 1) OR (right_event_index)
+        :return: None
+        """
+        if breakpoint_index == -1:
+            # this happens when the break point is at the very beginning of the event_arm, no breaking required
+            return 0
+
+        segment_to_break = Segment('temp', -1, -1)
+        left_delete_len = -1
+        right_delete_len = -1
+
+        current_bp_index = -1  # corrects 0-index off-shift
+
+        # locate the Segment to create breakpoint
+        for segment in event_arm.segments:
+            current_bp_index += len(segment)
+            if current_bp_index == breakpoint_index:
+                # breakpoint exists
+                return 0
+            elif current_bp_index > breakpoint_index:
+                # document the breakpoint location on the current segment
+                segment_to_break = segment.duplicate()
+                previous_bp_index = current_bp_index - len(segment)
+                left_delete_len = breakpoint_index - previous_bp_index
+                right_delete_len = current_bp_index - breakpoint_index
+                break
+            else:
+                # breakpoint location not yet met
+                continue
+        return 1
 
     def generate_breakpoint(self, event_arm: Arm, breakpoint_index: int):
         """
@@ -512,7 +550,7 @@ class Genome:
 
         return segments_selected, segments_selected_indices
 
-    def deletion(self, event_chromosome: Chromosome, event_arm: Arm, left_event_index: int, right_event_index: int):
+    def deletion(self, event_arm: Arm, left_event_index: int, right_event_index: int):
         """
         perform deletion event, inplace, between the two indices (inclusive)
         :param event_chromosome: chromosome that the Arm is located on
@@ -527,7 +565,7 @@ class Genome:
         event_arm.delete_segments_by_index(event_segments_indices)
         return event_segments
 
-    def tandem_duplication(self, event_chromosome: Chromosome, event_arm: Arm, left_event_index: int, right_event_index: int):
+    def tandem_duplication(self, event_arm: Arm, left_event_index: int, right_event_index: int):
         """
         duplication even, inplace
         :param event_chromosome: chromosome that the Arm is located on
@@ -542,7 +580,7 @@ class Genome:
         event_arm.duplicate_segments_by_index(event_segment_indices)
         return event_segments
 
-    def inversion(self, event_chromosome: Chromosome, event_arm: Arm, left_event_index: int, right_event_index: int):
+    def inversion(self, event_arm: Arm, left_event_index: int, right_event_index: int):
         """
         inversion even, inplace
         :param event_chromosome: chromosome that the Arm is located on
@@ -557,8 +595,7 @@ class Genome:
         event_arm.invert_segments_by_index(event_segments_indices)
         return event_segments
 
-    def right_duplication_inversion(self, event_chromosome: Chromosome, event_arm: Arm,
-                                    left_event_index: int, right_event_index: int):
+    def right_duplication_inversion(self, event_arm: Arm, left_event_index: int, right_event_index: int):
         event_segments, event_segment_indices = self.locate_segments_for_event(event_arm, left_event_index,
                                                                                right_event_index)
         new_segment_start_index = event_segment_indices[-1] + 1
@@ -568,7 +605,7 @@ class Genome:
         event_arm.invert_segments_by_index(segments_for_inversion_indices)
         return event_segments
 
-    def left_duplication_inversion(self, event_chromosome: Chromosome, event_arm: Arm,
+    def left_duplication_inversion(self, event_arm: Arm,
                                    left_event_index: int, right_event_index: int):
         event_segments, event_segment_indices = self.locate_segments_for_event(event_arm, left_event_index,
                                                                                right_event_index)
@@ -576,35 +613,80 @@ class Genome:
         event_arm.invert_segments_by_index(event_segment_indices)
         return event_segments
 
-    def translocation_reciprocal(self,
-                                 event_chromosome1, event_arm1: Arm, arm1_left_index: int, arm1_right_index: int,
-                                 event_chromosome2, event_arm2: Arm, arm2_left_index: int, arm2_right_index: int):
+    def translocation_reciprocal_balanced(self,
+                                          event_arm1: Arm, arm1_left_index: int, arm1_right_index: int,
+                                          event_arm2: Arm, arm2_left_index: int, arm2_right_index: int):
+        # TODO: need a refactoring, the current implementation increment arm1_indices if arm1 and arm2 are the same and
+        #  indices1 come before indices2. This compensation is needed as locate_segments_for_event performs the breaking
+        #  We also cannot unique identify the segment index as all segment of the same values (like duplicates) will
+        #  be matched if using __eq__; let's try matching the object ID, if possible, as duplicate segments are of
+        #  different object (deep copy). Idea2: rebuild the arm from scratch and copy over
+
+        n_breaks_arm2_segments = \
+            self.need_breakpoint(event_arm2, arm2_left_index - 1) + self.need_breakpoint(event_arm2, arm2_right_index)
         arm1_segments, arm1_segment_indices = \
             self.locate_segments_for_event(event_arm1, arm1_left_index, arm1_right_index)
         arm2_segments, arm2_segment_indices = \
             self.locate_segments_for_event(event_arm2, arm2_left_index, arm2_right_index)
+        if event_arm1 == event_arm2 and arm1_segment_indices[0] >= arm2_segment_indices[0]:
+            for index_ind in range(0, len(arm1_segment_indices)):
+                arm1_segment_indices[index_ind] += n_breaks_arm2_segments
         arm1_start_segment_index = arm1_segment_indices[0]
+        arm2_start_segment_index = arm2_segment_indices[0]
+
+        if event_arm1 != event_arm2:
+            event_arm1.delete_segments_by_index(arm1_segment_indices)
+            event_arm2.delete_segments_by_index(arm2_segment_indices) # this will be shifted if on the same arm
+            event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
+            event_arm1.segments[arm1_start_segment_index:arm1_start_segment_index] = arm2_segments
+        else:
+            if arm1_start_segment_index < arm2_start_segment_index:
+                event_arm2.delete_segments_by_index(arm2_segment_indices)
+                event_arm1.delete_segments_by_index(arm1_segment_indices)
+                event_arm1.segments[arm1_start_segment_index:arm1_start_segment_index] = arm2_segments
+                shift_factor = len(arm2_segment_indices) - len(arm1_segment_indices)
+                shifted_insert_site = arm2_start_segment_index + shift_factor
+                event_arm2.segments[shifted_insert_site:shifted_insert_site] = arm1_segments
+            else:
+                event_arm1.delete_segments_by_index(arm1_segment_indices)
+                event_arm2.delete_segments_by_index(arm2_segment_indices)
+                event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
+                shift_factor = len(arm1_segment_indices) - len(arm2_segment_indices)
+                shifted_insert_site = arm1_start_segment_index + shift_factor
+                event_arm1.segments[shifted_insert_site:shifted_insert_site] = arm2_segments
+
+        return [arm1_segments, arm2_segments]
+
+    def translocation_reciprocal_unbalanced(self,
+                                            event_arm1: Arm, arm1_left_index: int, arm1_right_index: int,
+                                            event_arm2: Arm, arm2_left_index: int, arm2_right_index: int):
+        n_breaks_arm2_segments = \
+            self.need_breakpoint(event_arm2, arm2_left_index - 1) + self.need_breakpoint(event_arm2, arm2_right_index)
+        arm1_segments, arm1_segment_indices = \
+            self.locate_segments_for_event(event_arm1, arm1_left_index, arm1_right_index)
+        arm2_segments, arm2_segment_indices = \
+            self.locate_segments_for_event(event_arm2, arm2_left_index, arm2_right_index)
         arm2_start_segment_index = arm2_segment_indices[0]
 
         event_arm1.delete_segments_by_index(arm1_segment_indices)
         event_arm2.delete_segments_by_index(arm2_segment_indices)
         event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
-        event_arm1.segments[arm1_start_segment_index:arm1_start_segment_index] = arm2_segments
+
         return [arm1_segments, arm2_segments]
 
     def translocation_nonreciprocal(self,
-                                    event_chromosome1, event_arm1: Arm, arm1_left_index: int, arm1_right_index: int,
-                                    event_chromosome2, event_arm2: Arm, arm2_index: int):
+                                    event_arm1: Arm, arm1_left_index: int, arm1_right_index: int,
+                                    event_arm2: Arm, arm2_index: int):
         arm1_segments, arm1_segment_indices = \
             self.locate_segments_for_event(event_arm1, arm1_left_index, arm1_right_index)
         arm2_segments, arm2_segment_indices = \
             self.locate_segments_for_event(event_arm2, arm2_index, -1)
         arm2_start_segment_index = arm2_segment_indices[0]
 
-        self.append_history('nonreciprocal translocation', arm1_segments, event_chromosome1, event_chromosome2)
-
         event_arm1.delete_segments_by_index(arm1_segment_indices)
         event_arm2.segments[arm2_start_segment_index:arm2_start_segment_index] = arm1_segments
+
+        return arm1_segments
 
     def chromosomal_deletion(self, event_chromosome: Chromosome):
         event_chromosome.deleted = True
@@ -622,14 +704,14 @@ class Genome:
             event_chromosome.p_arm.segments + event_chromosome.centromere.segments + event_chromosome.q_arm.segments
         return event_segments
 
-    def arm_deletion(self, event_chromosome: Chromosome, event_arm: Arm):
+    def arm_deletion(self, event_arm: Arm):
         event_segments, event_segments_indices = \
             self.locate_segments_for_event(event_arm, 0, len(event_arm) - 1)
         # remove empty segments
         event_arm.delete_segments_by_index(event_segments_indices)
         return event_segments
 
-    def arm_tandem_duplication(self, event_chromosome: Chromosome, event_arm: Arm):
+    def arm_tandem_duplication(self, event_arm: Arm):
         event_segments, event_segment_indices = \
             self.locate_segments_for_event(event_arm, 0, len(event_arm) - 1)
         # duplicate segments
@@ -650,6 +732,7 @@ class Genome:
         :param output_file:
         :return:
         """
+
         def reverse_complement(dna_sequence):
             complement_dict = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C',
                                'a': 't', 't': 'a', 'c': 'g', 'g': 'c',
@@ -659,7 +742,7 @@ class Genome:
                                'S': 'S', 's': 's',
                                'B': 'V', 'b': 'v', 'V': 'B', 'v': 'b',
                                'H': 'D', 'h': 'd', 'D': 'H', 'd': 'h',
-                               'N': 'N', 'n': 'n',}
+                               'N': 'N', 'n': 'n', }
             reverse_sequence = dna_sequence[::-1]
             complement_sequence = ''.join(complement_dict[base] for base in reverse_sequence)
             return complement_sequence
@@ -687,3 +770,11 @@ class Genome:
             output_dict[chromosome.name] = ''.join(new_sequence)
 
         IO.sequence_dict_to_FASTA(output_dict, output_file)
+
+
+def test():
+    pass
+
+
+if __name__ == "__main__":
+    test()

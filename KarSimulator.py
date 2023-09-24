@@ -21,12 +21,13 @@ def random_mode(args):
     # this needs to be in the exact same order as listed in the JSON file
     duplication_events = ['tandem_duplication', 'duplication_inversion',
                           'segmental_duplication', ]
-    reciprocal_translocation_events = ['intra_chromosomal_reciprocal_translocation',
-                                       'inter_chromosomal_reciprocal_translocation']
+    translocation_events = ['reciprocal_translocation',
+                            'nonreciprocal_translocation']
     arm_events = ['arm_deletion', 'arm_tandem_duplication', 'arm_segmental_duplication']
     chromosomal_events = ['chromosomal_deletion', 'chromosomal_duplication']
     supported_SVs = ['deletion', 'inversion',
-                     *duplication_events, *reciprocal_translocation_events, *arm_events, *chromosomal_events]
+                     *duplication_events, *translocation_events,
+                     *arm_events, *chromosomal_events]
     num_supported_SV = len(supported_SVs)
     access_setting_events = {name: index for index, name in enumerate(supported_SVs)}
 
@@ -61,6 +62,7 @@ def random_mode(args):
         random_parameter_error_logs = os.path.join(error_logs_path, 'random_parameters.txt')
         open(random_parameter_error_logs, 'w').close()
 
+        # TODO: make error log append concise
         def error_log_tostring(function_name, *function_args):
             params = ', '.join(map(str, function_args))
             return f"{function_name}: {params}"
@@ -93,7 +95,16 @@ def random_mode(args):
                 # make sure the chromosome selected is not in the deleted list
                 current_chr1 = random.choices(genome.get_chromosome_list(), chr_weights)[0]
             current_chr2 = current_chr1
-            if current_event != "inter_chromosomal_reciprocal_translocation":
+            # decide whether event is inter-chromosomal or intra-chromosomal, assume event uses the 2nd Chromosome
+            two_chrom_event_selection = 'not_selected'
+            if current_event in translocation_events:
+                inter_chrom_likelihood = \
+                    event_settings[access_setting_events[current_event]]['inter_chromosomal_occurrence_likelihood']
+                intra_chrom_likelihood = 1 - inter_chrom_likelihood
+                two_chrom_event_selection = \
+                    random.choices(['inter', 'intra'],
+                                   [inter_chrom_likelihood, intra_chrom_likelihood])[0]
+            if current_event not in translocation_events or two_chrom_event_selection == 'inter':
                 while current_chr1 == current_chr2 or current_chr2.deleted:
                     current_chr2 = random.choices(genome.get_chromosome_list(), chr_weights)[0]
 
@@ -121,7 +132,7 @@ def random_mode(args):
                 current_event1_length = random.randint(event_settings[access_setting_events[current_event]]['min_size'],
                                                        event_settings[access_setting_events[current_event]]['max_size'])
                 current_event1_length = min(current_event1_length, len(current_arm1) - 1)
-                if current_event in reciprocal_translocation_events:
+                if current_event == 'reciprocal_translocation':
                     current_event2_length = \
                         random.randint(event_settings[access_setting_events[current_event]]['min_size2'],
                                        event_settings[access_setting_events[current_event]]['max_size2'])
@@ -132,10 +143,31 @@ def random_mode(args):
             current_event_start_location2 = -1
             if current_event not in [*arm_events, *chromosomal_events]:
                 # arm and chromosomal events don't have a starting index
+                if len(current_arm1) < current_event1_length:
+                    continue  # TODO: implement a secondary selection strategy to continue, instead of skipping
                 current_event_start_location1 = random.randint(0, len(current_arm1) - current_event1_length - 1)
-                if current_event in reciprocal_translocation_events:
+                if current_event in translocation_events:
                     # reciprocal translocation have a second set of range
-                    current_event_start_location2 = random.randint(0, len(current_arm2) - current_event2_length - 1)
+                    if current_arm1 != current_arm2:
+                        current_event_start_location2 = random.randint(0, len(current_arm2) - current_event2_length - 1)
+                    else:
+                        # make sure the two regions do not overlap
+                        left_leftover_len = current_event_start_location1
+                        right_leftover_len = len(current_arm2) - current_event_start_location1 - current_event1_length
+                        if left_leftover_len < current_event2_length and right_leftover_len < current_event2_length:
+                            # TODO: implement a secondary selection strategy to continue, instead of skipping
+                            continue
+                        leftover_selection = random.choices(['left', 'right'],
+                                                            [left_leftover_len, right_leftover_len])[0]
+                        if left_leftover_len < current_event2_length:
+                            leftover_selection = 'right'
+                        elif right_leftover_len < current_event2_length:
+                            leftover_selection = 'left'
+                        if leftover_selection == 'left':
+                            current_event_start_location2 = random.randint(0, left_leftover_len - current_event2_length - 1)
+                        else:
+                            current_event_start_location2 = random.randint(current_event_start_location1 + current_event1_length + 1,
+                                                                           len(current_arm2) - current_event2_length - 1)
 
             def run_terminal_likelihood():
                 terminal_likelihood = \
@@ -159,7 +191,7 @@ def random_mode(args):
                                                         current_event_start_location1,
                                                         current_event_start_location1 + current_event1_length)
                     fp_write.write(command_append + '\n')
-                event_segments = genome.deletion(current_chr1, current_arm1,
+                event_segments = genome.deletion(current_arm1,
                                                  current_event_start_location1,
                                                  current_event_start_location1 + current_event1_length)
                 genome.append_history('deletion', event_segments, current_chr1, current_chr1)
@@ -177,7 +209,7 @@ def random_mode(args):
                                                         current_event_start_location1,
                                                         current_event_start_location1 + current_event1_length)
                     fp_write.write(command_append + '\n')
-                event_segments = genome.inversion(current_chr1, current_arm1,
+                event_segments = genome.inversion(current_arm1,
                                                   current_event_start_location1,
                                                   current_event_start_location1 + current_event1_length)
                 genome.append_history('inversion', event_segments, current_chr1, current_chr1)
@@ -195,7 +227,7 @@ def random_mode(args):
                                                         current_event_start_location1,
                                                         current_event_start_location1 + current_event1_length)
                     fp_write.write(command_append + '\n')
-                event_segments = genome.tandem_duplication(current_chr1, current_arm1,
+                event_segments = genome.tandem_duplication(current_arm1,
                                                            current_event_start_location1,
                                                            current_event_start_location1 + current_event1_length)
                 genome.append_history('tandem duplication', event_segments, current_chr1, current_chr1)
@@ -219,7 +251,7 @@ def random_mode(args):
                                                             current_event_start_location1,
                                                             current_event_start_location1 + current_event1_length)
                         fp_write.write(command_append + '\n')
-                    event_segments = genome.left_duplication_inversion(current_chr1, current_arm1,
+                    event_segments = genome.left_duplication_inversion(current_arm1,
                                                                        current_event_start_location1,
                                                                        current_event_start_location1 + current_event1_length)
                     genome.append_history('left duplication inversion', event_segments, current_chr1, current_chr1)
@@ -230,13 +262,13 @@ def random_mode(args):
                                                             current_event_start_location1,
                                                             current_event_start_location1 + current_event1_length)
                         fp_write.write(command_append + '\n')
-                    event_segments = genome.right_duplication_inversion(current_chr1, current_arm1,
+                    event_segments = genome.right_duplication_inversion(current_arm1,
                                                                         current_event_start_location1,
                                                                         current_event_start_location1 + current_event1_length)
 
                     genome.append_history('right duplication inversion', event_segments, current_chr1, current_chr1)
 
-            # TODO: waiting for bug fix
+            # FIXME: waiting for bug fix
             elif current_event == 'segmental_duplication':
                 terminal_event = run_terminal_likelihood()
                 if terminal_event:
@@ -250,34 +282,82 @@ def random_mode(args):
                                                         current_event_start_location1,
                                                         current_event_start_location1 + current_event1_length)
                     fp_write.write(command_append + '\n')
-                genome.tandem_duplication(current_chr1, current_arm1,
+                genome.tandem_duplication(current_arm1,
                                           current_event_start_location1,
                                           current_event_start_location1 + current_event1_length)
 
-            elif current_event in reciprocal_translocation_events:
+            elif current_event == "reciprocal_translocation":
+                balanced_likelihood = \
+                    event_settings[access_setting_events[current_event]]['balanced_likelihood']
+                unbalanced_likelihood = 1 - balanced_likelihood
+                event_balanced_selection = \
+                    random.choices(['balanced', 'unbalanced'],
+                                   [balanced_likelihood, unbalanced_likelihood])[0]
+
+                if event_balanced_selection == 'balanced':
+                    with open(random_parameter_error_logs, 'a') as fp_write:
+                        command_append = error_log_tostring('balanced reciprocal translocation',
+                                                            current_chr1, current_arm1,
+                                                            current_event_start_location1,
+                                                            current_event_start_location1 + current_event1_length,
+                                                            current_chr2, current_arm2, current_event_start_location2,
+                                                            current_event_start_location2 + current_event2_length)
+                        fp_write.write(command_append + '\n')
+
+                    event_segments_list = genome.translocation_reciprocal_balanced(current_arm1,
+                                                                                   current_event_start_location1,
+                                                                                   current_event_start_location1 + current_event1_length,
+                                                                                   current_arm2,
+                                                                                   current_event_start_location2,
+                                                                                   current_event_start_location2 + current_event2_length)
+                    genome.append_history('balanced reciprocal translocation', event_segments_list[0], current_chr1,
+                                          current_chr2)
+                    genome.append_history('balanced reciprocal translocation', event_segments_list[1], current_chr2,
+                                          current_chr1)
+                elif event_balanced_selection == 'unbalanced':
+                    with open(random_parameter_error_logs, 'a') as fp_write:
+                        command_append = error_log_tostring('unbalanced reciprocal translocation',
+                                                            current_chr1, current_arm1,
+                                                            current_event_start_location1,
+                                                            current_event_start_location1 + current_event1_length,
+                                                            current_chr2, current_arm2, current_event_start_location2,
+                                                            current_event_start_location2 + current_event2_length)
+                        fp_write.write(command_append + '\n')
+
+                    event_segments_list = genome.translocation_reciprocal_unbalanced(current_arm1,
+                                                                                     current_event_start_location1,
+                                                                                     current_event_start_location1 + current_event1_length,
+                                                                                     current_arm2,
+                                                                                     current_event_start_location2,
+                                                                                     current_event_start_location2 + current_event2_length)
+                    genome.append_history('unbalanced reciprocal translocation inserted', event_segments_list[0],
+                                          current_chr1,
+                                          current_chr2)
+                    genome.append_history('unbalanced reciprocal translocation deleted', event_segments_list[1],
+                                          current_chr2,
+                                          current_chr2)
+
+            elif current_event == 'nonreciprocal_translocation':
                 with open(random_parameter_error_logs, 'a') as fp_write:
-                    command_append = error_log_tostring('reciprocal translocation', current_chr1, current_arm1,
+                    command_append = error_log_tostring('nonreciprocal translocation',
+                                                        current_chr1, current_arm1,
                                                         current_event_start_location1,
                                                         current_event_start_location1 + current_event1_length,
-                                                        current_chr2, current_arm2, current_event_start_location2,
-                                                        current_event_start_location2 + current_event2_length)
+                                                        current_chr2, current_arm2, current_event_start_location2)
                     fp_write.write(command_append + '\n')
-                event_segments_list = genome.translocation_reciprocal(current_chr1, current_arm1,
-                                                                      current_event_start_location1,
-                                                                      current_event_start_location1 + current_event1_length,
-                                                                      current_chr2, current_arm2,
-                                                                      current_event_start_location2,
-                                                                      current_event_start_location2 + current_event2_length)
-                genome.append_history('reciprocal translocation', event_segments_list[0], current_chr1, current_chr2)
-                genome.append_history('reciprocal translocation', event_segments_list[1], current_chr2, current_chr1)
 
-            # TODO: add nonreciprocal translocation
+                event_segments = genome.translocation_nonreciprocal(current_arm1,
+                                                                    current_event_start_location1,
+                                                                    current_event_start_location1 + current_event1_length,
+                                                                    current_arm2,
+                                                                    current_event_start_location2)
+                genome.append_history('nonreciprocal translocation', event_segments, current_chr1, current_chr2)
 
             elif current_event == 'arm_deletion':
                 with open(random_parameter_error_logs, 'a') as fp_write:
                     command_append = error_log_tostring('arm_deletion', current_chr1, current_arm1)
                     fp_write.write(command_append + '\n')
-                event_segments = genome.arm_deletion(current_chr1, current_arm1)
+                event_segments = genome.arm_deletion(current_arm1)
                 genome.append_history('arm deletion', event_segments, current_chr1, current_chr1)
 
             # TODO: add arm segmental duplication
@@ -286,7 +366,7 @@ def random_mode(args):
                 with open(random_parameter_error_logs, 'a') as fp_write:
                     command_append = error_log_tostring('arm_tandem_duplication', current_chr1, current_arm1)
                     fp_write.write(command_append + '\n')
-                event_segments = genome.arm_tandem_duplication(current_chr1, current_arm1)
+                event_segments = genome.arm_tandem_duplication(current_arm1)
                 genome.append_history('arm tandem duplication', event_segments, current_chr1, current_chr1)
 
             elif current_event == 'chromosomal_deletion':

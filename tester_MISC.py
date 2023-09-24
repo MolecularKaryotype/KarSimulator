@@ -12,7 +12,15 @@ from Preparation.Get_Chr_Names import *
 
 # Get_All_Chr_Names('./Precompiled_Kar/Down_Extra21q.fasta', 'fullset_names.txt')
 
-a = [1]
-b = [2, 3]
-c = [4, 5]
-print([*a, *b, *c])
+# a = [1]
+# b = [2, 3]
+# c = [4, 5]
+# print([*a, *b, *c])
+
+
+def t1():
+    return 'a', 'b', 'c'
+
+
+x, y = t1()
+print(x)

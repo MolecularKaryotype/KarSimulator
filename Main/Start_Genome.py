@@ -82,7 +82,7 @@ def generate_raw_genome(copy_number: int, autosomes: [str], sex_chromosomes: [st
             current_slot[i].name = current_slot[i].name + chr(i + 97)
 
     # document initialization
-    initialization_string = 'initialization\n\tautosomes: {}\n\tautosomal copy number: {}\n\tsex chromosomes: {}'\
+    initialization_string = 'initialization\n\tautosomes: {}\n\tautosomal copy number: {}\n\tsex chromosomes: {}' \
         .format(str(autosomes), str(copy_number), str(sex_chromosomes))
 
     return Genome(full_KT, motherboard_segments, centromere_segments, initialization_string)
@@ -104,7 +104,7 @@ def generate_genome_from_KT(input_file: str) -> Genome:
 
     # read-in segment indexing
     with open(input_file) as fp_read:
-        line = fp_read.readline()   # column headers
+        line = fp_read.readline()  # column headers
         while True:
             line = fp_read.readline()
             if line[0] == '-':
@@ -118,7 +118,7 @@ def generate_genome_from_KT(input_file: str) -> Genome:
             else:
                 motherboard_segments.append(new_segment)
 
-        line = fp_read.readline()   # column headers
+        line = fp_read.readline()  # column headers
 
         # construct slots
         for chromosome in chromosome_of_interest:
@@ -184,7 +184,7 @@ def generate_genome_from_KT(input_file: str) -> Genome:
             initialization_string += line
 
         # read in history
-        block_name = 'null_block'
+        block_name = 'null_block_error'
         first_block_passed = False
         while True:
             line = fp_read.readline().replace('\n', '')
@@ -232,6 +232,15 @@ def generate_genome_from_KT(input_file: str) -> Genome:
                 histories.append(tuple([event_type, Arm(history_segments), history_chr_from, history_chr_to]))
 
         if first_block_passed:
-            history_markers[len(histories) - 1] = block_name    # append last block
+            history_markers[len(histories) - 1] = block_name  # append last block
 
     return Genome(full_KT, motherboard_segments, centromere_segments, initialization_string, histories, history_markers)
+
+
+def test():
+    genome = generate_genome_from_KT('/media/zhaoyang-new/workspace/KarSim/0922_test/r1/24XYe10_r1.kt.txt')
+    genome.output_KT('/media/zhaoyang-new/workspace/KarSim/0922_test/r1/24XYe10_r1_copy.kt.txt')
+
+
+if __name__ == "__main__":
+    test()

@@ -1,4 +1,4 @@
-from Main import generate_raw_genome, generate_genome_from_KT
+from Start_Genome import generate_raw_genome, generate_genome_from_KT
 from Structures import *
 
 # new_genome = generate_raw_genome(2, ['Chr1', 'Chr2'], ['ChrX', 'ChrX', 'ChrY'],
@@ -76,14 +76,24 @@ from Structures import *
 
 
 ## Testing chromosomal duplication
-new_genome = generate_raw_genome(2, ['Chr1', 'Chr2'], ['ChrX', 'ChrX', 'ChrY'],
-                                 '../Metadata/test_Full_Genome_Indices.txt')
-chr_1a = new_genome.full_KT['Chr1'][0]
-new_genome.chromosomal_duplication(chr_1a)
-chr_2a = new_genome.full_KT['Chr2'][0]
-new_genome.chromosomal_deletion(chr_2a)
-new_genome.mark_history('duplication')
-new_genome.output_KT('test_chromosomal_duplicate_delete.txt')
+# new_genome = generate_raw_genome(2, ['Chr1', 'Chr2'], ['ChrX', 'ChrX', 'ChrY'],
+#                                  '../Metadata/test_Full_Genome_Indices.txt')
+# chr_1a = new_genome.full_KT['Chr1'][0]
+# new_genome.chromosomal_duplication(chr_1a)
+# chr_2a = new_genome.full_KT['Chr2'][0]
+# new_genome.chromosomal_deletion(chr_2a)
+# new_genome.mark_history('duplication')
+# new_genome.output_KT('test_chromosomal_duplicate_delete.txt')
+#
+# new_genome = generate_genome_from_KT('./test_chromosomal_duplicate_delete.txt')
+# new_genome.output_KT('test_chromosomal_duplicate_delete2.txt')
 
-new_genome = generate_genome_from_KT('./test_chromosomal_duplicate_delete.txt')
-new_genome.output_KT('test_chromosomal_duplicate_delete2.txt')
+
+## Testing issue of translocation happening on the same arm
+new_genome = generate_raw_genome(1, ['Chr1', 'Chr2', 'Chr3', 'Chr4'], ['ChrX', 'ChrY'],
+                                 '../Metadata/Full_Genome_Indices.txt')
+chr_2a = new_genome.full_KT['Chr2'][0]
+new_genome.translocation_reciprocal_balanced(chr_2a.p_arm, 60000, 79999,
+                                             chr_2a.p_arm, 20000, 39999)
+new_genome.mark_history('trans')
+new_genome.output_KT('/media/zhaoyang-new/workspace/KarSim/0922_test/test_trans.txt')
