@@ -46,8 +46,8 @@ def generate_raw_genome(copy_number: int, autosomes: [str], sex_chromosomes: [st
                     t2_len = int(line[1]) - int(line[5]) - 1
                     centromere_segment = Segment(chr_name, int(line[3]) + 1, int(line[4]) - 1)
 
-                    full_KT[chr_name].append(Chromosome(chr_name, Arm([p_arm_segment]), Arm([q_arm_segment]),
-                                                        t1_len, t2_len, Arm([centromere_segment])))
+                    full_KT[chr_name].append(Chromosome(chr_name, Arm([p_arm_segment], 'p'), Arm([q_arm_segment], 'q'),
+                                                        t1_len, t2_len, Arm([centromere_segment], 'centromere')))
 
                     def segment_contained_in_list(item, this_list):
                         return any(item == e for e in this_list)
@@ -132,8 +132,8 @@ def generate_genome_from_KT(input_file: str) -> Genome:
             info = line.split('\t')
 
             if info[1] == 'deleted':
-                new_chromosome = Chromosome(info[0], Arm([]), Arm([]), int(info[2]),
-                                            int(info[3]), Arm([]), True)
+                new_chromosome = Chromosome(info[0], Arm([], 'deleted'), Arm([], 'deleted'), int(info[2]),
+                                            int(info[3]), Arm([], 'deleted'), True)
                 full_KT[info[0][:-1]].append(new_chromosome)
                 continue
 
@@ -168,8 +168,9 @@ def generate_genome_from_KT(input_file: str) -> Genome:
                 q_arm_segments.append(current_segment)
                 current_index += 1
 
-            new_chromosome = Chromosome(info[0], Arm(p_arm_segments), Arm(q_arm_segments), int(info[2]), int(info[3]),
-                                        Arm(current_centromere_segments))
+            new_chromosome = Chromosome(info[0], Arm(p_arm_segments, 'p'), Arm(q_arm_segments, 'q'),
+                                        int(info[2]), int(info[3]),
+                                        Arm(current_centromere_segments, 'centromere'))
             # append chromosome to slot in genome, ignore the last char in chromosome's unique ID
             full_KT[info[0][:-1]].append(new_chromosome)
 
@@ -229,7 +230,8 @@ def generate_genome_from_KT(input_file: str) -> Genome:
                 history_segments = segment_list_to_segments(segment_list)
                 history_chr_from = get_chromosome_from_unique_id(chr_from_name)
                 history_chr_to = get_chromosome_from_unique_id(chr_to_name)
-                histories.append(tuple([event_type, Arm(history_segments), history_chr_from, history_chr_to]))
+                histories.append(tuple([event_type, Arm(history_segments, 'history'),
+                                        history_chr_from, history_chr_to]))
 
         if first_block_passed:
             history_markers[len(histories) - 1] = block_name  # append last block

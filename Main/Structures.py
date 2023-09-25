@@ -94,9 +94,13 @@ class Segment:
 
 class Arm:
     segments: [Segment]
+    deleted: bool
+    arm_type: str
 
-    def __init__(self, segments: [Segment]):
+    def __init__(self, segments: [Segment], arm_type: str):
         self.segments = segments
+        self.deleted = False
+        self.arm_type = arm_type
 
     def __len__(self):
         current_sum = 0
@@ -138,7 +142,7 @@ class Arm:
         new_segments = []
         for segment in self.segments:
             new_segments.append(segment.duplicate())
-        return Arm(new_segments)
+        return Arm(new_segments, self.arm_type)
 
     def delete_segments_by_index(self, segment_indices):
         self.segments = [segment for index, segment in enumerate(self.segments) if index not in segment_indices]
@@ -203,7 +207,10 @@ class Chromosome:
             def __next__(self):
                 if self.current_arm_index < len(self.arms):
                     current_arm = self.arms[self.current_arm_index]
-                    if self.current_segment_index < len(current_arm.segments):
+                    if current_arm.deleted:
+                        self.current_arm_index += 1
+                        return next(self)
+                    elif self.current_segment_index < len(current_arm.segments):
                         segment = current_arm.segments[self.current_segment_index]
                         self.current_segment_index += 1
                         return segment
@@ -226,10 +233,16 @@ class Chromosome:
         pass
 
     def p_arm_len(self):
-        return len(self.p_arm)
+        if self.p_arm.deleted:
+            return 0
+        else:
+            return len(self.p_arm)
 
     def q_arm_len(self):
-        return len(self.q_arm)
+        if self.q_arm.deleted:
+            return 0
+        else:
+            return len(self.q_arm)
 
     def duplicate(self):
         return Chromosome(self.name, self.p_arm.duplicate(), self.q_arm.duplicate(),
@@ -261,7 +274,7 @@ def index_global_to_arm(chromosome: Chromosome, left_index: int, right_index: in
         raise ValueError('absolute-right-index in centromere region')
 
     # locate the Arm left_index is on
-    pass
+    pass # TODO: implement
 
 
 class Genome:
@@ -275,7 +288,7 @@ class Genome:
     def __init__(self, full_KT, motherboard_segments, centromere_segments, initialization_string,
                  history=None, history_markers=None):
         self.full_KT = full_KT
-        self.motherboard = Arm(motherboard_segments)
+        self.motherboard = Arm(motherboard_segments, 'motherboard')
         self.centromere_segments = centromere_segments
         self.initialization_string = initialization_string
         if history is not None:
@@ -343,7 +356,7 @@ class Genome:
         :param chr_from: object reference
         :return: None
         """
-        new_history = tuple([event_type, Arm(segments), chr_from, chr_to])
+        new_history = tuple([event_type, Arm(segments, 'history'), chr_from, chr_to])
         self.history.append(new_history)
 
     def mark_history(self, block_name):
@@ -733,19 +746,26 @@ class Genome:
             event_chromosome.p_arm.segments + event_chromosome.centromere.segments + event_chromosome.q_arm.segments
         return event_segments
 
-    def arm_deletion(self, event_arm: Arm):
-        event_segments, event_segments_indices = \
+    def arm_deletion(self, event_chromosome: Chromosome, event_arm: Arm):
+        event_segments, _ = \
             self.locate_segments_for_event(event_arm, 0, len(event_arm) - 1)
-        # remove empty segments
-        event_arm.delete_segments_by_index(event_segments_indices)
+        event_arm.deleted = True
+        if len(event_chromosome) == 0:
+            event_chromosome.deleted = True
         return event_segments
 
-    def arm_tandem_duplication(self, event_arm: Arm):
+    def arm_tandem_duplication(self, event_chromosome: Chromosome, event_arm: Arm):
+        new_chromosome = event_chromosome.duplicate()
+        self.full_KT[new_chromosome.name[:-1]].append(new_chromosome)
+        new_chromosome.name = new_chromosome.name[:-1] + chr(len(self.full_KT[new_chromosome.name[:-1]]) + 96)
         event_segments, event_segment_indices = \
             self.locate_segments_for_event(event_arm, 0, len(event_arm) - 1)
-        # duplicate segments
-        event_arm.duplicate_segments_by_index(event_segment_indices)
-        return event_segments
+        # duplicate arm onto a new chromosome
+        if event_arm.arm_type == 'p':
+            new_chromosome.q_arm.deleted = True
+        else:
+            new_chromosome.p_arm.deleted = True
+        return event_segments, new_chromosome
 
     def output_KT(self, output_file):
         with open(output_file, 'w') as fp_write:

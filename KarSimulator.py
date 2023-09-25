@@ -357,7 +357,7 @@ def random_mode(args):
                 with open(random_parameter_error_logs, 'a') as fp_write:
                     command_append = error_log_tostring('arm_deletion', current_chr1, current_arm1)
                     fp_write.write(command_append + '\n')
-                event_segments = genome.arm_deletion(current_arm1)
+                event_segments = genome.arm_deletion(current_chr1, current_arm1)
                 genome.append_history('arm deletion', event_segments, current_chr1, current_chr1)
 
             # TODO: add arm segmental duplication
@@ -366,8 +366,8 @@ def random_mode(args):
                 with open(random_parameter_error_logs, 'a') as fp_write:
                     command_append = error_log_tostring('arm_tandem_duplication', current_chr1, current_arm1)
                     fp_write.write(command_append + '\n')
-                event_segments = genome.arm_tandem_duplication(current_arm1)
-                genome.append_history('arm tandem duplication', event_segments, current_chr1, current_chr1)
+                event_segments, new_chr = genome.arm_tandem_duplication(current_chr1, current_arm1)
+                genome.append_history('arm tandem duplication', event_segments, current_chr1, new_chr)
 
             elif current_event == 'chromosomal_deletion':
                 with open(random_parameter_error_logs, 'a') as fp_write:

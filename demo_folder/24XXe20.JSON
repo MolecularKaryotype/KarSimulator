@@ -1,10 +1,10 @@
 {
-  "job_name": "10 random events",
-  "output_file_name": "24XYe10",
-  "template_KT": "/media/zhaoyang-new/workspace/KarSim/0922_test/24XY_ref.kt.txt",
-  "output_directory": "/media/zhaoyang-new/workspace/KarSim/0922_test/e10/",
+  "job_name": "20 random events",
+  "output_file_name": "24XXe20",
+  "template_KT": "/media/zhaoyang-new/workspace/KarSim/0922_test/24XX_ref.kt.txt",
+  "output_directory": "/media/zhaoyang-new/workspace/KarSim/0922_test/e20/",
   "number_of_iterations": 10,
-  "number_of_events": 10,
+  "number_of_events": 20,
   "event_setting": [
     {
       "type": "deletion",
