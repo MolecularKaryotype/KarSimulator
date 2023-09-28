@@ -9,7 +9,6 @@ def sequence_dict_to_FASTA(sequence_dict, output_file):
             elif chr_part == "Y":
                 return int(24)  # Put ChrY after ChrX
             return key
-
         sorted_keys = sorted(sequence_dict.keys(), key=custom_sort_chr)
 
         for header in sorted_keys:

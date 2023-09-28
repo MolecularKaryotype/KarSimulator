@@ -335,7 +335,7 @@ def random_mode(args):
                                           current_chr2)
                     genome.append_history('unbalanced reciprocal translocation deleted', event_segments_list[1],
                                           current_chr2,
-                                          current_chr2)
+                                          current_chr1)
 
             elif current_event == 'nonreciprocal_translocation':
                 with open(random_parameter_error_logs, 'a') as fp_write:

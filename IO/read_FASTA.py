@@ -32,12 +32,14 @@ def test():
     all_chrom = ['Chr1', 'Chr2', 'Chr3', 'Chr4', 'Chr5', 'Chr6', 'Chr7', 'Chr8', 'Chr9', 'Chr10', 'Chr11',
                 'Chr12', 'Chr13', 'Chr14', 'Chr15', 'Chr16', 'Chr17', 'Chr18', 'Chr19', 'Chr20', 'Chr21',
                 'Chr22', 'ChrX', 'ChrY']
-    seq_dict = read_FASTA("../Genomes/hg38.fasta", all_chrom)
-    for chrom in all_chrom:
-        # seq_dict['ChrX'][10000:2406768]
-        for index, char in enumerate(seq_dict[chrom]):
-            if char.lower() not in ['a', 'c', 'g', 't', 'n', 'm', 'r', 'k', 'w', 'y', 's', 'b', 'v', 'h', 'd']:
-                print(chrom, index, char)
+    # seq_dict = read_FASTA("../Genomes/hg38.fasta", all_chrom)
+    # for chrom in all_chrom:
+    #     for index, char in enumerate(seq_dict[chrom]):
+    #         if char.lower() not in ['a', 'c', 'g', 't', 'n', 'm', 'r', 'k', 'w', 'y', 's', 'b', 'v', 'h', 'd']:
+    #             print(chrom, index, char)
+    seq_dict = read_FASTA("/Users/zhaoyangjia/Downloads/FASTAs/23Xe10_r1.fasta", ['all'])
+    for key in seq_dict:
+        print(key, len(seq_dict[key]))
 
 
 if __name__ == "__main__":
