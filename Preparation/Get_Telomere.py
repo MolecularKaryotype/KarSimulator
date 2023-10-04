@@ -1,4 +1,4 @@
-from Main.read_in_FASTA import read_in_FASTA
+import IO
 
 
 def Get_Telomere(genome_path, chr_name_file, telomere_output_path, length_output_path):
@@ -18,7 +18,7 @@ def Get_Telomere(genome_path, chr_name_file, telomere_output_path, length_output
             line = line.replace('\n', '').split('\t')
             chr_of_interest[line[1]] = line[0]
 
-    sequence_dict = read_in_FASTA(genome_path, chr_of_interest.keys())
+    sequence_dict = IO.read_FASTA(genome_path, chr_of_interest.keys())
     telomere_dict = {}
 
     # locate the telomere regions
