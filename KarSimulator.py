@@ -18,6 +18,13 @@ def rawGenome_mode(args):
 
 
 def random_mode(args):
+    # TODO: temporary variable, pending removal
+    skip_chr = ['1', '3', '9', '13', '14', '15', '16', '19', '21', '22', 'Y']
+    skip_chr_list = []
+    for chr_iter in skip_chr:
+        skip_chr_list.append('Chr' + chr_iter + 'a')
+        skip_chr_list.append('Chr' + chr_iter + 'b')
+
     # this needs to be in the exact same order as listed in the JSON file
     duplication_events = ['tandem_duplication', 'duplication_inversion',
                           'segmental_duplication', ]
@@ -86,10 +93,17 @@ def random_mode(args):
             for chromosome in genome:
                 if chromosome.deleted:
                     sum_length += 0
+                elif chromosome.name in skip_chr_list:
+                    # TODO: remove
+                    sum_length += 0
                 else:
                     sum_length += len(chromosome)
             for chromosome in genome:
-                chr_weights.append(float(len(chromosome)) / sum_length)
+                if chromosome.name in skip_chr_list:
+                    # TODO: remove
+                    chr_weights.append(0.0)
+                else:
+                    chr_weights.append(float(len(chromosome)) / sum_length)
             current_chr1 = None
             while current_chr1 is None or current_chr1.deleted:
                 # make sure the chromosome selected is not in the deleted list

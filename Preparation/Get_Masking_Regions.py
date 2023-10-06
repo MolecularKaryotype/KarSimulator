@@ -18,13 +18,15 @@ def Get_Masking_Regions(genome_path, output_path):
                 substring_start_index = current_index
             elif N_string:
                 if sequence[current_index] != 'N':
-                    # output
-                    output_dict[itr_header].append(tuple([substring_start_index, current_index - 1]))
+                    # output, ignore regions that are too small
+                    if current_index - substring_start_index >= 50000:
+                        output_dict[itr_header].append(tuple([substring_start_index, current_index - 1]))
                     N_string = False
             current_index += 1
 
         if N_string:
-            output_dict[itr_header].append(tuple([substring_start_index, len(sequence) - 1]))
+            if len(sequence) - substring_start_index >= 50000:
+                output_dict[itr_header].append(tuple([substring_start_index, len(sequence) - 1]))
 
     with open(output_path, 'w') as fp_write:
         for key in output_dict:
@@ -39,10 +41,12 @@ def test():
 
 
 def generate_hg38():
-    Get_Masking_Regions('','')
+    Get_Masking_Regions('/media/zhaoyang-new/workspace/KarSim/KarSimulator/Genomes/hg38.fasta',
+                        '../Metadata/hg38_masking_regions_50000.txt')
+
 
 if __name__ == "__main__":
-    test()
+    generate_hg38()
 
 
 

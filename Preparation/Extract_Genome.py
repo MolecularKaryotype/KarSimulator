@@ -47,24 +47,19 @@ def one_time_usage():
     #                    '/media/zhaoyang-new/workspace/KarSim/0908_genomes/FASTA/23Ye10_r3/23Ye10_r3.fasta', "none",
     #                    output_path)
     chrom = []
-    for i in range(1, 23):
-        chrom.append('Chr' + str(i))
-    output_path = "./22_ref.fasta"
-    Extract_Genome(chrom,
-                   './All24Chr.fasta', "none",
-                   output_path)
+    # for i in range(1, 13):
+    #     chrom.append('Chr' + str(i) + 'a')
     # output_path = '/media/zhaoyang-new/workspace/KarSim/0908_genomes/split_FASTA/23Ye10_r3_Chr1+13.fasta'
     # Extract_Genome(chrom,
     #                '/media/zhaoyang-new/workspace/KarSim/0908_genomes/FASTA/23Ye10_r3/23Ye10_r3.fasta', "none",
     #                output_path)
-
-    # for i in range(13, 23):
-    #     chrom.append('Chr' + str(i) + 'a')
-    # chrom.append('ChrYa')
-    # output_path = '/media/zhaoyang-new/workspace/KarSim/0908_genomes/split_FASTA/23Ye10_r3_Chr13+Y.fasta'
-    # Extract_Genome(chrom,
-    #                '/media/zhaoyang-new/workspace/KarSim/0908_genomes/FASTA/23Ye10_r3/23Ye10_r3.fasta', "none",
-    #                output_path)
+    for i in range(13, 23):
+        chrom.append('Chr' + str(i) + 'a')
+    chrom.append('ChrYa')
+    output_path = '/media/zhaoyang-new/workspace/KarSim/0908_genomes/split_FASTA/23Ye10_r3_Chr13+Y.fasta'
+    Extract_Genome(chrom,
+                   '/media/zhaoyang-new/workspace/KarSim/0908_genomes/FASTA/23Ye10_r3/23Ye10_r3.fasta', "none",
+                   output_path)
     # chrom = 'ChrYa'
     # output_path = '/media/zhaoyang-new/workspace/KarSim/0908_genomes/split_FASTA/23Ye10_r3_' \
     #                       + str(chrom)[:-1] + '.fasta'
