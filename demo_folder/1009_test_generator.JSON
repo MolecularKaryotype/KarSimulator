@@ -1,0 +1,86 @@
+{
+  "job_name": "random events",
+  "output_file_name": "1009_masking_test",
+  "template_KT": "/media/zhaoyang-new/workspace/KarSim/1009_genomes/1009_test.kt.txt",
+  "output_directory": "/media/zhaoyang-new/workspace/KarSim/1009_genomes/KT/",
+  "number_of_iterations": 5,
+  "number_of_events": 3,
+  "event_setting": [
+    {
+      "type": "deletion",
+      "likelihood_weight": 0,
+      "min_size": 1000000,
+      "max_size": 3000000,
+      "terminal_occurrence_likelihood": 0.2
+    },
+    {
+      "type": "inversion",
+      "likelihood_weight": 0,
+      "min_size": 1000000,
+      "max_size": 3000000,
+      "terminal_occurrence_likelihood": 0.2
+    },
+    {
+      "type": "tandem_duplication",
+      "likelihood_weight": 0,
+      "min_size": 1000000,
+      "max_size": 3000000,
+      "terminal_occurrence_likelihood": 0.2
+    },
+    {
+      "type": "duplication_inversion",
+      "likelihood_weight": 0,
+      "min_size": 1000000,
+      "max_size": 3000000,
+      "left_dupinv_to_right_dupinv_likelihood": 0.5,
+      "terminal_occurrence_likelihood": 0.2
+    },
+    {
+      "type": "segmental_duplication",
+      "likelihood_weight": 0,
+      "min_size": 1000000,
+      "max_size": 3000000,
+      "inversion_likelihood": 0.5,
+      "inter_chromosomal_occurrence_likelihood": 0.5,
+      "terminal_occurrence_likelihood": 0.2
+    },
+    {
+      "type": "reciprocal_translocation",
+      "likelihood_weight": 1,
+      "min_size": 1000000,
+      "max_size": 3000000,
+      "min_size2": 1000000,
+      "max_size2": 3000000,
+      "inter_chromosomal_occurrence_likelihood": 0.5,
+      "balanced_likelihood": 1
+    },
+    {
+      "type": "nonreciprocal_translocation",
+      "likelihood_weight": 0,
+      "min_size": 1000000,
+      "max_size": 3000000,
+      "inter_chromosomal_occurrence_likelihood": 1
+    },
+    {
+      "type": "arm_deletion",
+      "likelihood_weight": 0
+    },
+    {
+      "type": "arm_tandem_duplication",
+      "likelihood_weight": 0
+    },
+    {
+      "type": "arm_segmental_duplication",
+      "likelihood_weight": 0,
+      "inversion_likelihood": 0.5
+    },
+    {
+      "type": "chromosomal_deletion",
+      "likelihood_weight": 0
+    },
+    {
+      "type": "chromosomal_duplication",
+      "likelihood_weight": 0
+    }
+  ]
+}

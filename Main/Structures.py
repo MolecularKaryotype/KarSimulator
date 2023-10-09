@@ -1,4 +1,5 @@
 import IO
+import copy
 
 
 class Segment:
@@ -91,6 +92,14 @@ class Segment:
         self.start = self.end
         self.end = temp_start
 
+    def segment_intersection(self, other_segment):
+        if self.chr_name != other_segment.chr_name:
+            return False
+        if self.start <= other_segment.end and self.end >= other_segment.start:
+            return True
+        else:
+            return False
+
 
 class Arm:
     segments: [Segment]
@@ -167,6 +176,13 @@ class Arm:
         self.delete_segments_by_index(segment_indices)
         self.segments[index_of_insertion:index_of_insertion] = new_segments
 
+    def arm_intersection(self, other_arm):
+        for segment1 in self.segments:
+            for segment2 in other_arm.segments:
+                if segment1.segment_intersection(segment2):
+                    return True
+        return False
+
 
 class Chromosome:
     name: str
@@ -187,7 +203,10 @@ class Chromosome:
         self.deleted = deleted
 
     def __len__(self):
-        return self.p_arm_len() + self.q_arm_len()
+        if self.deleted:
+            return 0
+        else:
+            return self.p_arm_len() + self.q_arm_len()
 
     def __str__(self):
         if self.deleted:
@@ -230,6 +249,7 @@ class Chromosome:
         :param right_bound:
         :return:
         """
+        # TODO: implement
         pass
 
     def p_arm_len(self):
@@ -300,6 +320,28 @@ class Genome:
         else:
             self.history_block_markings = {}
 
+    def duplicate(self):
+        new_full_KT = {}
+        for key in self.full_KT:
+            new_chr_list = []
+            for chr_itr in self.full_KT[key]:
+                new_chr_list.append(chr_itr.duplicate())
+            new_full_KT[key] = new_chr_list
+
+        new_centromere_segments = []
+        for chr_itr in self.centromere_segments:
+            new_centromere_segments.append(chr_itr.duplicate())
+
+        new_history = []
+        for history_itr in self.history:
+            new_item = [copy.deepcopy(history_itr[0])]
+
+        return Genome(new_full_KT,
+                      self.motherboard.duplicate(),
+                      new_centromere_segments,
+                      copy.deepcopy(self.initialization_string),
+                      )
+
     def __str__(self):
         return_str = ''
         for chromosome in self:
@@ -362,6 +404,10 @@ class Genome:
     def mark_history(self, block_name):
         last_event_in_block = len(self.history) - 1
         self.history_block_markings[last_event_in_block] = block_name
+
+    def pop_last_history_marking(self):
+        last_event_in_block = len(self.history) - 1
+        self.history_block_markings.pop(last_event_in_block)
 
     def history_tostring(self):
         segment_dict = self.segment_indexing()
@@ -432,7 +478,7 @@ class Genome:
 
     def need_breakpoint(self, event_arm: Arm, breakpoint_index: int):
         """
-        split segment such that the breakpoint_index is garenteed to be the end index of a Segment
+        split segment such that the breakpoint_index is guarenteed to be the end index of a Segment
         :param event_arm: Arm which the event happens on, and the breakpoint_index point at
         :param breakpoint_index: the position of break on the current Arm
             (left_event_index - 1) OR (right_event_index)
@@ -544,8 +590,8 @@ class Genome:
         """
         create breakpoint and select the Segment between the breakpoints
         :param event_arm: chromosome arm that the event will happen in
-        :param left_event_index: beginning of deletion, this index will be deleted
-        :param right_event_index: end of deletion, this index will be deleted; if -1, then only left_event_index is used
+        :param left_event_index: beginning of event, this index will be included
+        :param right_event_index: end of event, this index will be included; if -1, then only left_event_index is used
         :return: a list of Segment for processing the event
         """
         segments_selected = []
@@ -821,9 +867,19 @@ class Genome:
         IO.sequence_dict_to_FASTA(output_dict, output_file)
 
 
-def test():
+def segment_intersection_test():
+    segment1 = Segment("Chr1", 10, 30)
+    segment2 = Segment("Chr1", 25, 40)
+    segment3 = Segment("Chr2", 5, 15)
+    segment4 = Segment("Chr1", 5, 9)
+    print(segment1.segment_intersection(segment2))  # Should return True
+    print(segment1.segment_intersection(segment3))  # Should return False
+    print(segment1.segment_intersection(segment4))  # Should return False
+
+
+def arm_intersection_test():
     pass
 
 
 if __name__ == "__main__":
-    test()
+    arm_intersection_test()

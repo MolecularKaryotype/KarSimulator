@@ -18,9 +18,26 @@ from Preparation.Get_Chr_Names import *
 # print([*a, *b, *c])
 
 
-def t1():
-    return 'a', 'b', 'c'
+class MyException(Exception):
+    pass
 
 
-x, y = t1()
-print(x)
+def f1(input_int):
+    if input_int == 1:
+        raise MyException
+    else:
+        print(input_int)
+
+
+x = [j for j in range(0, 4)]
+pointer = 0
+for i in range(0, 5):
+    executed = False
+    while not executed:
+        try:
+            f1(x[pointer])
+        except MyException:
+            pointer = (pointer + 1) % 4
+            continue
+        executed = True
+        pointer = (pointer + 1) % 4
