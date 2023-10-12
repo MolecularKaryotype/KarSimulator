@@ -14,10 +14,29 @@ def test():
 
 
 def one_time_usage():
+    return_value = check_regions_masked(Arm([Segment('Chr15', 74120302, 75680570)], 'test_arm'),
+                                        '../Metadata/merged_masking.bed')
+    print(return_value)
+
     return_value = check_regions_masked(Arm([Segment('Chr12', 64678139, 68251745)], 'test_arm'),
                                         '../Metadata/merged_masking.bed')
     print(return_value)
 
+    return_value = check_regions_masked(Arm([Segment('Chr17', 30780079, 31936302)], 'test_arm'),
+                                        '../Metadata/merged_masking.bed')
+    print(return_value)
+
+    return_value = check_regions_masked(Arm([Segment('Ch17', 36459259, 37856298)], 'test_arm'),
+                                        '../Metadata/merged_masking.bed')
+    print(return_value)
+
+    return_value = check_regions_masked(Arm([Segment('Chr17', 14194598, 15567589)], 'test_arm'),
+                                        '../Metadata/merged_masking.bed')
+    print(return_value)
+
+    return_value = check_regions_masked(Arm([Segment('Chr1', 147061832, 148411223)], 'test_arm'),
+                                        '../Metadata/merged_masking.bed')
+    print(return_value)
 
 if __name__ == "__main__":
-    test()
+    one_time_usage()

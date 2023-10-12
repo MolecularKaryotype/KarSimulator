@@ -75,7 +75,7 @@ def random_mode(args):
         genome = generate_genome_from_KT(KT_input_file)
         full_output_file_path = output_file_prefix + "_r" + str(event_iteration_index + 1) + ".kt.txt"
 
-        masking_arm = read_masking_regions('Metadata/hg38_cnv_masks.bed')
+        masking_arm = read_masking_regions('Metadata/merged_masking.bed')
 
         for event_index in range(number_of_events):
             # choose event
