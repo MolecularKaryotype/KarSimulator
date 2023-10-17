@@ -165,7 +165,7 @@ def test():
     bin_chromosomes(
         "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final/1q21-1_recurrent_microdeletion_r1.1/1q21-1_recurrent_microdeletion_r1.1.txt",
         "/media/zhaoyang-new/workspace/KarSim/1011_genomes/KT/1q21-1_recurrent_microdeletion_r1.kt.txt",
-        "Metadata/merged_masking_unique.bed")
+        "../Metadata/merged_masking_unique.bed")
 
 
 def test_align_paths():
