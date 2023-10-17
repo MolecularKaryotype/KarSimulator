@@ -1,0 +1,174 @@
+/home/zhaoyang-new/anaconda3/envs/random_codes/bin/python /media/zhaoyang-new/workspace/KarSim/KarSimulator/Main/compare_KT_to_solved_path.py
+
+path with problematic centromere are found (empty if not found): 
+chr_bin: multiple centromere: Chr1 Chr5 , path_name: Path2, segments: (Chr1, 248942320, 149252832, solved_path)(Chr1, 149236076, 148647980, solved_path)(Chr1, 147033411, 125184589, solved_path)(Chr1, 125184588, 122026459, solved_path)(Chr1, 122026458, 121489495, solved_path)(Chr5, 122535678, 119500199, solved_path)(Chr5, 119500198, 50059809, solved_path)(Chr5, 50059808, 46485900, solved_path)(Chr5, 46485899, 19924, solved_path)
+chr_bin: no centromere, path_name: Path4, segments: (Chr5, 181466351, 173684667, solved_path)(Chr5, 170911661, 173684666, solved_path)(Chr5, 170911660, 130462373, solved_path)(Chr5, 130432294, 125814455, solved_path)(Chr5, 125805891, 125662306, solved_path)(Chr5, 125814455, 130432294, solved_path)(Chr5, 125662305, 122535679, solved_path)(Chr5, 122535678, 119500199, solved_path)(Chr1, 121489494, 93776499, solved_path)(Chr6, 15267181, 9931283, solved_path)(Chr6, 9931282, 0, solved_path)
+chr_bin: no centromere, path_name: Path25, segments: (Chr13, 16010361, 18051249, solved_path)(Chr13, 18051250, 32981325, solved_path)(Chr13, 32984431, 40240055, solved_path)(Chr13, 40246836, 40392463, solved_path)(Chr13, 40392464, 40611343, solved_path)(Chr13, 40611344, 40670926, solved_path)(Chr13, 40675982, 47641057, solved_path)(Chr13, 47642043, 114350910, solved_path)
+chr_bin: no centromere, path_name: Path26, segments: (Chr13, 114350910, 47642043, solved_path)(Chr13, 47641057, 40675982, solved_path)(Chr13, 40670926, 40611344, solved_path)(Chr13, 40611343, 40392464, solved_path)(Chr13, 40392463, 40246836, solved_path)(Chr13, 40240055, 32984431, solved_path)(Chr13, 40392464, 40611343, solved_path)(Chr13, 47641057, 40675982, solved_path)(Chr13, 40240055, 32984431, solved_path)(Chr13, 32981325, 18051250, solved_path)(Chr13, 18051249, 16010361, solved_path)
+
+bin with non-matching size (empty if not found): 
+['Chr1', 'Chr5', 'Chr13']
+
+alignment between Chr2a, Path7: -12171
+(Chr2, 0, 9999, telomere1)	(Chr2, 10000, 92188144, p_arm)	(Chr2, 92188145, 92188145, p_arm)	(Chr2, 92188146, 94090557, centromere)	(Chr2, 94090558, 94090558, q_arm)	(Chr2, 94090559, 242181357, q_arm)	(Chr2, 242181358, 242183528, q_arm)	(Chr2, 242183529, 242193528, telomere2)	
+(Chr2, 0, 9999, solved_path)	(Chr2, 10000, 92188144, solved_path)	(Chr2, 92188145, 92188145, solved_path)	(Chr2, 92188146, 94090557, solved_path)	(Chr2, 94090558, 94090558, solved_path)	(Chr2, 94090559, 242181357, solved_path)	-	-	
+
+alignment between Chr2b, Path8: -12171
+(Chr2, 0, 9999, telomere1)	(Chr2, 10000, 92188144, p_arm)	(Chr2, 92188145, 92188145, p_arm)	(Chr2, 92188146, 94090557, centromere)	(Chr2, 94090558, 94090558, q_arm)	(Chr2, 94090559, 242181357, q_arm)	(Chr2, 242181358, 242183528, q_arm)	(Chr2, 242183529, 242193528, telomere2)	
+(Chr2, 0, 9999, solved_path)	(Chr2, 10000, 92188144, solved_path)	(Chr2, 92188145, 92188145, solved_path)	(Chr2, 92188146, 94090557, solved_path)	(Chr2, 94090558, 94090558, solved_path)	(Chr2, 94090559, 242181357, solved_path)	-	-	
+
+alignment between Chr3a, Path9: -17987251
+(Chr3, 0, 9999, telomere1)	(Chr3, 10000, 17437, p_arm)	(Chr3, 17438, 16374695, p_arm)	(Chr3, 16374696, 16377321, p_arm)	-	(Chr3, 16377322, 21203684, p_arm)	(Chr3, 21203685, 21204354, p_arm)	(Chr3, 21204355, 30537971, p_arm)	(Chr3, 30537972, 30542629, p_arm)	(Chr3, 30542630, 30544574, p_arm)	(Chr3, 30544575, 35571935, p_arm)	(Chr3, 35571936, 35573260, p_arm)	(Chr3, 35573261, 35678172, p_arm)	(Chr3, 35678173, 35683145, p_arm)	(Chr3, 35683146, 90772457, p_arm)	(Chr3, 90772458, 90772458, p_arm)	(Chr3, 90772459, 93655574, centromere)	(Chr3, 93655575, 93655575, q_arm)	(Chr3, 93655576, 188716201, q_arm)	(Chr3, 188716202, 188716372, q_arm)	-	(Chr3, 188716373, 192842997, q_arm)	(Chr3, 192842998, 192844294, q_arm)	(Chr3, 192844295, 198217553, q_arm)	(Chr3, 198217554, 198235558, q_arm)	(Chr3, 198235559, 198295558, telomere2)	
+-	-	(Chr3, 17438, 16374695, solved_path)	(Chr3, 16374696, 16377321, solved_path)	(Chr3, 16377322, 21203684, solved_path)	-	(Chr3, 21203685, 21204354, solved_path)	(Chr3, 21204355, 30537971, solved_path)	(Chr3, 30537972, 30542629, solved_path)	-	(Chr3, 30544575, 35571935, solved_path)	-	(Chr3, 35573261, 35678172, solved_path)	(Chr3, 35678173, 35683145, solved_path)	(Chr3, 35683146, 90772457, solved_path)	(Chr3, 90772458, 90772458, solved_path)	(Chr3, 90772459, 93655574, solved_path)	(Chr3, 93655575, 93655575, solved_path)	(Chr3, 93655576, 188716201, solved_path)	(Chr3, 188716202, 188716372, solved_path)	(Chr3, 188716373, 192842997, solved_path)	-	(Chr3, 192842998, 192844294, solved_path)	(Chr3, 192844295, 198217553, solved_path)	-	-	
+
+alignment between Chr3b, Path10: -18119565
+(Chr3, 0, 9999, telomere1)	(Chr3, 10000, 17437, p_arm)	(Chr3, 17438, 16374695, p_arm)	-	-	-	(Chr3, 16374696, 16377321, p_arm)	(Chr3, 188716373, 192842997, p_arm)	(Chr3, 21203685, 21204354, p_arm)	(Chr3, 21204355, 30537971, p_arm)	(Chr3, 30537972, 30542629, p_arm)	(Chr3, 30542630, 30544574, p_arm)	(Chr3, 30544575, 35571935, p_arm)	-	(Chr3, 35571936, 35573260, p_arm)	(Chr3, 35573261, 35678172, p_arm)	(Chr3, 35678172, 35573261, p_arm)	(Chr3, 35573260, 35571936, p_arm)	(Chr3, 35571935, 30544575, p_arm)	(Chr3, 30544574, 30542630, p_arm)	(Chr3, 30542629, 30537972, p_arm)	(Chr3, 35678173, 35683145, p_arm)	(Chr3, 35683146, 90772457, p_arm)	(Chr3, 90772458, 90772458, p_arm)	(Chr3, 90772459, 93655574, centromere)	(Chr3, 93655575, 93655575, q_arm)	(Chr3, 93655576, 188716201, q_arm)	-	-	-	(Chr3, 188716202, 188716372, q_arm)	(Chr3, 16377322, 21203684, q_arm)	(Chr3, 192842998, 192844294, q_arm)	(Chr3, 192844295, 198217553, q_arm)	(Chr3, 198217554, 198235558, q_arm)	(Chr3, 198235559, 198295558, telomere2)	
+-	-	(Chr3, 17438, 16374695, solved_path)	(Chr3, 188716202, 188716372, solved_path)	(Chr3, 188716373, 192842997, solved_path)	(Chr3, 192842998, 192844294, solved_path)	-	-	-	(Chr3, 21204355, 30537971, solved_path)	(Chr3, 30537972, 30542629, solved_path)	-	(Chr3, 30544575, 35571935, solved_path)	(Chr3, 35683145, 35678173, solved_path)	-	-	(Chr3, 35678172, 35573261, solved_path)	-	(Chr3, 35571935, 30544575, solved_path)	-	-	-	(Chr3, 35683146, 90772457, solved_path)	(Chr3, 90772458, 90772458, solved_path)	(Chr3, 90772459, 93655574, solved_path)	(Chr3, 93655575, 93655575, solved_path)	(Chr3, 93655576, 188716201, solved_path)	(Chr3, 16374696, 16377321, solved_path)	(Chr3, 16377322, 21203684, solved_path)	(Chr3, 21203685, 21204354, solved_path)	-	-	-	(Chr3, 192844295, 198217553, solved_path)	-	-	
+
+alignment between Chr4b, Path12: -4069171
+(Chr4, 0, 9999, telomere1)	(Chr4, 10000, 14574, p_arm)	(Chr4, 14575, 49708099, p_arm)	(Chr4, 49708100, 49708100, p_arm)	(Chr4, 49708101, 51743951, centromere)	(Chr4, 51743952, 51743952, q_arm)	(Chr4, 51743953, 98867762, q_arm)	(Chr4, 98867763, 98882555, q_arm)	-	(Chr4, 98882556, 98897714, q_arm)	(Chr4, 98897715, 102828013, q_arm)	(Chr4, 102828014, 102842521, q_arm)	(Chr4, 102842522, 102858687, q_arm)	(Chr4, 102858688, 133351005, q_arm)	(Chr4, 133351006, 133355512, q_arm)	(Chr4, 133355513, 133366894, q_arm)	(Chr4, 133366895, 138595204, q_arm)	(Chr4, 138595205, 138617815, q_arm)	(Chr4, 138617816, 138636447, q_arm)	(Chr4, 133355513, 133366894, q_arm)	(Chr4, 133366895, 138595204, q_arm)	(Chr4, 138595205, 138617815, q_arm)	(Chr4, 138617816, 138636447, q_arm)	(Chr4, 138636448, 190196474, q_arm)	(Chr4, 190196475, 190204554, q_arm)	(Chr4, 190204555, 190214554, telomere2)	
+-	-	(Chr4, 14575, 49708099, solved_path)	(Chr4, 49708100, 49708100, solved_path)	(Chr4, 49708101, 51743951, solved_path)	(Chr4, 51743952, 51743952, solved_path)	(Chr4, 51743953, 98867762, solved_path)	(Chr4, 98867763, 98882555, solved_path)	(Chr4, 98897715, 102828013, solved_path)	-	(Chr4, 98897715, 102828013, solved_path)	-	(Chr4, 102842522, 102858687, solved_path)	(Chr4, 102858688, 133351005, solved_path)	-	-	(Chr4, 133366895, 138595204, solved_path)	-	-	-	(Chr4, 133366895, 138595204, solved_path)	-	(Chr4, 138617816, 138636447, solved_path)	(Chr4, 138636448, 190196474, solved_path)	-	-	
+
+alignment between Chr4a, Path11: -4077172
+(Chr4, 0, 9999, telomere1)	(Chr4, 10000, 14574, p_arm)	(Chr4, 14575, 49708099, p_arm)	(Chr4, 49708100, 49708100, p_arm)	(Chr4, 49708101, 51743951, centromere)	(Chr4, 51743952, 51743952, q_arm)	(Chr4, 51743953, 98867762, q_arm)	(Chr4, 98867763, 98882555, q_arm)	(Chr4, 98882556, 98897714, q_arm)	(Chr4, 98897715, 102828013, q_arm)	(Chr4, 102828014, 102842521, q_arm)	(Chr4, 102842522, 102858687, q_arm)	(Chr4, 98867763, 98882555, q_arm)	(Chr4, 98882556, 98897714, q_arm)	(Chr4, 98897715, 102828013, q_arm)	(Chr4, 102828014, 102842521, q_arm)	(Chr4, 102842522, 102858687, q_arm)	(Chr4, 102858688, 133351005, q_arm)	(Chr4, 133351006, 133355512, q_arm)	(Chr4, 133355513, 133366894, q_arm)	(Chr4, 133366895, 138595204, q_arm)	(Chr4, 138595205, 138617815, q_arm)	(Chr4, 138617816, 138636447, q_arm)	(Chr4, 138636448, 190196474, q_arm)	(Chr4, 190196475, 190204554, q_arm)	(Chr4, 190204555, 190214554, telomere2)	
+-	-	(Chr4, 14575, 49708099, solved_path)	(Chr4, 49708100, 49708100, solved_path)	(Chr4, 49708101, 51743951, solved_path)	(Chr4, 51743952, 51743952, solved_path)	(Chr4, 51743953, 98867762, solved_path)	-	-	-	-	-	(Chr4, 98867763, 98882555, solved_path)	-	(Chr4, 98897715, 102828013, solved_path)	-	(Chr4, 102842522, 102858687, solved_path)	(Chr4, 102858688, 133351005, solved_path)	-	-	(Chr4, 133366895, 138595204, solved_path)	-	(Chr4, 138617816, 138636447, solved_path)	(Chr4, 138636448, 190196474, solved_path)	-	-	
+
+alignment between Chr6a, Path6: -94113251
+-	-	-	(Chr6, 0, 59999, telomere1)	(Chr6, 60000, 9931282, p_arm)	(Chr6, 9931283, 9932025, p_arm)	(Chr6, 15265013, 15267181, p_arm)	(Chr6, 15267182, 58553887, p_arm)	(Chr6, 58553888, 58553888, p_arm)	(Chr6, 58553889, 59829934, centromere)	(Chr6, 59829935, 59829935, q_arm)	(Chr6, 59829936, 66445464, q_arm)	(Chr6, 66445465, 66447592, q_arm)	(Chr6, 150558347, 150560608, q_arm)	(Chr6, 150560609, 154996331, q_arm)	(Chr6, 66447593, 71173057, q_arm)	(Chr6, 71173058, 150558346, q_arm)	(Chr6, 154996332, 170739897, q_arm)	(Chr6, 170739898, 170745978, q_arm)	(Chr6, 170745979, 170805978, telomere2)	
+(Chr1, 19686, 93776498, solved_path)	(Chr6, 9931283, 9932025, solved_path)	(Chr6, 9932026, 15265012, solved_path)	-	-	-	(Chr6, 15265013, 15267181, solved_path)	(Chr6, 15267182, 58553887, solved_path)	(Chr6, 58553888, 58553888, solved_path)	(Chr6, 58553889, 59829934, solved_path)	(Chr6, 59829935, 59829935, solved_path)	(Chr6, 59829936, 66445464, solved_path)	-	-	(Chr6, 150560609, 154996331, solved_path)	-	-	(Chr6, 154996332, 170739897, solved_path)	-	-	
+
+alignment between Chr6b, Path5: -150624428
+-	-	-	-	-	-	-	-	-	-	-	-	-	-	(Chr6, 0, 59999, telomere1)	(Chr6, 60000, 9931282, p_arm)	(Chr6, 9931283, 9932025, p_arm)	(Chr6, 9932026, 15265012, p_arm)	(Chr6, 15265013, 15267181, p_arm)	(Chr6, 15267182, 58553887, p_arm)	(Chr6, 58553888, 58553888, p_arm)	(Chr6, 58553889, 59829934, centromere)	(Chr6, 59829935, 59829935, q_arm)	(Chr6, 59829936, 66445464, q_arm)	(Chr6, 66445465, 66447592, q_arm)	(Chr6, 66447593, 71173057, q_arm)	(Chr6, 71173058, 150558346, q_arm)	(Chr6, 150558347, 150560608, q_arm)	(Chr6, 150560609, 154996331, q_arm)	(Chr6, 154996332, 170739897, q_arm)	(Chr6, 170739898, 170745978, q_arm)	(Chr6, 170745979, 170805978, telomere2)	
+(Chr6, 0, 59999, solved_path)	(Chr6, 60000, 9931282, solved_path)	(Chr6, 15267182, 58553887, solved_path)	(Chr6, 58553888, 58553888, solved_path)	(Chr6, 58553889, 59829934, solved_path)	(Chr6, 59829935, 59829935, solved_path)	(Chr6, 59829936, 66445464, solved_path)	(Chr6, 66445465, 66447592, solved_path)	(Chr6, 66447593, 71173057, solved_path)	(Chr6, 71173058, 150558346, solved_path)	(Chr6, 150558347, 150560608, solved_path)	(Chr6, 66445465, 66447592, solved_path)	(Chr6, 66447593, 71173057, solved_path)	(Chr6, 71173058, 150558346, solved_path)	-	-	-	-	-	-	-	-	-	-	-	-	-	(Chr6, 150558347, 150560608, solved_path)	(Chr6, 150560609, 154996331, solved_path)	(Chr6, 154996332, 170739897, solved_path)	-	-	
+
+alignment between Chr7a, Path13: -10988
+(Chr7, 0, 9999, telomere1)	(Chr7, 10000, 58169652, p_arm)	(Chr7, 58169653, 58169653, p_arm)	(Chr7, 58169654, 60828234, centromere)	(Chr7, 60828235, 60828235, q_arm)	(Chr7, 60828236, 159334984, q_arm)	(Chr7, 159334985, 159335972, q_arm)	(Chr7, 159335973, 159345972, telomere2)	
+(Chr7, 0, 9999, solved_path)	(Chr7, 10000, 58169652, solved_path)	(Chr7, 58169653, 58169653, solved_path)	(Chr7, 58169654, 60828234, solved_path)	(Chr7, 60828235, 60828235, solved_path)	(Chr7, 60828236, 159334984, solved_path)	-	-	
+
+alignment between Chr7b, Path14: -10988
+(Chr7, 0, 9999, telomere1)	(Chr7, 10000, 58169652, p_arm)	(Chr7, 58169653, 58169653, p_arm)	(Chr7, 58169654, 60828234, centromere)	(Chr7, 60828235, 60828235, q_arm)	(Chr7, 60828236, 159334984, q_arm)	(Chr7, 159334985, 159335972, q_arm)	(Chr7, 159335973, 159345972, telomere2)	
+(Chr7, 0, 9999, solved_path)	(Chr7, 10000, 58169652, solved_path)	(Chr7, 58169653, 58169653, solved_path)	(Chr7, 58169654, 60828234, solved_path)	(Chr7, 60828235, 60828235, solved_path)	(Chr7, 60828236, 159334984, solved_path)	-	-	
+
+alignment between Chr8b, Path15: -62510
+(Chr8, 0, 59999, telomere1)	(Chr8, 60000, 44033743, p_arm)	(Chr8, 44033744, 44033744, p_arm)	(Chr8, 44033745, 45877265, centromere)	(Chr8, 45877266, 45877266, q_arm)	(Chr8, 45877267, 89328299, q_arm)	(Chr8, 89328300, 89331223, q_arm)	(Chr8, 89331224, 97882261, q_arm)	(Chr8, 97882262, 97886202, q_arm)	(Chr8, 97886203, 145076125, q_arm)	(Chr8, 145076126, 145078635, q_arm)	(Chr8, 145078636, 145138635, telomere2)	
+(Chr8, 0, 59999, solved_path)	(Chr8, 60000, 44033743, solved_path)	(Chr8, 44033744, 44033744, solved_path)	(Chr8, 44033745, 45877265, solved_path)	(Chr8, 45877266, 45877266, solved_path)	(Chr8, 45877267, 89328299, solved_path)	(Chr8, 89328300, 89331223, solved_path)	(Chr8, 89331224, 97882261, solved_path)	(Chr8, 97882262, 97886202, solved_path)	(Chr8, 97886203, 145076125, solved_path)	-	-	
+
+alignment between Chr8a, Path16: -76240
+(Chr8, 0, 59999, telomere1)	(Chr8, 60000, 44033743, p_arm)	(Chr8, 44033744, 44033744, p_arm)	(Chr8, 44033745, 45877265, centromere)	(Chr8, 45877266, 45877266, q_arm)	(Chr8, 45877267, 89328299, q_arm)	-	(Chr8, 97886202, 97882262, q_arm)	(Chr8, 97882261, 89331224, q_arm)	-	(Chr8, 89331223, 89328300, q_arm)	(Chr8, 97886203, 145076125, q_arm)	(Chr8, 145076126, 145078635, q_arm)	(Chr8, 145078636, 145138635, telomere2)	
+(Chr8, 0, 59999, solved_path)	(Chr8, 60000, 44033743, solved_path)	(Chr8, 44033744, 44033744, solved_path)	(Chr8, 44033745, 45877265, solved_path)	(Chr8, 45877266, 45877266, solved_path)	(Chr8, 45877267, 89328299, solved_path)	(Chr8, 89328300, 89331223, solved_path)	-	(Chr8, 97882261, 89331224, solved_path)	(Chr8, 97882262, 97886202, solved_path)	-	(Chr8, 97886203, 145076125, solved_path)	-	-	
+
+alignment between Chr9a, Path17: -60252
+(Chr9, 0, 9999, telomere1)	(Chr9, 10000, 43236166, p_arm)	(Chr9, 43236167, 43236167, p_arm)	(Chr9, 43236168, 45518558, centromere)	(Chr9, 45518559, 45518559, q_arm)	(Chr9, 45518560, 138334464, q_arm)	(Chr9, 138334465, 138334716, q_arm)	(Chr9, 138334717, 138394716, telomere2)	
+(Chr9, 0, 9999, solved_path)	(Chr9, 10000, 43236166, solved_path)	(Chr9, 43236167, 43236167, solved_path)	(Chr9, 43236168, 45518558, solved_path)	(Chr9, 45518559, 45518559, solved_path)	(Chr9, 45518560, 138334464, solved_path)	-	-	
+
+alignment between Chr9b, Path18: -60252
+(Chr9, 0, 9999, telomere1)	(Chr9, 10000, 43236166, p_arm)	(Chr9, 43236167, 43236167, p_arm)	(Chr9, 43236168, 45518558, centromere)	(Chr9, 45518559, 45518559, q_arm)	(Chr9, 45518560, 138334464, q_arm)	(Chr9, 138334465, 138334716, q_arm)	(Chr9, 138334717, 138394716, telomere2)	
+(Chr9, 0, 9999, solved_path)	(Chr9, 10000, 43236166, solved_path)	(Chr9, 43236167, 43236167, solved_path)	(Chr9, 43236168, 45518558, solved_path)	(Chr9, 45518559, 45518559, solved_path)	(Chr9, 45518560, 138334464, solved_path)	-	-	
+
+alignment between Chr10b, Path19: -12816282
+(Chr10, 0, 9999, telomere1)	(Chr10, 10000, 19073, p_arm)	(Chr10, 19074, 26588139, p_arm)	(Chr10, 26588140, 26593420, p_arm)	(Chr10, 26593421, 26594164, p_arm)	(Chr10, 26594165, 30081663, p_arm)	(Chr10, 30081664, 30091495, p_arm)	(Chr10, 30091496, 30185093, p_arm)	(Chr10, 30185093, 30091496, p_arm)	(Chr10, 30091495, 30081664, p_arm)	(Chr10, 30081663, 26594165, p_arm)	(Chr10, 26594164, 26593421, p_arm)	(Chr10, 30185094, 30187552, p_arm)	(Chr10, 30187553, 39686681, p_arm)	(Chr10, 39686682, 39686682, p_arm)	(Chr10, 39686683, 41593521, centromere)	(Chr10, 41593522, 41593522, q_arm)	(Chr10, 41593523, 46991592, q_arm)	(Chr10, 46991593, 48060267, q_arm)	(Chr10, 48060268, 96293715, q_arm)	(Chr10, 96293716, 96305862, q_arm)	(Chr10, 96305863, 96308015, q_arm)	-	(Chr10, 96308016, 100896493, q_arm)	(Chr10, 100896494, 100896546, q_arm)	(Chr10, 100896547, 100897768, q_arm)	(Chr10, 100897769, 133778994, q_arm)	(Chr10, 133778995, 133787421, q_arm)	(Chr10, 133787422, 133797421, telomere2)	
+-	-	(Chr10, 19074, 26588139, solved_path)	-	-	(Chr10, 26594165, 30081663, solved_path)	-	(Chr10, 30091496, 30185093, solved_path)	-	-	-	-	(Chr10, 30185094, 30187552, solved_path)	(Chr10, 30187553, 39686681, solved_path)	(Chr10, 39686682, 39686682, solved_path)	(Chr10, 39686683, 41593521, solved_path)	(Chr10, 41593522, 41593522, solved_path)	(Chr10, 41593523, 46991592, solved_path)	(Chr10, 46991593, 48060267, solved_path)	(Chr10, 48060268, 96293715, solved_path)	-	(Chr10, 96305863, 96308015, solved_path)	(Chr10, 96308016, 100896493, solved_path)	-	(Chr10, 100896494, 100896546, solved_path)	-	(Chr10, 100897769, 133778994, solved_path)	-	-	
+
+alignment between Chr10a, Path20: -22083384
+(Chr10, 0, 9999, telomere1)	(Chr10, 10000, 19073, p_arm)	(Chr10, 19074, 26588139, p_arm)	(Chr10, 26588140, 26593420, p_arm)	(Chr10, 26593421, 26594164, p_arm)	(Chr10, 26594165, 30081663, p_arm)	-	-	-	(Chr10, 30081664, 30091495, p_arm)	(Chr10, 30091496, 30185093, p_arm)	(Chr10, 30185094, 30187552, p_arm)	(Chr10, 30187553, 39686681, p_arm)	(Chr10, 39686682, 39686682, p_arm)	(Chr10, 39686683, 41593521, centromere)	(Chr10, 41593522, 41593522, q_arm)	(Chr10, 41593523, 46991592, q_arm)	(Chr10, 46991593, 48060267, q_arm)	(Chr10, 48060268, 96293715, q_arm)	-	-	-	(Chr10, 96293716, 96305862, q_arm)	(Chr10, 96305863, 96308015, q_arm)	-	(Chr10, 96308016, 100896493, q_arm)	(Chr10, 96308016, 100896493, q_arm)	(Chr10, 100896494, 100896546, q_arm)	(Chr10, 100896547, 100897768, q_arm)	(Chr10, 100897769, 133778994, q_arm)	(Chr10, 133778995, 133787421, q_arm)	(Chr10, 133787422, 133797421, telomere2)	
+-	-	(Chr10, 19074, 26588139, solved_path)	-	-	(Chr10, 26594165, 30081663, solved_path)	(Chr10, 30187552, 30185094, solved_path)	(Chr10, 30185093, 30091496, solved_path)	(Chr10, 30081663, 26594165, solved_path)	-	-	-	(Chr10, 30187553, 39686681, solved_path)	(Chr10, 39686682, 39686682, solved_path)	(Chr10, 39686683, 41593521, solved_path)	(Chr10, 41593522, 41593522, solved_path)	(Chr10, 41593523, 46991592, solved_path)	(Chr10, 46991593, 48060267, solved_path)	(Chr10, 48060268, 96293715, solved_path)	(Chr10, 96305863, 96308015, solved_path)	(Chr10, 96308016, 100896493, solved_path)	(Chr10, 100896494, 100896546, solved_path)	-	(Chr10, 96305863, 96308015, solved_path)	(Chr10, 96308016, 100896493, solved_path)	-	-	(Chr10, 100896494, 100896546, solved_path)	-	(Chr10, 100897769, 133778994, solved_path)	-	-	
+
+alignment between Chr11a, Path21: -17056
+(Chr11, 0, 59999, telomere1)	(Chr11, 60000, 51078347, p_arm)	(Chr11, 51078348, 51078348, p_arm)	(Chr11, 51078349, 54425074, centromere)	(Chr11, 54425075, 54425075, q_arm)	(Chr11, 54425076, 135069565, q_arm)	(Chr11, 135069566, 135076621, q_arm)	(Chr11, 135076622, 135086621, telomere2)	
+(Chr11, 0, 59999, solved_path)	(Chr11, 60000, 51078347, solved_path)	(Chr11, 51078348, 51078348, solved_path)	(Chr11, 51078349, 54425074, solved_path)	(Chr11, 54425075, 54425075, solved_path)	(Chr11, 54425076, 135069565, solved_path)	-	-	
+
+alignment between Chr11b, Path22: -17056
+(Chr11, 0, 59999, telomere1)	(Chr11, 60000, 51078347, p_arm)	(Chr11, 51078348, 51078348, p_arm)	(Chr11, 51078349, 54425074, centromere)	(Chr11, 54425075, 54425075, q_arm)	(Chr11, 54425076, 135069565, q_arm)	(Chr11, 135069566, 135076621, q_arm)	(Chr11, 135076622, 135086621, telomere2)	
+(Chr11, 0, 59999, solved_path)	(Chr11, 60000, 51078347, solved_path)	(Chr11, 51078348, 51078348, solved_path)	(Chr11, 51078349, 54425074, solved_path)	(Chr11, 54425075, 54425075, solved_path)	(Chr11, 54425076, 135069565, solved_path)	-	-	
+
+alignment between Chr12a, Path23: -24752
+(Chr12, 0, 9999, telomere1)	(Chr12, 10000, 19720, p_arm)	(Chr12, 19721, 17544064, p_arm)	(Chr12, 17544065, 17545565, p_arm)	(Chr12, 17545566, 18109871, p_arm)	(Chr12, 18109872, 18115822, p_arm)	(Chr12, 18115823, 34769406, p_arm)	(Chr12, 34769407, 34769407, p_arm)	(Chr12, 34769408, 37185252, centromere)	(Chr12, 37185253, 37185253, q_arm)	(Chr12, 37185254, 133258008, q_arm)	(Chr12, 133258009, 133265308, q_arm)	(Chr12, 133265309, 133275308, telomere2)	
+-	-	(Chr12, 19721, 17544064, solved_path)	-	(Chr12, 17545566, 18109871, solved_path)	-	(Chr12, 18115823, 34769406, solved_path)	(Chr12, 34769407, 34769407, solved_path)	(Chr12, 34769408, 37185252, solved_path)	(Chr12, 37185253, 37185253, solved_path)	(Chr12, 37185254, 133258008, solved_path)	-	-	
+
+alignment between Chr12b, Path24: -24752
+(Chr12, 0, 9999, telomere1)	(Chr12, 10000, 19720, p_arm)	(Chr12, 19721, 17544064, p_arm)	(Chr12, 17544065, 17545565, p_arm)	(Chr12, 17545566, 18109871, p_arm)	(Chr12, 18109872, 18115822, p_arm)	(Chr12, 18115823, 34769406, p_arm)	(Chr12, 34769407, 34769407, p_arm)	(Chr12, 34769408, 37185252, centromere)	(Chr12, 37185253, 37185253, q_arm)	(Chr12, 37185254, 133258008, q_arm)	(Chr12, 133258009, 133265308, q_arm)	(Chr12, 133265309, 133275308, telomere2)	
+-	-	(Chr12, 19721, 17544064, solved_path)	-	(Chr12, 17545566, 18109871, solved_path)	-	(Chr12, 18115823, 34769406, solved_path)	(Chr12, 34769407, 34769407, solved_path)	(Chr12, 34769408, 37185252, solved_path)	(Chr12, 37185253, 37185253, solved_path)	(Chr12, 37185254, 133258008, solved_path)	-	-	
+
+alignment between Chr14a, Path27: -170437
+(Chr14, 0, 15999999, telomere1)	-	(Chr14, 16000000, 16000000, p_arm)	(Chr14, 16000001, 18173523, centromere)	(Chr14, 18173524, 18173524, q_arm)	(Chr14, 18173525, 106873282, q_arm)	(Chr14, 106873283, 106883717, q_arm)	(Chr14, 106883718, 107043717, telomere2)	
+(Chr14, 0, 15999999, solved_path)	(Chr14, 16000000, 16000000, solved_path)	-	(Chr14, 16000001, 18173523, solved_path)	(Chr14, 18173524, 18173524, solved_path)	(Chr14, 18173525, 106873282, solved_path)	-	-	
+
+alignment between Chr14b, Path28: -170437
+(Chr14, 0, 15999999, telomere1)	-	(Chr14, 16000000, 16000000, p_arm)	(Chr14, 16000001, 18173523, centromere)	(Chr14, 18173524, 18173524, q_arm)	(Chr14, 18173525, 106873282, q_arm)	(Chr14, 106873283, 106883717, q_arm)	(Chr14, 106883718, 107043717, telomere2)	
+(Chr14, 0, 15999999, solved_path)	(Chr14, 16000000, 16000000, solved_path)	-	(Chr14, 16000001, 18173523, solved_path)	(Chr14, 18173524, 18173524, solved_path)	(Chr14, 18173525, 106873282, solved_path)	-	-	
+
+alignment between Chr15b, Path32: -18410
+(Chr15, 0, 16999999, telomere1)	-	(Chr15, 17000000, 17000000, p_arm)	(Chr15, 17000001, 19725254, centromere)	(Chr15, 19725255, 19725255, q_arm)	(Chr15, 19725256, 48936166, q_arm)	-	(Chr15, 48936167, 48937926, q_arm)	(Chr15, 56598142, 101976509, q_arm)	(Chr15, 101976510, 101981188, q_arm)	(Chr15, 101981189, 101991188, telomere2)	
+(Chr15, 0, 16999999, solved_path)	(Chr15, 17000000, 17000000, solved_path)	-	(Chr15, 17000001, 19725254, solved_path)	(Chr15, 19725255, 19725255, solved_path)	(Chr15, 19725256, 48936166, solved_path)	(Chr15, 56596173, 56598141, solved_path)	-	(Chr15, 56598142, 101976509, solved_path)	-	-	
+
+alignment between Chr15a, Path29: -71202475
+(Chr15, 0, 16999999, telomere1)	-	(Chr15, 17000000, 17000000, p_arm)	(Chr15, 17000001, 19725254, centromere)	(Chr15, 19725255, 19725255, q_arm)	(Chr15, 19725256, 48936166, q_arm)	(Chr15, 48936167, 48937926, q_arm)	(Chr15, 48937927, 56596172, q_arm)	-	(Chr15, 56596173, 56598141, q_arm)	(Chr15, 56598142, 101981188, q_arm)	(Chr15, 101981189, 101991188, telomere2)	
+(Chr15, 0, 16999999, solved_path)	(Chr15, 17000000, 17000000, solved_path)	-	(Chr15, 17000001, 19725254, solved_path)	(Chr15, 19725255, 19725255, solved_path)	(Chr15, 19725256, 48936166, solved_path)	(Chr15, 48936167, 48937926, solved_path)	(Chr15, 48937927, 56596172, solved_path)	(ChrX, 130218156, 156025612, solved_path)	-	-	-	
+
+alignment between Chr16a, Path33: -113593
+(Chr16, 0, 9999, telomere1)	(Chr16, 10000, 21500434, p_arm)	(Chr16, 21500435, 22438802, p_arm)	(Chr16, 22438803, 36311157, p_arm)	(Chr16, 36311158, 36311158, p_arm)	(Chr16, 36311159, 38280682, centromere)	(Chr16, 38280683, 38280683, q_arm)	(Chr16, 38280684, 90224751, q_arm)	(Chr16, 90224752, 90228344, q_arm)	(Chr16, 90228345, 90338344, telomere2)	
+(Chr16, 0, 9999, solved_path)	(Chr16, 10000, 21500434, solved_path)	(Chr16, 21500435, 22438802, solved_path)	(Chr16, 22438803, 36311157, solved_path)	(Chr16, 36311158, 36311158, solved_path)	(Chr16, 36311159, 38280682, solved_path)	(Chr16, 38280683, 38280683, solved_path)	(Chr16, 38280684, 90224751, solved_path)	-	-	
+
+alignment between Chr16b, Path34: -113593
+(Chr16, 0, 9999, telomere1)	(Chr16, 10000, 21500434, p_arm)	(Chr16, 21500435, 22438802, p_arm)	(Chr16, 22438803, 36311157, p_arm)	(Chr16, 36311158, 36311158, p_arm)	(Chr16, 36311159, 38280682, centromere)	(Chr16, 38280683, 38280683, q_arm)	(Chr16, 38280684, 90224751, q_arm)	(Chr16, 90224752, 90228344, q_arm)	(Chr16, 90228345, 90338344, telomere2)	
+(Chr16, 0, 9999, solved_path)	(Chr16, 10000, 21500434, solved_path)	(Chr16, 21500435, 22438802, solved_path)	(Chr16, 22438803, 36311157, solved_path)	(Chr16, 36311158, 36311158, solved_path)	(Chr16, 36311159, 38280682, solved_path)	(Chr16, 38280683, 38280683, solved_path)	(Chr16, 38280684, 90224751, solved_path)	-	-	
+
+alignment between Chr17a, Path35: -11048
+(Chr17, 0, 59999, telomere1)	(Chr17, 60000, 22813678, p_arm)	(Chr17, 22813679, 22813679, p_arm)	(Chr17, 22813680, 26885980, centromere)	(Chr17, 26885981, 26885981, q_arm)	(Chr17, 26885982, 83246392, q_arm)	(Chr17, 83246393, 83247440, q_arm)	(Chr17, 83247441, 83257440, telomere2)	
+(Chr17, 0, 59999, solved_path)	(Chr17, 60000, 22813678, solved_path)	(Chr17, 22813679, 22813679, solved_path)	(Chr17, 22813680, 26885980, solved_path)	(Chr17, 26885981, 26885981, solved_path)	(Chr17, 26885982, 83246392, solved_path)	-	-	
+
+alignment between Chr17b, Path36: -11048
+(Chr17, 0, 59999, telomere1)	(Chr17, 60000, 22813678, p_arm)	(Chr17, 22813679, 22813679, p_arm)	(Chr17, 22813680, 26885980, centromere)	(Chr17, 26885981, 26885981, q_arm)	(Chr17, 26885982, 83246392, q_arm)	(Chr17, 83246393, 83247440, q_arm)	(Chr17, 83247441, 83257440, telomere2)	
+(Chr17, 0, 59999, solved_path)	(Chr17, 60000, 22813678, solved_path)	(Chr17, 22813679, 22813679, solved_path)	(Chr17, 22813680, 26885980, solved_path)	(Chr17, 26885981, 26885981, solved_path)	(Chr17, 26885982, 83246392, solved_path)	-	-	
+
+alignment between Chr18a, Path37: -116910
+(Chr18, 0, 9999, telomere1)	(Chr18, 10000, 15460898, p_arm)	(Chr18, 15460899, 15460899, p_arm)	(Chr18, 15460900, 20861206, centromere)	(Chr18, 20861207, 20861207, q_arm)	(Chr18, 20861208, 80256374, q_arm)	(Chr18, 80256375, 80263284, q_arm)	(Chr18, 80263285, 80373284, telomere2)	
+(Chr18, 0, 9999, solved_path)	(Chr18, 10000, 15460898, solved_path)	(Chr18, 15460899, 15460899, solved_path)	(Chr18, 15460900, 20861206, solved_path)	(Chr18, 20861207, 20861207, solved_path)	(Chr18, 20861208, 80256374, solved_path)	-	-	
+
+alignment between Chr18b, Path38: -116910
+(Chr18, 0, 9999, telomere1)	(Chr18, 10000, 15460898, p_arm)	(Chr18, 15460899, 15460899, p_arm)	(Chr18, 15460900, 20861206, centromere)	(Chr18, 20861207, 20861207, q_arm)	(Chr18, 20861208, 80256374, q_arm)	(Chr18, 80256375, 80263284, q_arm)	(Chr18, 80263285, 80373284, telomere2)	
+(Chr18, 0, 9999, solved_path)	(Chr18, 10000, 15460898, solved_path)	(Chr18, 15460899, 15460899, solved_path)	(Chr18, 15460900, 20861206, solved_path)	(Chr18, 20861207, 20861207, solved_path)	(Chr18, 20861208, 80256374, solved_path)	-	-	
+
+alignment between Chr19a, Path39: -11900
+(Chr19, 0, 59999, telomere1)	(Chr19, 60000, 24498979, p_arm)	(Chr19, 24498980, 24498980, p_arm)	(Chr19, 24498981, 27190874, centromere)	(Chr19, 27190875, 27190875, q_arm)	(Chr19, 27190876, 58605715, q_arm)	(Chr19, 58605716, 58607615, q_arm)	(Chr19, 58607616, 58617615, telomere2)	
+(Chr19, 0, 59999, solved_path)	(Chr19, 60000, 24498979, solved_path)	(Chr19, 24498980, 24498980, solved_path)	(Chr19, 24498981, 27190874, solved_path)	(Chr19, 27190875, 27190875, solved_path)	(Chr19, 27190876, 58605715, solved_path)	-	-	
+
+alignment between Chr19b, Path40: -11900
+(Chr19, 0, 59999, telomere1)	(Chr19, 60000, 24498979, p_arm)	(Chr19, 24498980, 24498980, p_arm)	(Chr19, 24498981, 27190874, centromere)	(Chr19, 27190875, 27190875, q_arm)	(Chr19, 27190876, 58605715, q_arm)	(Chr19, 58605716, 58607615, q_arm)	(Chr19, 58607616, 58617615, telomere2)	
+(Chr19, 0, 59999, solved_path)	(Chr19, 60000, 24498979, solved_path)	(Chr19, 24498980, 24498980, solved_path)	(Chr19, 24498981, 27190874, solved_path)	(Chr19, 27190875, 27190875, solved_path)	(Chr19, 27190876, 58605715, solved_path)	-	-	
+
+alignment between Chr20a, Path41: -110448
+(Chr20, 0, 59999, telomere1)	(Chr20, 60000, 26436231, p_arm)	(Chr20, 26436232, 26436232, p_arm)	(Chr20, 26436233, 30038348, centromere)	(Chr20, 30038349, 30038349, q_arm)	(Chr20, 30038350, 64333718, q_arm)	(Chr20, 64333719, 64334166, q_arm)	(Chr20, 64334167, 64444166, telomere2)	
+(Chr20, 0, 59999, solved_path)	(Chr20, 60000, 26436231, solved_path)	(Chr20, 26436232, 26436232, solved_path)	(Chr20, 26436233, 30038348, solved_path)	(Chr20, 30038349, 30038349, solved_path)	(Chr20, 30038350, 64333718, solved_path)	-	-	
+
+alignment between Chr20b, Path42: -110448
+(Chr20, 0, 59999, telomere1)	(Chr20, 60000, 26436231, p_arm)	(Chr20, 26436232, 26436232, p_arm)	(Chr20, 26436233, 30038348, centromere)	(Chr20, 30038349, 30038349, q_arm)	(Chr20, 30038350, 64333718, q_arm)	(Chr20, 64333719, 64334166, q_arm)	(Chr20, 64334167, 64444166, telomere2)	
+(Chr20, 0, 59999, solved_path)	(Chr20, 60000, 26436231, solved_path)	(Chr20, 26436232, 26436232, solved_path)	(Chr20, 26436233, 30038348, solved_path)	(Chr20, 30038349, 30038349, solved_path)	(Chr20, 30038350, 64333718, solved_path)	-	-	
+
+alignment between Chr21a, Path43: -12752
+(Chr21, 0, 5009999, telomere1)	(Chr21, 5010000, 10864559, p_arm)	(Chr21, 10864560, 10864560, p_arm)	(Chr21, 10864561, 12915808, centromere)	(Chr21, 12915809, 12915809, q_arm)	(Chr21, 12915810, 46697230, q_arm)	(Chr21, 46697231, 46699982, q_arm)	(Chr21, 46699983, 46709982, telomere2)	
+(Chr21, 0, 5009999, solved_path)	(Chr21, 5010000, 10864559, solved_path)	(Chr21, 10864560, 10864560, solved_path)	(Chr21, 10864561, 12915808, solved_path)	(Chr21, 12915809, 12915809, solved_path)	(Chr21, 12915810, 46697230, solved_path)	-	-	
+
+alignment between Chr21b, Path44: -12752
+(Chr21, 0, 5009999, telomere1)	(Chr21, 5010000, 10864559, p_arm)	(Chr21, 10864560, 10864560, p_arm)	(Chr21, 10864561, 12915808, centromere)	(Chr21, 12915809, 12915809, q_arm)	(Chr21, 12915810, 46697230, q_arm)	(Chr21, 46697231, 46699982, q_arm)	(Chr21, 46699983, 46709982, telomere2)	
+(Chr21, 0, 5009999, solved_path)	(Chr21, 5010000, 10864559, solved_path)	(Chr21, 10864560, 10864560, solved_path)	(Chr21, 10864561, 12915808, solved_path)	(Chr21, 12915809, 12915809, solved_path)	(Chr21, 12915810, 46697230, solved_path)	-	-	
+
+alignment between Chr22a, Path45: -12880
+(Chr22, 0, 10509999, telomere1)	(Chr22, 10510000, 12954787, p_arm)	(Chr22, 12954788, 12954788, p_arm)	(Chr22, 12954789, 15054318, centromere)	(Chr22, 15054319, 15054319, q_arm)	(Chr22, 15054320, 50805587, q_arm)	(Chr22, 50805588, 50808467, q_arm)	(Chr22, 50808468, 50818467, telomere2)	
+(Chr22, 0, 10509999, solved_path)	(Chr22, 10510000, 12954787, solved_path)	(Chr22, 12954788, 12954788, solved_path)	(Chr22, 12954789, 15054318, solved_path)	(Chr22, 15054319, 15054319, solved_path)	(Chr22, 15054320, 50805587, solved_path)	-	-	
+
+alignment between Chr22b, Path46: -12880
+(Chr22, 0, 10509999, telomere1)	(Chr22, 10510000, 12954787, p_arm)	(Chr22, 12954788, 12954788, p_arm)	(Chr22, 12954789, 15054318, centromere)	(Chr22, 15054319, 15054319, q_arm)	(Chr22, 15054320, 50805587, q_arm)	(Chr22, 50805588, 50808467, q_arm)	(Chr22, 50808468, 50818467, telomere2)	
+(Chr22, 0, 10509999, solved_path)	(Chr22, 10510000, 12954787, solved_path)	(Chr22, 12954788, 12954788, solved_path)	(Chr22, 12954789, 15054318, solved_path)	(Chr22, 15054319, 15054319, solved_path)	(Chr22, 15054320, 50805587, solved_path)	-	-	
+
+alignment between ChrXa, Path30: -15284
+(ChrX, 0, 9999, telomere1)	(ChrX, 10000, 58605578, p_arm)	(ChrX, 58605579, 58605579, p_arm)	(ChrX, 58605580, 62412542, centromere)	(ChrX, 62412543, 62412543, q_arm)	(ChrX, 62412544, 130218155, q_arm)	(ChrX, 130218156, 130223953, q_arm)	-	(ChrX, 130223954, 130223954, q_arm)	(ChrX, 130223955, 156025612, q_arm)	(ChrX, 156025613, 156030894, q_arm)	(ChrX, 156030895, 156040894, telomere2)	
+(ChrX, 0, 9999, solved_path)	(ChrX, 10000, 58605578, solved_path)	(ChrX, 58605579, 58605579, solved_path)	(ChrX, 58605580, 62412542, solved_path)	(ChrX, 62412543, 62412543, solved_path)	(ChrX, 62412544, 130218155, solved_path)	(ChrX, 130218156, 130223953, solved_path)	(ChrX, 130223954, 130223954, solved_path)	-	(ChrX, 130223955, 156025612, solved_path)	-	-	
+
+alignment between ChrXb, Path31: -71202867
+(ChrX, 0, 9999, telomere1)	(ChrX, 10000, 58605578, p_arm)	(ChrX, 58605579, 58605579, p_arm)	(ChrX, 58605580, 62412542, centromere)	(ChrX, 62412543, 62412543, q_arm)	(ChrX, 62412544, 130218155, q_arm)	-	(ChrX, 130218156, 130223953, q_arm)	(Chr15, 48937927, 56596172, q_arm)	(Chr15, 56596173, 56598141, q_arm)	-	(ChrX, 130223954, 130223954, q_arm)	(ChrX, 130223955, 156030894, q_arm)	(ChrX, 156030895, 156040894, telomere2)	
+(ChrX, 0, 9999, solved_path)	(ChrX, 10000, 58605578, solved_path)	(ChrX, 58605579, 58605579, solved_path)	(ChrX, 58605580, 62412542, solved_path)	(ChrX, 62412543, 62412543, solved_path)	(ChrX, 62412544, 130218155, solved_path)	(Chr15, 48936167, 48937926, solved_path)	-	(Chr15, 48937927, 56596172, solved_path)	(Chr15, 56596173, 56598141, solved_path)	(Chr15, 56598142, 101976509, solved_path)	-	-	-	
+
+
+Process finished with exit code 0
+

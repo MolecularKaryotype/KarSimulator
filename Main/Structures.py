@@ -45,6 +45,7 @@ class Segment:
         if isinstance(other, Segment):
             return (self.chr_name, self.start, self.end) == (other.chr_name, other.start, other.end)
         return False
+        # return (self.chr_name, self.start, self.end) == (other.chr_name, other.start, other.end)
 
     def __hash__(self):
         return hash((self.chr_name, self.start, self.end))
@@ -77,7 +78,7 @@ class Segment:
         return self.start <= self.end
 
     def duplicate(self):
-        return Segment(self.chr_name, self.start, self.end)
+        return Segment(self.chr_name, self.start, self.end, self.segment_type)
 
     def left_delete(self, bp_to_delete):
         """
@@ -123,15 +124,26 @@ class Segment:
         """
         if self.chr_name != bp_chromosome:
             return False
-        if bp_type == "start" and bp_index == self.start:
-            return False
-        elif bp_type == "end" and bp_index == self.end:
-            return False
+        if self.direction():
+            if bp_type == "start" and bp_index == self.start:
+                return False
+            elif bp_type == "end" and bp_index == self.end:
+                return False
 
-        if bp_index in range(self.start, self.end + 1):
-            return True
+            if bp_index in range(self.start, self.end + 1):
+                return True
+            else:
+                return False
         else:
-            return False
+            if bp_type == "end" and bp_index == self.start:
+                return False
+            elif bp_type == "start" and bp_index == self.end:
+                return False
+
+            if bp_index in range(self.end, self.start + 1):
+                return True
+            else:
+                return False
 
 
 class Arm:
@@ -235,8 +247,12 @@ class Arm:
         """
         return_list = []
         for segment in self.segments:
-            return_list.append(tuple([segment.chr_name, segment.start, 'start']))
-            return_list.append(tuple([segment.chr_name, segment.end, 'end']))
+            if segment.direction():
+                return_list.append(tuple([segment.chr_name, segment.start, 'start']))
+                return_list.append(tuple([segment.chr_name, segment.end, 'end']))
+            else:
+                return_list.append(tuple([segment.chr_name, segment.start, 'end']))
+                return_list.append(tuple([segment.chr_name, segment.end, 'start']))
         return return_list
 
     def introduce_breakpoint(self, bp_chromosome, bp_index, bp_type):
@@ -253,18 +269,32 @@ class Arm:
             current_segment = self.segments[current_segment_index]
             if current_segment.bp_in_interior(bp_chromosome, bp_index, bp_type):
                 insertion_index = self.get_segment_index(current_segment)
-                if bp_type == "start":
-                    left_segment = Segment(current_segment.chr_name, current_segment.start, bp_index - 1,
-                                           current_segment.segment_type)
-                    right_segment = Segment(current_segment.chr_name, bp_index, current_segment.end,
-                                            current_segment.segment_type)
-                elif bp_type == "end":
-                    left_segment = Segment(current_segment.chr_name, current_segment.start, bp_index,
-                                           current_segment.segment_type)
-                    right_segment = Segment(current_segment.chr_name, bp_index + 1, current_segment.end,
-                                            current_segment.segment_type)
+                if current_segment.direction():
+                    if bp_type == "start":
+                        left_segment = Segment(current_segment.chr_name, current_segment.start, bp_index - 1,
+                                               current_segment.segment_type)
+                        right_segment = Segment(current_segment.chr_name, bp_index, current_segment.end,
+                                                current_segment.segment_type)
+                    elif bp_type == "end":
+                        left_segment = Segment(current_segment.chr_name, current_segment.start, bp_index,
+                                               current_segment.segment_type)
+                        right_segment = Segment(current_segment.chr_name, bp_index + 1, current_segment.end,
+                                                current_segment.segment_type)
+                    else:
+                        raise ValueError('bp_type must be start OR end')
                 else:
-                    raise ValueError('bp_type must be start OR end')
+                    if bp_type == "start":
+                        left_segment = Segment(current_segment.chr_name, current_segment.start, bp_index,
+                                               current_segment.segment_type)
+                        right_segment = Segment(current_segment.chr_name, bp_index - 1, current_segment.end,
+                                                current_segment.segment_type)
+                    elif bp_type == "end":
+                        left_segment = Segment(current_segment.chr_name, current_segment.start, bp_index + 1,
+                                               current_segment.segment_type)
+                        right_segment = Segment(current_segment.chr_name, bp_index, current_segment.end,
+                                                current_segment.segment_type)
+                    else:
+                        raise ValueError('bp_type must be start OR end')
 
                 self.segments.pop(insertion_index)
                 self.segments.insert(insertion_index, right_segment)
@@ -1000,24 +1030,33 @@ class Path:
         self.path_chr = path_chr
         self.path_name = path_name
 
-    def generate_mutual_breakpoints(self, other_path=None):
+    def __str__(self):
+        return str("chr_bin: {}, path_name: {}, segments: {}".format(self.path_chr, self.path_name, self.linear_path))
+
+    def generate_mutual_breakpoints(self, other_path=None, mutual=True):
         """
         make sure all segments within the 1/2 paths have mutual breakpoints
         :param other_path: if None, then breaking within itself
+        :param mutual: whether to generate breakpoints on the other_path
         :return:
         """
         path1_breakpoints = self.linear_path.gather_boundary_points()
 
         if other_path is not None:
             path2_breakpoints = other_path.linear_path.gather_boundary_points()
-
-            for breakpoint_itr in path1_breakpoints:
-                other_path.linear_path.introduce_breakpoint(*breakpoint_itr)
             for breakpoint_itr in path2_breakpoints:
                 self.linear_path.introduce_breakpoint(*breakpoint_itr)
+
+            if mutual:
+                for breakpoint_itr in path1_breakpoints:
+                    other_path.linear_path.introduce_breakpoint(*breakpoint_itr)
         else:
             for breakpoint_itr in path1_breakpoints:
                 self.linear_path.introduce_breakpoint(*breakpoint_itr)
+
+    def duplicate(self):
+        new_arm = self.linear_path.duplicate()
+        return Path(new_arm, self.path_chr, self.path_name)
 
 
 def segment_intersection_test():
