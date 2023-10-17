@@ -6,16 +6,20 @@ class Segment:
     chr_name: str
     start: int
     end: int
+    segment_type: str
 
-    def __init__(self, chr_name: str, start: int, end: int):
+    def __init__(self, chr_name: str, start: int, end: int, segment_type=None):
         self.chr_name = chr_name
         self.start = start
         self.end = end
+        self.segment_type = segment_type
 
     def __len__(self):
         return abs(self.end - self.start) + 1
 
     def __lt__(self, other):
+        type_order = ["telomere1", "telomere2", "centromere", "hardmask", "superdup"]
+
         def get_chr_order(chromosome_name):
             chr_extracted = chromosome_name.replace('Chr', '')
             if chr_extracted == 'X':
@@ -30,7 +34,12 @@ class Segment:
         elif get_chr_order(self.chr_name) > get_chr_order(other.chr_name):
             return False
         elif get_chr_order(self.chr_name) == get_chr_order(other.chr_name):
-            return max(self.start, self.end) < max(other.start, other.end)
+            if max(self.start, self.end) != max(other.start, other.end):
+                return max(self.start, self.end) < max(other.start, other.end)
+            else:
+                self_type_index = type_order.index(self.segment_type)
+                other_type_index = type_order.index(other.segment_type)
+                return self_type_index < other_type_index
 
     def __eq__(self, other):
         if isinstance(other, Segment):
@@ -41,7 +50,10 @@ class Segment:
         return hash((self.chr_name, self.start, self.end))
 
     def __str__(self):
-        return "({}, {}, {})".format(self.chr_name, self.start, self.end)
+        if self.segment_type is not None:
+            return "({}, {}, {}, {})".format(self.chr_name, self.start, self.end, self.segment_type)
+        else:
+            return "({}, {}, {})".format(self.chr_name, self.start, self.end)
 
     def same_segment_ignore_dir(self, other):
         if self.chr_name != other.chr_name:
@@ -96,6 +108,27 @@ class Segment:
         if self.chr_name != other_segment.chr_name:
             return False
         if self.start <= other_segment.end and self.end >= other_segment.start:
+            return True
+        else:
+            return False
+
+    def bp_in_interior(self, bp_chromosome, bp_index, bp_type):
+        """
+        For KarComparator
+        Used to see if an index is within the segment, potentially requiring a breakpoint
+        :param bp_chromosome:
+        :param bp_index:
+        :param bp_type: start or end
+        :return:
+        """
+        if self.chr_name != bp_chromosome:
+            return False
+        if bp_type == "start" and bp_index == self.start:
+            return False
+        elif bp_type == "end" and bp_index == self.end:
+            return False
+
+        if bp_index in range(self.start, self.end + 1):
             return True
         else:
             return False
@@ -182,6 +215,96 @@ class Arm:
                 if segment1.segment_intersection(segment2):
                     return True
         return False
+
+    def report_arm_intersection(self, other_arm):
+        intersecting_segments = []
+        for segment1 in self.segments:
+            for segment2 in other_arm.segments:
+                if segment1.segment_intersection(segment2):
+                    intersecting_segments.append(segment2)
+        return_str = "Input Segments: "
+        return_str += str(self) + "\n"
+        return_str += "Intersecting Segments: "
+        return_str += str(Arm(intersecting_segments, "")) + "\n"
+        return return_str
+
+    def gather_boundary_points(self):
+        """
+        For KarComparator
+        :return: a list of all the boundary points for each Segment (two for each)
+        """
+        return_list = []
+        for segment in self.segments:
+            return_list.append(tuple([segment.chr_name, segment.start, 'start']))
+            return_list.append(tuple([segment.chr_name, segment.end, 'end']))
+        return return_list
+
+    def introduce_breakpoint(self, bp_chromosome, bp_index, bp_type):
+        """
+        For KarComparator
+        Search through the arm and generate the breakpoint, if within an interior of a Segment
+        :param bp_chromosome:
+        :param bp_index:
+        :param bp_type: start or end bp
+        :return:
+        """
+        current_segment_index = 0
+        while current_segment_index < len(self.segments):
+            current_segment = self.segments[current_segment_index]
+            if current_segment.bp_in_interior(bp_chromosome, bp_index, bp_type):
+                insertion_index = self.get_segment_index(current_segment)
+                if bp_type == "start":
+                    left_segment = Segment(current_segment.chr_name, current_segment.start, bp_index - 1,
+                                           current_segment.segment_type)
+                    right_segment = Segment(current_segment.chr_name, bp_index, current_segment.end,
+                                            current_segment.segment_type)
+                elif bp_type == "end":
+                    left_segment = Segment(current_segment.chr_name, current_segment.start, bp_index,
+                                           current_segment.segment_type)
+                    right_segment = Segment(current_segment.chr_name, bp_index + 1, current_segment.end,
+                                            current_segment.segment_type)
+                else:
+                    raise ValueError('bp_type must be start OR end')
+
+                self.segments.pop(insertion_index)
+                self.segments.insert(insertion_index, right_segment)
+                self.segments.insert(insertion_index, left_segment)
+                current_segment_index += 1  # since we added one more segment in-place
+
+            current_segment_index += 1
+
+    def get_segment_index(self, input_segment):
+        """
+        For KarComparator
+        find the index of segment in list, matching the object using __is__ (not __eq__)
+        :param input_segment: Only use segment that is in the Arm
+        :return:
+        """
+        for segment_index in range(0, len(self.segments)):
+            current_segment = self.segments[segment_index]
+            if current_segment is input_segment:
+                return segment_index
+        raise RuntimeError('segment not found in Arm')
+
+    def merge_breakpoints(self):
+        """
+        For Masking File Generation
+        :return:
+        """
+        current_segment_index = 0
+        while current_segment_index < len(self.segments) - 1:
+            current_segment = self.segments[current_segment_index]
+            next_segment = self.segments[current_segment_index + 1]
+            if current_segment.chr_name == next_segment.chr_name:
+                if current_segment.segment_type == next_segment.segment_type:
+                    if current_segment.end + 1 == next_segment.start:
+                        new_segment = Segment(current_segment.chr_name, current_segment.start,
+                                              next_segment.end, current_segment.segment_type)
+                        self.segments.pop(current_segment_index)
+                        self.segments.pop(current_segment_index)
+                        self.segments.insert(current_segment_index, new_segment)
+                        continue
+            current_segment_index += 1
 
 
 class Chromosome:
@@ -294,7 +417,7 @@ def index_global_to_arm(chromosome: Chromosome, left_index: int, right_index: in
         raise ValueError('absolute-right-index in centromere region')
 
     # locate the Arm left_index is on
-    pass # TODO: implement
+    pass  # TODO: implement
 
 
 class Genome:
@@ -867,6 +990,36 @@ class Genome:
         IO.sequence_dict_to_FASTA(output_dict, output_file)
 
 
+class Path:
+    linear_path: Arm
+    path_chr: str
+    path_name: str
+
+    def __init__(self, linear_path: Arm, path_chr=None, path_name=None):
+        self.linear_path = linear_path
+        self.path_chr = path_chr
+        self.path_name = path_name
+
+    def generate_mutual_breakpoints(self, other_path=None):
+        """
+        make sure all segments within the 1/2 paths have mutual breakpoints
+        :param other_path: if None, then breaking within itself
+        :return:
+        """
+        path1_breakpoints = self.linear_path.gather_boundary_points()
+
+        if other_path is not None:
+            path2_breakpoints = other_path.linear_path.gather_boundary_points()
+
+            for breakpoint_itr in path1_breakpoints:
+                other_path.linear_path.introduce_breakpoint(*breakpoint_itr)
+            for breakpoint_itr in path2_breakpoints:
+                self.linear_path.introduce_breakpoint(*breakpoint_itr)
+        else:
+            for breakpoint_itr in path1_breakpoints:
+                self.linear_path.introduce_breakpoint(*breakpoint_itr)
+
+
 def segment_intersection_test():
     segment1 = Segment("Chr1", 10, 30)
     segment2 = Segment("Chr1", 25, 40)
@@ -881,5 +1034,64 @@ def arm_intersection_test():
     pass
 
 
+def break_masking_file():
+    with open("../Metadata/merged_masking_annotated.bed") as fp_read:
+        fp_read.readline()
+        segments = []
+        for line in fp_read:
+            line = line.replace('\n', '').split('\t')
+            if line[0] == "23":
+                chr_name = "X"
+            elif line[0] == "24":
+                chr_name = "Y"
+            else:
+                chr_name = line[0]
+            chr_name = "Chr" + chr_name
+            segments.append(Segment(chr_name, int(line[1]), int(line[2]), line[3]))
+
+    masking_arm = Arm(segments, "masking_arm")
+    masking_path = Path(masking_arm)
+
+    masking_path.generate_mutual_breakpoints()
+    masking_path.linear_path.segments = sorted(masking_path.linear_path.segments)
+
+    # remove duplicates
+    unique_segments = []
+    prev_segment = None
+
+    for segment in masking_path.linear_path.segments:
+        if segment != prev_segment:
+            unique_segments.append(segment)  # save the first occurrence, assume list is sorted
+            prev_segment = segment
+
+    masking_path.linear_path.segments = unique_segments
+    masking_path.linear_path.merge_breakpoints()
+    print(len(masking_path.linear_path))
+
+    centromere_telomere_length = 0
+    for segment in masking_path.linear_path.segments:
+        if segment.segment_type in ["centromere", "telomere1", "telomere2"]:
+            centromere_telomere_length += len(segment)
+    print(centromere_telomere_length)
+
+    hardmask_length = 0
+    for segment in masking_path.linear_path.segments:
+        if segment.segment_type in ["hardmask"]:
+            hardmask_length += len(segment)
+    print(hardmask_length)
+
+    superdup_length = 0
+    for segment in masking_path.linear_path.segments:
+        if segment.segment_type in ["superdup"]:
+            superdup_length += len(segment)
+    print(superdup_length)
+
+    with open("../Metadata/merged_masking_unique.bed", "w") as fp_write:
+        fp_write.write("Chr\tStartPos\tEndPos\tType\n")
+        for segment in masking_path.linear_path.segments:
+            fp_write.write("{}\t{}\t{}\t{}\n".format(segment.chr_name, segment.start, segment.end,
+                                                     segment.segment_type))
+
+
 if __name__ == "__main__":
-    arm_intersection_test()
+    segment_intersection_test()

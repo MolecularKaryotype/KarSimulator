@@ -5,7 +5,7 @@ import os
 import shutil
 
 from Main.Start_Genome import *
-from Main.read_regions_regions import read_masking_regions
+from Main.read_masking_regions import read_masking_regions
 
 
 class IllegalIndexException(Exception):

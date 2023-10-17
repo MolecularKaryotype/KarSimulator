@@ -7,17 +7,13 @@ def read_masking_regions(masking_file) -> Arm:
         fp_read.readline()  # skip index line
         for line in fp_read:
             line = line.replace('\n', '').split('\t')
-            if line[0] == "23":
-                line[0] = 'X'
-            elif line[0] == "24":
-                line[0] = 'Y'
-            new_segment = Segment('Chr' + str(line[0]), int(line[1]), int(line[2]))
+            new_segment = Segment(str(line[0]), int(line[1]), int(line[2]), str(line[3]))
             segment_list.append(new_segment)
     return Arm(segment_list, 'masking_regions')
 
 
 def test():
-    print(read_masking_regions('../Metadata/merged_masking.bed'))
+    print(read_masking_regions('../Metadata/merged_masking_unique.bed'))
 
 
 if __name__ == "__main__":
