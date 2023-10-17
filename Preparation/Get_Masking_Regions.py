@@ -1,4 +1,4 @@
-import IO
+from Main import IO
 
 
 def Get_Masking_Regions(genome_path, output_path):

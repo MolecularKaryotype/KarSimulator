@@ -1,4 +1,4 @@
-import IO
+from Main import IO
 
 
 def Extract_Genome(chr_of_interest: [str], genome_path: str, chr_name_file: str, output_file: str):

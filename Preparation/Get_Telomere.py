@@ -1,4 +1,4 @@
-import IO
+from Main import IO
 
 
 def Get_Telomere(genome_path, chr_name_file, telomere_output_path, length_output_path):

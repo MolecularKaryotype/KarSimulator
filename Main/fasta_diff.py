@@ -1,4 +1,4 @@
-import IO
+from read_FASTA import read_FASTA
 
 
 def fasta_diff(fasta1, fasta2, header_conversion: {str: str}):
@@ -9,11 +9,11 @@ def fasta_diff(fasta1, fasta2, header_conversion: {str: str}):
     :param header_conversion: a dictionary that converts fasta1's sequence header into fasta2's
     :return: None; output to stdout for each pair of headers in header_conversion
     """
-    fasta1_dict = IO.read_FASTA(fasta1, list(header_conversion.keys()))
+    fasta1_dict = read_FASTA(fasta1, list(header_conversion.keys()))
     # for key in fasta1_dict:
     #     print(key, len(fasta1_dict[key]))
 
-    fasta2_dict = IO.read_FASTA(fasta2, list(header_conversion.values()))
+    fasta2_dict = read_FASTA(fasta2, list(header_conversion.values()))
     # for key in fasta2_dict:
     #     print(key, len(fasta2_dict[key]))
 

@@ -1,4 +1,6 @@
-import IO
+from fasta_diff import *
+from read_FASTA import *
+from sequence_dict_to_FASTA import *
 import copy
 
 
