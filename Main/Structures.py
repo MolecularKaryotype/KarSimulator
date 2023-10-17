@@ -995,7 +995,7 @@ class Path:
     path_chr: str
     path_name: str
 
-    def __init__(self, linear_path: Arm, path_chr=None, path_name=None):
+    def __init__(self, linear_path: Arm, path_name=None, path_chr=None):
         self.linear_path = linear_path
         self.path_chr = path_chr
         self.path_name = path_name

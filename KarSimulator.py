@@ -73,9 +73,10 @@ def random_mode(args):
             return f"{function_name}: {params}"
 
         genome = generate_genome_from_KT(KT_input_file)
+        previous_history_length = len(genome.history)
         full_output_file_path = output_file_prefix + "_r" + str(event_iteration_index + 1) + ".kt.txt"
 
-        masking_arm = read_masking_regions('Metadata/merged_masking.bed')
+        masking_arm = read_masking_regions('Metadata/merged_masking_unique.bed')
 
         for event_index in range(number_of_events):
             # choose event
@@ -86,9 +87,13 @@ def random_mode(args):
             while not executed_in_this_cycle:
                 try:
                     # backup genome
-                    genome.mark_history('temporary backup, should not be in final KT')
+                    current_history_length = len(genome.history)
+                    if current_history_length > previous_history_length:
+                        genome.mark_history('temporary backup, should not be in final KT')
                     genome.output_KT('error_logs/temp_KT')
-                    genome.pop_last_history_marking()
+                    if genome.history_block_markings[current_history_length - 1] == \
+                            'temporary backup, should not be in final KT':
+                        genome.pop_last_history_marking()
 
                     # choose chr
                     # check if there exist non-deleted chromosomes
@@ -443,7 +448,10 @@ def random_mode(args):
                 except IllegalIndexException:
                     # recover the previous KT version
                     genome = generate_genome_from_KT('error_logs/temp_KT')
-                    genome.pop_last_history_marking()
+                    current_history_length = len(genome.history)
+                    if genome.history_block_markings[current_history_length - 1] == \
+                            'temporary backup, should not be in final KT':
+                        genome.pop_last_history_marking()
                     continue
                 executed_in_this_cycle = True
 
