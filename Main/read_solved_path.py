@@ -104,7 +104,7 @@ def report_centromere_anomaly(path_list):
     print(len(path_list))
     for path in path_list:
         if path.path_chr.startswith("no centromere") or path.path_chr.startswith("multiple centromere"):
-            print(path)
+            print(path.get_path_notes())
 
 
 def test():
@@ -115,5 +115,18 @@ def test():
         print(path)
 
 
+def cmd():
+    import argparse
+    parser = argparse.ArgumentParser(description="dicentromeric and acentromeric checker")
+    parser.add_argument("--file", type=str, dest='omkar_file', help="file path to OMKar's solved path")
+    args = parser.parse_args()
+
+    path_list = read_solved_path(args.omkar_file)
+    for path in path_list:
+        path.linear_path.merge_breakpoints()
+    path_list = rotate_and_bin_path(path_list, "Metadata/merged_masking_unique.bed")
+    report_centromere_anomaly(path_list)
+
+
 if __name__ == "__main__":
-    test()
+    cmd()

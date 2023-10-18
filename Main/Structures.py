@@ -329,13 +329,21 @@ class Arm:
             next_segment = self.segments[current_segment_index + 1]
             if current_segment.chr_name == next_segment.chr_name:
                 if current_segment.segment_type == next_segment.segment_type:
-                    if current_segment.end + 1 == next_segment.start:
+                    if current_segment.direction() and current_segment.end + 1 == next_segment.start:
                         new_segment = Segment(current_segment.chr_name, current_segment.start,
                                               next_segment.end, current_segment.segment_type)
                         self.segments.pop(current_segment_index)
                         self.segments.pop(current_segment_index)
                         self.segments.insert(current_segment_index, new_segment)
                         continue
+                    elif (not current_segment.direction()) and current_segment.end - 1 == next_segment.start:
+                        new_segment = Segment(current_segment.chr_name, current_segment.start,
+                                              next_segment.end, current_segment.segment_type)
+                        self.segments.pop(current_segment_index)
+                        self.segments.pop(current_segment_index)
+                        self.segments.insert(current_segment_index, new_segment)
+                        continue
+
             current_segment_index += 1
 
 
@@ -1034,6 +1042,13 @@ class Path:
 
     def __str__(self):
         return str("chr_bin: {}, path_name: {}, segments: {}".format(self.path_chr, self.path_name, self.linear_path))
+
+    def get_path_notes(self):
+        segment_origin_str = ""
+        for segment in self.linear_path.segments:
+            segment_origin_str += segment.chr_name + " "
+        return str("chr_bin: {}, path_name: {}, segment_chr: {}".format(self.path_chr, self.path_name,
+                                                                        segment_origin_str))
 
     def generate_mutual_breakpoints(self, other_path=None, mutual=True):
         """
