@@ -1,84 +1,67 @@
-from Structures import *
+from Structures import Segment, Arm, Path
 from read_solved_path import *
 from read_KT_to_path import *
+from read_masking_regions import read_masking_regions
 
 
-def bin_chromosomes(solved_path_file, kt_file, masking_file):
+def compare_paths(solved_path_file, kt_file, masking_file):
     kt_path_list = read_KT_to_path(kt_file, masking_file)
     solved_path_list = read_solved_path(solved_path_file)
     solved_path_list = rotate_and_bin_path(solved_path_list, masking_file)
 
-    kt_path_bin = {f"Chr{i}": [] for i in range(1, 23)}
-    kt_path_bin["ChrX"] = []
-    kt_path_bin["ChrY"] = []
-
-    solved_path_bin = {f"Chr{i}": [] for i in range(1, 23)}
-    solved_path_bin["ChrX"] = []
-    solved_path_bin["ChrY"] = []
-
-    for path in kt_path_list:
-        kt_path_bin[path.path_chr].append(path)
-
-    problematic_solve_paths = []
+    bin_size = {}
     for path in solved_path_list:
-        if path.path_chr.startswith("no centromere") or path.path_chr.startswith("multiple centromere"):
-            problematic_solve_paths.append(path)
+        if path.path_chr in bin_size:
+            bin_size[path.path_chr] += 1
         else:
-            solved_path_bin[path.path_chr].append(path)
+            bin_size[path.path_chr] = 1
+    print(bin_size)
 
-    print("\npath with problematic centromere are found (empty if not found): ")
-    for path in problematic_solve_paths:
-        print(path)
+    label_acrocentric_regions('../Metadata/comparison_forbidden_regions.bed', solved_path_list)
+    label_acrocentric_regions('../Metadata/comparison_forbidden_regions.bed', kt_path_list)
 
-    # check bin sizes
-    bin_with_matching_size = []
-    bin_with_nonmatching_size = []
-    for key in kt_path_bin:
-        if len(kt_path_bin[key]) == len(solved_path_bin[key]):
-            bin_with_matching_size.append(key)
-        else:
-            bin_with_nonmatching_size.append(key)
+    while len(kt_path_list) > 0 and len(solved_path_list) > 0:
+        best_score = float('-inf')
+        best_kt_alignment = None
+        best_solved_path_alignment = None
+        best_kt_path_index = None
+        best_solved_path_index = None
+        for kt_path_index in range(len(kt_path_list)):
+            for solved_path_index in range(solved_path_list):
+                current_kt_path = kt_path_list[kt_path_index].duplicate()
+                current_solved_path = solved_path_list[solved_path_index].duplicate()
+                current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
 
-    print("\nbin with non-matching size (empty if not found): ")
-    print(bin_with_nonmatching_size)
-    print()
+                current_score, current_kt_alignment, current_solved_path_alignment = \
+                    align_paths(current_kt_path.linear_path.segments,
+                                current_solved_path.linear_path.segments)
 
-    for bin_key in bin_with_matching_size:
-        # iterate through all combinations of kt_path vs. solved_path
-        # find best pair, pop, and continue finding the next pair
-        while len(kt_path_bin[bin_key]) > 0:
-            best_score = float('-inf')
-            best_kt_alignment = None
-            best_solved_path_alignment = None
-            best_kt_path_index = None
-            best_solved_path_index = None
-            for kt_path_index in range(len(kt_path_bin[bin_key])):
-                for solved_path_index in range(len(solved_path_bin[bin_key])):
-                    current_kt_path = kt_path_bin[bin_key][kt_path_index].duplicate()
-                    current_solved_path = solved_path_bin[bin_key][solved_path_index].duplicate()
-                    current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
-
-                    current_score, current_kt_alignment, current_solved_path_alignment = \
-                        align_paths(current_kt_path.linear_path.segments,
-                                    current_solved_path.linear_path.segments)
-
-                    if current_score > best_score:
-                        best_score = current_score
-                        best_kt_alignment = current_kt_alignment
-                        best_solved_path_alignment = current_solved_path_alignment
-                        best_kt_path_index = kt_path_index
-                        best_solved_path_index = solved_path_index
+                if current_score > best_score:
+                    best_score = current_score
+                    best_kt_alignment = current_kt_alignment
+                    best_solved_path_alignment = current_solved_path_alignment
+                    best_kt_path_index = kt_path_index
+                    best_solved_path_index = solved_path_index
 
             # output current pair
-            print("alignment between {}, {}: {}".format(kt_path_bin[bin_key][best_kt_path_index].path_name,
-                  solved_path_bin[bin_key][best_solved_path_index].path_name,
-                  best_score))
+            print("alignment between {}, {}: {}".format(kt_path_list[best_kt_path_index].path_name,
+                  solved_path_list[best_solved_path_index].path_name, best_score))
             print(best_kt_alignment)
             print(best_solved_path_alignment)
             print()
 
-            kt_path_bin[bin_key].pop(best_kt_path_index)
-            solved_path_bin[bin_key].pop(best_solved_path_index)
+            kt_path_list.pop(best_kt_path_index)
+            solved_path_list.pop(best_solved_path_index)
+
+
+def label_acrocentric_regions(acrocentric_forbidden_file, input_paths):
+    acrocentric_region = read_masking_regions(acrocentric_forbidden_file)
+    for path in input_paths:
+        tmp_acrocentric_path = Path(acrocentric_region.duplicate(), "forbidden_regions")
+        path.generate_mutual_breakpoints(other_path=tmp_acrocentric_path, mutual=True)
+        for segment in path.linear_path.segments:
+            if segment in tmp_acrocentric_path.linear_path.segments:
+                segment.segment_type = "acrocentric"
 
 
 def align_paths(segment_list1, segment_list2):
@@ -101,10 +84,18 @@ def align_paths(segment_list1, segment_list2):
 
     for row_index in range(1, len(segment_list1) + 1):
         for col_index in range(1, len(segment_list2) + 1):
-            down_value = scoring_matrix[row_index - 1][
-                             col_index] + len(segment_list1[row_index - 1]) * indel_penalty_per_nt
-            right_value = scoring_matrix[row_index][
-                              col_index - 1] + len(segment_list2[col_index - 1]) * indel_penalty_per_nt
+            if segment_list1[row_index - 1].segment_type == 'acrocentric':
+                down_value = scoring_matrix[row_index - 1][col_index]
+            else:
+                down_value = scoring_matrix[row_index - 1][col_index] \
+                             + len(segment_list1[row_index - 1]) * indel_penalty_per_nt
+
+            if segment_list2[col_index - 1].segment_type == 'acrocentric':
+                right_value = scoring_matrix[row_index][col_index - 1]
+            else:
+                right_value = scoring_matrix[row_index][col_index - 1] \
+                              + len(segment_list2[col_index - 1]) * indel_penalty_per_nt
+
             if segment_list1[row_index - 1] == segment_list2[col_index - 1]:
                 diagonal_value = scoring_matrix[row_index - 1][col_index - 1]
             else:
@@ -161,11 +152,12 @@ def align_paths(segment_list1, segment_list2):
     return final_score, alignment_1_string, alignment_2_string
 
 
-def test():
-    bin_chromosomes(
-        "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final/1q21-1_recurrent_microdeletion_r1.1/1q21-1_recurrent_microdeletion_r1.1.txt",
-        "/media/zhaoyang-new/workspace/KarSim/1011_genomes/KT/1q21-1_recurrent_microdeletion_r1.kt.txt",
+def test_compare_paths():
+    compare_paths(
+        "/Users/zhaoyangjia/Library/CloudStorage/OneDrive-UCSanDiego/bionano/Solved_paths/simulation_final/1q21-1_recurrent_microdeletion_r1.1/1q21-1_recurrent_microdeletion_r1.1.txt",
+        "/Users/zhaoyangjia/Library/CloudStorage/OneDrive-UCSanDiego/bionano/Solved_paths/simulation_final/1q21-1_recurrent_microdeletion_r1.1/1q21-1_recurrent_microdeletion_r1.kt.txt",
         "../Metadata/merged_masking_unique.bed")
+
 
 
 def test_align_paths():
@@ -186,4 +178,4 @@ def test_align_paths():
 
 
 if __name__ == "__main__":
-    test()
+    test_compare_paths()

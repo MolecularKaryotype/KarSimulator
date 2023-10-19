@@ -44,13 +44,13 @@ def read_solved_path(file):
     return path_list
 
 
-def get_centromere_segments(masking_file):
+def get_segments_by_type(masking_file, segment_type):
     masking_arm = read_masking_regions(masking_file)
     centromere_segments = []
     for segment in masking_arm.segments:
-        if segment.segment_type == "centromere":
+        if segment.segment_type == segment_type:
             centromere_segments.append(segment)
-    return Arm(centromere_segments, "centromeres")
+    return Arm(centromere_segments, segment_type)
 
 
 def rotate_and_bin_path(path_list, masking_file):
@@ -60,12 +60,18 @@ def rotate_and_bin_path(path_list, masking_file):
     :param path_list:
     :return: path_list
     """
-    centromere_arm = get_centromere_segments(masking_file)
+    centromere_arm = get_segments_by_type(masking_file, 'centromere')
     centromere_path = Path(centromere_arm)
+    telomere1_arm = get_segments_by_type(masking_file, 'telomere1')
+    telomere1_path = Path(telomere1_arm)
+    telomere2_arm = get_segments_by_type(masking_file, 'telomere2')
+    telomere2_path = Path(telomere2_arm)
 
     # isolate centromere
     for path in path_list:
         path.generate_mutual_breakpoints(other_path=centromere_path, mutual=False)
+        path.generate_mutual_breakpoints(other_path=telomere1_path, mutual=False)
+        path.generate_mutual_breakpoints(other_path=telomere2_path, mutual=False)
 
     # get centromere, rotate if backward, and bin path
     for path in path_list:
@@ -73,31 +79,60 @@ def rotate_and_bin_path(path_list, masking_file):
         for centromere_segment in centromere_path.linear_path.segments:
             for segment_itr in path.linear_path.segments:
                 if segment_itr.same_segment_ignore_dir(centromere_segment):
-                    # if path_centromere is not None:
-                    #     raise ValueError("di-centromeric path found")
                     path_centromere.append(segment_itr)
-        # if path_centromere is None:
-        #     raise ValueError("a-centromeric path found")
 
         if len(path_centromere) == 1:
-            # reverse whole path if centromere found backward
-            if not path_centromere[0].direction():
-                reversed_segment_list = []
-                for segment_itr in reversed(path.linear_path.segments):
-                    new_segment = segment_itr.duplicate()
-                    new_segment.invert()
-                    reversed_segment_list.append(new_segment)
-                path.linear_path.segments = reversed_segment_list
-            # assign bin
-            path.path_chr = path_centromere[0].chr_name
+            flip_path_direction(path, centromere_path)
         elif len(path_centromere) == 0:
             path.path_chr = "no centromere"
+            print(path.get_path_notes())
+            if not flip_path_direction(path, telomere2_path):
+                if not flip_path_direction(path, telomere1_path):
+                    print("DEBUG: this path cannot be flipped: " + path.get_path_notes())
         else:
             path.path_chr = "multiple centromere: "
             for centromere_itr in path_centromere:
                 path.path_chr += centromere_itr.chr_name + " "
+            print(path.get_path_notes())
+            if not flip_path_direction(path, telomere2_path):
+                if not flip_path_direction(path, telomere1_path):
+                    print("DEBUG: this path cannot be flipped: " + path.get_path_notes())
+
+        path.path_chr = bin_path_by_chr_content(path)  # always bin by %chr content
 
     return path_list
+
+
+def flip_path_direction(input_path, path_with_direction_anchor):
+    for segment_itr1 in input_path.linear_path.segments:
+        for segment_itr2 in path_with_direction_anchor.linear_path.segments:
+            if segment_itr1.same_segment_ignore_dir(segment_itr2):
+                if not segment_itr1.direction():
+                    reversed_segment_list = []
+                    for reversed_segment_itr in reversed(input_path.linear_path.segments):
+                        new_segment = reversed_segment_itr.duplicate()
+                        new_segment.invert()
+                        reversed_segment_list.append(new_segment)
+                    input_path.linear_path.segments = reversed_segment_list
+                return True
+    return False
+
+
+def bin_path_by_chr_content(input_path):
+    tally = {}
+    for segment in input_path.linear_path.segments:
+        if segment.chr_name in tally:
+            tally[segment.chr_name] += len(segment)
+        else:
+            tally[segment.chr_name] = len(segment)
+
+    max_count = -1
+    max_count_chr = None
+    for key in tally:
+        if tally[key] > max_count:
+            max_count = tally[key]
+            max_count_chr = key
+    return max_count_chr
 
 
 def report_centromere_anomaly(path_list):

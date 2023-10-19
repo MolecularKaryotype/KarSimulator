@@ -1,9 +1,9 @@
-from Main import IO
+from Main.read_FASTA import read_FASTA
 
 
 def Get_Masking_Regions(genome_path, output_path):
     # TODO: add filter against telomere and centromere
-    sequence_dict = IO.read_FASTA(genome_path, ['all'])
+    sequence_dict = read_FASTA(genome_path, ['all'])
     output_dict = {key: [] for key in sequence_dict.keys()}
 
     for itr_header in sequence_dict:

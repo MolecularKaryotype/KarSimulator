@@ -16,7 +16,6 @@ def read_KT_to_path(KT_file, masking_file):
             segment_itr.segment_type = "p_arm"
             segment_list.append(segment_itr)
 
-        # TODO: look into why centromere segment is not an instance of Segment: isinstance() = False
         cen_segment = chromosome_itr.centromere.segments[0].duplicate()
         cen_segment.segment_type = "centromere"
         segment_list.append(cen_segment)

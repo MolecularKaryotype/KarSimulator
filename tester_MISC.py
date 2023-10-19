@@ -42,4 +42,11 @@ from Preparation.Get_Chr_Names import *
 #         executed = True
 #         pointer = (pointer + 1) % 4
 
-print(4 in range(4,-1,-1))
+my_dict = {
+    "banana": 2,
+    "apple": 5,
+    "date": 1,
+    "cherry": 8
+}
+sorted_items = sorted(my_dict.items(), key=lambda x: x[1], reverse=True)
+print(sorted_items[0][0])
