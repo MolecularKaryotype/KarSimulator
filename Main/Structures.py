@@ -1027,7 +1027,7 @@ class Genome:
 
             output_dict[chromosome.name] = ''.join(new_sequence)
 
-        IO.sequence_dict_to_FASTA(output_dict, output_file)
+        sequence_dict_to_FASTA(output_dict, output_file)
 
 
 class Path:
