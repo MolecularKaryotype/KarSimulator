@@ -7,15 +7,6 @@ from read_masking_regions import read_masking_regions
 def compare_paths(solved_path_file, kt_file, masking_file):
     kt_path_list = read_KT_to_path(kt_file, masking_file)
     solved_path_list = read_solved_path(solved_path_file)
-    solved_path_list = rotate_and_bin_path(solved_path_list, masking_file)
-
-    bin_size = {}
-    for path in solved_path_list:
-        if path.path_chr in bin_size:
-            bin_size[path.path_chr] += 1
-        else:
-            bin_size[path.path_chr] = 1
-    print(bin_size)
 
     label_acrocentric_regions('../Metadata/comparison_forbidden_regions.bed', solved_path_list)
     label_acrocentric_regions('../Metadata/comparison_forbidden_regions.bed', kt_path_list)
@@ -27,7 +18,7 @@ def compare_paths(solved_path_file, kt_file, masking_file):
         best_kt_path_index = None
         best_solved_path_index = None
         for kt_path_index in range(len(kt_path_list)):
-            for solved_path_index in range(solved_path_list):
+            for solved_path_index in range(len(solved_path_list)):
                 current_kt_path = kt_path_list[kt_path_index].duplicate()
                 current_solved_path = solved_path_list[solved_path_index].duplicate()
                 current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
@@ -35,7 +26,6 @@ def compare_paths(solved_path_file, kt_file, masking_file):
                 current_score, current_kt_alignment, current_solved_path_alignment = \
                     align_paths(current_kt_path.linear_path.segments,
                                 current_solved_path.linear_path.segments)
-
                 if current_score > best_score:
                     best_score = current_score
                     best_kt_alignment = current_kt_alignment
@@ -43,15 +33,31 @@ def compare_paths(solved_path_file, kt_file, masking_file):
                     best_kt_path_index = kt_path_index
                     best_solved_path_index = solved_path_index
 
-            # output current pair
-            print("alignment between {}, {}: {}".format(kt_path_list[best_kt_path_index].path_name,
-                  solved_path_list[best_solved_path_index].path_name, best_score))
-            print(best_kt_alignment)
-            print(best_solved_path_alignment)
-            print()
+                # check if reversed gives higher score
+                current_kt_path = kt_path_list[kt_path_index].duplicate()
+                current_solved_path = solved_path_list[solved_path_index].duplicate()
+                current_solved_path.reverse()
+                current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
 
-            kt_path_list.pop(best_kt_path_index)
-            solved_path_list.pop(best_solved_path_index)
+                current_score, current_kt_alignment, current_solved_path_alignment = \
+                    align_paths(current_kt_path.linear_path.segments,
+                                current_solved_path.linear_path.segments)
+                if current_score > best_score:
+                    best_score = current_score
+                    best_kt_alignment = current_kt_alignment
+                    best_solved_path_alignment = current_solved_path_alignment
+                    best_kt_path_index = kt_path_index
+                    best_solved_path_index = solved_path_index
+
+        # output current pair
+        print("alignment between {}, {}: {}".format(kt_path_list[best_kt_path_index].path_name,
+              solved_path_list[best_solved_path_index].path_name, best_score))
+        print(best_kt_alignment)
+        print(best_solved_path_alignment)
+        print()
+
+        kt_path_list.pop(best_kt_path_index)
+        solved_path_list.pop(best_solved_path_index)
 
 
 def label_acrocentric_regions(acrocentric_forbidden_file, input_paths):
@@ -64,7 +70,26 @@ def label_acrocentric_regions(acrocentric_forbidden_file, input_paths):
                 segment.segment_type = "acrocentric"
 
 
+def label_telomere_regions(all_forbidden_region_file, input_paths):
+    all_forbidden_region = read_masking_regions(all_forbidden_region_file)
+    telomere_segments = []
+    for segment in all_forbidden_region.segments:
+        if segment.segment_type in ['telomere1', 'telomere2']:
+            telomere_segments.append(segment)
+    telomere_regions = Arm(telomere_segments, "telomeres")
+
+    for path in input_paths:
+        tmp_telomere_path = Path(telomere_regions.duplicate(), "forbidden_regions")
+        path.generate_mutual_breakpoints(other_path=tmp_telomere_path, mutual=True)
+        for segment in path.linear_path.segments:
+            for telomere_segment_itr in tmp_telomere_path.linear_path.segments:
+                if segment.same_segment_ignore_dir(telomere_segment_itr):
+                    segment.segment_type = telomere_segment_itr.segment_type
+                    break
+
+
 def align_paths(segment_list1, segment_list2):
+    forbidden_comparison_region_types = ['acrocentric', 'telomere1', 'telomere2']
     indel_penalty_per_nt = -1
     alignment_1 = []
     alignment_2 = []
@@ -84,13 +109,13 @@ def align_paths(segment_list1, segment_list2):
 
     for row_index in range(1, len(segment_list1) + 1):
         for col_index in range(1, len(segment_list2) + 1):
-            if segment_list1[row_index - 1].segment_type == 'acrocentric':
+            if segment_list1[row_index - 1].segment_type in forbidden_comparison_region_types:
                 down_value = scoring_matrix[row_index - 1][col_index]
             else:
                 down_value = scoring_matrix[row_index - 1][col_index] \
                              + len(segment_list1[row_index - 1]) * indel_penalty_per_nt
 
-            if segment_list2[col_index - 1].segment_type == 'acrocentric':
+            if segment_list2[col_index - 1].segment_type in forbidden_comparison_region_types:
                 right_value = scoring_matrix[row_index][col_index - 1]
             else:
                 right_value = scoring_matrix[row_index][col_index - 1] \

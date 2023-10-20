@@ -1043,6 +1043,14 @@ class Path:
     def __str__(self):
         return str("chr_bin: {}, path_name: {}, segments: {}".format(self.path_chr, self.path_name, self.linear_path))
 
+    def reverse(self):
+        new_segments = []
+        for segment in reversed(self.linear_path.segments):
+            new_segment = segment.duplicate()
+            new_segment.invert()
+            new_segments.append(new_segment)
+        self.linear_path.segments = new_segments
+
     def get_path_notes(self):
         segment_origin_str = ""
         for segment in self.linear_path.segments:
