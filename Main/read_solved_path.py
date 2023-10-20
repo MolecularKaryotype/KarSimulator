@@ -32,6 +32,8 @@ def read_solved_path(file):
                     direction = segment_index_itr[-1]
                     segment_index_itr = int(segment_index_itr[:-1])
                     new_segment = segment_dict[segment_index_itr].duplicate()
+                    new_segment.kt_index = str(segment_index_itr)
+                    new_segment.kt_index += direction
                     if direction == "+":
                         path_segments.append(new_segment)
                     elif direction == "-":

@@ -5,6 +5,7 @@ from Start_Genome import generate_genome_from_KT
 
 def read_KT_to_path(KT_file, masking_file):
     genome = generate_genome_from_KT(KT_file)
+    index_dict = genome.segment_indexing()
     t2_segments = get_t2_segments(masking_file)
     path_list = []
 
@@ -14,14 +15,25 @@ def read_KT_to_path(KT_file, masking_file):
 
         for segment_itr in chromosome_itr.p_arm.segments:
             segment_itr.segment_type = "p_arm"
+            segment_itr.kt_index = get_kt_index(index_dict, segment_itr)
+            if segment_itr.direction():
+                segment_itr.kt_index += "+"
+            else:
+                segment_itr.kt_index += "-"
             segment_list.append(segment_itr)
 
         cen_segment = chromosome_itr.centromere.segments[0].duplicate()
         cen_segment.segment_type = "centromere"
+        cen_segment.kt_index = get_kt_index(index_dict, cen_segment)
         segment_list.append(cen_segment)
 
         for segment_itr in chromosome_itr.q_arm.segments:
             segment_itr.segment_type = "q_arm"
+            segment_itr.kt_index = get_kt_index(index_dict, segment_itr)
+            if segment_itr.direction():
+                segment_itr.kt_index += "+"
+            else:
+                segment_itr.kt_index += "-"
             segment_list.append(segment_itr)
 
         t2_segment = None
@@ -31,9 +43,26 @@ def read_KT_to_path(KT_file, masking_file):
                 break
         segment_list.append(t2_segment)
 
+        # label SV segments given history
+
         path_list.append(Path(Arm(segment_list, "KT_path"), chromosome_itr.name, chromosome_itr.name[:-1]))
 
     return path_list
+
+
+def get_kt_index(input_index_dict, input_segment):
+    for key in input_index_dict:
+        if input_segment.same_segment_ignore_dir(key):
+            return input_index_dict[key]
+
+
+def get_segment_in_SV(history_entry, segment_list):
+    event_name = history_entry[0]
+    if event_name == 'deletion':
+        return
+    for
+    for segment in segment_list:
+
 
 
 def get_t2_segments(masking_file):

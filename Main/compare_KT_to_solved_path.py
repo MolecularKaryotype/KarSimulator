@@ -59,6 +59,13 @@ def compare_paths(solved_path_file, kt_file, masking_file):
         kt_path_list.pop(best_kt_path_index)
         solved_path_list.pop(best_solved_path_index)
 
+    if len(kt_path_list) > 0:
+        for path in kt_path_list:
+            print(path)
+    if len(solved_path_list) > 0:
+        for path in solved_path_list:
+            print(path)
+
 
 def label_acrocentric_regions(acrocentric_forbidden_file, input_paths):
     acrocentric_region = read_masking_regions(acrocentric_forbidden_file)

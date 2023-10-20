@@ -9,12 +9,14 @@ class Segment:
     start: int
     end: int
     segment_type: str
+    kt_index: str
 
-    def __init__(self, chr_name: str, start: int, end: int, segment_type=None):
+    def __init__(self, chr_name: str, start: int, end: int, segment_type=None, kt_index=None):
         self.chr_name = chr_name
         self.start = start
         self.end = end
         self.segment_type = segment_type
+        self.kt_index = kt_index
 
     def __len__(self):
         return abs(self.end - self.start) + 1
@@ -53,10 +55,13 @@ class Segment:
         return hash((self.chr_name, self.start, self.end))
 
     def __str__(self):
+        additional_info = ""
         if self.segment_type is not None:
-            return "({}, {}, {}, {})".format(self.chr_name, self.start, self.end, self.segment_type)
-        else:
-            return "({}, {}, {})".format(self.chr_name, self.start, self.end)
+            additional_info += ", " + self.segment_type
+        if self.kt_index is not None:
+            additional_info += ", " + self.kt_index
+        return_str = "({}, {}, {}{})".format(self.chr_name, self.start, self.end, additional_info)
+        return return_str
 
     def same_segment_ignore_dir(self, other):
         if self.chr_name != other.chr_name:
@@ -80,7 +85,7 @@ class Segment:
         return self.start <= self.end
 
     def duplicate(self):
-        return Segment(self.chr_name, self.start, self.end, self.segment_type)
+        return Segment(self.chr_name, self.start, self.end, self.segment_type, self.kt_index)
 
     def left_delete(self, bp_to_delete):
         """
@@ -274,27 +279,27 @@ class Arm:
                 if current_segment.direction():
                     if bp_type == "start":
                         left_segment = Segment(current_segment.chr_name, current_segment.start, bp_index - 1,
-                                               current_segment.segment_type)
+                                               current_segment.segment_type, current_segment.kt_index)
                         right_segment = Segment(current_segment.chr_name, bp_index, current_segment.end,
-                                                current_segment.segment_type)
+                                                current_segment.segment_type, current_segment.kt_index)
                     elif bp_type == "end":
                         left_segment = Segment(current_segment.chr_name, current_segment.start, bp_index,
-                                               current_segment.segment_type)
+                                               current_segment.segment_type, current_segment.kt_index)
                         right_segment = Segment(current_segment.chr_name, bp_index + 1, current_segment.end,
-                                                current_segment.segment_type)
+                                                current_segment.segment_type, current_segment.kt_index)
                     else:
                         raise ValueError('bp_type must be start OR end')
                 else:
                     if bp_type == "start":
                         left_segment = Segment(current_segment.chr_name, current_segment.start, bp_index,
-                                               current_segment.segment_type)
+                                               current_segment.segment_type, current_segment.kt_index)
                         right_segment = Segment(current_segment.chr_name, bp_index - 1, current_segment.end,
-                                                current_segment.segment_type)
+                                                current_segment.segment_type, current_segment.kt_index)
                     elif bp_type == "end":
                         left_segment = Segment(current_segment.chr_name, current_segment.start, bp_index + 1,
-                                               current_segment.segment_type)
+                                               current_segment.segment_type, current_segment.kt_index)
                         right_segment = Segment(current_segment.chr_name, bp_index, current_segment.end,
-                                                current_segment.segment_type)
+                                                current_segment.segment_type, current_segment.kt_index)
                     else:
                         raise ValueError('bp_type must be start OR end')
 
