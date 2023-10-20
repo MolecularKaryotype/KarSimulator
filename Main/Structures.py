@@ -1,6 +1,5 @@
-from fasta_diff import *
-from read_FASTA import *
-from sequence_dict_to_FASTA import *
+from Main.sequence_dict_to_FASTA import *
+from Main.read_FASTA import read_FASTA
 import copy
 
 
@@ -113,9 +112,16 @@ class Segment:
         self.end = temp_start
 
     def segment_intersection(self, other_segment):
-        if self.chr_name != other_segment.chr_name:
+        duplicate_self = self.duplicate()
+        duplicate_other = other_segment.duplicate()
+        if not duplicate_self.direction():
+            duplicate_self.invert()
+        if not duplicate_other.direction():
+            duplicate_other.invert()
+
+        if duplicate_self.chr_name != duplicate_other.chr_name:
             return False
-        if self.start <= other_segment.end and self.end >= other_segment.start:
+        if duplicate_self.start <= duplicate_other.end and duplicate_self.end >= duplicate_other.start:
             return True
         else:
             return False
@@ -1010,7 +1016,7 @@ class Genome:
             complement_sequence = ''.join(complement_dict[base] for base in reverse_sequence)
             return complement_sequence
 
-        sequence_dict = IO.read_FASTA(genome_path, ['all'])
+        sequence_dict = read_FASTA(genome_path, ['all'])
         output_dict = {}
         for chromosome in self:
             if chromosome.deleted:

@@ -1,0 +1,35 @@
+def translate_global_index_to_arm_index(chr_name, start_index, end_index, genome_index_file):
+    p_start = -1
+    q_start = -1
+
+    with open(genome_index_file) as fp_read:
+        for line in fp_read:
+            line = line.replace('\n', '').split('\t')
+            if line[0] == chr_name:
+                # TODO: add warning for intersecting centromere and telomere regions
+                p_start = int(line[2])
+                q_start = int(line[4])
+
+    if start_index >= q_start:
+        print("q_arm\nstart: {}\nend: {}\n".format(str(start_index - q_start), str(end_index - q_start)))
+    else:
+        print("p_arm\nstart: {}\nend: {}\n".format(str(start_index - p_start), str(end_index - p_start)))
+
+
+def batch_manual():
+    indexing_file = "../Metadata/Full_Genome_Indices.txt"
+    translate_global_index_to_arm_index('Chr22', 21562828, 23380258, indexing_file)
+
+    translate_global_index_to_arm_index('Chr22', 19022279, 21098156, indexing_file)
+
+    translate_global_index_to_arm_index('Chr15', 98814741, 101981189, indexing_file)
+
+    translate_global_index_to_arm_index('Chr2', 59058561, 61592680, indexing_file)
+
+    translate_global_index_to_arm_index('Chr5', 10001, 12533192, indexing_file)
+
+    translate_global_index_to_arm_index('Chr11', 31784791, 32435541, indexing_file)
+
+
+if __name__ == "__main__":
+    batch_manual()

@@ -1,4 +1,4 @@
-from Structures import *
+from Main.Structures import *
 
 
 def generate_raw_genome(copy_number: int, autosomes: [str], sex_chromosomes: [str], genome_index_file: str) -> Genome:

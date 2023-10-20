@@ -1,7 +1,6 @@
 from Main.Start_Genome import generate_raw_genome
 
-# TODO: make a hg38 converter to convert hg38 index to p/q-arm indexing, using a metadata sheet as input (maybe set as
-#  global variable)
+
 new_genome = generate_raw_genome(2, ['all'], ['male'],
                                  '../Metadata/Full_Genome_Indices.txt')
 chr_15a = new_genome.full_KT['Chr15'][0]

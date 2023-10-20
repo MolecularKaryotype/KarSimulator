@@ -60,9 +60,8 @@ def get_segment_in_SV(history_entry, segment_list):
     event_name = history_entry[0]
     if event_name == 'deletion':
         return
-    for
-    for segment in segment_list:
-
+    # for
+    # for segment in segment_list:
 
 
 def get_t2_segments(masking_file):

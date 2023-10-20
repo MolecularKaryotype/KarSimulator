@@ -1,4 +1,4 @@
-from Structures import Arm, Segment
+from Main.Structures import Arm, Segment
 
 
 def read_masking_regions(masking_file) -> Arm:
