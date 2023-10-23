@@ -62,6 +62,17 @@ class Segment:
         return_str = "({}, {}, {}{})".format(self.chr_name, self.start, self.end, additional_info)
         return return_str
 
+    def concise_str(self):
+        if self.segment_type is None:
+            s1 = ""
+        else:
+            s1 = self.segment_type
+        if self.kt_index is None:
+            s2 = ""
+        else:
+            s2 = self.kt_index
+        return "({},{})".format(s1, s2)
+
     def same_segment_ignore_dir(self, other):
         if self.chr_name != other.chr_name:
             return False
@@ -1053,6 +1064,12 @@ class Path:
 
     def __str__(self):
         return str("chr_bin: {}, path_name: {}, segments: {}".format(self.path_chr, self.path_name, self.linear_path))
+
+    def concise_str(self):
+        segment_str = ""
+        for segment in self.linear_path.segments:
+            segment_str += segment.concise_str()
+        return str("path_name: {}, segments: {}".format(self.path_name, segment_str))
 
     def reverse(self):
         new_segments = []
