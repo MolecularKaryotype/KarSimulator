@@ -9,6 +9,7 @@ class Segment:
     end: int
     segment_type: str
     kt_index: str
+    ordinal: int
 
     def __init__(self, chr_name: str, start: int, end: int, segment_type=None, kt_index=None):
         self.chr_name = chr_name
@@ -16,6 +17,7 @@ class Segment:
         self.end = end
         self.segment_type = segment_type
         self.kt_index = kt_index
+        self.ordinal = -1
 
     def __len__(self):
         return abs(self.end - self.start) + 1
@@ -59,6 +61,8 @@ class Segment:
             additional_info += ", " + self.segment_type
         if self.kt_index is not None:
             additional_info += ", " + self.kt_index
+        if self.ordinal != -1:
+            additional_info += ", " + str(self.ordinal)
         return_str = "({}, {}, {}{})".format(self.chr_name, self.start, self.end, additional_info)
         return return_str
 
@@ -488,10 +492,11 @@ class Genome:
     centromere_segments = [Segment]
     history_block_markings = {}  # history enumerate index: block name
     history: [(str, Arm, Chromosome, Chromosome)]  # event type, event segments, chr from, chr to
+    ordinal_history: [[(str, Segment, Segment, Segment)]]  # ins/del/inv, event_segment, left_bound, right_bound
     initialization_string: str  # contains information with the initialization of the genome
 
     def __init__(self, full_KT, motherboard_segments, centromere_segments, initialization_string,
-                 history=None, history_markers=None):
+                 history=None, history_markers=None, ordinal_history=None):
         self.full_KT = full_KT
         self.motherboard = Arm(motherboard_segments, 'motherboard')
         self.centromere_segments = centromere_segments
@@ -504,6 +509,10 @@ class Genome:
             self.history_block_markings = history_markers
         else:
             self.history_block_markings = {}
+        if ordinal_history is not None:
+            self.ordinal_history = ordinal_history
+        else:
+            self.ordinal_history = []
 
     def duplicate(self):
         new_full_KT = {}

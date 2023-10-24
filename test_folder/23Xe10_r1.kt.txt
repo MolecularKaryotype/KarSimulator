@@ -116,15 +116,15 @@ initialization
 	autosomal copy number: 1
 	sex chromosomes: ['ChrX']
 block 1: 10 random events
-	inversion on segments [1+,2+], from Chr1a to Chr1a	(inv,[2.1-,1.1-])
+	inversion on segments [1+,2+], from Chr1a to Chr1a	(inv,2.1)(inv,1.1)
 	chromosomal duplication on segments [12+,CEN4+,13+], from Chr4a to Chr4b	
-	deletion on segments [5+], from Chr1a to Chr1a	(del,4.1+,T2)
-	reciprocal translocation on segments [35+], from Chr11a to Chr9a	(del,34.1+,36.1+)(ins,[35.1+])
-	reciprocal translocation on segments [27+], from Chr9a to Chr11a	(del,26.1+,28.1+)(ins,[27.1+])
-	reciprocal translocation on segments [16+], from Chr5a to Chr10a	(del,15.1+,17.1+)(ins,[
-	reciprocal translocation on segments [30+], from Chr10a to Chr5a	(del,29.1+,31.1+)
-	arm tandem duplication on segments [6+], from Chr2a to Chr2a
-	deletion on segments [49+], from Chr17a to Chr17a
-	tandem duplication on segments [10+], from Chr3a to Chr3a
-	tandem duplication on segments [24+], from Chr9a to Chr9a
-	right duplication inversion on segments [2+], from Chr1a to Chr1a
+	deletion on segments [5+], from Chr1a to Chr1a	(del,4.1,T2)
+	reciprocal translocation on segments [35+], from Chr11a to Chr9a	(del,34.1,36.1)(ins,35.1)
+	reciprocal translocation on segments [27+], from Chr9a to Chr11a	(del,26.1,28.1)(ins,27.1)
+	reciprocal translocation on segments [16+], from Chr5a to Chr10a	(del,15.1,17.1)(ins,16.1)
+	reciprocal translocation on segments [30+], from Chr10a to Chr5a	(del,29.1,31.1)(ins,30.1)
+	arm tandem duplication on segments [6+], from Chr2a to Chr2a	(ins,6.2)
+	deletion on segments [49+], from Chr17a to Chr17a	(del,48.1,50.1)
+	tandem duplication on segments [10+], from Chr3a to Chr3a	(ins,10.2)
+	tandem duplication on segments [24+], from Chr9a to Chr9a	(ins,24.2)
+	right duplication inversion on segments [2+], from Chr1a to Chr1a	(ins,2.2)

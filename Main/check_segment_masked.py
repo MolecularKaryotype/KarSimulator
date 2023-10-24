@@ -82,5 +82,39 @@ def batch_check_masked():
     print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
 
 
+def check_sunnyside():
+    masking_file = '../Metadata/merged_masking_unique.bed'
+
+    # 204
+    input_segment = Segment('Chr15', 19024883, 22276055)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    # 219
+    input_segment = Segment('Chr11', 48350254, 48949944)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    # 1327
+    input_segment = Segment('ChrY', 2465162, 16252722)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+    input_segment = Segment('ChrY', 16264213, 56951882)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    # 1338
+    input_segment = Segment('Chr10', 34883020, 35028718)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+
+def check_keyhole():
+    masking_file = '../Metadata/merged_masking_unique.bed'
+
+    # 1878
+    input_segment = Segment('Chr9', 28188952, 28352275)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    # 2436
+    input_segment = Segment('Chr9', 28171542, 28364123)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+
 if __name__ == "__main__":
-    batch_check_masked()
+    check_keyhole()
