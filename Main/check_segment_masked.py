@@ -7,7 +7,7 @@ def check_regions_masked(input_arm: Arm, masking_file):
     if input_arm.arm_intersection(masking_arm):
         return input_arm.report_arm_intersection(masking_arm)
     else:
-        return "Input Segments: " + str(input_arm) + "\nno intersection\n"
+        return "no intersection"
 
 
 def test():
@@ -45,16 +45,19 @@ def one_time_usage():
 def cmd():
     import argparse
     parser = argparse.ArgumentParser(description="forbidden region intersection test")
-    parser.add_argument("--segment", type=str, dest='input_segment', help="in format Chr1,10000,20000")
+    parser.add_argument("--segment", type=str, dest='input_segment', help="in format (Chr1,10000,20000)")
     args = parser.parse_args()
 
     masking_file = '../Metadata/merged_masking_unique.bed'
-    input_parsed = args.input_segment.split(',')
-    input_segment = Segment(input_parsed[0], int(input_parsed[1]), int(input_parsed[2]))
-    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+    total_input = args.input_segment.split('(')
+    for segment_index in range(1, len(total_input)):
+        input_parsed = total_input[segment_index]
+        input_parsed = input_parsed.replace('(', '').replace(')', '').replace(',', '').split('-')
+        input_segment = Segment(input_parsed[0], int(input_parsed[1]), int(input_parsed[2]))
+        print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
 
 
-def batch_check_masked():
+def batch_check_masked_1020():
     masking_file = '../Metadata/merged_masking_unique.bed'
 
     # 22q11.2 distal deletion syndrome
@@ -79,6 +82,42 @@ def batch_check_masked():
 
     # WAGR 11p13 deletion syndrome
     input_segment = Segment('Chr11', 31784791, 32435541)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+
+def batch_check_masked_1025():
+    masking_file = '../Metadata/merged_masking_unique.bed'
+
+    print('CMT1A')
+    input_segment = Segment('Chr17', 14194598, 15567589)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('NF1')
+    input_segment = Segment('Chr17', 30780079, 31936302)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('Potocki-Lupski')
+    input_segment = Segment('Chr17', 16869758, 20318836)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('Potocki-Shaffer')
+    input_segment = Segment('Chr11', 43973250, 46030899)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('STS')
+    input_segment = Segment('ChrX', 6537771, 8165154)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('RCAD')
+    input_segment = Segment('Chr17', 36459259, 37856298)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('Cri_du_chat')
+    input_segment = Segment('Chr5', 10001, 12533192)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('Angelman')
+    input_segment = Segment('Chr15', 22677345, 28193120)
     print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
 
 
@@ -117,4 +156,4 @@ def check_keyhole():
 
 
 if __name__ == "__main__":
-    check_keyhole()
+    cmd()

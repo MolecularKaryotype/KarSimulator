@@ -88,10 +88,11 @@ def generate_raw_genome(copy_number: int, autosomes: [str], sex_chromosomes: [st
     return Genome(full_KT, motherboard_segments, centromere_segments, initialization_string)
 
 
-def generate_genome_from_KT(input_file: str) -> Genome:
+def generate_genome_from_KT(input_file: str, ordinal_info_included=False) -> Genome:
     """
     directly generating Genome from a formatted KT file
     :param input_file: path to input file
+    :param ordinal_info_included: weather the KT file will contain ordinal info in history section
     :return: Genome Object
     """
     full_KT = {}
@@ -200,7 +201,10 @@ def generate_genome_from_KT(input_file: str) -> Genome:
                 first_block_passed = True
             else:
                 line = line.split('\t')
-                ordinal_history_info = line[2]
+                if ordinal_info_included:
+                    ordinal_history_info = line[2]
+                else:
+                    ordinal_history_info = ""
                 line = line[1]
                 line = line.split('], ')
                 event_type = line[0].split(' on')[0]
@@ -239,70 +243,71 @@ def generate_genome_from_KT(input_file: str) -> Genome:
                                         history_chr_from, history_chr_to]))
 
                 # store current ordinal history entry
-                ordinal_history_info = ordinal_history_info.split('(')
-                if len(ordinal_history_info) == 1:
-                    ordinal_history.append([])  # empty list if no ordinal data is given
-                else:
-                    new_ordinal_entry = []
+                if ordinal_info_included:
+                    ordinal_history_info = ordinal_history_info.split('(')
+                    if len(ordinal_history_info) == 1:
+                        ordinal_history.append([])  # empty list if no ordinal data is given
+                    else:
+                        new_ordinal_entry = []
 
-                    for entry_index in range(1, len(ordinal_history_info)):
-                        current_entry_info = ordinal_history_info[entry_index].replace(')', '').split(',')
-                        current_entry = [current_entry_info[0]]
-                        if current_entry_info[0] in ['inv', 'ins']:
-                            # inv and ins are always chr_to
-                            event_segment_index = current_entry_info[1].split('.')[0]
-                            event_segment_ordinal = int(current_entry_info[1].split('.')[1])
-                            event_segment = segment_dict[event_segment_index].duplicate()
-                            event_segment.ordinal = event_segment_ordinal
+                        for entry_index in range(1, len(ordinal_history_info)):
+                            current_entry_info = ordinal_history_info[entry_index].replace(')', '').split(',')
+                            current_entry = [current_entry_info[0]]
+                            if current_entry_info[0] in ['inv', 'ins']:
+                                # inv and ins are always chr_to
+                                event_segment_index = current_entry_info[1].split('.')[0]
+                                event_segment_ordinal = int(current_entry_info[1].split('.')[1])
+                                event_segment = segment_dict[event_segment_index].duplicate()
+                                event_segment.ordinal = event_segment_ordinal
 
-                            is_on_q_arm, segment_arm_location = get_segment_location(event_segment, event_segment_ordinal, history_chr_to)
-                            left_boundary_segment = None
-                            right_boundary_segment = None
-                            if not is_on_q_arm:
-                                left_boundary_segment_location = segment_arm_location - 1
-                                right_boundary_segment_location = segment_arm_location + 1
-                                if left_boundary_segment_location >= 0:
-                                    left_boundary_segment = history_chr_to.p_arm.segments[left_boundary_segment_location].duplicate()
-                                if right_boundary_segment_location < len(history_chr_to.p_arm.segments):
-                                    right_boundary_segment = history_chr_to.p_arm.segments[right_boundary_segment_location].duplicate()
-                            else:
-                                left_boundary_segment_location = segment_arm_location - 1
-                                right_boundary_segment_location = segment_arm_location + 1
-                                if left_boundary_segment_location >= 0:
-                                    left_boundary_segment = history_chr_to.q_arm.segments[left_boundary_segment_location].duplicate()
-                                if right_boundary_segment_location < len(history_chr_to.q_arm.segments):
-                                    right_boundary_segment = history_chr_to.q_arm.segments[right_boundary_segment_location].duplicate()
+                                is_on_q_arm, segment_arm_location = get_segment_location(event_segment, event_segment_ordinal, history_chr_to)
+                                left_boundary_segment = None
+                                right_boundary_segment = None
+                                if not is_on_q_arm:
+                                    left_boundary_segment_location = segment_arm_location - 1
+                                    right_boundary_segment_location = segment_arm_location + 1
+                                    if left_boundary_segment_location >= 0:
+                                        left_boundary_segment = history_chr_to.p_arm.segments[left_boundary_segment_location].duplicate()
+                                    if right_boundary_segment_location < len(history_chr_to.p_arm.segments):
+                                        right_boundary_segment = history_chr_to.p_arm.segments[right_boundary_segment_location].duplicate()
+                                else:
+                                    left_boundary_segment_location = segment_arm_location - 1
+                                    right_boundary_segment_location = segment_arm_location + 1
+                                    if left_boundary_segment_location >= 0:
+                                        left_boundary_segment = history_chr_to.q_arm.segments[left_boundary_segment_location].duplicate()
+                                    if right_boundary_segment_location < len(history_chr_to.q_arm.segments):
+                                        right_boundary_segment = history_chr_to.q_arm.segments[right_boundary_segment_location].duplicate()
 
-                            if left_boundary_segment is not None:
-                                left_boundary_segment.ordinal = get_segment_ordinal(left_boundary_segment, history_chr_to)
-                            if right_boundary_segment is not None:
-                                right_boundary_segment.ordinal = get_segment_ordinal(right_boundary_segment, history_chr_to)
-                            current_entry += [event_segment, left_boundary_segment, right_boundary_segment]
-                            new_ordinal_entry.append(tuple(current_entry))
-                        elif current_entry_info[0] == 'del':
-                            # deletion is always on chr_from
-                            event_segment = history_segments
-                            left_boundary_index = None
-                            right_boundary_index = None
-                            left_boundary_segment = current_entry_info[1]
-                            right_boundary_segment = current_entry_info[2]
-                            if current_entry_info[1] not in ['T1', 'T2', 'CEN']:
-                                left_boundary_index = current_entry_info[1].split('.')[0]
-                                left_boundary_ordinal = int(current_entry_info[1].split('.')[1])
-                            if current_entry_info[2] not in ['T1', 'T2', 'CEN']:
-                                right_boundary_index = current_entry_info[2].split('.')[0]
-                                right_boundary_ordinal = int(current_entry_info[2].split('.')[1])
+                                if left_boundary_segment is not None:
+                                    left_boundary_segment.ordinal = get_segment_ordinal(left_boundary_segment, history_chr_to)
+                                if right_boundary_segment is not None:
+                                    right_boundary_segment.ordinal = get_segment_ordinal(right_boundary_segment, history_chr_to)
+                                current_entry += [event_segment, left_boundary_segment, right_boundary_segment]
+                                new_ordinal_entry.append(tuple(current_entry))
+                            elif current_entry_info[0] == 'del':
+                                # deletion is always on chr_from
+                                event_segment = history_segments
+                                left_boundary_index = None
+                                right_boundary_index = None
+                                left_boundary_segment = current_entry_info[1]
+                                right_boundary_segment = current_entry_info[2]
+                                if current_entry_info[1] not in ['T1', 'T2', 'CEN']:
+                                    left_boundary_index = current_entry_info[1].split('.')[0]
+                                    left_boundary_ordinal = int(current_entry_info[1].split('.')[1])
+                                if current_entry_info[2] not in ['T1', 'T2', 'CEN']:
+                                    right_boundary_index = current_entry_info[2].split('.')[0]
+                                    right_boundary_ordinal = int(current_entry_info[2].split('.')[1])
 
-                            if left_boundary_index is not None:
-                                left_boundary_segment = segment_dict[left_boundary_index].duplicate()
-                                left_boundary_segment.ordinal = left_boundary_ordinal
-                            if right_boundary_index is not None:
-                                right_boundary_segment = segment_dict[right_boundary_index].duplicate()
-                                right_boundary_segment.ordinal = right_boundary_ordinal
-                            current_entry += [event_segment, left_boundary_segment, right_boundary_segment]
-                            new_ordinal_entry.append(tuple(current_entry))
+                                if left_boundary_index is not None:
+                                    left_boundary_segment = segment_dict[left_boundary_index].duplicate()
+                                    left_boundary_segment.ordinal = left_boundary_ordinal
+                                if right_boundary_index is not None:
+                                    right_boundary_segment = segment_dict[right_boundary_index].duplicate()
+                                    right_boundary_segment.ordinal = right_boundary_ordinal
+                                current_entry += [event_segment, left_boundary_segment, right_boundary_segment]
+                                new_ordinal_entry.append(tuple(current_entry))
 
-                    ordinal_history.append(new_ordinal_entry)
+                        ordinal_history.append(new_ordinal_entry)
 
         if first_block_passed:
             history_markers[len(histories) - 1] = block_name  # append last block

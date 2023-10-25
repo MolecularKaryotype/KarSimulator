@@ -3,7 +3,9 @@ import json
 import random
 import os
 import shutil
+import sys
 
+sys.path.insert(1, '/media/zhaoyang-new/workspace/KarSim/KarSimulator/Main')
 from Main.Start_Genome import *
 from Main.read_masking_regions import read_masking_regions
 

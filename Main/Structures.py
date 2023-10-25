@@ -66,6 +66,11 @@ class Segment:
         return_str = "({}, {}, {}{})".format(self.chr_name, self.start, self.end, additional_info)
         return return_str
 
+    def annotated_number(self):
+        start_str = "{:,}".format(self.start)
+        end_str = "{:,}".format(self.end)
+        return "({}-{}-{}-{})".format(self.chr_name, start_str, end_str, self.segment_type)
+
     def concise_str(self):
         if self.segment_type is None:
             s1 = ""
@@ -268,10 +273,9 @@ class Arm:
             for segment2 in other_arm.segments:
                 if segment1.segment_intersection(segment2):
                     intersecting_segments.append(segment2)
-        return_str = "Input Segments: "
-        return_str += str(self) + "\n"
-        return_str += "Intersecting Segments: "
-        return_str += str(Arm(intersecting_segments, "")) + "\n"
+        return_str = ''
+        for segment in intersecting_segments:
+            return_str += segment.annotated_number()
         return return_str
 
     def gather_boundary_points(self):
