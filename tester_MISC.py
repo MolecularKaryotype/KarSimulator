@@ -51,6 +51,22 @@ from Preparation.Get_Chr_Names import *
 # sorted_items = sorted(my_dict.items(), key=lambda x: x[1], reverse=True)
 # print(sorted_items[0][0])
 
-x = "(yy)(zz)"
-y = ""
-print(y.split('('))
+# x = "(yy)(zz)"
+# y = ""
+# print(y.split('('))
+
+# # Define the source list (the list you want to insert)
+# source_list = [7, 8, 9]
+# # Define the destination list (the list into which you want to insert)
+# destination_list = [1, 2, 3, 4, 5, 6]
+# # Specify the index where you want to insert the source list
+# insert_index = 3
+# # Use slicing and the extend method to insert the source list into the destination list
+# destination_list[insert_index:insert_index] = source_list
+# # Now, destination_list will contain the elements from the source_list inserted at the specified index
+# print(destination_list)
+
+left = 3
+right = 5
+for i in range(right-1,left-1,-1):
+    print(i)

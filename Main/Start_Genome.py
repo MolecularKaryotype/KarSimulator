@@ -1,4 +1,4 @@
-from Main.Structures import *
+from Structures import *
 
 
 def generate_raw_genome(copy_number: int, autosomes: [str], sex_chromosomes: [str], genome_index_file: str) -> Genome:
@@ -344,6 +344,9 @@ def get_segment_location(input_current_segment: Segment, input_segment_ordinal: 
                 else:
                     finder_ptr += 1
                     if finder_ptr >= len(input_chr.q_arm.segments):
+                        print(input_current_segment)
+                        print(input_segment_ordinal)
+                        print(input_chr)
                         raise RuntimeError('segment not found with the correct ordinal in given chr')
     return p_arm_exhausted, output_segment_location
 

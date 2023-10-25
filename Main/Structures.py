@@ -1,5 +1,5 @@
-from Main.sequence_dict_to_FASTA import *
-from Main.read_FASTA import read_FASTA
+from sequence_dict_to_FASTA import *
+from read_FASTA import read_FASTA
 import copy
 
 
@@ -121,10 +121,16 @@ class Segment:
         else:
             self.end = self.end + bp_to_delete
 
-    def invert(self):
-        temp_start = self.start
-        self.start = self.end
-        self.end = temp_start
+    def invert(self, inplace=True):
+        if inplace:
+            temp_start = self.start
+            self.start = self.end
+            self.end = temp_start
+        else:
+            new_segment = self.duplicate()
+            new_segment.start = self.end
+            new_segment.end = self.start
+            return new_segment
 
     def segment_intersection(self, other_segment):
         duplicate_self = self.duplicate()

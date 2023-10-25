@@ -10,7 +10,7 @@ def read_solved_path(file):
 
         for line in fp_read:
             line = line.replace("\n", "").split('\t')
-
+            print(line)
             # documenting segments
             if line[0] == "Segment":
                 chr_name = str(line[2])
@@ -40,6 +40,7 @@ def read_solved_path(file):
                         new_segment.invert()
                         path_segments.append(new_segment)
                     else:
+                        print(direction)
                         raise ValueError("direction must be + or -")
                 path_list.append(Path(Arm(path_segments, "solved_path"), path_name))
 

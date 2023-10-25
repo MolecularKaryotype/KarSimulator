@@ -48,21 +48,81 @@ def read_KT_to_path(KT_file, masking_file):
         #     path_list.append(Path(Arm(segment_list, "KT_path"), chromosome_itr.name, chromosome_itr.name[:-1]))
         #     continue
 
-        # label SV segments from history
-        # get inv/ins first
-        for ordinal_history_entry_index in range(len(genome.ordinal_history)):
-            ordinal_history_entry = genome.ordinal_history[ordinal_history_entry_index]
-            for ordinal_sub_entry in ordinal_history_entry:
-                if ordinal_sub_entry[0] in ['inv', 'ins']:
-                    event_segment = ordinal_sub_entry[1]
-                    event_segment_in_path = get_segment_from_ordinal(event_segment, event_segment.ordinal, segment_list)
-                    event_segment_in_path.segment_type = ordinal_sub_entry[0] + ": SV" + str(ordinal_history_entry_index)
-
-        # intersperse del in-between the left and right boundary
-
         path_list.append(Path(Arm(segment_list, "KT_path"), chromosome_itr.name, chromosome_itr.name[:-1]))
-        print('x')
 
+    # label SV segments from history
+    # get inv/ins first
+    for ordinal_history_entry_index in range(len(genome.ordinal_history)):
+        current_path = None
+        for path_itr in path_list:
+            # access chr_to
+            if path_itr.path_name == genome.history[ordinal_history_entry_index][3].name:
+                current_path = path_itr
+                break
+        current_segment_list = current_path.linear_path.segments
+        ordinal_history_entry = genome.ordinal_history[ordinal_history_entry_index]
+        for ordinal_sub_entry in ordinal_history_entry:
+            if ordinal_sub_entry[0] in ['inv', 'ins']:
+                event_segment = ordinal_sub_entry[1]
+                event_segment_in_path = current_segment_list[get_segment_index_from_ordinal(event_segment, event_segment.ordinal, current_segment_list)]
+                event_segment_in_path.segment_type = ordinal_sub_entry[0] + ": SV" + str(ordinal_history_entry_index)
+
+    # create indel ghost segments
+    for ordinal_history_entry_index in range(len(genome.ordinal_history)):
+        current_path = None
+        for path_itr in path_list:
+            # access chr_from
+            if path_itr.path_name == genome.history[ordinal_history_entry_index][2].name:
+                current_path = path_itr
+                break
+        current_segment_list = current_path.linear_path.segments
+        ordinal_history_entry = genome.ordinal_history[ordinal_history_entry_index]
+        for ordinal_sub_entry in ordinal_history_entry:
+            if ordinal_sub_entry[0] == 'del':
+                event_segments = ordinal_sub_entry[1]  # directionality is preserved as mentioned in history
+                copied_event_segments = []
+                for event_segment_itr in event_segments:
+                    new_segment = event_segment_itr.duplicate()
+                    new_segment.segment_type = 'del: SV' + str(ordinal_history_entry_index)
+                    if new_segment in index_dict:
+                        new_segment.kt_index = index_dict[new_segment] + '+'
+                    elif new_segment.duplicate.invert(inplace=False) in index_dict:
+                        new_segment.kt_index = index_dict[new_segment.duplicate.invert(inplace=False)] + '-'
+
+                    copied_event_segments.append(new_segment)
+                left_boundary_segment = ordinal_sub_entry[2]
+                right_boundary_segment = ordinal_sub_entry[3]
+                if left_boundary_segment == 'CEN':
+                    left_boundary_index = get_centromere_index(current_segment_list)
+                elif left_boundary_segment != 'T1':
+                    left_boundary_index = get_segment_index_from_ordinal(left_boundary_segment, left_boundary_segment.ordinal, current_segment_list)
+                else:
+                    left_boundary_index = 0
+
+                if right_boundary_segment == 'CEN':
+                    right_boundary_index = get_centromere_index(current_segment_list)
+                elif right_boundary_segment != 'T2':
+                    right_boundary_index = get_segment_index_from_ordinal(right_boundary_segment, right_boundary_segment.ordinal, current_segment_list)
+                else:
+                    right_boundary_index = len(current_segment_list) - 1
+
+                if right_boundary_index - left_boundary_index == 0:
+                    raise RuntimeError('same left and right boundary found')
+                elif right_boundary_index - left_boundary_index == 1:
+                    ghost_for_insertions = []
+                    for event_segment_itr in copied_event_segments:
+                        ghost_for_insertions.append(event_segment_itr.duplicate())
+                    current_segment_list[left_boundary_index+1:left_boundary_index+1] = ghost_for_insertions
+                else:
+                    # intersperse del in-between the left and right boundary
+                    ghost_for_insertions = []
+                    for event_segment_itr in copied_event_segments:
+                        ghost_for_insertions.append(event_segment_itr.duplicate())
+                    for insertion_index in range(right_boundary_index, left_boundary_index, -1):
+                        current_segment_list[insertion_index:insertion_index] = ghost_for_insertions
+
+
+                # TODO: need to change the ordinal value of the subsequent segments; may interfere with the subsequent 'del' left/right boundary finding as they can be shifted
     return path_list
 
 
@@ -111,23 +171,25 @@ def segments_are_continuous(segment1: Segment, segment2: Segment):
     return False
 
 
-def get_segment_from_ordinal(input_current_segment: Segment, input_segment_ordinal: int, input_segment_list: []):
-    output_segment = None
-    finder_ptr = 0
-    p_arm_exhausted = False
-    for occurrence in range(0, input_segment_ordinal):
-        # FIXME: runtime error require investigation
-        segment_not_matched = True
-        while segment_not_matched:
-            if input_segment_list[finder_ptr].same_segment_ignore_dir(input_current_segment):
-                output_segment = input_segment_list[finder_ptr]
-                segment_not_matched = False
-            finder_ptr += 1
-    return output_segment
+def get_segment_index_from_ordinal(input_current_segment: Segment, input_segment_ordinal: int, input_segment_list: [Segment]):
+    occurrence = 0
+    for finder_ptr in range(len(input_segment_list)):
+        if input_segment_list[finder_ptr].same_segment_ignore_dir(input_current_segment):
+            occurrence += 1
+        if occurrence == input_segment_ordinal:
+            return finder_ptr
+
+    raise RuntimeError('segment not found')
+
+
+def get_centromere_index(input_segment_list: [Segment]):
+    for segment_index in range(len(input_segment_list)):
+        if input_segment_list[segment_index].segment_type == 'centromere':
+            return segment_index
 
 
 def test():
-    return_list = read_KT_to_path("/media/zhaoyang-new/workspace/KarSim/KarSimulator/test_folder/23Xe10_r1.kt.txt",
+    return_list = read_KT_to_path("/Users/zhaoyangjia/Library/CloudStorage/OneDrive-UCSanDiego/Bafna_Lab/KarSimulator/test_folder/23Xe10_r1.kt.txt",
                                   "../Metadata/merged_masking_unique.bed")
     for path in return_list:
         print(path.concise_str())

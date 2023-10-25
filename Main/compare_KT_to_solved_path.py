@@ -17,13 +17,16 @@ def compare_paths(solved_path_file, kt_file, masking_file):
         best_solved_path_alignment = None
         best_kt_path_index = None
         best_solved_path_index = None
+        best_sv_total = None
+        best_sv_captured = None
+        best_jaccard = None
         for kt_path_index in range(len(kt_path_list)):
             for solved_path_index in range(len(solved_path_list)):
                 current_kt_path = kt_path_list[kt_path_index].duplicate()
                 current_solved_path = solved_path_list[solved_path_index].duplicate()
                 current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
 
-                current_score, current_kt_alignment, current_solved_path_alignment = \
+                current_score, current_kt_alignment, current_solved_path_alignment, sv_total, sv_captured, jaccard = \
                     align_paths(current_kt_path.linear_path.segments,
                                 current_solved_path.linear_path.segments)
                 if current_score > best_score:
@@ -32,6 +35,9 @@ def compare_paths(solved_path_file, kt_file, masking_file):
                     best_solved_path_alignment = current_solved_path_alignment
                     best_kt_path_index = kt_path_index
                     best_solved_path_index = solved_path_index
+                    best_sv_total = sv_total
+                    best_sv_captured = sv_captured
+                    best_jaccard = jaccard
 
                 # check if reversed gives higher score
                 current_kt_path = kt_path_list[kt_path_index].duplicate()
@@ -39,7 +45,7 @@ def compare_paths(solved_path_file, kt_file, masking_file):
                 current_solved_path.reverse()
                 current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
 
-                current_score, current_kt_alignment, current_solved_path_alignment = \
+                current_score, current_kt_alignment, current_solved_path_alignment, sv_total, sv_captured, jaccard= \
                     align_paths(current_kt_path.linear_path.segments,
                                 current_solved_path.linear_path.segments)
                 if current_score > best_score:
@@ -48,10 +54,18 @@ def compare_paths(solved_path_file, kt_file, masking_file):
                     best_solved_path_alignment = current_solved_path_alignment
                     best_kt_path_index = kt_path_index
                     best_solved_path_index = solved_path_index
+                    best_sv_total = sv_total
+                    best_sv_captured = sv_captured
+                    best_jaccard = jaccard
 
         # output current pair
         print("alignment between {}, {}: {}".format(kt_path_list[best_kt_path_index].path_name,
               solved_path_list[best_solved_path_index].path_name, best_score))
+        for sv_name in best_sv_total:
+            sv_capture_rate = best_sv_captured[sv_name] / best_sv_total[sv_name]
+            sv_capture_rate = "{:.4f}".format(sv_capture_rate)
+            print("SV_name: {}, SV_total: {}, SV_captured: {}, SV_capture_rate: {}".format(sv_name, str(best_sv_total[sv_name]), str(best_sv_captured[sv_name]), sv_capture_rate))
+        print("jaccard score: {}".format(best_jaccard))
         print(best_kt_alignment)
         print(best_solved_path_alignment)
         print()
@@ -118,6 +132,8 @@ def align_paths(segment_list1, segment_list2):
         for col_index in range(1, len(segment_list2) + 1):
             if segment_list1[row_index - 1].segment_type in forbidden_comparison_region_types:
                 down_value = scoring_matrix[row_index - 1][col_index]
+            elif segment_list1[row_index - 1].segment_type is not None and segment_list1[row_index - 1].segment_type.startswith('del'):
+                down_value = scoring_matrix[row_index - 1][col_index]
             else:
                 down_value = scoring_matrix[row_index - 1][col_index] \
                              + len(segment_list1[row_index - 1]) * indel_penalty_per_nt
@@ -130,6 +146,8 @@ def align_paths(segment_list1, segment_list2):
 
             if segment_list1[row_index - 1] == segment_list2[col_index - 1]:
                 diagonal_value = scoring_matrix[row_index - 1][col_index - 1]
+            elif segment_list1[row_index - 1].segment_type is not None and segment_list1[row_index - 1].segment_type.startswith('del'):
+                diagonal_value = scoring_matrix[row_index - 1][col_index - 1] + + len(segment_list1[row_index - 1]) * indel_penalty_per_nt
             else:
                 diagonal_value = float('-inf')  # mismatch not allowed
 
@@ -147,6 +165,17 @@ def align_paths(segment_list1, segment_list2):
     final_score = scoring_matrix[len(segment_list1)][len(segment_list2)]
     current_row = len(segment_list1)
     current_col = len(segment_list2)
+    sv_total = {}
+    sv_captured = {}
+    for segment_itr in segment_list1:
+        if segment_itr.segment_type is not None and segment_itr.segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
+            event_name = segment_itr.segment_type.split(': ')[1]
+            if event_name not in sv_total:
+                sv_total[event_name] = 0
+            sv_total[event_name] += len(segment_itr)
+    for event_name in sv_total:
+        sv_captured[event_name] = 0
+
 
     while True:
         if current_row == 0 and current_col == 0:
@@ -154,11 +183,19 @@ def align_paths(segment_list1, segment_list2):
         if backtrack_matrix[current_row][current_col] == "diag":
             alignment_1.insert(0, segment_list1[current_row - 1])
             alignment_2.insert(0, segment_list2[current_col - 1])
+            if segment_list1[current_row - 1].segment_type is not None and segment_list1[current_row - 1].segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
+                if not segment_list1[current_row - 1].segment_type.startswith('del'):
+                    event_name = segment_list1[current_row - 1].segment_type.split(': ')[1]
+                    sv_captured[event_name] += len(segment_list1[current_row - 1])
             current_col -= 1
             current_row -= 1
         elif backtrack_matrix[current_row][current_col] == "down":
             alignment_1.insert(0, segment_list1[current_row - 1])
             alignment_2.insert(0, "-")
+            if segment_list1[current_row - 1].segment_type is not None and segment_list1[current_row - 1].segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
+                if segment_list1[current_row - 1].segment_type.startswith('del'):
+                    event_name = segment_list1[current_row - 1].segment_type.split(': ')[1]
+                    sv_captured[event_name] += len(segment_list1[current_row - 1])
             current_row -= 1
         elif backtrack_matrix[current_row][current_col] == "rigt":
             alignment_1.insert(0, "-")
@@ -181,13 +218,22 @@ def align_paths(segment_list1, segment_list2):
         else:
             alignment_2_string += str(index)
         alignment_2_string += "\t"
-    return final_score, alignment_1_string, alignment_2_string
+
+    # calculate jaccard
+    numerator = 0
+    denominator = abs(final_score)
+    for sv_name in sv_total:
+        numerator += sv_captured[sv_name]
+        denominator += sv_total[sv_name]
+    jaccard = numerator / denominator
+    jaccard = "{:.4f}".format(jaccard)
+    return final_score, alignment_1_string, alignment_2_string, sv_total, sv_captured, jaccard
 
 
 def test_compare_paths():
     compare_paths(
-        "/Users/zhaoyangjia/Library/CloudStorage/OneDrive-UCSanDiego/bionano/Solved_paths/simulation_final/1q21-1_recurrent_microdeletion_r1.1/1q21-1_recurrent_microdeletion_r1.1.txt",
-        "/Users/zhaoyangjia/Library/CloudStorage/OneDrive-UCSanDiego/bionano/Solved_paths/simulation_final/1q21-1_recurrent_microdeletion_r1.1/1q21-1_recurrent_microdeletion_r1.kt.txt",
+        "/Users/zhaoyangjia/Library/CloudStorage/OneDrive-UCSanDiego/Bafna_Lab/KarSimulator/test_folder/Angelman_r2.1.txt",
+        "/Users/zhaoyangjia/Library/CloudStorage/OneDrive-UCSanDiego/Bafna_Lab/KarSimulator/test_folder/Angelman_r2.kt.txt",
         "../Metadata/merged_masking_unique.bed")
 
 

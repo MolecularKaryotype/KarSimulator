@@ -1,0 +1,6 @@
+alignment between Chr10a, Path9: -2889373
+SV_name: SV6, SV_total: 4271500, SV_captured: 2135750, SV_capture_rate: 0.5000
+SV_name: SV5, SV_total: 2887218, SV_captured: 0, SV_capture_rate: 0.0000
+jaccard score: 0.2126
+(Chr10, 0, 9999, telomere1)	(Chr10, 10000, 15649462, 29+)	(Chr10, 15649463, 15653369, 29+)	(Chr10, 15653370, 17789119, del: SV6, 30+)	(Chr5, 67957100, 70844317, ins: SV5, 16+)	(Chr10, 15653370, 17789119, del: SV6, 30+)	(Chr10, 17789120, 39686682, 31+)	(Chr10, 39686683, 41593521, centromere, CEN10)	(Chr10, 41593522, 46991592, 32+)	(Chr10, 46991593, 48060267, 32+)	(Chr10, 48060268, 133785266, 32+)	(Chr10, 133785267, 133787421, 32+)	(Chr10, 133787422, 133797421, telomere2)
+(Chr10, 0, 9999, solved_path, 42+)	(Chr10, 10000, 15649462, solved_path, 42+)	(Chr10, 15649463, 15653369, solved_path, 43+)	-	-	(Chr10, 15653370, 17789119, solved_path, 43+)	(Chr10, 17789120, 39686682, solved_path, 43+)	(Chr10, 39686683, 41593521, solved_path, 43+)	(Chr10, 41593522, 46991592, solved_path, 43+)	(Chr10, 46991593, 48060267, solved_path, 44+)	(Chr10, 48060268, 133785266, solved_path, 45+)	-	-
