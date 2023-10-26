@@ -1,0 +1,248 @@
+/home/zhaoyang-new/anaconda3/envs/KarSimulator/bin/python /media/zhaoyang-new/workspace/KarSim/KarSimulator/Main/compare_KT_to_solved_path.py
+alignment between Chr9a, Path17: -252
+jaccard score: 0.0000
+(Chr9, 0, 9999, telomere1)	(Chr9, 10000, 43236167, 31+)	(Chr9, 43236168, 45518558, centromere, CEN9)	(Chr9, 45518559, 66159244, 32+)	(Chr9, 66159245, 67853030, 32+)	(Chr9, 67853031, 138334464, 32+)	(Chr9, 138334465, 138334716, 32+)	(Chr9, 138334717, 138394716, telomere2)
+(Chr9, 0, 9999, solved_path, 42+)	(Chr9, 10000, 43236167, solved_path, 42+)	(Chr9, 43236168, 45518558, solved_path, 42+)	(Chr9, 45518559, 66159244, solved_path, 42+)	(Chr9, 66159245, 67853030, solved_path, 43+)	(Chr9, 67853031, 138334464, solved_path, 44+)	-	-
+
+alignment between Chr9b, Path18: -252
+jaccard score: 0.0000
+(Chr9, 0, 9999, telomere1)	(Chr9, 10000, 43236167, 31+)	(Chr9, 43236168, 45518558, centromere, CEN9)	(Chr9, 45518559, 66159244, 32+)	(Chr9, 66159245, 67853030, 32+)	(Chr9, 67853031, 138334464, 32+)	(Chr9, 138334465, 138334716, 32+)	(Chr9, 138334717, 138394716, telomere2)
+(Chr9, 0, 9999, solved_path, 42-)	(Chr9, 10000, 43236167, solved_path, 42-)	(Chr9, 43236168, 45518558, solved_path, 42-)	(Chr9, 45518559, 66159244, solved_path, 42-)	(Chr9, 66159245, 67853030, solved_path, 43-)	(Chr9, 67853031, 138334464, solved_path, 44-)	-	-
+
+alignment between Chr20a, Path39: -448
+jaccard score: 0.0000
+(Chr20, 0, 59999, telomere1)	(Chr20, 60000, 26436232, 62+)	(Chr20, 26436233, 30038348, centromere, CEN20)	(Chr20, 30038349, 64333718, 63+)	(Chr20, 64333719, 64334166, 63+)	(Chr20, 64334167, 64444166, telomere2)
+(Chr20, 0, 59999, solved_path, 65+)	(Chr20, 60000, 26436232, solved_path, 65+)	(Chr20, 26436233, 30038348, solved_path, 65+)	(Chr20, 30038349, 64333718, solved_path, 65+)	-	-
+
+alignment between Chr20b, Path40: -448
+jaccard score: 0.0000
+(Chr20, 0, 59999, telomere1)	(Chr20, 60000, 26436232, 62+)	(Chr20, 26436233, 30038348, centromere, CEN20)	(Chr20, 30038349, 64333718, 63+)	(Chr20, 64333719, 64334166, 63+)	(Chr20, 64334167, 64444166, telomere2)
+(Chr20, 0, 59999, solved_path, 65-)	(Chr20, 60000, 26436232, solved_path, 65-)	(Chr20, 26436233, 30038348, solved_path, 65-)	(Chr20, 30038349, 64333718, solved_path, 65-)	-	-
+
+alignment between Chr17a, Path33: -1048
+jaccard score: 0.0000
+(Chr17, 0, 59999, telomere1)	(Chr17, 60000, 16806183, 54+)	(Chr17, 16806184, 18509508, 54+)	(Chr17, 18509509, 22813679, 54+)	(Chr17, 22813680, 26885980, centromere, CEN17)	(Chr17, 26885981, 83246392, 55+)	(Chr17, 83246393, 83247440, 55+)	(Chr17, 83247441, 83257440, telomere2)
+(Chr17, 0, 59999, solved_path, 60+)	(Chr17, 60000, 16806183, solved_path, 60+)	(Chr17, 16806184, 18509508, solved_path, 61+)	(Chr17, 18509509, 22813679, solved_path, 62+)	(Chr17, 22813680, 26885980, solved_path, 62+)	(Chr17, 26885981, 83246392, solved_path, 62+)	-	-
+
+alignment between Chr17b, Path34: -1048
+jaccard score: 0.0000
+(Chr17, 0, 59999, telomere1)	(Chr17, 60000, 16806183, 54+)	(Chr17, 16806184, 18509508, 54+)	(Chr17, 18509509, 22813679, 54+)	(Chr17, 22813680, 26885980, centromere, CEN17)	(Chr17, 26885981, 83246392, 55+)	(Chr17, 83246393, 83247440, 55+)	(Chr17, 83247441, 83257440, telomere2)
+(Chr17, 0, 59999, solved_path, 60-)	(Chr17, 60000, 16806183, solved_path, 60-)	(Chr17, 16806184, 18509508, solved_path, 61-)	(Chr17, 18509509, 22813679, solved_path, 62-)	(Chr17, 22813680, 26885980, solved_path, 62-)	(Chr17, 26885981, 83246392, solved_path, 62-)	-	-
+
+alignment between Chr12a, Path23: -1348
+jaccard score: 0.0000
+(Chr12, 0, 9999, telomere1)	(Chr12, 10000, 34769407, 37+)	(Chr12, 34769408, 37185252, centromere, CEN12)	(Chr12, 37185253, 133263960, 38+)	(Chr12, 133263961, 133265308, 38+)	(Chr12, 133265309, 133275308, telomere2)
+(Chr12, 0, 9999, solved_path, 51+)	(Chr12, 10000, 34769407, solved_path, 51+)	(Chr12, 34769408, 37185252, solved_path, 51+)	(Chr12, 37185253, 133263960, solved_path, 51+)	-	-
+
+alignment between Chr12b, Path24: -1348
+jaccard score: 0.0000
+(Chr12, 0, 9999, telomere1)	(Chr12, 10000, 34769407, 37+)	(Chr12, 34769408, 37185252, centromere, CEN12)	(Chr12, 37185253, 133263960, 38+)	(Chr12, 133263961, 133265308, 38+)	(Chr12, 133265309, 133275308, telomere2)
+(Chr12, 0, 9999, solved_path, 51-)	(Chr12, 10000, 34769407, solved_path, 51-)	(Chr12, 34769408, 37185252, solved_path, 51-)	(Chr12, 37185253, 133263960, solved_path, 51-)	-	-
+
+alignment between Chr19b, Path37: -1900
+jaccard score: 0.0000
+(Chr19, 0, 59999, telomere1)	(Chr19, 60000, 24498980, 58+)	(Chr19, 24498981, 27190874, centromere, CEN19)	(Chr19, 27190875, 51188096, 59+)	(Chr19, 51188097, 51188097, 60+)	(Chr19, 51188098, 58605715, 61+)	(Chr19, 58605716, 58607615, 61+)	(Chr19, 58607616, 58617615, telomere2)
+(Chr19, 0, 59999, solved_path, 64+)	(Chr19, 60000, 24498980, solved_path, 64+)	(Chr19, 24498981, 27190874, solved_path, 64+)	(Chr19, 27190875, 51188096, solved_path, 64+)	(Chr19, 51188097, 51188097, solved_path, 64+)	(Chr19, 51188098, 58605715, solved_path, 64+)	-	-
+
+alignment between Chr4a, Path9: -1990
+jaccard score: 0.0000
+(Chr4, 0, 9999, telomere1)	(Chr4, 10000, 49708100, 9+)	(Chr4, 49708101, 51743951, centromere, CEN4)	(Chr4, 51743952, 148575472, 10+)	(Chr4, 148575473, 151157542, 11+)	(Chr4, 151157543, 190202564, 12+)	(Chr4, 190202565, 190204554, 12+)	(Chr4, 190204555, 190214554, telomere2)
+(Chr4, 0, 9999, solved_path, 19+)	(Chr4, 10000, 49708100, solved_path, 19+)	(Chr4, 49708101, 51743951, solved_path, 19+)	(Chr4, 51743952, 148575472, solved_path, 19+)	(Chr4, 148575473, 151157542, solved_path, 19+)	(Chr4, 151157543, 190202564, solved_path, 19+)	-	-
+
+alignment between Chr2a, Path3: -2171
+jaccard score: 0.0000
+(Chr2, 0, 9999, telomere1)	(Chr2, 10000, 68489164, 3+)	(Chr2, 68489165, 70200799, 3+)	(Chr2, 70200800, 92188145, 3+)	(Chr2, 92188146, 94090557, centromere, CEN2)	(Chr2, 94090558, 97967642, 4+)	(Chr2, 97967643, 100559330, 4+)	(Chr2, 100559331, 116674302, 4+)	(Chr2, 116674303, 117956910, 4+)	(Chr2, 117956911, 228769185, 4+)	(Chr2, 228769186, 231412178, 4+)	(Chr2, 231412179, 242181357, 4+)	(Chr2, 242181358, 242183528, 4+)	(Chr2, 242183529, 242193528, telomere2)
+(Chr2, 0, 9999, solved_path, 9+)	(Chr2, 10000, 68489164, solved_path, 9+)	(Chr2, 68489165, 70200799, solved_path, 10+)	(Chr2, 70200800, 92188145, solved_path, 11+)	(Chr2, 92188146, 94090557, solved_path, 11+)	(Chr2, 94090558, 97967642, solved_path, 11+)	(Chr2, 97967643, 100559330, solved_path, 12+)	(Chr2, 100559331, 116674302, solved_path, 13+)	(Chr2, 116674303, 117956910, solved_path, 14+)	(Chr2, 117956911, 228769185, solved_path, 15+)	(Chr2, 228769186, 231412178, solved_path, 16+)	(Chr2, 231412179, 242181357, solved_path, 17+)	-	-
+
+alignment between Chr13a, Path25: -2225
+jaccard score: 0.0000
+(Chr13, 0, 15999999, acrocentric)	(Chr13, 16000000, 16000000, acrocentric, 39+)	(Chr13, 16000001, 18051248, acrocentric, CEN13)	(Chr13, 18051249, 18051249, acrocentric, 40+)	(Chr13, 18051250, 56261538, 40+)	(Chr13, 56261539, 57831463, 41+)	(Chr13, 57831464, 85674828, 42+)	(Chr13, 85674829, 88522022, 43+)	(Chr13, 88522023, 112784403, 44+)	(Chr13, 112784404, 114352102, 45+)	(Chr13, 114352103, 114354327, 45+)	(Chr13, 114354328, 114364327, telomere2)
+(Chr13, 0, 15999999, acrocentric, 52+)	(Chr13, 16000000, 16000000, acrocentric, 52+)	(Chr13, 16000001, 18051248, acrocentric, 52+)	(Chr13, 18051249, 18051249, acrocentric, 52+)	(Chr13, 18051250, 56261538, solved_path, 52+)	(Chr13, 56261539, 57831463, solved_path, 52+)	(Chr13, 57831464, 85674828, solved_path, 52+)	(Chr13, 85674829, 88522022, solved_path, 52+)	(Chr13, 88522023, 112784403, solved_path, 52+)	(Chr13, 112784404, 114352102, solved_path, 52+)	-	-
+
+alignment between Chr8a, Path15: -2510
+jaccard score: 0.0000
+(Chr8, 0, 59999, telomere1)	(Chr8, 60000, 44033744, 29+)	(Chr8, 44033745, 45877265, centromere, CEN8)	(Chr8, 45877266, 145076125, 30+)	(Chr8, 145076126, 145078635, 30+)	(Chr8, 145078636, 145138635, telomere2)
+(Chr8, 0, 59999, solved_path, 41+)	(Chr8, 60000, 44033744, solved_path, 41+)	(Chr8, 44033745, 45877265, solved_path, 41+)	(Chr8, 45877266, 145076125, solved_path, 41+)	-	-
+
+alignment between Chr21a, Path41: -2752
+jaccard score: 0.0000
+(Chr21, 0, 5009999, acrocentric)	(Chr21, 5010000, 10864560, acrocentric, 64+)	(Chr21, 10864561, 12915808, acrocentric, CEN21)	(Chr21, 12915809, 12915809, acrocentric, 65+)	(Chr21, 12915810, 46697230, 65+)	(Chr21, 46697231, 46699982, 65+)	(Chr21, 46699983, 46709982, telomere2)
+(Chr21, 0, 5009999, acrocentric, 66+)	(Chr21, 5010000, 10864560, acrocentric, 66+)	(Chr21, 10864561, 12915808, acrocentric, 66+)	(Chr21, 12915809, 12915809, acrocentric, 66+)	(Chr21, 12915810, 46697230, solved_path, 66+)	-	-
+
+alignment between Chr21b, Path42: -2752
+jaccard score: 0.0000
+(Chr21, 0, 5009999, acrocentric)	(Chr21, 5010000, 10864560, acrocentric, 64+)	(Chr21, 10864561, 12915808, acrocentric, CEN21)	(Chr21, 12915809, 12915809, acrocentric, 65+)	(Chr21, 12915810, 46697230, 65+)	(Chr21, 46697231, 46699982, 65+)	(Chr21, 46699983, 46709982, telomere2)
+(Chr21, 0, 5009999, solved_path, 66-)	(Chr21, 5010000, 10864560, solved_path, 66-)	(Chr21, 10864561, 12915808, solved_path, 66-)	(Chr21, 12915809, 12915809, solved_path, 66-)	(Chr21, 12915810, 46697230, solved_path, 66-)	-	-
+
+alignment between Chr22a, Path43: -2880
+jaccard score: 0.0000
+(Chr22, 0, 10509999, acrocentric)	(Chr22, 10510000, 12954788, acrocentric, 66+)	(Chr22, 12954789, 15054318, acrocentric, CEN22)	(Chr22, 15054319, 15054319, acrocentric, 67+)	(Chr22, 15054320, 50805587, 67+)	(Chr22, 50805588, 50808467, 67+)	(Chr22, 50808468, 50818467, telomere2)
+(Chr22, 0, 10509999, acrocentric, 67+)	(Chr22, 10510000, 12954788, acrocentric, 67+)	(Chr22, 12954789, 15054318, acrocentric, 67+)	(Chr22, 15054319, 15054319, acrocentric, 67+)	(Chr22, 15054320, 50805587, solved_path, 67+)	-	-
+
+alignment between Chr22b, Path44: -2880
+jaccard score: 0.0000
+(Chr22, 0, 10509999, acrocentric)	(Chr22, 10510000, 12954788, acrocentric, 66+)	(Chr22, 12954789, 15054318, acrocentric, CEN22)	(Chr22, 15054319, 15054319, acrocentric, 67+)	(Chr22, 15054320, 50805587, 67+)	(Chr22, 50805588, 50808467, 67+)	(Chr22, 50808468, 50818467, telomere2)
+(Chr22, 0, 10509999, solved_path, 67-)	(Chr22, 10510000, 12954788, solved_path, 67-)	(Chr22, 12954789, 15054318, solved_path, 67-)	(Chr22, 15054319, 15054319, solved_path, 67-)	(Chr22, 15054320, 50805587, solved_path, 67-)	-	-
+
+alignment between Chr1b, Path2: -4101
+jaccard score: 0.0000
+(Chr1, 0, 9999, telomere1)	(Chr1, 10000, 122026459, 1+)	(Chr1, 122026460, 125184587, centromere, CEN1)	(Chr1, 125184588, 248645845, 2+)	(Chr1, 248645846, 248942320, 2+)	(Chr1, 248942321, 248946421, 2+)	(Chr1, 248946422, 248956421, telomere2)
+-	-	-	-	(Chr1, 248645846, 248942320, solved_path, 8-)	-	-
+
+alignment between Chr15a, Path29: -4679
+jaccard score: 0.0000
+(Chr15, 0, 16999999, acrocentric)	(Chr15, 17000000, 17000000, acrocentric, 48+)	(Chr15, 17000001, 19725254, acrocentric, CEN15)	(Chr15, 19725255, 19725255, acrocentric, 49+)	(Chr15, 19725256, 101976509, 49+)	(Chr15, 101976510, 101981188, 49+)	(Chr15, 101981189, 101991188, telomere2)
+(Chr15, 0, 16999999, acrocentric, 54+)	(Chr15, 17000000, 17000000, acrocentric, 54+)	(Chr15, 17000001, 19725254, acrocentric, 54+)	(Chr15, 19725255, 19725255, acrocentric, 54+)	(Chr15, 19725256, 101976509, solved_path, 54+)	-	-
+
+alignment between Chr15b, Path30: -4679
+jaccard score: 0.0000
+(Chr15, 0, 16999999, acrocentric)	(Chr15, 17000000, 17000000, acrocentric, 48+)	(Chr15, 17000001, 19725254, acrocentric, CEN15)	(Chr15, 19725255, 19725255, acrocentric, 49+)	(Chr15, 19725256, 101976509, 49+)	(Chr15, 101976510, 101981188, 49+)	(Chr15, 101981189, 101991188, telomere2)
+(Chr15, 0, 16999999, solved_path, 54-)	(Chr15, 17000000, 17000000, solved_path, 54-)	(Chr15, 17000001, 19725254, solved_path, 54-)	(Chr15, 19725255, 19725255, solved_path, 54-)	(Chr15, 19725256, 101976509, solved_path, 54-)	-	-
+
+alignment between Chr3a, Path7: -4962
+jaccard score: 0.0000
+(Chr3, 0, 9999, telomere1)	(Chr3, 10000, 90772458, 5+)	(Chr3, 90772459, 93655574, centromere, CEN3)	(Chr3, 93655575, 178141140, 6+)	(Chr3, 178141141, 180335513, 7+)	(Chr3, 180335514, 198230596, 8+)	(Chr3, 198230597, 198235558, 8+)	(Chr3, 198235559, 198295558, telomere2)
+(Chr3, 0, 9999, solved_path, 18+)	(Chr3, 10000, 90772458, solved_path, 18+)	(Chr3, 90772459, 93655574, solved_path, 18+)	(Chr3, 93655575, 178141140, solved_path, 18+)	(Chr3, 178141141, 180335513, solved_path, 18+)	(Chr3, 180335514, 198230596, solved_path, 18+)	-	-
+
+alignment between Chr3b, Path8: -4962
+SV_name: SV2-{nonreciprocal translocation from Chr3b to Chr16a}	SV_total: 2194373	SV_captured: 0	SV_capture_rate: 0.0000
+jaccard score: 0.0000
+(Chr3, 0, 9999, telomere1)	(Chr3, 10000, 90772458, 5+)	(Chr3, 90772459, 93655574, centromere, CEN3)	(Chr3, 93655575, 178141140, 6+)	(Chr3, 178141141, 180335513, del: SV2, 7+)	(Chr3, 180335514, 198230596, 8+)	(Chr3, 198230597, 198235558, 8+)	(Chr3, 198235559, 198295558, telomere2)
+(Chr3, 0, 9999, solved_path, 18-)	(Chr3, 10000, 90772458, solved_path, 18-)	(Chr3, 90772459, 93655574, solved_path, 18-)	(Chr3, 93655575, 178141140, solved_path, 18-)	(Chr3, 178141141, 180335513, solved_path, 18-)	(Chr3, 180335514, 198230596, solved_path, 18-)	-	-
+
+alignment between ChrYa, Path46: -5282
+jaccard score: 0.0000
+(ChrY, 0, 9999, telomere1)	(ChrY, 10000, 10316944, 74+)	(ChrY, 10316945, 10544039, centromere, CENY)	(ChrY, 10544040, 57212132, 75+)	(ChrY, 57212133, 57217414, 75+)	(ChrY, 57217415, 57227414, telomere2)
+(ChrY, 0, 9999, solved_path, 71+)	(ChrY, 10000, 10316944, solved_path, 71+)	(ChrY, 10316945, 10544039, solved_path, 71+)	(ChrY, 10544040, 57212132, solved_path, 71+)	-	-
+
+alignment between Chr18a, Path35: -6910
+jaccard score: 0.0000
+(Chr18, 0, 9999, telomere1)	(Chr18, 10000, 15460899, 56+)	(Chr18, 15460900, 20861206, centromere, CEN18)	(Chr18, 20861207, 80256374, 57+)	(Chr18, 80256375, 80263284, 57+)	(Chr18, 80263285, 80373284, telomere2)
+(Chr18, 0, 9999, solved_path, 63+)	(Chr18, 10000, 15460899, solved_path, 63+)	(Chr18, 15460900, 20861206, solved_path, 63+)	(Chr18, 20861207, 80256374, solved_path, 63+)	-	-
+
+alignment between Chr18b, Path36: -6910
+jaccard score: 0.0000
+(Chr18, 0, 9999, telomere1)	(Chr18, 10000, 15460899, 56+)	(Chr18, 15460900, 20861206, centromere, CEN18)	(Chr18, 20861207, 80256374, 57+)	(Chr18, 80256375, 80263284, 57+)	(Chr18, 80263285, 80373284, telomere2)
+(Chr18, 0, 9999, solved_path, 63-)	(Chr18, 10000, 15460899, solved_path, 63-)	(Chr18, 15460900, 20861206, solved_path, 63-)	(Chr18, 20861207, 80256374, solved_path, 63-)	-	-
+
+alignment between Chr11a, Path21: -7056
+jaccard score: 0.0000
+(Chr11, 0, 59999, telomere1)	(Chr11, 60000, 51078348, 35+)	(Chr11, 51078349, 54425074, centromere, CEN11)	(Chr11, 54425075, 135069565, 36+)	(Chr11, 135069566, 135076621, 36+)	(Chr11, 135076622, 135086621, telomere2)
+(Chr11, 0, 59999, solved_path, 50+)	(Chr11, 60000, 51078348, solved_path, 50+)	(Chr11, 51078349, 54425074, solved_path, 50+)	(Chr11, 54425075, 135069565, solved_path, 50+)	-	-
+
+alignment between Chr11b, Path22: -7056
+jaccard score: 0.0000
+(Chr11, 0, 59999, telomere1)	(Chr11, 60000, 51078348, 35+)	(Chr11, 51078349, 54425074, centromere, CEN11)	(Chr11, 54425075, 135069565, 36+)	(Chr11, 135069566, 135076621, 36+)	(Chr11, 135076622, 135086621, telomere2)
+(Chr11, 0, 59999, solved_path, 50-)	(Chr11, 60000, 51078348, solved_path, 50-)	(Chr11, 51078349, 54425074, solved_path, 50-)	(Chr11, 54425075, 135069565, solved_path, 50-)	-	-
+
+alignment between Chr14a, Path27: -10435
+jaccard score: 0.0000
+(Chr14, 0, 15999999, acrocentric)	(Chr14, 16000000, 16000000, acrocentric, 46+)	(Chr14, 16000001, 18173523, acrocentric, CEN14)	(Chr14, 18173524, 18173524, acrocentric, 47+)	(Chr14, 18173525, 106873282, 47+)	(Chr14, 106873283, 106883717, 47+)	(Chr14, 106883718, 107043717, telomere2)
+(Chr14, 0, 15999999, acrocentric, 53+)	(Chr14, 16000000, 16000000, acrocentric, 53+)	(Chr14, 16000001, 18173523, acrocentric, 53+)	(Chr14, 18173524, 18173524, acrocentric, 53+)	(Chr14, 18173525, 106873282, solved_path, 53+)	-	-
+
+alignment between Chr14b, Path28: -10435
+jaccard score: 0.0000
+(Chr14, 0, 15999999, acrocentric)	(Chr14, 16000000, 16000000, acrocentric, 46+)	(Chr14, 16000001, 18173523, acrocentric, CEN14)	(Chr14, 18173524, 18173524, acrocentric, 47+)	(Chr14, 18173525, 106873282, 47+)	(Chr14, 106873283, 106883717, 47+)	(Chr14, 106883718, 107043717, telomere2)
+(Chr14, 0, 15999999, solved_path, 53-)	(Chr14, 16000000, 16000000, solved_path, 53-)	(Chr14, 16000001, 18173523, solved_path, 53-)	(Chr14, 18173524, 18173524, solved_path, 53-)	(Chr14, 18173525, 106873282, solved_path, 53-)	-	-
+
+alignment between ChrXa, Path45: -13448
+SV_name: SV0-{deletion from ChrXa to ChrXa}	SV_total: 1627384	SV_captured: 1625922	SV_capture_rate: 0.9991
+SV_name: SV10-{deletion from ChrXa to ChrXa}	SV_total: 1480569	SV_captured: 0	SV_capture_rate: 0.0000
+jaccard score: 0.5209
+(ChrX, 0, 9999, telomere1)	(ChrX, 10000, 12932, 68+)	(ChrX, 12933, 6529265, 68+)	(ChrX, 6529266, 6537770, 68+)	(ChrX, 6537771, 8163692, del: SV0, 69+)	(ChrX, 8163693, 8165154, del: SV0, 69+)	-	(ChrX, 8165155, 50213660, 70+)	(ChrX, 50213661, 51694229, del: SV10, 71+)	(ChrX, 51694230, 58605579, 72+)	(ChrX, 58605580, 62412542, centromere, CENX)	(ChrX, 62412543, 156020370, 73+)	(ChrX, 156020371, 156030894, 73+)	(ChrX, 156030895, 156040894, telomere2)
+-	-	-	-	-	(ChrX, 12933, 6529265, solved_path, 68+)	(ChrX, 8163693, 8165154, solved_path, 70+)	(ChrX, 8165155, 50213660, solved_path, 70+)	(ChrX, 50213661, 51694229, solved_path, 70+)	(ChrX, 51694230, 58605579, solved_path, 70+)	(ChrX, 58605580, 62412542, solved_path, 70+)	(ChrX, 62412543, 156020370, solved_path, 70+)	-	-
+
+alignment between Chr10a, Path19: -14455
+jaccard score: 0.0000
+(Chr10, 0, 9999, telomere1)	(Chr10, 10000, 19073, 33+)	(Chr10, 19074, 39686682, 33+)	(Chr10, 39686683, 41593521, centromere, CEN10)	(Chr10, 41593522, 46991592, 34+)	(Chr10, 46991593, 48060267, 34+)	(Chr10, 48060268, 90913426, 34+)	(Chr10, 90913427, 90914177, 34+)	(Chr10, 90914178, 93264147, 34+)	(Chr10, 93264148, 93269424, 34+)	(Chr10, 93269425, 133778994, 34+)	(Chr10, 133778995, 133787421, 34+)	(Chr10, 133787422, 133797421, telomere2)
+-	-	(Chr10, 19074, 39686682, solved_path, 45+)	(Chr10, 39686683, 41593521, solved_path, 45+)	(Chr10, 41593522, 46991592, solved_path, 45+)	(Chr10, 46991593, 48060267, solved_path, 46+)	(Chr10, 48060268, 90913426, solved_path, 47+)	-	(Chr10, 90914178, 93264147, solved_path, 48+)	-	(Chr10, 93269425, 133778994, solved_path, 49+)	-	-
+
+alignment between Chr7a, Path13: -16904
+jaccard score: 0.0000
+(Chr7, 0, 9999, telomere1)	(Chr7, 10000, 12915, 17+)	(Chr7, 12916, 18678236, 17+)	(Chr7, 18678237, 20353033, 18+)	(Chr7, 20353034, 58169653, 19+)	(Chr7, 58169654, 60828234, centromere, CEN7)	(Chr7, 60828235, 65824937, 20+)	(Chr7, 65824938, 66884567, 21+)	(Chr7, 66884568, 118849884, 22+)	(Chr7, 118849885, 121568890, 23+)	(Chr7, 121568891, 126290455, 24+)	(Chr7, 126290456, 129027401, 25+)	(Chr7, 129027402, 129076216, 26+)	(Chr7, 129076217, 129080853, 26+)	(Chr7, 129080854, 130245147, 26+)	(Chr7, 130245148, 130250906, 26+)	(Chr7, 130250907, 133081001, 26+)	(Chr7, 133081002, 135415147, 27+)	(Chr7, 135415148, 159329464, 28+)	(Chr7, 159329465, 159335972, 28+)	(Chr7, 159335973, 159345972, telomere2)
+-	-	(Chr7, 12916, 18678236, solved_path, 38+)	(Chr7, 18678237, 20353033, solved_path, 38+)	(Chr7, 20353034, 58169653, solved_path, 38+)	(Chr7, 58169654, 60828234, solved_path, 38+)	(Chr7, 60828235, 65824937, solved_path, 38+)	(Chr7, 65824938, 66884567, solved_path, 38+)	(Chr7, 66884568, 118849884, solved_path, 38+)	(Chr7, 118849885, 121568890, solved_path, 38+)	(Chr7, 121568891, 126290455, solved_path, 38+)	(Chr7, 126290456, 129027401, solved_path, 38+)	(Chr7, 129027402, 129076216, solved_path, 38+)	-	(Chr7, 129080854, 130245147, solved_path, 39+)	-	(Chr7, 130250907, 133081001, solved_path, 40+)	(Chr7, 133081002, 135415147, solved_path, 40+)	(Chr7, 135415148, 159329464, solved_path, 40+)	-	-
+
+alignment between Chr16b, Path31: -24133
+jaccard score: 0.0000
+(Chr16, 0, 9999, telomere1)	(Chr16, 10000, 19374, 50+)	(Chr16, 19375, 36311158, 50+)	(Chr16, 36311159, 38280682, centromere, CEN16)	(Chr16, 38280683, 77407599, 51+)	(Chr16, 77407600, 77407600, 52+)	(Chr16, 77407601, 81762973, 53+)	(Chr16, 81762974, 81814168, 53+)	(Chr16, 81814169, 81815746, 53+)	(Chr16, 81815747, 84456616, 53+)	(Chr16, 84456617, 84470899, 53+)	(Chr16, 84470900, 84581301, 53+)	(Chr16, 84581302, 90220072, 53+)	(Chr16, 90220073, 90228344, 53+)	(Chr16, 90228345, 90338344, telomere2)
+-	-	(Chr16, 19375, 36311158, solved_path, 55+)	(Chr16, 36311159, 38280682, solved_path, 55+)	(Chr16, 38280683, 77407599, solved_path, 55+)	(Chr16, 77407600, 77407600, solved_path, 55+)	(Chr16, 77407601, 81762973, solved_path, 55+)	(Chr16, 81762974, 81814168, solved_path, 56+)	-	(Chr16, 81815747, 84456616, solved_path, 57+)	-	(Chr16, 84470900, 84581301, solved_path, 58+)	(Chr16, 84581302, 90220072, solved_path, 59+)	-	-
+
+alignment between Chr19a, Path38: -1061530
+SV_name: SV3-{nonreciprocal translocation from Chr7b to Chr19a}	SV_total: 1059630	SV_captured: 0	SV_capture_rate: 0.0000
+jaccard score: 0.0000
+(Chr19, 0, 59999, telomere1)	(Chr19, 60000, 24498980, 58+)	(Chr19, 24498981, 27190874, centromere, CEN19)	(Chr19, 27190875, 51188096, 59+)	(Chr7, 65824938, 66884567, ins: SV3, 21+)	(Chr19, 51188097, 51188097, 60+)	(Chr19, 51188098, 58605715, 61+)	(Chr19, 58605716, 58607615, 61+)	(Chr19, 58607616, 58617615, telomere2)
+(Chr19, 0, 59999, solved_path, 64-)	(Chr19, 60000, 24498980, solved_path, 64-)	(Chr19, 24498981, 27190874, solved_path, 64-)	(Chr19, 27190875, 51188096, solved_path, 64-)	-	(Chr19, 51188097, 51188097, solved_path, 64-)	(Chr19, 51188098, 58605715, solved_path, 64-)	-	-
+
+alignment between Chr4b, Path10: -2849184
+SV_name: SV5-{balanced reciprocal translocation from Chr4b to Chr13b}	SV_total: 2582070.0	SV_captured: 0.0	SV_capture_rate: 0.0000
+SV_name: SV4-{balanced reciprocal translocation from Chr13b to Chr4b}	SV_total: 2847194	SV_captured: 0	SV_capture_rate: 0.0000
+jaccard score: 0.0000
+(Chr4, 0, 9999, telomere1)	(Chr4, 10000, 49708100, 9+)	(Chr4, 49708101, 51743951, centromere, CEN4)	(Chr4, 51743952, 148575472, 10+)	(Chr4, 148575473, 151157542, del: SV5: 2, 11+)	(Chr13, 85674829, 88522022, ins: SV4, 43+)	(Chr4, 148575473, 151157542, del: SV5: 2, 11+)	(Chr4, 151157543, 190202564, 12+)	(Chr4, 190202565, 190204554, 12+)	(Chr4, 190204555, 190214554, telomere2)
+(Chr4, 0, 9999, solved_path, 19-)	(Chr4, 10000, 49708100, solved_path, 19-)	(Chr4, 49708101, 51743951, solved_path, 19-)	(Chr4, 51743952, 148575472, solved_path, 19-)	-	-	(Chr4, 148575473, 151157542, solved_path, 19-)	(Chr4, 151157543, 190202564, solved_path, 19-)	-	-
+
+alignment between Chr6a, Path11: -3836077
+jaccard score: 0.0000
+(Chr6, 0, 59999, telomere1)	(Chr6, 60000, 78490, 15+)	(Chr6, 78491, 26578091, 15+)	(Chr6, 26578092, 27977546, 15+)	(Chr6, 27977547, 58445657, 15+)	(Chr6, 58445658, 58553888, 15+)	(Chr6, 58553889, 59282243, centromere, CEN6)	(Chr6, 59282244, 59829934, centromere, CEN6)	(Chr6, 59829935, 85700148, 16+)	-	(Chr6, 85700149, 87289751, 16+)	(Chr6, 87289752, 87407346, 16+)	(Chr6, 87407347, 87408693, 16+)	(Chr6, 87408694, 170489744, 16+)	(Chr6, 170489745, 170490271, 16+)	(Chr6, 170490272, 170737419, 16+)	(Chr6, 170737420, 170745978, 16+)	(Chr6, 170745979, 170805978, telomere2)
+-	-	(Chr6, 78491, 26578091, solved_path, 29+)	(Chr6, 26578092, 27977546, solved_path, 30+)	(Chr6, 27977547, 58445657, solved_path, 31+)	-	-	(Chr6, 59282244, 59829934, solved_path, 32+)	(Chr6, 59829935, 85700148, solved_path, 32+)	(Chr6, 26578092, 27977546, solved_path, 30+)	-	(Chr6, 87289752, 87407346, solved_path, 35+)	-	(Chr6, 87408694, 170489744, solved_path, 36+)	-	(Chr6, 170490272, 170737419, solved_path, 37+)	-	-
+
+alignment between Chr13b, Path26: -4154219
+SV_name: SV4-{balanced reciprocal translocation from Chr13b to Chr4b}	SV_total: 2847194.0	SV_captured: 0.0	SV_capture_rate: 0.0000
+SV_name: SV5-{balanced reciprocal translocation from Chr4b to Chr13b}	SV_total: 2582070	SV_captured: 0	SV_capture_rate: 0.0000
+SV_name: SV7-{left duplication inversion from Chr13b to Chr13b}	SV_total: 1569924	SV_captured: 0	SV_capture_rate: 0.0000
+jaccard score: 0.0000
+(Chr13, 0, 15999999, acrocentric)	(Chr13, 16000000, 16000000, acrocentric, 39+)	(Chr13, 16000001, 18051248, acrocentric, CEN13)	(Chr13, 18051249, 18051249, acrocentric, 40+)	(Chr13, 18051250, 56261538, 40+)	(Chr13, 56261539, 57831463, 41+)	(Chr13, 57831464, 85674828, 42+)	(Chr13, 85674829, 88522022, del: SV4: 2, 43+)	(Chr4, 148575473, 151157542, ins: SV5, 11+)	(Chr13, 85674829, 88522022, del: SV4: 2, 43+)	(Chr13, 88522023, 112784403, 44+)	(Chr13, 114354327, 114352103, ins: SV7, 45-)	(Chr13, 114352102, 112784404, ins: SV7, 45-)	(Chr13, 112784404, 114352102, 45+)	(Chr13, 114352103, 114354327, 45+)	(Chr13, 114354328, 114364327, telomere2)
+(Chr13, 0, 15999999, solved_path, 52-)	(Chr13, 16000000, 16000000, solved_path, 52-)	(Chr13, 16000001, 18051248, solved_path, 52-)	(Chr13, 18051249, 18051249, solved_path, 52-)	(Chr13, 18051250, 56261538, solved_path, 52-)	(Chr13, 56261539, 57831463, solved_path, 52-)	(Chr13, 57831464, 85674828, solved_path, 52-)	-	-	(Chr13, 85674829, 88522022, solved_path, 52-)	(Chr13, 88522023, 112784403, solved_path, 52-)	-	-	(Chr13, 112784404, 114352102, solved_path, 52-)	-	-
+
+alignment between Chr10b, Path20: -4501775
+jaccard score: 0.0000
+(Chr10, 0, 9999, telomere1)	(Chr10, 10000, 19073, 33+)	(Chr10, 19074, 39686682, 33+)	(Chr10, 39686683, 41593521, centromere, CEN10)	(Chr10, 41593522, 46991592, 34+)	-	(Chr10, 46991593, 48060267, 34+)	(Chr10, 48060268, 90913426, 34+)	(Chr10, 90913427, 93269424, 34+)	(Chr10, 93269425, 133778994, 34+)	(Chr10, 133778995, 133787421, 34+)	(Chr10, 133787422, 133797421, telomere2)
+-	-	(Chr10, 19074, 39686682, solved_path, 45-)	(Chr10, 39686683, 41593521, solved_path, 45-)	(Chr10, 41593522, 46991592, solved_path, 45-)	(Chr10, 48060267, 46991593, solved_path, 46+)	-	(Chr10, 48060268, 90913426, solved_path, 47-)	-	(Chr10, 93269425, 133778994, solved_path, 49-)	-	-
+
+alignment between Chr6c, Path12: -4613943
+jaccard score: 0.0000
+(Chr6, 0, 59999, telomere1)	(Chr6, 60000, 78490, 15+)	(Chr6, 78491, 26578091, 15+)	-	-	(Chr6, 26578092, 27977546, 15+)	(Chr6, 27977547, 58445657, 15+)	-	(Chr6, 58445658, 58553888, 15+)	(Chr6, 58553889, 59829934, centromere, CEN6)	(Chr6, 170745979, 170805978, telomere2)
+-	-	(Chr6, 78491, 26578091, solved_path, 29-)	(Chr6, 85700149, 87139302, solved_path, 33-)	(Chr6, 87145843, 87289751, solved_path, 34-)	-	(Chr6, 27977547, 58445657, solved_path, 31-)	(Chr6, 170490272, 170737419, solved_path, 37-)	-	-	-
+
+alignment between Chr16a, Path32: -4859376
+SV_name: SV2-{nonreciprocal translocation from Chr3b to Chr16a}	SV_total: 2194373	SV_captured: 0	SV_capture_rate: 0.0000
+jaccard score: 0.0000
+(Chr16, 0, 9999, telomere1)	(Chr16, 10000, 19374, 50+)	(Chr16, 19375, 36311158, 50+)	(Chr16, 36311159, 38280682, centromere, CEN16)	(Chr16, 38280683, 77407599, 51+)	(Chr3, 178141141, 180335513, ins: SV2, 7+)	(Chr16, 77407600, 77407600, 52+)	(Chr16, 77407601, 81762973, 53+)	(Chr16, 81762974, 81814168, 53+)	-	(Chr16, 81814169, 81815746, 53+)	(Chr16, 81815747, 84456616, 53+)	(Chr16, 84456617, 84470899, 53+)	(Chr16, 84470900, 84581301, 53+)	(Chr16, 84581302, 90220072, 53+)	(Chr16, 90220073, 90228344, 53+)	(Chr16, 90228345, 90338344, telomere2)
+-	-	(Chr16, 19375, 36311158, solved_path, 55-)	(Chr16, 36311159, 38280682, solved_path, 55-)	(Chr16, 38280683, 77407599, solved_path, 55-)	-	(Chr16, 77407600, 77407600, solved_path, 55-)	(Chr16, 77407601, 81762973, solved_path, 55-)	(Chr16, 81762974, 81814168, solved_path, 56-)	(Chr16, 81815747, 84456616, solved_path, 57-)	-	(Chr16, 81815747, 84456616, solved_path, 57-)	-	(Chr16, 84470900, 84581301, solved_path, 58-)	(Chr16, 84581302, 90220072, solved_path, 59-)	-	-
+
+alignment between Chr7b, Path14: -7927087
+SV_name: SV8-{balanced reciprocal translocation from Chr7b to Chr7b}	SV_total: 3349594.0	SV_captured: 0.0	SV_capture_rate: 0.0000
+SV_name: SV9-{balanced reciprocal translocation from Chr7b to Chr7b}	SV_total: 4668292.0	SV_captured: 0.0	SV_capture_rate: 0.0000
+SV_name: SV3-{nonreciprocal translocation from Chr7b to Chr19a}	SV_total: 1059630	SV_captured: 0	SV_capture_rate: 0.0000
+SV_name: SV13-{deletion from Chr7b to Chr7b}	SV_total: 2719006	SV_captured: 0	SV_capture_rate: 0.0000
+SV_name: SV6-{left duplication inversion from Chr7b to Chr7b}	SV_total: 2736946	SV_captured: 0	SV_capture_rate: 0.0000
+jaccard score: 0.0000
+(Chr7, 0, 9999, telomere1)	(Chr7, 10000, 12915, 17+)	(Chr7, 12916, 18678236, 17+)	(Chr7, 18678237, 20353033, del: SV8: 2, 18+)	(Chr7, 133081002, 135415147, ins: SV9, 27+)	(Chr7, 18678237, 20353033, del: SV8: 2, 18+)	(Chr7, 20353034, 58169653, 19+)	(Chr7, 58169654, 60828234, centromere, CEN7)	(Chr7, 60828235, 65824937, 20+)	(Chr7, 65824938, 66884567, del: SV3, 21+)	(Chr7, 66884568, 118849884, 22+)	(Chr7, 118849885, 121568890, del: SV13, 23+)	(Chr7, 121568891, 126290455, 24+)	(Chr7, 129027401, 126290456, ins: SV6, 25-)	(Chr7, 126290456, 129027401, 25+)	(Chr7, 129027402, 129076216, 26+)	(Chr7, 129076217, 130250906, 26+)	(Chr7, 130250907, 133081001, 26+)	(Chr7, 133081002, 135415147, del: SV9: 2, 27+)	(Chr7, 18678237, 20353033, ins: SV8, 18+)	(Chr7, 133081002, 135415147, del: SV9: 2, 27+)	(Chr7, 135415148, 159329464, 28+)	(Chr7, 159329465, 159335972, 28+)	(Chr7, 159335973, 159345972, telomere2)
+-	-	(Chr7, 12916, 18678236, solved_path, 38-)	-	-	(Chr7, 18678237, 20353033, solved_path, 38-)	(Chr7, 20353034, 58169653, solved_path, 38-)	(Chr7, 58169654, 60828234, solved_path, 38-)	(Chr7, 60828235, 65824937, solved_path, 38-)	(Chr7, 65824938, 66884567, solved_path, 38-)	(Chr7, 66884568, 118849884, solved_path, 38-)	(Chr7, 118849885, 121568890, solved_path, 38-)	(Chr7, 121568891, 126290455, solved_path, 38-)	-	(Chr7, 126290456, 129027401, solved_path, 38-)	(Chr7, 129027402, 129076216, solved_path, 38-)	-	(Chr7, 130250907, 133081001, solved_path, 40-)	-	-	(Chr7, 133081002, 135415147, solved_path, 40-)	(Chr7, 135415148, 159329464, solved_path, 40-)	-	-
+
+alignment between Chr5c, Path6: -9139745
+jaccard score: 0.0000
+-	-	(Chr5, 0, 9999, telomere1)	(Chr5, 46485901, 50059807, centromere, CEN5)	(Chr5, 50059808, 55589423, 14+)	(Chr5, 55589424, 69517970, 14+)	(Chr5, 69517971, 69520280, 14+)	(Chr5, 69520281, 70645849, 14+)	(Chr5, 70645850, 70653792, 14+)	(Chr5, 70653793, 84296868, 14+)	(Chr5, 84296869, 84300666, 14+)	(Chr5, 84300667, 88754755, 14+)	(Chr5, 88754756, 88758838, 14+)	(Chr5, 88758839, 181301991, 14+)	(Chr5, 181301992, 181308172, 14+)	(Chr5, 181308173, 181466351, 14+)	(Chr5, 181466352, 181478258, 14+)	(Chr5, 181478259, 181538258, telomere2)
+(Chr2, 0, 68489164, solved_path, 9-)	(Chr2, 68489165, 70200799, solved_path, 10-)	-	-	-	(Chr5, 55589424, 69517970, solved_path, 23-)	-	(Chr5, 69520281, 70645849, solved_path, 24-)	-	(Chr5, 70653793, 84296868, solved_path, 25-)	-	(Chr5, 84300667, 88754755, solved_path, 26-)	-	(Chr5, 88758839, 181301991, solved_path, 27-)	-	(Chr5, 181308173, 181466351, solved_path, 28-)	-	-
+
+alignment between Chr5a, Path4: -49660499
+jaccard score: 0.0000
+(Chr5, 0, 9999, telomere1)	(Chr5, 10000, 19923, 13+)	(Chr5, 19924, 46485900, 13+)	(Chr5, 46485901, 49668515, centromere, CEN5)	(Chr5, 49668516, 50059807, centromere, CEN5)	(Chr5, 50059808, 181308172, 14+)	-	-	(Chr5, 181308173, 181466351, 14+)	(Chr5, 181466352, 181478258, 14+)	(Chr5, 181478259, 181538258, telomere2)
+-	-	-	-	-	-	(Chr5, 19924, 46485900, solved_path, 20+)	(Chr5, 46485901, 49668515, solved_path, 20+)	(Chr5, 181308173, 181466351, solved_path, 28+)	-	-
+
+alignment between Chr2b, Path5: -65872706
+jaccard score: 0.0000
+(Chr2, 0, 9999, telomere1)	(Chr2, 10000, 68489164, 3+)	-	-	(Chr2, 68489165, 70200799, 3+)	(Chr2, 70200800, 92188145, 3+)	(Chr2, 92188146, 94090557, centromere, CEN2)	(Chr2, 94090558, 97967642, 4+)	-	(Chr2, 97967643, 100559330, 4+)	(Chr2, 100559331, 116674302, 4+)	-	(Chr2, 116674303, 117956910, 4+)	(Chr2, 117956911, 228769185, 4+)	-	(Chr2, 228769186, 231412178, 4+)	(Chr2, 231412179, 242181357, 4+)	(Chr2, 242181358, 242183528, 4+)	(Chr2, 242183529, 242193528, telomere2)
+-	-	(Chr5, 19924, 49668515, solved_path, 20-)	(Chr5, 49709239, 52896603, solved_path, 21-)	(Chr2, 68489165, 70200799, solved_path, 10-)	(Chr2, 70200800, 92188145, solved_path, 11-)	(Chr2, 92188146, 94090557, solved_path, 11-)	(Chr2, 94090558, 97967642, solved_path, 11-)	(Chr2, 100559330, 97967643, solved_path, 12+)	-	(Chr2, 100559331, 116674302, solved_path, 13-)	(Chr2, 228769186, 231412178, solved_path, 16-)	-	(Chr2, 117956911, 228769185, solved_path, 15-)	(Chr2, 116674303, 117956910, solved_path, 14-)	-	(Chr2, 231412179, 242181357, solved_path, 17-)	-	-
+
+alignment between Chr5b, Path16: -145076126
+jaccard score: 0.0000
+(Chr5, 0, 9999, telomere1)	(Chr5, 10000, 46485900, 13+)	(Chr5, 46485901, 50059807, centromere, CEN5)	(Chr5, 50059808, 181478258, 14+)	-	(Chr5, 181478259, 181538258, telomere2)
+-	-	-	-	(Chr8, 145076125, 0, solved_path, 41-)	-
+
+alignment between Chr6b, Path1: -170685979
+jaccard score: 0.0000
+-	-	-	-	-	-	-	-	(Chr6, 0, 59999, telomere1)	(Chr6, 60000, 58553888, 15+)	(Chr6, 58553889, 59829934, centromere, CEN6)	(Chr6, 59829935, 170745978, 16+)	(Chr6, 170745979, 170805978, telomere2)
+(Chr1, 14453, 120149346, solved_path, 1+)	(Chr1, 120157745, 125145640, solved_path, 2+)	(Chr1, 143278152, 148917716, solved_path, 3+)	(Chr1, 148928812, 149174538, solved_path, 4+)	(Chr1, 149182715, 194522835, solved_path, 5+)	(Chr1, 194526468, 197326003, solved_path, 6+)	(Chr1, 197341825, 248643859, solved_path, 7+)	(Chr1, 248645846, 248942320, solved_path, 8+)	-	-	-	-	-
+
+
+Process finished with exit code 0

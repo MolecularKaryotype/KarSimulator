@@ -2,10 +2,12 @@ from Structures import Segment, Arm, Path
 from read_solved_path import *
 from read_KT_to_path import *
 from read_masking_regions import read_masking_regions
+from Start_Genome import generate_genome_from_KT
 
 
 def compare_paths(solved_path_file, kt_file, masking_file):
     kt_path_list = read_KT_to_path(kt_file, masking_file)
+    genome = generate_genome_from_KT(kt_file, ordinal_info_included=True)
     solved_path_list = read_solved_path(solved_path_file)
 
     label_acrocentric_regions('../Metadata/comparison_forbidden_regions.bed', solved_path_list)
@@ -64,7 +66,9 @@ def compare_paths(solved_path_file, kt_file, masking_file):
         for sv_name in best_sv_total:
             sv_capture_rate = best_sv_captured[sv_name] / best_sv_total[sv_name]
             sv_capture_rate = "{:.4f}".format(sv_capture_rate)
-            print("SV_name: {}, SV_total: {}, SV_captured: {}, SV_capture_rate: {}".format(sv_name, str(best_sv_total[sv_name]), str(best_sv_captured[sv_name]), sv_capture_rate))
+            sv_history_info = genome.history[int(sv_name.replace('SV', ''))]
+            sv_history_str = '{' + sv_history_info[0] + ' from ' + sv_history_info[2].name + " to " + sv_history_info[3].name + '}'
+            print("SV_name: {}-{}\tSV_total: {}\tSV_captured: {}\tSV_capture_rate: {}".format(sv_name, sv_history_str, str(best_sv_total[sv_name]), str(best_sv_captured[sv_name]), sv_capture_rate))
         print("jaccard score: {}".format(best_jaccard))
         print(best_kt_alignment)
         print(best_solved_path_alignment)
@@ -169,13 +173,14 @@ def align_paths(segment_list1, segment_list2):
     sv_captured = {}
     for segment_itr in segment_list1:
         if segment_itr.segment_type is not None and segment_itr.segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
-            event_name = segment_itr.segment_type.split(': ')[1]
+            event_name = ': '.join(segment_itr.segment_type.split(': ')[1:])
             if event_name not in sv_total:
                 sv_total[event_name] = 0
+            if len(event_name.split(': ')) == 2 and event_name.split(': ')[0] not in sv_total:
+                sv_total[event_name.split(': ')[0]] = 0
             sv_total[event_name] += len(segment_itr)
     for event_name in sv_total:
         sv_captured[event_name] = 0
-
 
     while True:
         if current_row == 0 and current_col == 0:
@@ -185,7 +190,7 @@ def align_paths(segment_list1, segment_list2):
             alignment_2.insert(0, segment_list2[current_col - 1])
             if segment_list1[current_row - 1].segment_type is not None and segment_list1[current_row - 1].segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
                 if not segment_list1[current_row - 1].segment_type.startswith('del'):
-                    event_name = segment_list1[current_row - 1].segment_type.split(': ')[1]
+                    event_name = ': '.join(segment_list1[current_row - 1].segment_type.split(': ')[1:])
                     sv_captured[event_name] += len(segment_list1[current_row - 1])
             current_col -= 1
             current_row -= 1
@@ -194,7 +199,7 @@ def align_paths(segment_list1, segment_list2):
             alignment_2.insert(0, "-")
             if segment_list1[current_row - 1].segment_type is not None and segment_list1[current_row - 1].segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
                 if segment_list1[current_row - 1].segment_type.startswith('del'):
-                    event_name = segment_list1[current_row - 1].segment_type.split(': ')[1]
+                    event_name = ': '.join(segment_list1[current_row - 1].segment_type.split(': ')[1:])
                     sv_captured[event_name] += len(segment_list1[current_row - 1])
             current_row -= 1
         elif backtrack_matrix[current_row][current_col] == "rigt":
@@ -219,6 +224,27 @@ def align_paths(segment_list1, segment_list2):
             alignment_2_string += str(index)
         alignment_2_string += "\t"
 
+    # remove duplicate ghost segment's contribution in SV total and SV captured
+    for sv_name in sv_total:
+        if len(sv_name.split(': ')) == 2:
+            # it is a deletion with ghost multiplicity
+            ghost_multiplicity = int(sv_name.split(': ')[1])
+            individual_count = sv_total[sv_name] / ghost_multiplicity
+            sv_total[sv_name] = sv_total[sv_name] - (ghost_multiplicity - 1) * individual_count
+            sv_captured[sv_name] = sv_captured[sv_name] - (ghost_multiplicity - 1) * individual_count
+    # merge ins and del of the same SV
+    for sv_name in sv_total:
+        if len(sv_name.split(': ')) == 2:
+            sv_total[sv_name.split(': ')[0]] += sv_total[sv_name]
+            sv_captured[sv_name.split(': ')[0]] += sv_captured[sv_name]
+    new_sv_total = {}
+    new_sv_captured = {}
+    for sv_name in sv_total:
+        if len(sv_name.split(': ')) == 1:
+            new_sv_total[sv_name] = sv_total[sv_name]
+            new_sv_captured[sv_name] = sv_captured[sv_name]
+    sv_total = new_sv_total
+    sv_captured = new_sv_captured
     # calculate jaccard
     numerator = 0
     denominator = abs(final_score)
@@ -232,10 +258,17 @@ def align_paths(segment_list1, segment_list2):
 
 def test_compare_paths():
     compare_paths(
-        "/Users/zhaoyangjia/Library/CloudStorage/OneDrive-UCSanDiego/Bafna_Lab/KarSimulator/test_folder/Angelman_r2.1.txt",
-        "/Users/zhaoyangjia/Library/CloudStorage/OneDrive-UCSanDiego/Bafna_Lab/KarSimulator/test_folder/Angelman_r2.kt.txt",
+        "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/23Y_Cri_du_Chat_r1.1/23Y_Cri_du_Chat_r1.1.txt",
+        "/media/zhaoyang-new/workspace/KarSim/KarSimulator/modified_KT/23Y_Cri_du_Chat_r1.kt.txt",
         "../Metadata/merged_masking_unique.bed")
-
+    # compare_paths(
+    #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/test_folder/23Xe10_r1.1.txt",
+    #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/test_folder/23Xe10_r1.kt.txt",
+    #     "../Metadata/merged_masking_unique.bed")
+    # compare_paths(
+    #     "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/23X_22q11-2_distal_deletion_r1.1/23X_22q11-2_distal_deletion_r1.1.txt",
+    #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/modified_KT/23X_22q11-2_distal_deletion_r1.kt.txt",
+    #     "../Metadata/merged_masking_unique.bed")
 
 
 def test_align_paths():

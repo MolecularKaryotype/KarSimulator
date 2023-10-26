@@ -66,7 +66,11 @@ from Preparation.Get_Chr_Names import *
 # # Now, destination_list will contain the elements from the source_list inserted at the specified index
 # print(destination_list)
 
-left = 3
-right = 5
-for i in range(right-1,left-1,-1):
-    print(i)
+# left = 3
+# right = 5
+# for i in range(right-1,left-1,-1):
+#     print(i)
+
+x = '\t1\t2\t'
+print(len(x.split('\t')))
+print(x.split('\t'))

@@ -202,6 +202,7 @@ def generate_genome_from_KT(input_file: str, ordinal_info_included=False) -> Gen
             else:
                 line = line.split('\t')
                 if ordinal_info_included:
+                    # print(line)
                     ordinal_history_info = line[2]
                 else:
                     ordinal_history_info = ""

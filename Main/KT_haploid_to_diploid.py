@@ -18,19 +18,6 @@ def kt_haploid_to_diploid(input_file, output_dir):
     chr_of_interest = ['Chr' + str(i) for i in range(1, 23)]
     chr_of_interest.append('ChrX')
     if not female_haploid:
-        # segment_dict_values = segment_dict.values()
-        # max_dict_index = -1
-        # for dict_index in segment_dict_values:
-        #     try:
-        #         value = int(dict_index)
-        #         if value > max_dict_index:
-        #             max_dict_index = value
-        #     except ValueError:
-        #         # Ignore non-integer elements
-        #         pass
-        # segment_dict[Segment('ChrX', 10000, 58605579)] = str(max_dict_index + 1)
-        # segment_dict[Segment('ChrX', 58605580, 62412542)] = 'CENX'
-        # segment_dict[Segment('ChrX', 62412543, 156030894)] = str(max_dict_index + 2)
         genome.motherboard.segments.append(Segment('ChrX', 10000, 58605579))
         genome.centromere_segments.append(Segment('ChrX', 58605580, 62412542))
         genome.motherboard.segments.append(Segment('ChrX', 62412543, 156030894))

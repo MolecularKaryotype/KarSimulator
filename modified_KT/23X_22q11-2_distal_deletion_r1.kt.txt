@@ -148,17 +148,17 @@ initialization
 	autosomal copy number: 1
 	sex chromosomes: ['ChrX']
 block 1: 22q11.2_distal_deletion
-	deletion on segments [68+], from Chr22a to Chr22a
+	deletion on segments [68+], from Chr22a to Chr22a	(del,67.1,69.1)
 block 2: random events
-	left duplication inversion on segments [2+], from Chr1a to Chr1a
-	left duplication inversion on segments [56+,57+,58+], from Chr18a to Chr18a
-	tandem duplication on segments [57+], from Chr18a to Chr18a
-	balanced reciprocal translocation on segments [9+], from Chr2a to Chr2a
-	balanced reciprocal translocation on segments [6+], from Chr2a to Chr2a
-	deletion on segments [27+], from Chr8a to Chr8a
-	balanced reciprocal translocation on segments [29+], from Chr9a to Chr9a
-	balanced reciprocal translocation on segments [31+], from Chr9a to Chr9a
-	left duplication inversion on segments [37+], from Chr11a to Chr11a
-	chromosomal duplication on segments [17+,CEN6+,18+,19+,20+], from Chr6a to Chr6a
-	deletion on segments [42+], from Chr12a to Chr12a
-	inversion on segments [19+], from Chr6a to Chr6a
+	left duplication inversion on segments [2+], from Chr1a to Chr1a	(ins,2.1)
+	left duplication inversion on segments [56+,57+,58+], from Chr18a to Chr18a	(ins,58.1)(ins,57.1)(ins,56.1)
+	tandem duplication on segments [57+], from Chr18a to Chr18a	(ins,57.2)
+	balanced reciprocal translocation on segments [9+], from Chr2a to Chr2a	(del,8.1,10.1)(ins,9.1)
+	balanced reciprocal translocation on segments [6+], from Chr2a to Chr2a	(del,5.1,7.1)(ins,6.1)
+	deletion on segments [27+], from Chr8a to Chr8a	(del,26.1,T2)
+	balanced reciprocal translocation on segments [29+], from Chr9a to Chr9a	-
+	balanced reciprocal translocation on segments [31+], from Chr9a to Chr9a	(del,30.1,32.1)(ins,31.1)
+	left duplication inversion on segments [37+], from Chr11a to Chr11a	(ins,37.1)
+	chromosomal duplication on segments [17+,CEN6+,18+,19+,20+], from Chr6a to Chr6a	-
+	deletion on segments [42+], from Chr12a to Chr12a	(del,41.1,43.1)
+	inversion on segments [19+], from Chr6a to Chr6a	(inv,19.1)

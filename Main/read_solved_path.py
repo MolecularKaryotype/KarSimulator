@@ -10,7 +10,6 @@ def read_solved_path(file):
 
         for line in fp_read:
             line = line.replace("\n", "").split('\t')
-            print(line)
             # documenting segments
             if line[0] == "Segment":
                 chr_name = str(line[2])
@@ -23,12 +22,15 @@ def read_solved_path(file):
                 end = int(line[4].split(".")[0])
                 segment_dict[int(line[1])] = Segment(chr_name, start, end, "solved_path")
             elif line[0].startswith("Path"):
+                # print(line)
                 line = line[0].split(" = ")
                 path_name = line[0]
                 line = line[1]
-                line = line[:-1].split(" ")
+                line = line.split(" ")
                 path_segments = []
                 for segment_index_itr in line:
+                    if len(segment_index_itr) == 0:
+                        break
                     direction = segment_index_itr[-1]
                     segment_index_itr = int(segment_index_itr[:-1])
                     new_segment = segment_dict[segment_index_itr].duplicate()

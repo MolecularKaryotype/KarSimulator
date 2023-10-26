@@ -154,18 +154,18 @@ initialization
 	autosomal copy number: 1
 	sex chromosomes: ['ChrY']
 block 1: Cri_du_Chat
-	deletion on segments [18+], from Chr5a to Chr5a
+	deletion on segments [18+], from Chr5a to Chr5a	(del,17.1,19.1)
 block 2: random events
-	left duplication inversion on segments [37+], from Chr10a to Chr10a
-	balanced reciprocal translocation on segments [43+], from Chr12a to Chr8a
-	balanced reciprocal translocation on segments [31+], from Chr8a to Chr12a
-	balanced reciprocal translocation on segments [12+], from Chr3a to Chr2a
-	balanced reciprocal translocation on segments [6+], from Chr2a to Chr3a
-	inversion on segments [47+], from Chr13a to Chr13a
-	inversion on segments [3+], from Chr1a to Chr1a
-	tandem duplication on segments [25+], from Chr6a to Chr6a
-	deletion on segments [8+], from Chr2a to Chr2a
-	balanced reciprocal translocation on segments [62+], from Chr18a to Chr18a
-	balanced reciprocal translocation on segments [64+], from Chr18a to Chr18a
-	tandem duplication on segments [21+], from Chr5a to Chr5a
-	left duplication inversion on segments [51+], from Chr13a to Chr13a
+	left duplication inversion on segments [37+], from Chr10a to Chr10a	(ins,37.1)
+	balanced reciprocal translocation on segments [43+], from Chr12a to Chr8a	(del,42.1,44.1)(ins,43.1)
+	balanced reciprocal translocation on segments [31+], from Chr8a to Chr12a	(del,30.1,32.1)(ins,31.1)
+	balanced reciprocal translocation on segments [12+], from Chr3a to Chr2a	(del,11.1,13.1)(ins,12.1)
+	balanced reciprocal translocation on segments [6+], from Chr2a to Chr3a	(del,5.1,7.1)(ins,6.1)
+	inversion on segments [47+], from Chr13a to Chr13a	(inv,47.1)
+	inversion on segments [3+], from Chr1a to Chr1a	(inv,3.1)
+	tandem duplication on segments [25+], from Chr6a to Chr6a	(ins,25.2)
+	deletion on segments [8+], from Chr2a to Chr2a	(del,7.1,9.1)
+	balanced reciprocal translocation on segments [62+], from Chr18a to Chr18a	-
+	balanced reciprocal translocation on segments [64+], from Chr18a to Chr18a	(del,63.1,65.1)(ins,64.1)
+	tandem duplication on segments [21+], from Chr5a to Chr5a	(ins,21.2)
+	left duplication inversion on segments [51+], from Chr13a to Chr13a	(ins,51.1)

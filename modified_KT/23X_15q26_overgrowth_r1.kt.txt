@@ -145,15 +145,15 @@ initialization
 	autosomal copy number: 1
 	sex chromosomes: ['ChrX']
 block 1: 15q26_overgrowth
-	tandem_duplication on segments [53+], from Chr15a to Chr15a
+	tandem_duplication on segments [53+], from Chr15a to Chr15a	(ins,53.2)
 block 2: random events
-	deletion on segments [18+], from Chr5a to Chr5a
-	left duplication inversion on segments [25+], from Chr6a to Chr6a
-	nonreciprocal translocation on segments [51+], from Chr15a to Chr2a
-	inversion on segments [38+], from Chr11a to Chr11a
-	inversion on segments [46+], from Chr13a to Chr13a
-	tandem duplication on segments [9+], from Chr2a to Chr2a
-	tandem duplication on segments [30+], from Chr8a to Chr8a
-	inversion on segments [12+], from Chr3a to Chr3a
-	arm deletion on segments [6+,51+,7+,8+,9+,9+,10+], from Chr2a to Chr2a
-	deletion on segments [3+], from Chr1a to Chr1a
+	deletion on segments [18+], from Chr5a to Chr5a	(del,17.1,19.1)
+	left duplication inversion on segments [25+], from Chr6a to Chr6a	(ins,25.1)
+	nonreciprocal translocation on segments [51+], from Chr15a to Chr2a	(del,50.1,52.1)
+	inversion on segments [38+], from Chr11a to Chr11a	(inv,38.1)
+	inversion on segments [46+], from Chr13a to Chr13a	(inv,46.1)
+	tandem duplication on segments [9+], from Chr2a to Chr2a	-
+	tandem duplication on segments [30+], from Chr8a to Chr8a	(ins,30.2)
+	inversion on segments [12+], from Chr3a to Chr3a	(inv,12.1)
+	arm deletion on segments [6+,51+,7+,8+,9+,9+,10+], from Chr2a to Chr2a	(del,CEN,T2)
+	deletion on segments [3+], from Chr1a to Chr1a		(del,2.1,4.1)

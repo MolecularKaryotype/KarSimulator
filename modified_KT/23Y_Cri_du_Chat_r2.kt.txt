@@ -149,16 +149,16 @@ initialization
 	autosomal copy number: 1
 	sex chromosomes: ['ChrY']
 block 1: Cri_du_Chat
-	deletion on segments [12+], from Chr5a to Chr5a
+	deletion on segments [12+], from Chr5a to Chr5a	(del,11.1,13.1)
 block 2: random events
-	arm tandem duplication on segments [14+,15+,16+], from Chr5a to Chr5b
-	balanced reciprocal translocation on segments [33+], from Chr9a to Chr6a
-	balanced reciprocal translocation on segments [18+], from Chr6a to Chr9a
-	left duplication inversion on segments [45+], from Chr13a to Chr13a
-	inversion on segments [29+], from Chr8a to Chr8a
-	inversion on segments [37+], from Chr10a to Chr10a
-	tandem duplication on segments [57+], from Chr18a to Chr18a
-	chromosomal duplication on segments [11+,13+,CEN5+,14+,15+,16+], from Chr5a to Chr5a
-	right duplication inversion on segments [15+], from Chr5c to Chr5c
-	deletion on segments [7+], from Chr3a to Chr3a
-	nonreciprocal translocation on segments [21+], from Chr6a to Chr8a
+	arm tandem duplication on segments [14+,15+,16+], from Chr5a to Chr5b	-
+	balanced reciprocal translocation on segments [33+], from Chr9a to Chr6a	(del,32.1,34.1)(ins,33.1)
+	balanced reciprocal translocation on segments [18+], from Chr6a to Chr9a	(del,17.1,19.1)(ins,18.1)
+	left duplication inversion on segments [45+], from Chr13a to Chr13a	(ins,45.1)
+	inversion on segments [29+], from Chr8a to Chr8a	(inv,29.1)
+	inversion on segments [37+], from Chr10a to Chr10a	(inv,37.1)
+	tandem duplication on segments [57+], from Chr18a to Chr18a	(ins,57.2)
+	chromosomal duplication on segments [11+,13+,CEN5+,14+,15+,16+], from Chr5a to Chr5a	-
+	right duplication inversion on segments [15+], from Chr5c to Chr5c	(ins,15.2)
+	deletion on segments [7+], from Chr3a to Chr3a	(del,6.1,8.1)
+	nonreciprocal translocation on segments [21+], from Chr6a to Chr8a	(del,20.1,22.1)(ins,21.1)

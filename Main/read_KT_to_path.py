@@ -4,7 +4,7 @@ from Start_Genome import *
 
 
 def read_KT_to_path(KT_file, masking_file):
-    genome = generate_genome_from_KT(KT_file)
+    genome = generate_genome_from_KT(KT_file, ordinal_info_included=True)
     history_dict = extract_history_by_chr_destination(genome)
     index_dict = genome.segment_indexing()
     t2_segments = get_t2_segments(masking_file)
@@ -12,6 +12,8 @@ def read_KT_to_path(KT_file, masking_file):
 
     history_counter = 1
     for chromosome_itr in genome:
+        if chromosome_itr.deleted:
+            continue
         t1_segment = Segment(chromosome_itr.name[:-1], 0, chromosome_itr.t1_len - 1, "telomere1")
         segment_list = [t1_segment]
 
@@ -59,6 +61,8 @@ def read_KT_to_path(KT_file, masking_file):
             if path_itr.path_name == genome.history[ordinal_history_entry_index][3].name:
                 current_path = path_itr
                 break
+        if current_path is None:
+            continue  # chr deleted
         current_segment_list = current_path.linear_path.segments
         ordinal_history_entry = genome.ordinal_history[ordinal_history_entry_index]
         for ordinal_sub_entry in ordinal_history_entry:
@@ -75,6 +79,8 @@ def read_KT_to_path(KT_file, masking_file):
             if path_itr.path_name == genome.history[ordinal_history_entry_index][2].name:
                 current_path = path_itr
                 break
+        if current_path is None:
+            continue  # chr deleted
         current_segment_list = current_path.linear_path.segments
         ordinal_history_entry = genome.ordinal_history[ordinal_history_entry_index]
         for ordinal_sub_entry in ordinal_history_entry:
@@ -106,9 +112,10 @@ def read_KT_to_path(KT_file, masking_file):
                 else:
                     right_boundary_index = len(current_segment_list) - 1
 
-                if right_boundary_index - left_boundary_index == 0:
+                ghost_multiplicity = right_boundary_index - left_boundary_index
+                if ghost_multiplicity == 0:
                     raise RuntimeError('same left and right boundary found')
-                elif right_boundary_index - left_boundary_index == 1:
+                elif ghost_multiplicity == 1:
                     ghost_for_insertions = []
                     for event_segment_itr in copied_event_segments:
                         ghost_for_insertions.append(event_segment_itr.duplicate())
@@ -117,12 +124,13 @@ def read_KT_to_path(KT_file, masking_file):
                     # intersperse del in-between the left and right boundary
                     ghost_for_insertions = []
                     for event_segment_itr in copied_event_segments:
-                        ghost_for_insertions.append(event_segment_itr.duplicate())
+                        new_segment_itr = event_segment_itr.duplicate()
+                        new_segment_itr.segment_type += ": " + str(ghost_multiplicity)
+                        ghost_for_insertions.append(new_segment_itr)
                     for insertion_index in range(right_boundary_index, left_boundary_index, -1):
                         current_segment_list[insertion_index:insertion_index] = ghost_for_insertions
 
-
-                # TODO: need to change the ordinal value of the subsequent segments; may interfere with the subsequent 'del' left/right boundary finding as they can be shifted
+    # FIXME: need to change the ordinal value of the subsequent segments; may interfere with the subsequent 'del' left/right boundary finding as they can be shifted
     return path_list
 
 
