@@ -21,8 +21,7 @@ def compare_paths(solved_path_file, kt_file, masking_file):
     current_solved_path = solved_path_list[4].duplicate()
     current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
     best_score, best_kt_alignment, best_solved_path_alignment, sv_total, sv_captured, jaccard = \
-        align_paths(current_kt_path.linear_path.segments,
-                    current_solved_path.linear_path.segments)
+        align_paths(current_kt_path.linear_path.segments, current_solved_path.linear_path.segments)
 
     chr_pairing = {}
     while len(kt_path_list) > len(chr_pairing) and len(solved_path_list) > len(chr_pairing.values()):
@@ -204,14 +203,14 @@ def align_paths(segment_list1, segment_list2):
     scoring_matrix[0][0] = 0
     for row_index in range(1, len(segment_list1) + 1):
         current_segment = segment_list1[row_index - 1]
-        if current_segment.segment_type is not None and current_segment.segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
+        if current_segment.segment_type is None or current_segment.segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
             scoring_matrix[row_index][0] = scoring_matrix[row_index - 1][0] + len(current_segment) * indel_penalty_per_nt
         else:
             scoring_matrix[row_index][0] = scoring_matrix[row_index - 1][0]
         backtrack_matrix[row_index][0] = "down"
     for col_index in range(1, len(segment_list2) + 1):
         current_segment = segment_list2[col_index - 1]
-        if current_segment.segment_type is not None and current_segment.segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
+        if current_segment.segment_type is None or current_segment.segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
             scoring_matrix[0][col_index] = scoring_matrix[0][col_index - 1] + len(current_segment) * indel_penalty_per_nt
         else:
             scoring_matrix[0][col_index] = scoring_matrix[0][col_index - 1]
@@ -219,7 +218,7 @@ def align_paths(segment_list1, segment_list2):
 
     for row_index in range(1, len(segment_list1) + 1):
         for col_index in range(1, len(segment_list2) + 1):
-            if segment_list1[row_index - 1].segment_type in forbidden_comparison_region_types:
+            if segment_list1[row_index - 1].segment_type is not None and segment_list1[row_index - 1].segment_type in forbidden_comparison_region_types:
                 # forbidden region indel
                 down_value = scoring_matrix[row_index - 1][col_index]
             elif segment_list1[row_index - 1].segment_type is not None and segment_list1[row_index - 1].segment_type.startswith('del'):
@@ -230,7 +229,7 @@ def align_paths(segment_list1, segment_list2):
                 down_value = scoring_matrix[row_index - 1][col_index] \
                              + len(segment_list1[row_index - 1]) * indel_penalty_per_nt
 
-            if segment_list2[col_index - 1].segment_type in forbidden_comparison_region_types:
+            if segment_list2[col_index - 1].segment_type is not None and segment_list2[col_index - 1].segment_type in forbidden_comparison_region_types:
                 # forbidden region indel
                 right_value = scoring_matrix[row_index][col_index - 1]
             else:
