@@ -71,6 +71,10 @@ from Preparation.Get_Chr_Names import *
 # for i in range(right-1,left-1,-1):
 #     print(i)
 
-x = '\t1\t2\t'
-print(len(x.split('\t')))
-print(x.split('\t'))
+# x = '\t1\t2\t'
+# print(len(x.split('\t')))
+# print(x.split('\t'))
+
+x = 1 + 1
+x += 1 ++ 1
+print(x)

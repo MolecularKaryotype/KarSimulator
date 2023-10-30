@@ -16,6 +16,14 @@ def compare_paths(solved_path_file, kt_file, masking_file):
     # create bins of dependent chrs
     bin_list = bin_dependent_chr(kt_path_list)
 
+    # debugging a specific alignment
+    current_kt_path = kt_path_list[4].duplicate()
+    current_solved_path = solved_path_list[4].duplicate()
+    current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
+    best_score, best_kt_alignment, best_solved_path_alignment, sv_total, sv_captured, jaccard = \
+        align_paths(current_kt_path.linear_path.segments,
+                    current_solved_path.linear_path.segments)
+
     chr_pairing = {}
     while len(kt_path_list) > len(chr_pairing) and len(solved_path_list) > len(chr_pairing.values()):
         best_score = float('-inf')
@@ -84,7 +92,7 @@ def compare_paths(solved_path_file, kt_file, masking_file):
             if kt_path_index_itr in chr_pairing:
                 current_solved_path_index = chr_pairing[kt_path_index_itr]
             else:
-                print("kt unaligned: " + kt_path_list[kt_path_index_itr])
+                print("kt unaligned: " + str(kt_path_list[kt_path_index_itr]))
             current_kt_path = kt_path_list[kt_path_index_itr].duplicate()
             current_solved_path = solved_path_list[current_solved_path_index].duplicate()
             current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
@@ -195,10 +203,18 @@ def align_paths(segment_list1, segment_list2):
     # initialize starting grid
     scoring_matrix[0][0] = 0
     for row_index in range(1, len(segment_list1) + 1):
-        scoring_matrix[row_index][0] = 0
+        current_segment = segment_list1[row_index - 1]
+        if current_segment.segment_type is not None and current_segment.segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
+            scoring_matrix[row_index][0] = scoring_matrix[row_index - 1][0] + len(current_segment) * indel_penalty_per_nt
+        else:
+            scoring_matrix[row_index][0] = scoring_matrix[row_index - 1][0]
         backtrack_matrix[row_index][0] = "down"
     for col_index in range(1, len(segment_list2) + 1):
-        scoring_matrix[0][col_index] = 0
+        current_segment = segment_list2[col_index - 1]
+        if current_segment.segment_type is not None and current_segment.segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
+            scoring_matrix[0][col_index] = scoring_matrix[0][col_index - 1] + len(current_segment) * indel_penalty_per_nt
+        else:
+            scoring_matrix[0][col_index] = scoring_matrix[0][col_index - 1]
         backtrack_matrix[0][col_index] = "rigt"
 
     for row_index in range(1, len(segment_list1) + 1):
@@ -218,15 +234,19 @@ def align_paths(segment_list1, segment_list2):
                 # forbidden region indel
                 right_value = scoring_matrix[row_index][col_index - 1]
             else:
+                # standard indel
                 right_value = scoring_matrix[row_index][col_index - 1] \
                               + len(segment_list2[col_index - 1]) * indel_penalty_per_nt
 
             if segment_list1[row_index - 1] == segment_list2[col_index - 1]:
+                # match
                 diagonal_value = scoring_matrix[row_index - 1][col_index - 1]
             elif segment_list1[row_index - 1].segment_type is not None and segment_list1[row_index - 1].segment_type.startswith('del'):
-                diagonal_value = scoring_matrix[row_index - 1][col_index - 1] + + len(segment_list1[row_index - 1]) * indel_penalty_per_nt
+                # matching a ghost segment
+                diagonal_value = scoring_matrix[row_index - 1][col_index - 1] + len(segment_list1[row_index - 1]) * indel_penalty_per_nt
             else:
-                diagonal_value = float('-inf')  # mismatch not allowed
+                # mismatch: not allowed
+                diagonal_value = float('-inf')
 
             if diagonal_value >= down_value and diagonal_value >= right_value:
                 scoring_matrix[row_index][col_index] = diagonal_value
@@ -318,6 +338,7 @@ def align_paths(segment_list1, segment_list2):
             new_sv_captured[sv_name] = sv_captured[sv_name]
     sv_total = new_sv_total
     sv_captured = new_sv_captured
+
     # calculate jaccard
     numerator = 0
     denominator = abs(final_score)
@@ -325,14 +346,17 @@ def align_paths(segment_list1, segment_list2):
         numerator += sv_captured[sv_name]
         denominator += sv_total[sv_name]
     jaccard = numerator / denominator
-    jaccard = "{:.4f}".format(jaccard)
+    if len(sv_total) == 0:
+        jaccard = "N/a"
+    else:
+        jaccard = "{:.4f}".format(jaccard)
     return final_score, alignment_1_string, alignment_2_string, sv_total, sv_captured, jaccard
 
 
 def test_compare_paths():
     compare_paths(
-        "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/23Y_Cri_du_Chat_r1.1/23Y_Cri_du_Chat_r1.1.txt",
-        "/media/zhaoyang-new/workspace/KarSim/KarSimulator/modified_KT/23Y_Cri_du_Chat_r1.kt.txt",
+        "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/23Y_Cri_du_Chat_r2.1/23Y_Cri_du_Chat_r2.1.txt",
+        "/media/zhaoyang-new/workspace/KarSim/KarSimulator/modified_KT/23Y_Cri_du_Chat_r2.kt.txt",
         "../Metadata/merged_masking_unique.bed")
     # compare_paths(
     #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/test_folder/23Xe10_r1.1.txt",
