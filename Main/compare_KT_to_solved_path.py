@@ -237,12 +237,12 @@ def align_paths(segment_list1, segment_list2):
                 right_value = scoring_matrix[row_index][col_index - 1] \
                               + len(segment_list2[col_index - 1]) * indel_penalty_per_nt
 
-            if segment_list1[row_index - 1] == segment_list2[col_index - 1]:
-                # match
-                diagonal_value = scoring_matrix[row_index - 1][col_index - 1]
-            elif segment_list1[row_index - 1].segment_type is not None and segment_list1[row_index - 1].segment_type.startswith('del'):
+            if segment_list1[row_index - 1].segment_type is not None and segment_list1[row_index - 1].segment_type.startswith('del'):
                 # matching a ghost segment
                 diagonal_value = scoring_matrix[row_index - 1][col_index - 1] + len(segment_list1[row_index - 1]) * indel_penalty_per_nt
+            elif segment_list1[row_index - 1] == segment_list2[col_index - 1]:
+                # match
+                diagonal_value = scoring_matrix[row_index - 1][col_index - 1]
             else:
                 # mismatch: not allowed
                 diagonal_value = float('-inf')
