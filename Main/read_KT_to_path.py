@@ -130,7 +130,6 @@ def read_KT_to_path(KT_file, masking_file):
                     for insertion_index in range(right_boundary_index, left_boundary_index, -1):
                         current_segment_list[insertion_index:insertion_index] = ghost_for_insertions
 
-    # FIXME: need to change the ordinal value of the subsequent segments; may interfere with the subsequent 'del' left/right boundary finding as they can be shifted
     return path_list
 
 
@@ -183,7 +182,11 @@ def get_segment_index_from_ordinal(input_current_segment: Segment, input_segment
     occurrence = 0
     for finder_ptr in range(len(input_segment_list)):
         if input_segment_list[finder_ptr].same_segment_ignore_dir(input_current_segment):
-            occurrence += 1
+            if input_segment_list[finder_ptr].segment_type is None:
+                occurrence += 1
+            elif not input_segment_list[finder_ptr].segment_type.startswith('del'):
+                # del's ghost nodes do not count into the multiplicity
+                occurrence += 1
         if occurrence == input_segment_ordinal:
             return finder_ptr
 

@@ -353,10 +353,10 @@ def align_paths(segment_list1, segment_list2):
 
 
 def test_compare_paths():
-    compare_paths(
-        "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/23Y_Cri_du_Chat_r2.1/23Y_Cri_du_Chat_r2.1.txt",
-        "/media/zhaoyang-new/workspace/KarSim/KarSimulator/modified_KT/23Y_Cri_du_Chat_r2.kt.txt",
-        "../Metadata/merged_masking_unique.bed")
+    # compare_paths(
+    #     "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/23Y_Cri_du_Chat_r2.1/23Y_Cri_du_Chat_r2.1.txt",
+    #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/modified_KT/23Y_Cri_du_Chat_r2.kt.txt",
+    #     "../Metadata/merged_masking_unique.bed")
     # compare_paths(
     #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/test_folder/23Xe10_r1.1.txt",
     #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/test_folder/23Xe10_r1.kt.txt",
@@ -365,6 +365,10 @@ def test_compare_paths():
     #     "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/23X_22q11-2_distal_deletion_r1.1/23X_22q11-2_distal_deletion_r1.1.txt",
     #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/modified_KT/23X_22q11-2_distal_deletion_r1.kt.txt",
     #     "../Metadata/merged_masking_unique.bed")
+    compare_paths(
+        "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/STS_r1.1/STS_r1.1.txt",
+        "/media/zhaoyang-new/workspace/KarSim/KarSimulator/modified_KT/STS_r1.kt.txt",
+        "../Metadata/merged_masking_unique.bed")
 
 
 def test_align_paths():
