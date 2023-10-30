@@ -13,17 +13,21 @@ def compare_paths(solved_path_file, kt_file, masking_file):
     label_acrocentric_regions('../Metadata/comparison_forbidden_regions.bed', solved_path_list)
     label_acrocentric_regions('../Metadata/comparison_forbidden_regions.bed', kt_path_list)
 
-    while len(kt_path_list) > 0 and len(solved_path_list) > 0:
+    # create bins of dependent chrs
+    bin_list = bin_dependent_chr(kt_path_list)
+
+    chr_pairing = {}
+    while len(kt_path_list) > len(chr_pairing) and len(solved_path_list) > len(chr_pairing.values()):
         best_score = float('-inf')
-        best_kt_alignment = None
-        best_solved_path_alignment = None
-        best_kt_path_index = None
-        best_solved_path_index = None
-        best_sv_total = None
-        best_sv_captured = None
-        best_jaccard = None
+        best_kt_index = None
+        best_path_index = None
+        best_path_is_reversed = False
         for kt_path_index in range(len(kt_path_list)):
+            if kt_path_index in chr_pairing:
+                continue
             for solved_path_index in range(len(solved_path_list)):
+                if solved_path_index in chr_pairing.values():
+                    continue
                 current_kt_path = kt_path_list[kt_path_index].duplicate()
                 current_solved_path = solved_path_list[solved_path_index].duplicate()
                 current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
@@ -33,13 +37,9 @@ def compare_paths(solved_path_file, kt_file, masking_file):
                                 current_solved_path.linear_path.segments)
                 if current_score > best_score:
                     best_score = current_score
-                    best_kt_alignment = current_kt_alignment
-                    best_solved_path_alignment = current_solved_path_alignment
-                    best_kt_path_index = kt_path_index
-                    best_solved_path_index = solved_path_index
-                    best_sv_total = sv_total
-                    best_sv_captured = sv_captured
-                    best_jaccard = jaccard
+                    best_kt_index = kt_path_index
+                    best_path_index = solved_path_index
+                    best_path_is_reversed = False
 
                 # check if reversed gives higher score
                 current_kt_path = kt_path_list[kt_path_index].duplicate()
@@ -52,37 +52,104 @@ def compare_paths(solved_path_file, kt_file, masking_file):
                                 current_solved_path.linear_path.segments)
                 if current_score > best_score:
                     best_score = current_score
-                    best_kt_alignment = current_kt_alignment
-                    best_solved_path_alignment = current_solved_path_alignment
-                    best_kt_path_index = kt_path_index
-                    best_solved_path_index = solved_path_index
-                    best_sv_total = sv_total
-                    best_sv_captured = sv_captured
-                    best_jaccard = jaccard
+                    best_kt_index = kt_path_index
+                    best_path_index = solved_path_index
+                    best_path_is_reversed = True
 
-        # output current pair
-        print("alignment between {}, {}: {}".format(kt_path_list[best_kt_path_index].path_name,
-              solved_path_list[best_solved_path_index].path_name, best_score))
-        for sv_name in best_sv_total:
-            sv_capture_rate = best_sv_captured[sv_name] / best_sv_total[sv_name]
-            sv_capture_rate = "{:.4f}".format(sv_capture_rate)
-            sv_history_info = genome.history[int(sv_name.replace('SV', ''))]
-            sv_history_str = '{' + sv_history_info[0] + ' from ' + sv_history_info[2].name + " to " + sv_history_info[3].name + '}'
-            print("SV_name: {}-{}\tSV_total: {}\tSV_captured: {}\tSV_capture_rate: {}".format(sv_name, sv_history_str, str(best_sv_total[sv_name]), str(best_sv_captured[sv_name]), sv_capture_rate))
-        print("jaccard score: {}".format(best_jaccard))
-        print(best_kt_alignment)
-        print(best_solved_path_alignment)
-        print()
+        # record best pairing
+        if best_path_is_reversed:
+            solved_path_list[best_path_index].reverse()
+        chr_pairing[best_kt_index] = best_path_index
 
-        kt_path_list.pop(best_kt_path_index)
-        solved_path_list.pop(best_solved_path_index)
+    # summary statistics
+    print("unaligned standard: (empty if none)")
+    if len(kt_path_list) > len(chr_pairing):
+        for path_index in range(len(kt_path_list)):
+            if path_index not in chr_pairing:
+                print(kt_path_list[path_index])
+    print("unaligned reconstruction: (empty if none)")
+    if len(solved_path_list) > len(chr_pairing.values()):
+        for path_index in range(len(solved_path_list)):
+            if path_index not in chr_pairing.values():
+                print(solved_path_list[path_index])
 
-    if len(kt_path_list) > 0:
-        for path in kt_path_list:
-            print(path)
-    if len(solved_path_list) > 0:
-        for path in solved_path_list:
-            print(path)
+    for bin_index in range(len(bin_list)):
+        chr_list_str = ""
+        for chr_itr in bin_list[bin_index][0]:
+            chr_list_str += chr_itr
+        print("\ndependent component " + str(bin_index) + ": " + chr_list_str)
+        for kt_path_index_itr in bin_list[bin_index][1]:
+            # output current pair
+            current_solved_path_index = -1
+            if kt_path_index_itr in chr_pairing:
+                current_solved_path_index = chr_pairing[kt_path_index_itr]
+            else:
+                print("kt unaligned: " + kt_path_list[kt_path_index_itr])
+            current_kt_path = kt_path_list[kt_path_index_itr].duplicate()
+            current_solved_path = solved_path_list[current_solved_path_index].duplicate()
+            current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
+            best_score, best_kt_alignment, best_solved_path_alignment, sv_total, sv_captured, jaccard = \
+                align_paths(current_kt_path.linear_path.segments,
+                            current_solved_path.linear_path.segments)
+
+            print("alignment between {}, {}: {}".format(kt_path_list[kt_path_index_itr].path_name,
+                                                        solved_path_list[current_solved_path_index].path_name, best_score))
+            for sv_name in sv_total:
+                sv_capture_rate = sv_captured[sv_name] / sv_total[sv_name]
+                sv_capture_rate = "{:.4f}".format(sv_capture_rate)
+                sv_history_info = genome.history[int(sv_name.replace('SV', ''))]
+                sv_history_str = '{' + sv_history_info[0] + ' from ' + sv_history_info[2].name + " to " + sv_history_info[3].name + '}'
+                print("SV_name: {}-{}\tSV_total: {}\tSV_captured: {}\tSV_capture_rate: {}".format(sv_name, sv_history_str, str(sv_total[sv_name]),
+                                                                                                  str(sv_captured[sv_name]), sv_capture_rate))
+            print("jaccard score: {}".format(jaccard))
+            print(best_kt_alignment)
+            print(best_solved_path_alignment)
+
+
+def bin_dependent_chr(kt_path_list):
+    class Bin:
+        def __init__(self):
+            self.chr_components = set()
+            self.kt_indices = []
+
+        def chr_in(self, input_chr):
+            return input_chr in self.chr_components
+
+        def chr_add(self, input_chr):
+            self.chr_components.add(input_chr)
+
+        def index_append(self, input_index):
+            self.kt_indices.append(input_index)
+
+        def output_indices(self):
+            return self.kt_indices
+
+    bin_list = []
+    for kt_path_index in range(len(kt_path_list)):
+        current_chr = set()
+        for segment in kt_path_list[kt_path_index].linear_path.segments:
+            current_chr.add(segment.chr_name)
+
+        bin_found = None
+        for bin_itr in bin_list:
+            for chr_itr in current_chr:
+                if bin_itr.chr_in(chr_itr):
+                    bin_found = bin_itr
+                    break
+        if bin_found is None:
+            new_bin = Bin()
+            new_bin.chr_components = current_chr
+            new_bin.index_append(kt_path_index)
+            bin_list.append(new_bin)
+        else:
+            for chr_itr in current_chr:
+                bin_found.chr_add(chr_itr)
+            bin_found.index_append(kt_path_index)
+
+    return_list = []
+    for bin_itr in bin_list:
+        return_list.append(tuple([bin_itr.chr_components, bin_itr.output_indices()]))
+    return return_list
 
 
 def label_acrocentric_regions(acrocentric_forbidden_file, input_paths):
@@ -91,8 +158,10 @@ def label_acrocentric_regions(acrocentric_forbidden_file, input_paths):
         tmp_acrocentric_path = Path(acrocentric_region.duplicate(), "forbidden_regions")
         path.generate_mutual_breakpoints(other_path=tmp_acrocentric_path, mutual=True)
         for segment in path.linear_path.segments:
-            if segment in tmp_acrocentric_path.linear_path.segments:
-                segment.segment_type = "acrocentric"
+            for acrocentric_segment_itr in tmp_acrocentric_path.linear_path.segments:
+                if segment.same_segment_ignore_dir(acrocentric_segment_itr):
+                    segment.segment_type = "acrocentric"
+                    break
 
 
 def label_telomere_regions(all_forbidden_region_file, input_paths):
@@ -135,14 +204,18 @@ def align_paths(segment_list1, segment_list2):
     for row_index in range(1, len(segment_list1) + 1):
         for col_index in range(1, len(segment_list2) + 1):
             if segment_list1[row_index - 1].segment_type in forbidden_comparison_region_types:
+                # forbidden region indel
                 down_value = scoring_matrix[row_index - 1][col_index]
             elif segment_list1[row_index - 1].segment_type is not None and segment_list1[row_index - 1].segment_type.startswith('del'):
+                # ghost indel
                 down_value = scoring_matrix[row_index - 1][col_index]
             else:
+                # standard indel
                 down_value = scoring_matrix[row_index - 1][col_index] \
                              + len(segment_list1[row_index - 1]) * indel_penalty_per_nt
 
             if segment_list2[col_index - 1].segment_type in forbidden_comparison_region_types:
+                # forbidden region indel
                 right_value = scoring_matrix[row_index][col_index - 1]
             else:
                 right_value = scoring_matrix[row_index][col_index - 1] \

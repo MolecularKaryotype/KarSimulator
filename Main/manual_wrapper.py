@@ -53,5 +53,29 @@ def batch_1025():
     translate_global_index_to_arm_index('Chr15', 22677345, 28193120, indexing_file)
 
 
+def batch_1026():
+    indexing_file = "../Metadata/Full_Genome_Indices.txt"
+
+    print('Xp11.22-p11.23 Microduplication')
+    translate_global_index_to_arm_index('ChrX', 48476161, 52374518, indexing_file)
+
+    print('Early-onset Alzheimer')
+    translate_global_index_to_arm_index('Chr21', 25880549, 26171128, indexing_file)
+
+    print('1q21.1 recurrent microduplication')
+    translate_global_index_to_arm_index('Chr1', 147061832, 148411223, indexing_file)
+
+    print('1q21.1 recurrent microdeletion')
+    translate_global_index_to_arm_index('Chr1', 147061832, 148411223, indexing_file)
+
+    print('8q21.11 Microdeletion')
+    translate_global_index_to_arm_index('Chr8', 76314229, 76854003, indexing_file)
+
+    print('12q14 microdeletion syndrome')
+    translate_global_index_to_arm_index('Chr12', 64678139, 68251745, indexing_file)
+
+
+
+
 if __name__ == "__main__":
-    batch_1025()
+    batch_1026()

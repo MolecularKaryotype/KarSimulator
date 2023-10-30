@@ -121,6 +121,84 @@ def batch_check_masked_1025():
     print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
 
 
+def batch_check_masked_ddd():
+    masking_file = '../Metadata/merged_masking_unique.bed'
+
+    print('\n26674')
+    input_segment = Segment('Chr8', 7167369, 8173892)
+    print(input_segment)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('\n43992')
+    input_segment = Segment('Chr15', 19939373, 21061292)
+    print(input_segment)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('\n47063')
+    input_segment = Segment('Chr16', 32117844, 32893189)
+    print(input_segment)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('\n42082')
+    input_segment = Segment('Chr14', 19274726, 19942291)
+    print(input_segment)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('\n43992')
+    input_segment = Segment('Chr15', 19939373, 21061292)
+    print(input_segment)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('\n26674')
+    input_segment = Segment('Chr8', 7167369, 8173892)
+    print(input_segment)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('\n56143')
+    input_segment = Segment('Chr22', 18170680, 18809686)
+    print(input_segment)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('\n47063')
+    input_segment = Segment('Chr16', 32117844, 32893189)
+    print(input_segment)
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+
+def batch_check_masked_1026():
+    masking_file = '../Metadata/merged_masking_unique.bed'
+
+    print('\n8q21.11 Microdeletion Syndrome')
+    input_segment = Segment('Chr8', 76314229, 76854003)
+    print(input_segment.thousand_delimited())
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('\nEarly-onset Alzheimer disease with cerebral amyloid angiopathy')
+    input_segment = Segment('Chr21', 25880549, 26171128)
+    print(input_segment.thousand_delimited())
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('\nXp11.22-p11.23 Microduplication')
+    input_segment = Segment('ChrX', 48476161, 52374518)
+    print(input_segment.thousand_delimited())
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('\n1q21.1 recurrent microdeletion (susceptibility locus for neurodevelopmental disorders)')
+    input_segment = Segment('Chr1', 147061832, 148411223)
+    print(input_segment.thousand_delimited())
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('\n12q14 microdeletion syndrome')
+    input_segment = Segment('Chr12', 64678139, 68251745)
+    print(input_segment.thousand_delimited())
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+    print('\n1q21.1 recurrent microdeletion (susceptibility locus for neurodevelopmental disorders)')
+    input_segment = Segment('Chr1', 147061832, 148411223)
+    print(input_segment.thousand_delimited())
+    print(check_regions_masked(Arm([input_segment], "check_masked"), masking_file))
+
+
 def check_sunnyside():
     masking_file = '../Metadata/merged_masking_unique.bed'
 
@@ -156,4 +234,4 @@ def check_keyhole():
 
 
 if __name__ == "__main__":
-    cmd()
+    batch_check_masked_1026()

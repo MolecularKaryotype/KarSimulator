@@ -82,6 +82,9 @@ class Segment:
             s2 = self.kt_index
         return "({},{})".format(s1, s2)
 
+    def thousand_delimited(self):
+        return "({}-{}-{})".format(self.chr_name, "{:,}".format(self.start), "{:,}".format(self.end))
+
     def same_segment_ignore_dir(self, other):
         if self.chr_name != other.chr_name:
             return False
