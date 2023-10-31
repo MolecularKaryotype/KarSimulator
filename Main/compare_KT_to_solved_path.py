@@ -17,8 +17,8 @@ def compare_paths(solved_path_file, kt_file, masking_file):
     bin_list = bin_dependent_chr(kt_path_list)
 
     # debugging a specific alignment
-    # current_kt_path = kt_path_list[16].duplicate()
-    # current_solved_path = solved_path_list[12].duplicate()
+    # current_kt_path = kt_path_list[7].duplicate()
+    # current_solved_path = solved_path_list[10].duplicate()
     # current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
     # best_score, best_kt_alignment, best_solved_path_alignment, sv_total, sv_captured, jaccard = \
     #     align_paths(current_kt_path.linear_path.segments, current_solved_path.linear_path.segments)
@@ -143,10 +143,10 @@ def compare_paths(solved_path_file, kt_file, masking_file):
             sv_history_info = genome.history[int(sv_name.replace('SV', ''))]
             sv_history_str = '{' + sv_history_info[0] + ' from ' + sv_history_info[2].name + " to " + sv_history_info[3].name + '}'
             bin_sv_str += "SV_name: {}-{}\tSV_total: {}\tSV_captured: {}\tSV_capture_rate: {}\n".format(sv_name,
-                                                                                                            sv_history_str,
-                                                                                                            str(bin_sv_total[sv_name]),
-                                                                                                            str(bin_sv_captured[sv_name]),
-                                                                                                            sv_capture_rate)
+                                                                                                        sv_history_str,
+                                                                                                        str(bin_sv_total[sv_name]),
+                                                                                                        str(bin_sv_captured[sv_name]),
+                                                                                                        sv_capture_rate)
             bin_jaccard_num += bin_sv_captured[sv_name]
             bin_jaccard_denom += bin_sv_total[sv_name]
         bin_jaccard_denom += abs(bin_indel)
@@ -171,6 +171,7 @@ def compare_paths(solved_path_file, kt_file, masking_file):
 
     def custom_sort_sv_name(key):
         return int(key[2:])
+
     sorted_keys = sorted(genome_sv_total.keys(), key=custom_sort_sv_name)
     genome_sv_str = ""
     sv_captured_number = 0
@@ -242,8 +243,25 @@ def bin_dependent_chr(kt_path_list):
                 bin_found.chr_add(chr_itr)
             bin_found.index_append(kt_path_index)
 
+    # merge bins
+    final_bin_list = []
+    bin_selected = []
+    for unmerged_bin_index1 in range(len(bin_list)):
+        if unmerged_bin_index1 in bin_selected:
+            continue
+        new_bin = Bin()
+        new_bin.chr_components = bin_list[unmerged_bin_index1].chr_components
+        new_bin.kt_indices = bin_list[unmerged_bin_index1].kt_indices
+        for unmerged_bin_index2 in range(unmerged_bin_index1 + 1, len(bin_list)):
+            for chr_itr in bin_list[unmerged_bin_index1].chr_components:
+                if bin_list[unmerged_bin_index2].chr_in(chr_itr):
+                    bin_selected.append(unmerged_bin_index2)
+                    new_bin.chr_components = new_bin.chr_components | bin_list[unmerged_bin_index2].chr_components
+                    new_bin.kt_indices.extend(bin_list[unmerged_bin_index2].kt_indices)
+        final_bin_list.append(new_bin)
+
     return_list = []
-    for bin_itr in bin_list:
+    for bin_itr in final_bin_list:
         return_list.append(tuple([bin_itr.chr_components, bin_itr.output_indices()]))
     return return_list
 
@@ -326,15 +344,17 @@ def align_paths(segment_list1, segment_list2):
                 right_value = scoring_matrix[row_index][col_index - 1] \
                               + len(segment_list2[col_index - 1]) * indel_penalty_per_nt
 
-            if segment_list1[row_index - 1].segment_type is not None and segment_list1[row_index - 1].segment_type.startswith('del'):
-                # matching a ghost segment
-                diagonal_value = scoring_matrix[row_index - 1][col_index - 1] + len(segment_list1[row_index - 1]) * indel_penalty_per_nt
-            elif segment_list1[row_index - 1] == segment_list2[col_index - 1]:
-                # match
-                diagonal_value = scoring_matrix[row_index - 1][col_index - 1]
-            else:
+            if segment_list1[row_index - 1] != segment_list2[col_index - 1]:
                 # mismatch: not allowed
                 diagonal_value = float('-inf')
+            else:
+                # match
+                if segment_list1[row_index - 1].segment_type is not None and segment_list1[row_index - 1].segment_type.startswith('del'):
+                    # matching a ghost segment
+                    diagonal_value = scoring_matrix[row_index - 1][col_index - 1] + len(segment_list1[row_index - 1]) * indel_penalty_per_nt
+                else:
+                    # match
+                    diagonal_value = scoring_matrix[row_index - 1][col_index - 1]
 
             if diagonal_value >= down_value and diagonal_value >= right_value:
                 scoring_matrix[row_index][col_index] = diagonal_value
@@ -369,9 +389,10 @@ def align_paths(segment_list1, segment_list2):
         if backtrack_matrix[current_row][current_col] == "diag":
             alignment_1.insert(0, segment_list1[current_row - 1])
             alignment_2.insert(0, segment_list2[current_col - 1])
-            if segment_list1[current_row - 1].segment_type is not None and segment_list1[current_row - 1].segment_type not in ['telomere1', 'telomere2',
-                                                                                                                               'centromere', 'acrocentric']:
+            if segment_list1[current_row - 1].segment_type is not None \
+                    and segment_list1[current_row - 1].segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
                 if not segment_list1[current_row - 1].segment_type.startswith('del'):
+                    # ins/inv correctly aligned
                     event_name = ': '.join(segment_list1[current_row - 1].segment_type.split(': ')[1:])
                     sv_captured[event_name] += len(segment_list1[current_row - 1])
             current_col -= 1
@@ -379,9 +400,10 @@ def align_paths(segment_list1, segment_list2):
         elif backtrack_matrix[current_row][current_col] == "down":
             alignment_1.insert(0, segment_list1[current_row - 1])
             alignment_2.insert(0, "-")
-            if segment_list1[current_row - 1].segment_type is not None and segment_list1[current_row - 1].segment_type not in ['telomere1', 'telomere2',
-                                                                                                                               'centromere', 'acrocentric']:
+            if segment_list1[current_row - 1].segment_type is not None \
+                    and segment_list1[current_row - 1].segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
                 if segment_list1[current_row - 1].segment_type.startswith('del'):
+                    # deletion is correctly gaped
                     event_name = ': '.join(segment_list1[current_row - 1].segment_type.split(': ')[1:])
                     sv_captured[event_name] += len(segment_list1[current_row - 1])
             current_row -= 1
@@ -414,7 +436,7 @@ def align_paths(segment_list1, segment_list2):
             ghost_multiplicity = int(sv_name.split(': ')[1])
             individual_count = sv_total[sv_name] / ghost_multiplicity
             sv_total[sv_name] = sv_total[sv_name] - (ghost_multiplicity - 1) * individual_count
-            sv_captured[sv_name] = sv_captured[sv_name] - (ghost_multiplicity - 1) * individual_count
+            sv_captured[sv_name] = max(0, sv_captured[sv_name] - (ghost_multiplicity - 1) * individual_count)
     # merge ins and del of the same SV
     for sv_name in sv_total:
         if len(sv_name.split(': ')) == 2:
@@ -444,8 +466,8 @@ def align_paths(segment_list1, segment_list2):
 
 
 def test_compare_paths():
-    omkar_file = "../scoring_files/modified_OMKar/NF1_microdeletion_v2_r1.1.txt"
-    kt_file = "../scoring_files/modified_KT/NF1_microdeletion_v2_r1.kt.txt"
+    omkar_file = "../scoring_files/modified_OMKar/12q14_microdeletion_v2_r2.1.txt"
+    kt_file = "../scoring_files/modified_KT/12q14_microdeletion_v2_r2.kt.txt"
     masking_file = "../Metadata/merged_masking_unique.bed"
     compare_paths(omkar_file, kt_file, masking_file)
     # compare_paths(
