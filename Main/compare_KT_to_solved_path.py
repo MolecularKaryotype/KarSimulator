@@ -5,7 +5,7 @@ from read_masking_regions import read_masking_regions
 from Start_Genome import generate_genome_from_KT
 
 
-def compare_paths(solved_path_file, kt_file, masking_file):
+def compare_paths(solved_path_file, kt_file, masking_file, output_file):
     kt_path_list = read_KT_to_path(kt_file, masking_file)
     genome = generate_genome_from_KT(kt_file, ordinal_info_included=True)
     solved_path_list = read_solved_path(solved_path_file)
@@ -72,16 +72,17 @@ def compare_paths(solved_path_file, kt_file, masking_file):
         chr_pairing[best_kt_index] = best_path_index
 
     # summary statistics
-    print("unaligned standard: (empty if none)")
-    if len(kt_path_list) > len(chr_pairing):
-        for path_index in range(len(kt_path_list)):
-            if path_index not in chr_pairing:
-                print(kt_path_list[path_index])
-    print("unaligned reconstruction: (empty if none)")
-    if len(solved_path_list) > len(chr_pairing.values()):
-        for path_index in range(len(solved_path_list)):
-            if path_index not in chr_pairing.values():
-                print(solved_path_list[path_index])
+    with open(output_file, 'a') as fp_write:
+        fp_write.write("unaligned standard: (empty if none)\n")
+        if len(kt_path_list) > len(chr_pairing):
+            for path_index in range(len(kt_path_list)):
+                if path_index not in chr_pairing:
+                    fp_write.write(str(kt_path_list[path_index]) + "\n")
+        fp_write.write("unaligned reconstruction: (empty if none)\n")
+        if len(solved_path_list) > len(chr_pairing.values()):
+            for path_index in range(len(solved_path_list)):
+                if path_index not in chr_pairing.values():
+                    fp_write.write(str(solved_path_list[path_index]) + "\n")
 
     genome_output_str = ""
     bin_jaccard_strs = []
@@ -194,13 +195,15 @@ def compare_paths(solved_path_file, kt_file, masking_file):
 
     genome_jaccard_denom += abs(genome_indel)
     genome_jaccard = genome_jaccard_num / genome_jaccard_denom
-    print("genome indel: {}".format(abs(genome_indel)))
-    print("genome Jaccard Score: {}".format(str(genome_jaccard)))
-    print("connected components' Jaccard Score: ")
-    print(''.join(bin_jaccard_strs))
-    print("SV: {} present, {} captured".format(str(len(sorted_keys)), str(sv_captured_number)))
-    print(genome_sv_str)
-    print(genome_output_str)
+
+    with open(output_file, 'a') as fp_write:
+        fp_write.write("genome indel: {}".format(abs(genome_indel)) + "\n")
+        fp_write.write("genome Jaccard Score: {}".format(str(genome_jaccard)) + "\n")
+        fp_write.write("connected components' Jaccard Score: " + "\n")
+        fp_write.write(''.join(bin_jaccard_strs) + "\n")
+        fp_write.write("SV: {} present, {} captured".format(str(len(sorted_keys)), str(sv_captured_number)) + "\n")
+        fp_write.write(genome_sv_str + "\n")
+        fp_write.write(genome_output_str + "\n")
 
 
 def bin_dependent_chr(kt_path_list):
@@ -465,11 +468,12 @@ def align_paths(segment_list1, segment_list2):
     return final_score, alignment_1_string, alignment_2_string, sv_total, sv_captured, jaccard
 
 
-def test_compare_paths():
-    omkar_file = "../scoring_files/modified_OMKar/12q14_microdeletion_v2_r2.1.txt"
-    kt_file = "../scoring_files/modified_KT/12q14_microdeletion_v2_r2.kt.txt"
+def single_run():
+    omkar_file = "../scoring_files/modified_OMKar/23X_22q11-2_distal_deletion_r1.1.txt"
+    kt_file = "../scoring_files/modified_KT/23X_22q11-2_distal_deletion_r1.kt.txt"
     masking_file = "../Metadata/merged_masking_unique.bed"
-    compare_paths(omkar_file, kt_file, masking_file)
+    output_file = "../scoring_files/scores/23X_22q11-2_distal_deletion_r1.txt"
+    compare_paths(omkar_file, kt_file, masking_file, output_file)
     # compare_paths(
     #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/test_folder/23Xe10_r1.1.txt",
     #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/test_folder/23Xe10_r1.kt.txt",
@@ -501,5 +505,34 @@ def test_align_paths():
     print(c)
 
 
+def batch_scoring():
+    import os
+    masking_file_path = "../Metadata/merged_masking_unique.bed"
+    kt_folder = "../scoring_files/modified_KT/"
+    omkar_folder = "../scoring_files/modified_OMKar/"
+    output_folder = "../scoring_files/scores/"
+
+    counter = 0
+    for kt_file in os.listdir(kt_folder):
+        kt_file_path = ""
+        omkar_file_path = ""
+        output_file_path = ""
+        if kt_file.endswith(".kt.txt"):
+            # require that the omkar file to be present given the kt file is present in the folder
+            kt_file_path = os.path.join(kt_folder, kt_file)
+            for omkar_file in os.listdir(omkar_folder):
+                if kt_file.replace(".kt.txt", "") == omkar_file.replace(".1.txt", ""):
+                    omkar_file_path = os.path.join(omkar_folder, omkar_file)
+            output_file = kt_file.replace(".kt", "")
+            output_file_path = os.path.join(output_folder, output_file)
+
+            print(counter)
+            print(omkar_file_path)
+            print(kt_file_path)
+            print(output_file_path)
+            compare_paths(omkar_file_path, kt_file_path, masking_file_path, output_file_path)
+            counter += 1
+
+
 if __name__ == "__main__":
-    test_compare_paths()
+    single_run()

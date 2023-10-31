@@ -75,6 +75,16 @@ from Preparation.Get_Chr_Names import *
 # print(len(x.split('\t')))
 # print(x.split('\t'))
 
-x = 1 + 1
-x += 1 ++ 1
-print(x)
+# x = 1 + 1
+# x += 1 ++ 1
+# print(x)
+
+import os
+import sys
+
+output_folder = "scoring_files/test/"
+output_file = "test.txt"
+output_file_path = os.path.join(output_folder, output_file)
+
+with open(output_file_path, 'w') as sys.stdout:
+    print('hello world')

@@ -1,331 +1,322 @@
-/home/zhaoyang-new/anaconda3/envs/KarSimulator/bin/python /media/zhaoyang-new/workspace/KarSim/KarSimulator/Main/compare_KT_to_solved_path.py
 unaligned standard: (empty if none)
-chr_bin: Chr1, path_name: Chr1b, segments: (Chr1, 0, 9999, telomere1)(Chr1, 10000, 122026459, 1+)(Chr1, 122026460, 125184587, centromere, CEN1)(Chr1, 125184588, 147061831, 2+)(Chr1, 147061832, 148411223, 3+)(Chr1, 148411224, 164858002, 4+)(Chr3, 31268685, 40288953, ins: SV11, 16+)(Chr1, 164858003, 164858003, 5+)(Chr1, 164858004, 248946421, 6+)(Chr1, 248946422, 248956421, telomere2)
+chr_bin: Chr2, path_name: Chr2b, segments: (Chr2, 0, 9999, telomere1)(Chr2, 10000, 8351449, 7+)(Chr2, 8351450, 10880379, 8+)(Chr2, 10880380, 18195498, 9+)(Chr2, 18195499, 23935269, 10+)(Chr2, 23935270, 64775555, 11+)(Chr2, 64775556, 74054975, 12+)(Chr2, 74054976, 92188145, 13+)(Chr2, 92188146, 94090557, centromere, CEN2)(Chr2, 94090558, 242183528, 14+)(Chr2, 242183529, 242193528, telomere2)
 unaligned reconstruction: (empty if none)
-genome indel: 1417929228
-genome Jaccard Score: 0.05057632902426496
-connected components' Jaccard Score:
-component 0 (Chr3,Chr1), #SV: 1, Jaccard Score: 0.00517561277954799
-component 1 (Chr3,Chr2), #SV: 4, Jaccard Score: 0.02806720190147194
-component 2 (Chr4,Chr12), #SV: 2, Jaccard Score: 0.10616147498055321
-component 4 (Chr6), #SV: 1, Jaccard Score: 0.0
-component 6 (Chr9,Chr8), #SV: 5, Jaccard Score: 0.13159137510921975
-component 8 (Chr2,Chr11), #SV: 1, Jaccard Score: 0.08012220547654053
+genome indel: 1569850458
+genome Jaccard Score: 0.06518142753448786
+connected components' Jaccard Score: 
+component 0 (Chr2,Chr3,Chr1), #SV: 5, Jaccard Score: 0.04127913972932119
+component 1 (Chr4,Chr12), #SV: 2, Jaccard Score: 0.08467378996458612
+component 3 (Chr6), #SV: 1, Jaccard Score: 0.02095840977421646
+component 5 (Chr9,Chr8), #SV: 5, Jaccard Score: 0.13916157576463467
+component 7 (Chr2,Chr11), #SV: 1, Jaccard Score: 0.08012220547654053
 
-SV: 13 present, 7 captured
-SV_name: SV0-{deletion from Chr1a to Chr1a}	SV_total: 1349392	SV_captured: 1342345	SV_capture_rate: 0.9948
-SV_name: SV1-{balanced reciprocal translocation from Chr9b to Chr8a}	SV_total: 4609954.0	SV_captured: 2303631.0	SV_capture_rate: 0.4997
-SV_name: SV2-{balanced reciprocal translocation from Chr8a to Chr9b}	SV_total: 4290666.0	SV_captured: -3703.0	SV_capture_rate: -0.0009
-SV_name: SV3-{deletion from Chr6a to Chr6a}	SV_total: 3165191	SV_captured: 0	SV_capture_rate: 0.0000
-SV_name: SV4-{balanced reciprocal translocation from Chr12b to Chr4a}	SV_total: 12971800.0	SV_captured: 12970659.0	SV_capture_rate: 0.9999
-SV_name: SV5-{balanced reciprocal translocation from Chr4a to Chr12b}	SV_total: 15122418.0	SV_captured: 15117507.0	SV_capture_rate: 0.9997
-SV_name: SV6-{nonreciprocal translocation from Chr2a to Chr3a}	SV_total: 18558840	SV_captured: 9279420	SV_capture_rate: 0.5000
+SV: 13 present, 11 captured
+SV_name: SV0-{deletion from Chr1a to Chr1a}	SV_total: 1349392	SV_captured: 7047	SV_capture_rate: 0.0052
+SV_name: SV1-{balanced reciprocal translocation from Chr9b to Chr8a}	SV_total: 4609954.0	SV_captured: 4607262.0	SV_capture_rate: 0.9994
+SV_name: SV2-{balanced reciprocal translocation from Chr8a to Chr9b}	SV_total: 4290666.0	SV_captured: 4286963.0	SV_capture_rate: 0.9991
+SV_name: SV3-{deletion from Chr6a to Chr6a}	SV_total: 3165191	SV_captured: 3165191	SV_capture_rate: 1.0000
+SV_name: SV4-{balanced reciprocal translocation from Chr12b to Chr4a}	SV_total: 12971800.0	SV_captured: 12969518.0	SV_capture_rate: 0.9998
+SV_name: SV5-{balanced reciprocal translocation from Chr4a to Chr12b}	SV_total: 15122418.0	SV_captured: 15120781.0	SV_capture_rate: 0.9999
+SV_name: SV6-{nonreciprocal translocation from Chr2a to Chr3a}	SV_total: 18558840	SV_captured: 18558840	SV_capture_rate: 1.0000
 SV_name: SV7-{tandem duplication from Chr8a to Chr8a}	SV_total: 5813041	SV_captured: 5808949	SV_capture_rate: 0.9993
-SV_name: SV8-{balanced reciprocal translocation from Chr9b to Chr9b}	SV_total: 12206716.0	SV_captured: 6103358.0	SV_capture_rate: 0.5000
-SV_name: SV9-{balanced reciprocal translocation from Chr9b to Chr9b}	SV_total: 10507294.0	SV_captured: 10506385.0	SV_capture_rate: 0.9999
+SV_name: SV8-{balanced reciprocal translocation from Chr9b to Chr9b}	SV_total: 12206716.0	SV_captured: 12206716.0	SV_capture_rate: 1.0000
+SV_name: SV9-{balanced reciprocal translocation from Chr9b to Chr9b}	SV_total: 10507294.0	SV_captured: 10506688.0	SV_capture_rate: 0.9999
 SV_name: SV10-{nonreciprocal translocation from Chr2a to Chr11b}	SV_total: 11479542	SV_captured: 11476600	SV_capture_rate: 0.9997
-SV_name: SV11-{nonreciprocal translocation from Chr3a to Chr1b}	SV_total: 9020269	SV_captured: 0	SV_capture_rate: 0.0000
+SV_name: SV11-{nonreciprocal translocation from Chr3a to Chr1b}	SV_total: 18040538	SV_captured: 9020269	SV_capture_rate: 0.5000
 SV_name: SV13-{right duplication inversion from Chr2a to Chr2a}	SV_total: 2528930	SV_captured: 2454039	SV_capture_rate: 0.9704
 
 
-dependent component 0: Chr3,Chr1
-component 0 (Chr3,Chr1), #SV: 1, Jaccard Score: 0.00517561277954799
-SV_name: SV0-{deletion from Chr1a to Chr1a}	SV_total: 1349392	SV_captured: 1342345	SV_capture_rate: 0.9948
-
-alignment between Chr1a, Path1: -33544
-Alignment's Jaccard score: 0.9706
-(Chr1 0 9,999 telomere1 None)	(Chr1 10,000 19,685 1+)	(Chr1 19,686 122,026,459 1+)	(Chr1 122,026,460 125,184,587 centromere CEN1)	(Chr1 125,184,588 146,958,387 2+)	(Chr1 146,958,388 146,968,624 2+)	(Chr1 146,968,625 147,061,831 2+)	(Chr1 147,061,832 148,404,176 del: SV0 3+)	(Chr1 148,404,177 148,411,223 del: SV0 3+)	(Chr1 148,411,224 148,413,696 4+)	(Chr1 148,413,697 164,858,002 4+)	(Chr1 164,858,003 164,858,003 5+)	(Chr1 164,858,004 164,858,181 6+)	(Chr1 164,858,182 248,942,320 6+)	(Chr1 248,942,321 248,946,421 6+)	(Chr1 248,946,422 248,956,421 telomere2 None)
--	-	(Chr1 19,686 122,026,459 solved_path 1+)	(Chr1 122,026,460 125,184,587 solved_path 1+)	(Chr1 125,184,588 146,958,387 solved_path 1+)	-	(Chr1 146,968,625 147,061,831 solved_path 2+)	-	(Chr1 147,061,832 148,404,176 solved_path 2+)	-	(Chr1 148,413,697 164,858,002 solved_path 3+)	(Chr1 164,858,003 164,858,003 solved_path 3+)	(Chr1 164,858,004 164,858,181 solved_path 3+)	(Chr1 164,858,182 248,942,320 solved_path 4+)	-	-
-kt unaligned: chr_bin: Chr1, path_name: Chr1b, segments: (Chr1, 0, 9999, telomere1)(Chr1, 10000, 122026459, 1+)(Chr1, 122026460, 125184587, centromere, CEN1)(Chr1, 125184588, 147061831, 2+)(Chr1, 147061832, 148411223, 3+)(Chr1, 148411224, 164858002, 4+)(Chr3, 31268685, 40288953, ins: SV11, 16+)(Chr1, 164858003, 164858003, 5+)(Chr1, 164858004, 248946421, 6+)(Chr1, 248946422, 248956421, telomere2)
-
-
-dependent component 1: Chr3,Chr2
-component 1 (Chr3,Chr2), #SV: 4, Jaccard Score: 0.02806720190147194
+dependent component 0: Chr2,Chr3,Chr1
+component 0 (Chr2,Chr3,Chr1), #SV: 5, Jaccard Score: 0.04127913972932119
+SV_name: SV0-{deletion from Chr1a to Chr1a}	SV_total: 1349392	SV_captured: 7047	SV_capture_rate: 0.0052
+SV_name: SV11-{nonreciprocal translocation from Chr3a to Chr1b}	SV_total: 18040538	SV_captured: 9020269	SV_capture_rate: 0.5000
 SV_name: SV13-{right duplication inversion from Chr2a to Chr2a}	SV_total: 2528930	SV_captured: 2454039	SV_capture_rate: 0.9704
 SV_name: SV10-{nonreciprocal translocation from Chr2a to Chr11b}	SV_total: 5739771	SV_captured: 5736829	SV_capture_rate: 0.9995
-SV_name: SV6-{nonreciprocal translocation from Chr2a to Chr3a}	SV_total: 18558840	SV_captured: 9279420	SV_capture_rate: 0.5000
-SV_name: SV11-{nonreciprocal translocation from Chr3a to Chr1b}	SV_total: 9020269	SV_captured: 0	SV_capture_rate: 0.0000
+SV_name: SV6-{nonreciprocal translocation from Chr2a to Chr3a}	SV_total: 18558840	SV_captured: 18558840	SV_capture_rate: 1.0000
 
+alignment between Chr1a, Path1: -1368842
+Alignment's Jaccard score: 0.0026
+(Chr1 0 9,999 telomere1 None)	(Chr1 10,000 19,685 1+)	(Chr1 19,686 122,026,459 1+)	(Chr1 122,026,460 125,184,587 centromere CEN1)	(Chr1 125,184,588 146,958,387 2+)	(Chr1 146,958,388 146,968,624 2+)	(Chr1 146,968,625 147,061,831 2+)	(Chr1 147,061,832 148,404,176 del: SV0 3+)	(Chr1 148,404,177 148,411,223 del: SV0 3+)	(Chr1 148,411,224 148,413,696 4+)	(Chr1 148,413,697 164,858,002 4+)	(Chr1 164,858,003 164,858,003 5+)	(Chr1 164,858,004 164,858,181 6+)	(Chr1 164,858,182 248,942,320 6+)	(Chr1 248,942,321 248,946,421 6+)	(Chr1 248,946,422 248,956,421 telomere2 None)	
+-	-	(Chr1 19,686 122,026,459 solved_path 1+)	(Chr1 122,026,460 125,184,587 solved_path 1+)	(Chr1 125,184,588 146,958,387 solved_path 1+)	-	(Chr1 146,968,625 147,061,831 solved_path 2+)	(Chr1 147,061,832 148,404,176 solved_path 2+)	-	-	(Chr1 148,413,697 164,858,002 solved_path 3+)	(Chr1 164,858,003 164,858,003 solved_path 3+)	(Chr1 164,858,004 164,858,181 solved_path 3+)	(Chr1 164,858,182 248,942,320 solved_path 4+)	-	-	
+alignment between Chr1b, Path6: -192963302
+Alignment's Jaccard score: 0.0447
+(Chr1 0 9,999 telomere1 None)	(Chr1 10,000 122,026,459 1+)	(Chr1 122,026,460 125,184,587 centromere CEN1)	-	-	(Chr1 125,184,588 147,061,831 2+)	(Chr1 147,061,832 148,411,223 3+)	(Chr1 148,411,224 164,858,002 4+)	(Chr3 31,268,685 40,288,953 ins: SV11 16+)	-	(Chr1 164,858,003 164,858,003 5+)	(Chr1 164,858,004 164,858,181 6+)	(Chr1 164,858,182 248,942,320 6+)	(Chr1 248,942,321 248,946,421 6+)	(Chr1 248,946,422 248,956,421 telomere2 None)	
+-	-	-	(Chr3 0 31,268,530 solved_path 13-)	(Chr3 31,268,531 31,268,684 solved_path 14-)	-	-	-	(Chr3 31,268,685 40,288,953 solved_path 14-)	(Chr3 40,288,954 40,289,415 solved_path 14-)	-	-	(Chr1 164,858,182 248,942,320 solved_path 4-)	-	-	
 alignment between Chr2a, Path5: -164726
 Alignment's Jaccard score: 0.9863
-(Chr2 0 9,999 telomere1 None)	(Chr2 10,000 22,063 7+)	(Chr2 22,064 8,341,458 7+)	(Chr2 8,341,459 8,351,449 7+)	(Chr2 8,351,450 8,359,337 8+)	(Chr2 8,359,338 10,813,376 8+)	(Chr2 10,813,377 10,830,056 8+)	(Chr2 10,830,057 10,880,379 8+)	-	(Chr2 10,880,379 10,830,057 ins: SV13 8-)	(Chr2 10,830,056 10,813,377 ins: SV13 8-)	(Chr2 10,813,376 8,359,338 ins: SV13 8-)	(Chr2 8,359,337 8,351,450 ins: SV13 8-)	(Chr2 10,880,380 10,892,141 9+)	(Chr2 10,892,142 18,194,785 9+)	(Chr2 18,194,786 18,195,498 9+)	(Chr2 18,195,499 23,932,327 del: SV10 10+)	(Chr2 23,932,328 23,935,269 del: SV10 10+)	(Chr2 23,935,270 64,768,555 11+)	(Chr2 64,768,556 64,775,555 11+)	(Chr2 64,775,556 74,054,975 del: SV6 12+)	(Chr2 74,054,976 74,056,400 13+)	(Chr2 74,056,401 92,188,145 13+)	(Chr2 92,188,146 94,090,557 centromere CEN2)	(Chr2 94,090,558 242,175,920 14+)	(Chr2 242,175,921 242,183,528 14+)	(Chr2 242,183,529 242,193,528 telomere2 None)
--	-	(Chr2 22,064 8,341,458 solved_path 5+)	-	-	(Chr2 8,359,338 10,813,376 solved_path 6+)	-	(Chr2 10,830,057 10,880,379 solved_path 7+)	(Chr2 10,880,380 10,892,141 solved_path 7+)	-	-	(Chr2 10,813,376 8,359,338 solved_path 6-)	-	-	(Chr2 10,892,142 18,194,785 solved_path 8+)	-	-	(Chr2 23,932,328 23,935,269 solved_path 10+)	(Chr2 23,935,270 64,768,555 solved_path 10+)	-	-	-	(Chr2 74,056,401 92,188,145 solved_path 12+)	(Chr2 92,188,146 94,090,557 solved_path 12+)	(Chr2 94,090,558 242,175,920 solved_path 12+)	-	-
-alignment between Chr2b, Path8: -392139539
-Alignment's Jaccard score: No Event
--	-	-	-	(Chr2 0 9,999 telomere1 None)	(Chr2 10,000 8,351,449 7+)	(Chr2 8,351,450 10,880,379 8+)	(Chr2 10,880,380 18,195,498 9+)	(Chr2 18,195,499 23,935,269 10+)	(Chr2 23,935,270 64,768,555 11+)	(Chr2 64,768,556 64,775,555 11+)	(Chr2 64,775,556 74,054,975 12+)	(Chr2 74,054,976 74,056,400 13+)	(Chr2 74,056,401 92,188,145 13+)	(Chr2 92,188,146 94,090,557 centromere CEN2)	(Chr2 94,090,558 242,175,920 14+)	(Chr2 242,175,921 242,183,528 14+)	(Chr2 242,183,529 242,193,528 telomere2 None)
-(Chr1 19,686 146,958,387 solved_path 1-)	(Chr1 148,413,697 164,858,181 solved_path 3-)	(Chr3 31,268,531 40,289,415 solved_path 14-)	(Chr3 40,289,416 195,258,718 solved_path 15-)	-	-	-	-	-	-	(Chr2 64,768,556 64,775,555 solved_path 11-)	(Chr2 64,775,556 74,054,975 solved_path 11-)	(Chr2 74,054,976 74,056,400 solved_path 11-)	(Chr2 74,056,401 92,188,145 solved_path 12-)	(Chr2 92,188,146 94,090,557 solved_path 12-)	(Chr2 94,090,558 242,175,920 solved_path 12-)	-	-
-alignment between Chr3a, Path6: -185267025
-Alignment's Jaccard score: 0.0000
-(Chr3 0 9,999 telomere1 None)	(Chr3 10,000 31,268,530 15+)	(Chr3 31,268,531 31,268,684 15+)	-	-	(Chr3 31,268,685 40,288,953 del: SV11 16+)	(Chr3 40,288,954 40,289,415 17+)	(Chr3 40,289,416 90,772,458 17+)	(Chr3 90,772,459 93,655,574 centromere CEN3)	(Chr3 93,655,575 195,254,195 18+)	(Chr2 64,775,556 74,054,975 ins: SV6 12+)	(Chr3 195,254,196 195,254,196 19+)	(Chr3 195,254,197 198,235,558 20+)	(Chr3 198,235,559 198,295,558 telomere2 None)
-(Chr3 0 9,999 solved_path 13-)	(Chr3 10,000 31,268,530 solved_path 13-)	(Chr3 31,268,531 31,268,684 solved_path 14-)	(Chr3 31,268,685 40,288,953 solved_path 14-)	(Chr3 40,288,954 40,289,415 solved_path 14-)	(Chr1 164,858,182 248,942,320 solved_path 4-)	-	-	-	-	-	-	-	-
+(Chr2 0 9,999 telomere1 None)	(Chr2 10,000 22,063 7+)	(Chr2 22,064 8,341,458 7+)	(Chr2 8,341,459 8,351,449 7+)	(Chr2 8,351,450 8,359,337 8+)	(Chr2 8,359,338 10,813,376 8+)	(Chr2 10,813,377 10,830,056 8+)	(Chr2 10,830,057 10,880,379 8+)	-	(Chr2 10,880,379 10,830,057 ins: SV13 8-)	(Chr2 10,830,056 10,813,377 ins: SV13 8-)	(Chr2 10,813,376 8,359,338 ins: SV13 8-)	(Chr2 8,359,337 8,351,450 ins: SV13 8-)	(Chr2 10,880,380 10,892,141 9+)	(Chr2 10,892,142 18,194,785 9+)	(Chr2 18,194,786 18,195,498 9+)	(Chr2 18,195,499 23,932,327 del: SV10 10+)	(Chr2 23,932,328 23,935,269 del: SV10 10+)	(Chr2 23,935,270 64,768,555 11+)	(Chr2 64,768,556 64,775,555 11+)	(Chr2 64,775,556 74,054,975 del: SV6 12+)	(Chr2 74,054,976 74,056,400 13+)	(Chr2 74,056,401 92,188,145 13+)	(Chr2 92,188,146 94,090,557 centromere CEN2)	(Chr2 94,090,558 242,175,920 14+)	(Chr2 242,175,921 242,183,528 14+)	(Chr2 242,183,529 242,193,528 telomere2 None)	
+-	-	(Chr2 22,064 8,341,458 solved_path 5+)	-	-	(Chr2 8,359,338 10,813,376 solved_path 6+)	-	(Chr2 10,830,057 10,880,379 solved_path 7+)	(Chr2 10,880,380 10,892,141 solved_path 7+)	-	-	(Chr2 10,813,376 8,359,338 solved_path 6-)	-	-	(Chr2 10,892,142 18,194,785 solved_path 8+)	-	-	(Chr2 23,932,328 23,935,269 solved_path 10+)	(Chr2 23,935,270 64,768,555 solved_path 10+)	-	-	-	(Chr2 74,056,401 92,188,145 solved_path 12+)	(Chr2 92,188,146 94,090,557 solved_path 12+)	(Chr2 94,090,558 242,175,920 solved_path 12+)	-	-	
+kt unaligned: chr_bin: Chr2, path_name: Chr2b, segments: (Chr2, 0, 9999, telomere1)(Chr2, 10000, 8351449, 7+)(Chr2, 8351450, 10880379, 8+)(Chr2, 10880380, 18195498, 9+)(Chr2, 18195499, 23935269, 10+)(Chr2, 23935270, 64775555, 11+)(Chr2, 64775556, 74054975, 12+)(Chr2, 74054976, 92188145, 13+)(Chr2, 92188146, 94090557, centromere, CEN2)(Chr2, 94090558, 242183528, 14+)(Chr2, 242183529, 242193528, telomere2)
+alignment between Chr3a, Path8: -374775818
+Alignment's Jaccard score: 0.0236
+-	-	(Chr3 0 9,999 telomere1 None)	(Chr3 10,000 31,268,530 15+)	(Chr3 31,268,531 31,268,684 15+)	(Chr3 31,268,685 40,288,953 del: SV11 16+)	(Chr3 40,288,954 40,289,415 17+)	(Chr3 40,289,416 90,772,458 17+)	(Chr3 90,772,459 93,655,574 centromere CEN3)	(Chr3 93,655,575 195,254,195 18+)	-	-	-	(Chr2 64,775,556 74,054,975 ins: SV6 12+)	-	-	(Chr3 195,254,196 195,254,196 19+)	(Chr3 195,254,197 195,258,718 20+)	(Chr3 195,258,719 198,235,558 20+)	(Chr3 198,235,559 198,295,558 telomere2 None)	
+(Chr1 19,686 146,958,387 solved_path 1-)	(Chr1 148,413,697 164,858,181 solved_path 3-)	-	-	(Chr3 31,268,531 31,268,684 solved_path 14-)	(Chr3 31,268,685 40,288,953 solved_path 14-)	(Chr3 40,288,954 40,289,415 solved_path 14-)	(Chr3 40,289,416 90,772,458 solved_path 15-)	(Chr3 90,772,459 93,655,574 solved_path 15-)	(Chr3 93,655,575 195,254,195 solved_path 15-)	(Chr3 195,254,196 195,254,196 solved_path 15-)	(Chr3 195,254,197 195,258,718 solved_path 15-)	(Chr2 64,768,556 64,775,555 solved_path 11-)	(Chr2 64,775,556 74,054,975 solved_path 11-)	(Chr2 74,054,976 74,056,400 solved_path 11-)	(Chr2 74,056,401 242,175,920 solved_path 12-)	-	-	-	-	
 alignment between Chr3b, Path2: -9025847
 Alignment's Jaccard score: No Event
-(Chr3 0 9,999 telomere1 None)	(Chr3 10,000 31,268,530 15+)	(Chr3 31,268,531 31,268,684 15+)	(Chr3 31,268,685 40,288,953 16+)	(Chr3 40,288,954 40,289,415 17+)	(Chr3 40,289,416 90,772,458 17+)	(Chr3 90,772,459 93,655,574 centromere CEN3)	(Chr3 93,655,575 195,254,195 18+)	(Chr3 195,254,196 195,254,196 19+)	(Chr3 195,254,197 195,258,718 20+)	(Chr3 195,258,719 198,230,596 20+)	(Chr3 198,230,597 198,235,558 20+)	(Chr3 198,235,559 198,295,558 telomere2 None)
-(Chr3 0 9,999 solved_path 13+)	(Chr3 10,000 31,268,530 solved_path 13+)	-	-	-	(Chr3 40,289,416 90,772,458 solved_path 15+)	(Chr3 90,772,459 93,655,574 solved_path 15+)	(Chr3 93,655,575 195,254,195 solved_path 15+)	(Chr3 195,254,196 195,254,196 solved_path 15+)	(Chr3 195,254,197 195,258,718 solved_path 15+)	(Chr3 195,258,719 198,230,596 solved_path 16+)	-	-
+(Chr3 0 9,999 telomere1 None)	(Chr3 10,000 31,268,530 15+)	(Chr3 31,268,531 31,268,684 15+)	(Chr3 31,268,685 40,288,953 16+)	(Chr3 40,288,954 40,289,415 17+)	(Chr3 40,289,416 90,772,458 17+)	(Chr3 90,772,459 93,655,574 centromere CEN3)	(Chr3 93,655,575 195,254,195 18+)	(Chr3 195,254,196 195,254,196 19+)	(Chr3 195,254,197 195,258,718 20+)	(Chr3 195,258,719 198,230,596 20+)	(Chr3 198,230,597 198,235,558 20+)	(Chr3 198,235,559 198,295,558 telomere2 None)	
+(Chr3 0 9,999 solved_path 13+)	(Chr3 10,000 31,268,530 solved_path 13+)	-	-	-	(Chr3 40,289,416 90,772,458 solved_path 15+)	(Chr3 90,772,459 93,655,574 solved_path 15+)	(Chr3 93,655,575 195,254,195 solved_path 15+)	(Chr3 195,254,196 195,254,196 solved_path 15+)	(Chr3 195,254,197 195,258,718 solved_path 15+)	(Chr3 195,258,719 198,230,596 solved_path 16+)	-	-	
 
 
-dependent component 2: Chr4,Chr12
-component 2 (Chr4,Chr12), #SV: 2, Jaccard Score: 0.10616147498055321
-SV_name: SV5-{balanced reciprocal translocation from Chr4a to Chr12b}	SV_total: 15122418.0	SV_captured: 15117507.0	SV_capture_rate: 0.9997
-SV_name: SV4-{balanced reciprocal translocation from Chr12b to Chr4a}	SV_total: 12971800.0	SV_captured: 12970659.0	SV_capture_rate: 0.9999
+dependent component 1: Chr4,Chr12
+component 1 (Chr4,Chr12), #SV: 2, Jaccard Score: 0.08467378996458612
+SV_name: SV5-{balanced reciprocal translocation from Chr4a to Chr12b}	SV_total: 15122418.0	SV_captured: 15120781.0	SV_capture_rate: 0.9999
+SV_name: SV4-{balanced reciprocal translocation from Chr12b to Chr4a}	SV_total: 12971800.0	SV_captured: 12969518.0	SV_capture_rate: 0.9998
 
-alignment between Chr4a, Path12: -81110815
-Alignment's Jaccard score: 0.1476
-(Chr4 0 9,999 telomere1 None)	(Chr4 10,000 49,708,100 21+)	(Chr4 49,708,101 51,743,951 centromere CEN4)	(Chr4 51,743,952 101,537,441 22+)	-	(Chr4 101,537,442 101,539,078 del: SV5: 2 23+)	(Chr4 101,539,079 109,098,650 del: SV5: 2 23+)	(Chr12 52,518,277 59,003,035 ins: SV4 55+)	(Chr12 59,003,036 59,004,176 ins: SV4 55+)	(Chr4 101,537,442 101,539,078 del: SV5: 2 23+)	(Chr4 101,539,079 109,098,650 del: SV5: 2 23+)	(Chr4 109,098,651 190,204,554 24+)	(Chr4 190,204,555 190,214,554 telomere2 None)
-(Chr4 0 9,999 solved_path 17-)	(Chr4 10,000 49,708,100 solved_path 17-)	(Chr4 49,708,101 51,743,951 solved_path 17-)	(Chr4 51,743,952 101,537,441 solved_path 17-)	(Chr4 101,537,442 101,539,078 solved_path 17-)	(Chr12 52,515,962 52,518,276 solved_path 50-)	-	(Chr12 52,518,277 59,003,035 solved_path 50-)	(Chr12 59,003,036 59,004,176 solved_path 51-)	(Chr12 59,004,177 133,263,960 solved_path 51-)	-	-	-
+alignment between Chr4a, Path10: -152013540
+Alignment's Jaccard score: 0.0846
+(Chr4 0 9,999 telomere1 None)	(Chr4 10,000 49,708,100 21+)	(Chr4 49,708,101 51,743,951 centromere CEN4)	-	-	(Chr4 51,743,952 101,537,441 22+)	(Chr4 101,537,442 109,098,650 del: SV5: 2 23+)	(Chr12 52,518,277 59,003,035 ins: SV4 55+)	(Chr12 59,003,036 59,004,176 ins: SV4 55+)	(Chr4 101,537,442 109,098,650 del: SV5: 2 23+)	(Chr4 109,098,651 109,099,191 24+)	(Chr4 109,099,192 190,202,564 24+)	(Chr4 190,202,565 190,204,554 24+)	(Chr4 190,204,555 190,214,554 telomere2 None)	
+-	-	-	(Chr12 0 52,515,961 solved_path 49-)	(Chr12 52,515,962 52,518,276 solved_path 50-)	-	-	(Chr12 52,518,277 59,003,035 solved_path 50-)	-	-	-	(Chr4 109,099,192 190,202,564 solved_path 19-)	-	-	
 alignment between Chr4b, Path9: -1990
 Alignment's Jaccard score: No Event
-(Chr4 0 9,999 telomere1 None)	(Chr4 10,000 49,708,100 21+)	(Chr4 49,708,101 51,743,951 centromere CEN4)	(Chr4 51,743,952 101,537,441 22+)	(Chr4 101,537,442 101,539,078 23+)	(Chr4 101,539,079 109,098,650 23+)	(Chr4 109,098,651 109,099,191 24+)	(Chr4 109,099,192 190,202,564 24+)	(Chr4 190,202,565 190,204,554 24+)	(Chr4 190,204,555 190,214,554 telomere2 None)
-(Chr4 0 9,999 solved_path 17+)	(Chr4 10,000 49,708,100 solved_path 17+)	(Chr4 49,708,101 51,743,951 solved_path 17+)	(Chr4 51,743,952 101,537,441 solved_path 17+)	(Chr4 101,537,442 101,539,078 solved_path 17+)	(Chr4 101,539,079 109,098,650 solved_path 18+)	(Chr4 109,098,651 109,099,191 solved_path 18+)	(Chr4 109,099,192 190,202,564 solved_path 19+)	-	-
-alignment between Chr12a, Path10: -155365646
+(Chr4 0 9,999 telomere1 None)	(Chr4 10,000 49,708,100 21+)	(Chr4 49,708,101 51,743,951 centromere CEN4)	(Chr4 51,743,952 101,537,441 22+)	(Chr4 101,537,442 101,539,078 23+)	(Chr4 101,539,079 109,098,650 23+)	(Chr4 109,098,651 109,099,191 24+)	(Chr4 109,099,192 190,202,564 24+)	(Chr4 190,202,565 190,204,554 24+)	(Chr4 190,204,555 190,214,554 telomere2 None)	
+(Chr4 0 9,999 solved_path 17+)	(Chr4 10,000 49,708,100 solved_path 17+)	(Chr4 49,708,101 51,743,951 solved_path 17+)	(Chr4 51,743,952 101,537,441 solved_path 17+)	(Chr4 101,537,442 101,539,078 solved_path 17+)	(Chr4 101,539,079 109,098,650 solved_path 18+)	(Chr4 109,098,651 109,099,191 solved_path 18+)	(Chr4 109,099,192 190,202,564 solved_path 19+)	-	-	
+alignment between Chr12a, Path12: -151630544
 Alignment's Jaccard score: No Event
-(Chr12 0 9,999 telomere1 None)	(Chr12 10,000 34,769,407 53+)	(Chr12 34,769,408 37,185,252 centromere CEN12)	(Chr12 37,185,253 52,515,961 54+)	(Chr12 52,515,962 52,518,276 54+)	(Chr12 52,518,277 59,003,035 55+)	-	(Chr12 59,003,036 59,004,176 55+)	(Chr12 59,004,177 133,265,308 56+)	(Chr12 133,265,309 133,275,308 telomere2 None)
-(Chr12 0 9,999 solved_path 49-)	(Chr12 10,000 34,769,407 solved_path 49-)	(Chr12 34,769,408 37,185,252 solved_path 49-)	(Chr12 37,185,253 52,515,961 solved_path 49-)	(Chr12 52,515,962 52,518,276 solved_path 50-)	(Chr12 52,518,277 59,003,035 solved_path 50-)	(Chr4 109,099,192 190,202,564 solved_path 19-)	-	-	-
+(Chr12 0 9,999 telomere1 None)	(Chr12 10,000 34,769,407 53+)	(Chr12 34,769,408 37,185,252 centromere CEN12)	-	(Chr12 37,185,253 52,515,961 54+)	(Chr12 52,515,962 52,518,276 54+)	(Chr12 52,518,277 59,003,035 55+)	(Chr12 59,003,036 59,004,176 55+)	(Chr12 59,004,177 133,263,960 56+)	(Chr12 133,263,961 133,265,308 56+)	(Chr12 133,265,309 133,275,308 telomere2 None)	
+-	-	-	(Chr4 0 101,539,078 solved_path 17-)	-	(Chr12 52,515,962 52,518,276 solved_path 50-)	(Chr12 52,518,277 59,003,035 solved_path 50-)	(Chr12 59,003,036 59,004,176 solved_path 51-)	(Chr12 59,004,177 133,263,960 solved_path 51-)	-	-	
 alignment between Chr12b, Path11: -6982
 Alignment's Jaccard score: 0.9993
-(Chr12 0 9,999 telomere1 None)	(Chr12 10,000 34,769,407 53+)	(Chr12 34,769,408 37,185,252 centromere CEN12)	(Chr12 37,185,253 52,515,961 54+)	(Chr12 52,515,962 52,518,276 54+)	(Chr12 52,518,277 59,003,035 del: SV4: 2 55+)	(Chr12 59,003,036 59,004,176 del: SV4: 2 55+)	(Chr4 101,537,442 101,539,078 ins: SV5 23+)	(Chr4 101,539,079 109,098,650 ins: SV5 23+)	-	(Chr12 52,518,277 59,003,035 del: SV4: 2 55+)	(Chr12 59,003,036 59,004,176 del: SV4: 2 55+)	(Chr12 59,004,177 133,263,960 56+)	(Chr12 133,263,961 133,265,308 56+)	(Chr12 133,265,309 133,275,308 telomere2 None)
-(Chr12 0 9,999 solved_path 49+)	(Chr12 10,000 34,769,407 solved_path 49+)	(Chr12 34,769,408 37,185,252 solved_path 49+)	(Chr12 37,185,253 52,515,961 solved_path 49+)	-	-	-	-	(Chr4 101,539,079 109,098,650 solved_path 18+)	(Chr4 109,098,651 109,099,191 solved_path 18+)	-	(Chr12 59,003,036 59,004,176 solved_path 51+)	(Chr12 59,004,177 133,263,960 solved_path 51+)	-	-
+(Chr12 0 9,999 telomere1 None)	(Chr12 10,000 34,769,407 53+)	(Chr12 34,769,408 37,185,252 centromere CEN12)	(Chr12 37,185,253 52,515,961 54+)	(Chr12 52,515,962 52,518,276 54+)	(Chr12 52,518,277 59,003,035 del: SV4: 2 55+)	(Chr12 59,003,036 59,004,176 del: SV4: 2 55+)	(Chr4 101,537,442 101,539,078 ins: SV5 23+)	(Chr4 101,539,079 109,098,650 ins: SV5 23+)	-	(Chr12 52,518,277 59,003,035 del: SV4: 2 55+)	(Chr12 59,003,036 59,004,176 del: SV4: 2 55+)	(Chr12 59,004,177 133,263,960 56+)	(Chr12 133,263,961 133,265,308 56+)	(Chr12 133,265,309 133,275,308 telomere2 None)	
+(Chr12 0 9,999 solved_path 49+)	(Chr12 10,000 34,769,407 solved_path 49+)	(Chr12 34,769,408 37,185,252 solved_path 49+)	(Chr12 37,185,253 52,515,961 solved_path 49+)	-	-	-	-	(Chr4 101,539,079 109,098,650 solved_path 18+)	(Chr4 109,098,651 109,099,191 solved_path 18+)	-	(Chr12 59,003,036 59,004,176 solved_path 51+)	(Chr12 59,004,177 133,263,960 solved_path 51+)	-	-	
 
 
-dependent component 3: Chr5
-component 3 (Chr5), #SV: 0, Jaccard Score: No Event
+dependent component 2: Chr5
+component 2 (Chr5), #SV: 0, Jaccard Score: No Event
 
 alignment between Chr5a, Path13: -5544
 Alignment's Jaccard score: No Event
-(Chr5 0 9,999 telomere1 None)	(Chr5 10,000 46,485,900 25+)	(Chr5 46,485,901 50,059,807 centromere CEN5)	(Chr5 50,059,808 181,472,714 26+)	(Chr5 181,472,715 181,478,258 26+)	(Chr5 181,478,259 181,538,258 telomere2 None)
-(Chr5 0 9,999 solved_path 20+)	(Chr5 10,000 46,485,900 solved_path 20+)	(Chr5 46,485,901 50,059,807 solved_path 20+)	(Chr5 50,059,808 181,472,714 solved_path 20+)	-	-
+(Chr5 0 9,999 telomere1 None)	(Chr5 10,000 46,485,900 25+)	(Chr5 46,485,901 50,059,807 centromere CEN5)	(Chr5 50,059,808 181,472,714 26+)	(Chr5 181,472,715 181,478,258 26+)	(Chr5 181,478,259 181,538,258 telomere2 None)	
+(Chr5 0 9,999 solved_path 20+)	(Chr5 10,000 46,485,900 solved_path 20+)	(Chr5 46,485,901 50,059,807 solved_path 20+)	(Chr5 50,059,808 181,472,714 solved_path 20+)	-	-	
 alignment between Chr5b, Path14: -5544
 Alignment's Jaccard score: No Event
-(Chr5 0 9,999 telomere1 None)	(Chr5 10,000 46,485,900 25+)	(Chr5 46,485,901 50,059,807 centromere CEN5)	(Chr5 50,059,808 181,472,714 26+)	(Chr5 181,472,715 181,478,258 26+)	(Chr5 181,478,259 181,538,258 telomere2 None)
-(Chr5 0 9,999 solved_path 20-)	(Chr5 10,000 46,485,900 solved_path 20-)	(Chr5 46,485,901 50,059,807 solved_path 20-)	(Chr5 50,059,808 181,472,714 solved_path 20-)	-	-
+(Chr5 0 9,999 telomere1 None)	(Chr5 10,000 46,485,900 25+)	(Chr5 46,485,901 50,059,807 centromere CEN5)	(Chr5 50,059,808 181,472,714 26+)	(Chr5 181,472,715 181,478,258 26+)	(Chr5 181,478,259 181,538,258 telomere2 None)	
+(Chr5 0 9,999 solved_path 20-)	(Chr5 10,000 46,485,900 solved_path 20-)	(Chr5 46,485,901 50,059,807 solved_path 20-)	(Chr5 50,059,808 181,472,714 solved_path 20-)	-	-	
 
 
-dependent component 4: Chr6
-component 4 (Chr6), #SV: 1, Jaccard Score: 0.0
-SV_name: SV3-{deletion from Chr6a to Chr6a}	SV_total: 3165191	SV_captured: 0	SV_capture_rate: 0.0000
+dependent component 3: Chr6
+component 3 (Chr6), #SV: 1, Jaccard Score: 0.02095840977421646
+SV_name: SV3-{deletion from Chr6a to Chr6a}	SV_total: 3165191	SV_captured: 3165191	SV_capture_rate: 1.0000
 
-alignment between Chr6a, Path16: -27741714
-Alignment's Jaccard score: 0.0000
-(Chr6 0 59,999 telomere1 None)	(Chr6 60,000 78,490 27+)	(Chr6 78,491 561,177 27+)	(Chr6 561,178 565,047 27+)	(Chr6 565,048 31,571,449 27+)	(Chr6 31,571,450 32,726,607 27+)	(Chr6 32,726,608 40,619,201 27+)	-	(Chr6 40,619,202 40,631,776 27+)	(Chr6 40,631,777 43,796,967 del: SV3 28+)	-	-	(Chr6 43,796,968 43,814,273 29+)	(Chr6 43,814,274 58,445,657 29+)	(Chr6 58,445,658 58,553,888 29+)	(Chr6 58,553,889 59,282,243 centromere CEN6)	(Chr6 59,282,244 59,829,934 centromere CEN6)	(Chr6 59,829,935 170,737,419 30+)	(Chr6 170,737,420 170,745,978 30+)	(Chr6 170,745,979 170,805,978 telomere2 None)
--	-	(Chr6 78,491 561,177 solved_path 21-)	-	(Chr6 565,048 31,571,449 solved_path 22-)	(Chr6 31,571,450 32,726,607 solved_path 23-)	(Chr6 32,726,608 40,619,201 solved_path 24-)	(Chr6 43,814,274 58,445,657 solved_path 26-)	-	(Chr6 565,048 31,571,449 solved_path 22-)	(Chr6 31,571,450 32,726,607 solved_path 23-)	(Chr6 32,726,608 40,619,201 solved_path 24-)	-	(Chr6 43,814,274 58,445,657 solved_path 26-)	-	-	(Chr6 59,282,244 59,829,934 solved_path 27-)	(Chr6 59,829,935 170,737,419 solved_path 27-)	-	-
+alignment between Chr6a, Path16: -55582925
+Alignment's Jaccard score: 0.0539
+(Chr6 0 59,999 telomere1 None)	(Chr6 60,000 78,490 27+)	(Chr6 78,491 561,177 27+)	-	-	-	-	(Chr6 561,178 565,047 27+)	(Chr6 565,048 31,571,449 27+)	(Chr6 31,571,450 32,726,607 27+)	(Chr6 32,726,608 40,619,201 27+)	(Chr6 40,619,202 40,631,776 27+)	(Chr6 40,631,777 43,796,967 del: SV3 28+)	(Chr6 43,796,968 43,814,273 29+)	(Chr6 43,814,274 58,445,657 29+)	(Chr6 58,445,658 58,553,888 29+)	(Chr6 58,553,889 59,282,243 centromere CEN6)	(Chr6 59,282,244 59,829,934 centromere CEN6)	(Chr6 59,829,935 170,737,419 30+)	(Chr6 170,737,420 170,745,978 30+)	(Chr6 170,745,979 170,805,978 telomere2 None)	
+-	-	(Chr6 78,491 561,177 solved_path 21-)	(Chr6 565,048 31,571,449 solved_path 22-)	(Chr6 31,571,450 32,726,607 solved_path 23-)	(Chr6 32,726,608 40,619,201 solved_path 24-)	(Chr6 43,814,274 58,445,657 solved_path 26-)	-	(Chr6 565,048 31,571,449 solved_path 22-)	(Chr6 31,571,450 32,726,607 solved_path 23-)	(Chr6 32,726,608 40,619,201 solved_path 24-)	-	-	-	(Chr6 43,814,274 58,445,657 solved_path 26-)	-	-	(Chr6 59,282,244 59,829,934 solved_path 27-)	(Chr6 59,829,935 170,737,419 solved_path 27-)	-	-	
 alignment between Chr6b, Path15: -874141
 Alignment's Jaccard score: No Event
-(Chr6 0 59,999 telomere1 None)	(Chr6 60,000 78,490 27+)	(Chr6 78,491 561,177 27+)	(Chr6 561,178 565,047 27+)	(Chr6 565,048 31,571,449 27+)	(Chr6 31,571,450 32,726,607 27+)	(Chr6 32,726,608 40,619,201 27+)	(Chr6 40,619,202 40,624,216 27+)	(Chr6 40,624,217 40,631,776 27+)	(Chr6 40,631,777 43,796,967 28+)	(Chr6 43,796,968 43,812,653 29+)	(Chr6 43,812,654 43,814,273 29+)	(Chr6 43,814,274 58,445,657 29+)	(Chr6 58,445,658 58,553,888 29+)	(Chr6 58,553,889 59,282,243 centromere CEN6)	(Chr6 59,282,244 59,829,934 centromere CEN6)	(Chr6 59,829,935 170,737,419 30+)	(Chr6 170,737,420 170,745,978 30+)	(Chr6 170,745,979 170,805,978 telomere2 None)
--	-	(Chr6 78,491 561,177 solved_path 21+)	-	(Chr6 565,048 31,571,449 solved_path 22+)	(Chr6 31,571,450 32,726,607 solved_path 23+)	(Chr6 32,726,608 40,619,201 solved_path 24+)	-	(Chr6 40,624,217 40,631,776 solved_path 25+)	(Chr6 40,631,777 43,796,967 solved_path 25+)	(Chr6 43,796,968 43,812,653 solved_path 25+)	-	(Chr6 43,814,274 58,445,657 solved_path 26+)	-	-	(Chr6 59,282,244 59,829,934 solved_path 27+)	(Chr6 59,829,935 170,737,419 solved_path 27+)	-	-
+(Chr6 0 59,999 telomere1 None)	(Chr6 60,000 78,490 27+)	(Chr6 78,491 561,177 27+)	(Chr6 561,178 565,047 27+)	(Chr6 565,048 31,571,449 27+)	(Chr6 31,571,450 32,726,607 27+)	(Chr6 32,726,608 40,619,201 27+)	(Chr6 40,619,202 40,624,216 27+)	(Chr6 40,624,217 40,631,776 27+)	(Chr6 40,631,777 43,796,967 28+)	(Chr6 43,796,968 43,812,653 29+)	(Chr6 43,812,654 43,814,273 29+)	(Chr6 43,814,274 58,445,657 29+)	(Chr6 58,445,658 58,553,888 29+)	(Chr6 58,553,889 59,282,243 centromere CEN6)	(Chr6 59,282,244 59,829,934 centromere CEN6)	(Chr6 59,829,935 170,737,419 30+)	(Chr6 170,737,420 170,745,978 30+)	(Chr6 170,745,979 170,805,978 telomere2 None)	
+-	-	(Chr6 78,491 561,177 solved_path 21+)	-	(Chr6 565,048 31,571,449 solved_path 22+)	(Chr6 31,571,450 32,726,607 solved_path 23+)	(Chr6 32,726,608 40,619,201 solved_path 24+)	-	(Chr6 40,624,217 40,631,776 solved_path 25+)	(Chr6 40,631,777 43,796,967 solved_path 25+)	(Chr6 43,796,968 43,812,653 solved_path 25+)	-	(Chr6 43,814,274 58,445,657 solved_path 26+)	-	-	(Chr6 59,282,244 59,829,934 solved_path 27+)	(Chr6 59,829,935 170,737,419 solved_path 27+)	-	-	
 alignment between Chr6c, Path7: -91400222
 Alignment's Jaccard score: No Event
-(Chr6 0 59,999 telomere1 None)	(Chr6 60,000 40,631,776 27+)	(Chr6 43,796,968 58,553,888 29+)	(Chr6 58,553,889 59,829,934 centromere CEN6)	-	-	-	-	-	-	(Chr6 170,745,979 170,805,978 telomere2 None)
--	-	-	-	(Chr11 135,068,991 122,873,173 solved_path 48-)	(Chr2 23,932,327 18,194,786 solved_path 9-)	(Chr2 18,194,785 10,892,142 solved_path 8-)	(Chr2 10,892,141 10,830,057 solved_path 7-)	(Chr2 10,813,376 8,359,338 solved_path 6-)	(Chr2 8,341,458 22,064 solved_path 5-)	-
+(Chr6 0 59,999 telomere1 None)	(Chr6 60,000 40,631,776 27+)	(Chr6 43,796,968 58,553,888 29+)	(Chr6 58,553,889 59,829,934 centromere CEN6)	-	-	-	-	-	-	(Chr6 170,745,979 170,805,978 telomere2 None)	
+-	-	-	-	(Chr11 135,068,991 122,873,173 solved_path 48-)	(Chr2 23,932,327 18,194,786 solved_path 9-)	(Chr2 18,194,785 10,892,142 solved_path 8-)	(Chr2 10,892,141 10,830,057 solved_path 7-)	(Chr2 10,813,376 8,359,338 solved_path 6-)	(Chr2 8,341,458 22,064 solved_path 5-)	-	
 
 
-dependent component 5: Chr7
-component 5 (Chr7), #SV: 0, Jaccard Score: No Event
+dependent component 4: Chr7
+component 4 (Chr7), #SV: 0, Jaccard Score: No Event
 
 alignment between Chr7a, Path17: -988
 Alignment's Jaccard score: No Event
-(Chr7 0 9,999 telomere1 None)	(Chr7 10,000 58,169,653 31+)	(Chr7 58,169,654 60,828,234 centromere CEN7)	(Chr7 60,828,235 159,334,984 32+)	(Chr7 159,334,985 159,335,972 32+)	(Chr7 159,335,973 159,345,972 telomere2 None)
-(Chr7 0 9,999 solved_path 28+)	(Chr7 10,000 58,169,653 solved_path 28+)	(Chr7 58,169,654 60,828,234 solved_path 28+)	(Chr7 60,828,235 159,334,984 solved_path 28+)	-	-
+(Chr7 0 9,999 telomere1 None)	(Chr7 10,000 58,169,653 31+)	(Chr7 58,169,654 60,828,234 centromere CEN7)	(Chr7 60,828,235 159,334,984 32+)	(Chr7 159,334,985 159,335,972 32+)	(Chr7 159,335,973 159,345,972 telomere2 None)	
+(Chr7 0 9,999 solved_path 28+)	(Chr7 10,000 58,169,653 solved_path 28+)	(Chr7 58,169,654 60,828,234 solved_path 28+)	(Chr7 60,828,235 159,334,984 solved_path 28+)	-	-	
 alignment between Chr7b, Path18: -988
 Alignment's Jaccard score: No Event
-(Chr7 0 9,999 telomere1 None)	(Chr7 10,000 58,169,653 31+)	(Chr7 58,169,654 60,828,234 centromere CEN7)	(Chr7 60,828,235 159,334,984 32+)	(Chr7 159,334,985 159,335,972 32+)	(Chr7 159,335,973 159,345,972 telomere2 None)
-(Chr7 0 9,999 solved_path 28-)	(Chr7 10,000 58,169,653 solved_path 28-)	(Chr7 58,169,654 60,828,234 solved_path 28-)	(Chr7 60,828,235 159,334,984 solved_path 28-)	-	-
+(Chr7 0 9,999 telomere1 None)	(Chr7 10,000 58,169,653 31+)	(Chr7 58,169,654 60,828,234 centromere CEN7)	(Chr7 60,828,235 159,334,984 32+)	(Chr7 159,334,985 159,335,972 32+)	(Chr7 159,335,973 159,345,972 telomere2 None)	
+(Chr7 0 9,999 solved_path 28-)	(Chr7 10,000 58,169,653 solved_path 28-)	(Chr7 58,169,654 60,828,234 solved_path 28-)	(Chr7 60,828,235 159,334,984 solved_path 28-)	-	-	
 
 
-dependent component 6: Chr9,Chr8
-component 6 (Chr9,Chr8), #SV: 5, Jaccard Score: 0.13159137510921975
-SV_name: SV2-{balanced reciprocal translocation from Chr8a to Chr9b}	SV_total: 4290666.0	SV_captured: -3703.0	SV_capture_rate: -0.0009
-SV_name: SV1-{balanced reciprocal translocation from Chr9b to Chr8a}	SV_total: 4609954.0	SV_captured: 2303631.0	SV_capture_rate: 0.4997
+dependent component 5: Chr9,Chr8
+component 5 (Chr9,Chr8), #SV: 5, Jaccard Score: 0.13916157576463467
+SV_name: SV2-{balanced reciprocal translocation from Chr8a to Chr9b}	SV_total: 4290666.0	SV_captured: 4286963.0	SV_capture_rate: 0.9991
+SV_name: SV1-{balanced reciprocal translocation from Chr9b to Chr8a}	SV_total: 4609954.0	SV_captured: 4607262.0	SV_capture_rate: 0.9994
 SV_name: SV7-{tandem duplication from Chr8a to Chr8a}	SV_total: 5813041	SV_captured: 5808949	SV_capture_rate: 0.9993
-SV_name: SV8-{balanced reciprocal translocation from Chr9b to Chr9b}	SV_total: 12206716.0	SV_captured: 6103358.0	SV_capture_rate: 0.5000
-SV_name: SV9-{balanced reciprocal translocation from Chr9b to Chr9b}	SV_total: 10507294.0	SV_captured: 10506385.0	SV_capture_rate: 0.9999
+SV_name: SV8-{balanced reciprocal translocation from Chr9b to Chr9b}	SV_total: 12206716.0	SV_captured: 12206716.0	SV_capture_rate: 1.0000
+SV_name: SV9-{balanced reciprocal translocation from Chr9b to Chr9b}	SV_total: 10507294.0	SV_captured: 10506688.0	SV_capture_rate: 0.9999
 
-alignment between Chr8a, Path21: -41179848
-Alignment's Jaccard score: 0.0712
-(Chr8 0 59,999 telomere1 None)	(Chr8 60,000 26,203,544 33+)	(Chr8 26,203,545 28,348,877 del: SV2: 2 34+)	-	(Chr9 75,992,694 78,296,324 ins: SV1 43+)	(Chr9 78,296,325 78,297,670 ins: SV1 43+)	(Chr8 26,203,545 28,348,877 del: SV2: 2 34+)	-	-	(Chr8 28,348,878 28,353,512 35+)	(Chr8 28,353,513 44,033,744 35+)	(Chr8 44,033,745 45,877,265 centromere CEN8)	(Chr8 45,877,266 119,129,714 36+)	(Chr8 119,129,715 119,136,163 36+)	(Chr8 119,136,164 119,136,602 37+)	(Chr8 119,136,603 124,842,341 37+)	(Chr8 124,842,342 124,845,994 37+)	(Chr8 124,845,995 124,943,087 37+)	(Chr8 124,943,088 124,949,204 37+)	(Chr8 119,136,164 119,136,602 ins: SV7 37+)	(Chr8 119,136,603 124,842,341 ins: SV7 37+)	(Chr8 124,842,342 124,845,994 ins: SV7 37+)	(Chr8 124,845,995 124,943,087 ins: SV7 37+)	(Chr8 124,943,088 124,949,204 ins: SV7 37+)	(Chr8 124,949,205 145,074,239 38+)	(Chr8 145,074,240 145,078,635 38+)	(Chr8 145,078,636 145,138,635 telomere2 None)
--	-	(Chr9 0 18,037,817 solved_path 35-)	(Chr9 18,037,818 24,144,979 solved_path 36-)	-	-	(Chr9 24,144,980 75,992,607 solved_path 37-)	(Chr9 75,992,608 75,992,693 solved_path 38-)	(Chr9 75,992,694 78,296,324 solved_path 38-)	-	(Chr8 28,353,513 44,033,744 solved_path 31-)	(Chr8 44,033,745 45,877,265 solved_path 31-)	(Chr8 45,877,266 119,129,714 solved_path 31-)	-	-	(Chr8 119,136,603 124,842,341 solved_path 32-)	-	(Chr8 124,845,995 124,943,087 solved_path 33-)	-	-	(Chr8 119,136,603 124,842,341 solved_path 32-)	-	(Chr8 124,845,995 124,943,087 solved_path 33-)	(Chr8 124,943,088 124,949,204 solved_path 34-)	(Chr8 124,949,205 145,074,239 solved_path 34-)	-	-
+alignment between Chr8a, Path21: -102167366
+Alignment's Jaccard score: 0.0912
+-	-	-	-	(Chr8 0 59,999 telomere1 None)	(Chr8 60,000 26,203,544 33+)	(Chr8 26,203,545 28,348,877 del: SV2: 2 34+)	(Chr9 75,992,694 78,296,324 ins: SV1 43+)	(Chr9 78,296,325 78,297,670 ins: SV1 43+)	(Chr8 26,203,545 28,348,877 del: SV2: 2 34+)	(Chr8 28,348,878 28,353,512 35+)	(Chr8 28,353,513 44,033,744 35+)	(Chr8 44,033,745 45,877,265 centromere CEN8)	(Chr8 45,877,266 119,129,714 36+)	(Chr8 119,129,715 119,136,163 36+)	(Chr8 119,136,164 119,136,602 37+)	(Chr8 119,136,603 124,842,341 37+)	(Chr8 124,842,342 124,845,994 37+)	(Chr8 124,845,995 124,943,087 37+)	(Chr8 124,943,088 124,949,204 37+)	(Chr8 119,136,164 119,136,602 ins: SV7 37+)	(Chr8 119,136,603 124,842,341 ins: SV7 37+)	(Chr8 124,842,342 124,845,994 ins: SV7 37+)	(Chr8 124,845,995 124,943,087 ins: SV7 37+)	(Chr8 124,943,088 124,949,204 ins: SV7 37+)	(Chr8 124,949,205 145,074,239 38+)	(Chr8 145,074,240 145,078,635 38+)	(Chr8 145,078,636 145,138,635 telomere2 None)	
+(Chr9 0 18,037,817 solved_path 35-)	(Chr9 18,037,818 24,144,979 solved_path 36-)	(Chr9 24,144,980 75,992,607 solved_path 37-)	(Chr9 75,992,608 75,992,693 solved_path 38-)	-	-	-	(Chr9 75,992,694 78,296,324 solved_path 38-)	-	-	-	(Chr8 28,353,513 44,033,744 solved_path 31-)	(Chr8 44,033,745 45,877,265 solved_path 31-)	(Chr8 45,877,266 119,129,714 solved_path 31-)	-	-	(Chr8 119,136,603 124,842,341 solved_path 32-)	-	(Chr8 124,845,995 124,943,087 solved_path 33-)	-	-	(Chr8 119,136,603 124,842,341 solved_path 32-)	-	(Chr8 124,845,995 124,943,087 solved_path 33-)	(Chr8 124,943,088 124,949,204 solved_path 34-)	(Chr8 124,949,205 145,074,239 solved_path 34-)	-	-	
 alignment between Chr8b, Path19: -21425
 Alignment's Jaccard score: No Event
-(Chr8 0 59,999 telomere1 None)	(Chr8 60,000 66,487 33+)	(Chr8 66,488 26,203,544 33+)	(Chr8 26,203,545 26,207,247 34+)	(Chr8 26,207,248 28,348,877 34+)	(Chr8 28,348,878 28,353,512 35+)	(Chr8 28,353,513 44,033,744 35+)	(Chr8 44,033,745 45,877,265 centromere CEN8)	(Chr8 45,877,266 119,129,714 36+)	(Chr8 119,129,715 119,136,163 36+)	(Chr8 119,136,164 119,136,602 37+)	(Chr8 119,136,603 124,842,341 37+)	(Chr8 124,842,342 124,845,994 37+)	(Chr8 124,845,995 124,943,087 37+)	(Chr8 124,943,088 124,949,204 37+)	(Chr8 124,949,205 145,074,239 38+)	(Chr8 145,074,240 145,078,635 38+)	(Chr8 145,078,636 145,138,635 telomere2 None)
--	-	(Chr8 66,488 26,203,544 solved_path 29+)	(Chr8 26,203,545 26,207,247 solved_path 29+)	(Chr8 26,207,248 28,348,877 solved_path 30+)	(Chr8 28,348,878 28,353,512 solved_path 30+)	(Chr8 28,353,513 44,033,744 solved_path 31+)	(Chr8 44,033,745 45,877,265 solved_path 31+)	(Chr8 45,877,266 119,129,714 solved_path 31+)	-	-	(Chr8 119,136,603 124,842,341 solved_path 32+)	-	(Chr8 124,845,995 124,943,087 solved_path 33+)	(Chr8 124,943,088 124,949,204 solved_path 34+)	(Chr8 124,949,205 145,074,239 solved_path 34+)	-	-
+(Chr8 0 59,999 telomere1 None)	(Chr8 60,000 66,487 33+)	(Chr8 66,488 26,203,544 33+)	(Chr8 26,203,545 26,207,247 34+)	(Chr8 26,207,248 28,348,877 34+)	(Chr8 28,348,878 28,353,512 35+)	(Chr8 28,353,513 44,033,744 35+)	(Chr8 44,033,745 45,877,265 centromere CEN8)	(Chr8 45,877,266 119,129,714 36+)	(Chr8 119,129,715 119,136,163 36+)	(Chr8 119,136,164 119,136,602 37+)	(Chr8 119,136,603 124,842,341 37+)	(Chr8 124,842,342 124,845,994 37+)	(Chr8 124,845,995 124,943,087 37+)	(Chr8 124,943,088 124,949,204 37+)	(Chr8 124,949,205 145,074,239 38+)	(Chr8 145,074,240 145,078,635 38+)	(Chr8 145,078,636 145,138,635 telomere2 None)	
+-	-	(Chr8 66,488 26,203,544 solved_path 29+)	(Chr8 26,203,545 26,207,247 solved_path 29+)	(Chr8 26,207,248 28,348,877 solved_path 30+)	(Chr8 28,348,878 28,353,512 solved_path 30+)	(Chr8 28,353,513 44,033,744 solved_path 31+)	(Chr8 44,033,745 45,877,265 solved_path 31+)	(Chr8 45,877,266 119,129,714 solved_path 31+)	-	-	(Chr8 119,136,603 124,842,341 solved_path 32+)	-	(Chr8 124,845,995 124,943,087 solved_path 33+)	(Chr8 124,943,088 124,949,204 solved_path 34+)	(Chr8 124,949,205 145,074,239 solved_path 34+)	-	-	
 alignment between Chr9a, Path22: -71511537
 Alignment's Jaccard score: No Event
-(Chr9 0 9,999 telomere1 None)	(Chr9 10,000 18,037,817 39+)	(Chr9 18,037,818 18,038,843 39+)	(Chr9 18,038,844 24,142,201 40+)	(Chr9 24,142,202 43,236,167 41+)	(Chr9 43,236,168 45,518,558 centromere CEN9)	(Chr9 45,518,559 75,992,693 42+)	(Chr9 75,992,694 78,297,670 43+)	(Chr9 78,297,671 89,549,102 44+)	(Chr9 89,549,103 89,549,185 44+)	(Chr9 89,549,186 94,802,529 45+)	(Chr9 94,802,530 94,802,832 45+)	(Chr9 94,802,833 138,334,464 46+)	(Chr9 138,334,465 138,334,716 46+)	(Chr9 138,334,717 138,394,716 telomere2 None)
-(Chr9 0 9,999 solved_path 35+)	(Chr9 10,000 18,037,817 solved_path 35+)	-	-	-	-	-	-	-	(Chr9 89,549,103 89,549,185 solved_path 40+)	(Chr9 89,549,186 94,802,529 solved_path 40+)	(Chr9 94,802,530 94,802,832 solved_path 41+)	(Chr9 94,802,833 138,334,464 solved_path 41+)	-	-
-alignment between Chr9b, Path20: -37703289
-Alignment's Jaccard score: 0.3246
-(Chr9 0 9,999 telomere1 None)	(Chr9 10,000 18,037,817 39+)	(Chr9 18,037,818 18,038,843 39+)	(Chr9 18,038,844 24,142,201 del: SV8: 2 40+)	-	-	-	-	-	-	(Chr9 89,549,186 94,802,529 ins: SV9 45+)	(Chr9 94,802,530 94,802,832 ins: SV9 45+)	(Chr9 18,038,844 24,142,201 del: SV8: 2 40+)	(Chr9 24,142,202 24,144,979 41+)	(Chr9 24,144,980 43,236,167 41+)	(Chr9 43,236,168 45,518,558 centromere CEN9)	(Chr9 45,518,559 75,992,607 42+)	(Chr9 75,992,608 75,992,693 42+)	(Chr9 75,992,694 78,296,324 del: SV1: 2 43+)	(Chr9 78,296,325 78,297,670 del: SV1: 2 43+)	(Chr8 26,203,545 26,207,247 ins: SV2 34+)	(Chr8 26,207,248 28,348,877 ins: SV2 34+)	(Chr9 75,992,694 78,296,324 del: SV1: 2 43+)	(Chr9 78,296,325 78,297,670 del: SV1: 2 43+)	-	(Chr9 78,297,671 89,549,102 44+)	(Chr9 89,549,103 89,549,185 44+)	(Chr9 89,549,186 94,802,529 del: SV9: 2 45+)	(Chr9 94,802,530 94,802,832 del: SV9: 2 45+)	(Chr9 18,038,844 24,142,201 ins: SV8 40+)	(Chr9 89,549,186 94,802,529 del: SV9: 2 45+)	(Chr9 94,802,530 94,802,832 del: SV9: 2 45+)	-	(Chr9 94,802,833 138,334,464 46+)	(Chr9 138,334,465 138,334,716 46+)	(Chr9 138,334,717 138,394,716 telomere2 None)
--	-	-	(Chr8 66,488 26,203,544 solved_path 29-)	(Chr8 26,203,545 26,207,247 solved_path 29-)	(Chr9 75,992,608 75,992,693 solved_path 38-)	(Chr9 75,992,694 78,296,324 solved_path 38-)	(Chr9 78,296,325 78,297,670 solved_path 39-)	(Chr9 78,297,671 89,549,102 solved_path 39-)	(Chr9 89,549,103 89,549,185 solved_path 40-)	(Chr9 89,549,186 94,802,529 solved_path 40-)	-	-	-	(Chr9 24,144,980 43,236,167 solved_path 37-)	(Chr9 43,236,168 45,518,558 solved_path 37-)	(Chr9 45,518,559 75,992,607 solved_path 37-)	-	-	-	-	(Chr8 26,207,248 28,348,877 solved_path 30-)	-	(Chr8 28,348,878 28,353,512 solved_path 30-)	(Chr9 78,296,325 78,297,670 solved_path 39-)	(Chr9 78,297,671 89,549,102 solved_path 39-)	-	-	(Chr9 18,037,818 18,038,843 solved_path 36-)	(Chr9 18,038,844 24,142,201 solved_path 36-)	-	(Chr9 24,142,202 24,144,979 solved_path 36-)	(Chr9 94,802,530 94,802,832 solved_path 41-)	(Chr9 94,802,833 138,334,464 solved_path 41-)	-	-
+(Chr9 0 9,999 telomere1 None)	(Chr9 10,000 18,037,817 39+)	(Chr9 18,037,818 18,038,843 39+)	(Chr9 18,038,844 24,142,201 40+)	(Chr9 24,142,202 43,236,167 41+)	(Chr9 43,236,168 45,518,558 centromere CEN9)	(Chr9 45,518,559 75,992,693 42+)	(Chr9 75,992,694 78,297,670 43+)	(Chr9 78,297,671 89,549,102 44+)	(Chr9 89,549,103 89,549,185 44+)	(Chr9 89,549,186 94,802,529 45+)	(Chr9 94,802,530 94,802,832 45+)	(Chr9 94,802,833 138,334,464 46+)	(Chr9 138,334,465 138,334,716 46+)	(Chr9 138,334,717 138,394,716 telomere2 None)	
+(Chr9 0 9,999 solved_path 35+)	(Chr9 10,000 18,037,817 solved_path 35+)	-	-	-	-	-	-	-	(Chr9 89,549,103 89,549,185 solved_path 40+)	(Chr9 89,549,186 94,802,529 solved_path 40+)	(Chr9 94,802,530 94,802,832 solved_path 41+)	(Chr9 94,802,833 138,334,464 solved_path 41+)	-	-	
+alignment between Chr9b, Path20: -57743475
+Alignment's Jaccard score: 0.3199
+-	-	-	-	-	-	-	(Chr9 0 9,999 telomere1 None)	(Chr9 10,000 18,037,817 39+)	(Chr9 18,037,818 18,038,843 39+)	(Chr9 18,038,844 24,142,201 del: SV8: 2 40+)	(Chr9 89,549,186 94,802,529 ins: SV9 45+)	(Chr9 94,802,530 94,802,832 ins: SV9 45+)	(Chr9 18,038,844 24,142,201 del: SV8: 2 40+)	(Chr9 24,142,202 24,144,979 41+)	(Chr9 24,144,980 43,236,167 41+)	(Chr9 43,236,168 45,518,558 centromere CEN9)	(Chr9 45,518,559 75,992,607 42+)	(Chr9 75,992,608 75,992,693 42+)	(Chr9 75,992,694 78,296,324 del: SV1: 2 43+)	(Chr9 78,296,325 78,297,670 del: SV1: 2 43+)	(Chr8 26,203,545 26,207,247 ins: SV2 34+)	(Chr8 26,207,248 28,348,877 ins: SV2 34+)	-	(Chr9 75,992,694 78,296,324 del: SV1: 2 43+)	(Chr9 78,296,325 78,297,670 del: SV1: 2 43+)	(Chr9 78,297,671 89,549,102 44+)	-	(Chr9 89,549,103 89,549,185 44+)	(Chr9 89,549,186 94,802,529 del: SV9: 2 45+)	(Chr9 94,802,530 94,802,832 del: SV9: 2 45+)	(Chr9 18,038,844 24,142,201 ins: SV8 40+)	-	(Chr9 89,549,186 94,802,529 del: SV9: 2 45+)	(Chr9 94,802,530 94,802,832 del: SV9: 2 45+)	(Chr9 94,802,833 138,334,464 46+)	(Chr9 138,334,465 138,334,716 46+)	(Chr9 138,334,717 138,394,716 telomere2 None)	
+(Chr8 66,488 26,203,544 solved_path 29-)	(Chr8 26,203,545 26,207,247 solved_path 29-)	(Chr9 75,992,608 75,992,693 solved_path 38-)	(Chr9 75,992,694 78,296,324 solved_path 38-)	(Chr9 78,296,325 78,297,670 solved_path 39-)	(Chr9 78,297,671 89,549,102 solved_path 39-)	(Chr9 89,549,103 89,549,185 solved_path 40-)	-	-	-	-	(Chr9 89,549,186 94,802,529 solved_path 40-)	-	-	-	(Chr9 24,144,980 43,236,167 solved_path 37-)	(Chr9 43,236,168 45,518,558 solved_path 37-)	(Chr9 45,518,559 75,992,607 solved_path 37-)	-	-	-	-	(Chr8 26,207,248 28,348,877 solved_path 30-)	(Chr8 28,348,878 28,353,512 solved_path 30-)	-	(Chr9 78,296,325 78,297,670 solved_path 39-)	(Chr9 78,297,671 89,549,102 solved_path 39-)	(Chr9 18,037,818 18,038,843 solved_path 36-)	-	-	-	(Chr9 18,038,844 24,142,201 solved_path 36-)	(Chr9 24,142,202 24,144,979 solved_path 36-)	-	(Chr9 94,802,530 94,802,832 solved_path 41-)	(Chr9 94,802,833 138,334,464 solved_path 41-)	-	-	
 
 
-dependent component 7: Chr10
-component 7 (Chr10), #SV: 0, Jaccard Score: No Event
+dependent component 6: Chr10
+component 6 (Chr10), #SV: 0, Jaccard Score: No Event
 
 alignment between Chr10a, Path23: -2155
 Alignment's Jaccard score: No Event
-(Chr10 0 9,999 telomere1 None)	(Chr10 10,000 39,686,682 47+)	(Chr10 39,686,683 41,593,521 centromere CEN10)	(Chr10 41,593,522 46,991,592 48+)	(Chr10 46,991,593 48,060,267 48+)	(Chr10 48,060,268 133,785,266 48+)	(Chr10 133,785,267 133,787,421 48+)	(Chr10 133,787,422 133,797,421 telomere2 None)
-(Chr10 0 9,999 solved_path 42+)	(Chr10 10,000 39,686,682 solved_path 42+)	(Chr10 39,686,683 41,593,521 solved_path 42+)	(Chr10 41,593,522 46,991,592 solved_path 42+)	(Chr10 46,991,593 48,060,267 solved_path 43+)	(Chr10 48,060,268 133,785,266 solved_path 44+)	-	-
+(Chr10 0 9,999 telomere1 None)	(Chr10 10,000 39,686,682 47+)	(Chr10 39,686,683 41,593,521 centromere CEN10)	(Chr10 41,593,522 46,991,592 48+)	(Chr10 46,991,593 48,060,267 48+)	(Chr10 48,060,268 133,785,266 48+)	(Chr10 133,785,267 133,787,421 48+)	(Chr10 133,787,422 133,797,421 telomere2 None)	
+(Chr10 0 9,999 solved_path 42+)	(Chr10 10,000 39,686,682 solved_path 42+)	(Chr10 39,686,683 41,593,521 solved_path 42+)	(Chr10 41,593,522 46,991,592 solved_path 42+)	(Chr10 46,991,593 48,060,267 solved_path 43+)	(Chr10 48,060,268 133,785,266 solved_path 44+)	-	-	
 alignment between Chr10b, Path24: -2155
 Alignment's Jaccard score: No Event
-(Chr10 0 9,999 telomere1 None)	(Chr10 10,000 39,686,682 47+)	(Chr10 39,686,683 41,593,521 centromere CEN10)	(Chr10 41,593,522 46,991,592 48+)	(Chr10 46,991,593 48,060,267 48+)	(Chr10 48,060,268 133,785,266 48+)	(Chr10 133,785,267 133,787,421 48+)	(Chr10 133,787,422 133,797,421 telomere2 None)
-(Chr10 0 9,999 solved_path 42-)	(Chr10 10,000 39,686,682 solved_path 42-)	(Chr10 39,686,683 41,593,521 solved_path 42-)	(Chr10 41,593,522 46,991,592 solved_path 42-)	(Chr10 46,991,593 48,060,267 solved_path 43-)	(Chr10 48,060,268 133,785,266 solved_path 44-)	-	-
+(Chr10 0 9,999 telomere1 None)	(Chr10 10,000 39,686,682 47+)	(Chr10 39,686,683 41,593,521 centromere CEN10)	(Chr10 41,593,522 46,991,592 48+)	(Chr10 46,991,593 48,060,267 48+)	(Chr10 48,060,268 133,785,266 48+)	(Chr10 133,785,267 133,787,421 48+)	(Chr10 133,787,422 133,797,421 telomere2 None)	
+(Chr10 0 9,999 solved_path 42-)	(Chr10 10,000 39,686,682 solved_path 42-)	(Chr10 39,686,683 41,593,521 solved_path 42-)	(Chr10 41,593,522 46,991,592 solved_path 42-)	(Chr10 46,991,593 48,060,267 solved_path 43-)	(Chr10 48,060,268 133,785,266 solved_path 44-)	-	-	
 
 
-dependent component 8: Chr2,Chr11
-component 8 (Chr2,Chr11), #SV: 1, Jaccard Score: 0.08012220547654053
+dependent component 7: Chr2,Chr11
+component 7 (Chr2,Chr11), #SV: 1, Jaccard Score: 0.08012220547654053
 SV_name: SV10-{nonreciprocal translocation from Chr2a to Chr11b}	SV_total: 5739771	SV_captured: 5739771	SV_capture_rate: 1.0000
 
 alignment between Chr11a, Path4: -300984
 Alignment's Jaccard score: No Event
-(Chr11 0 59,999 telomere1 None)	(Chr11 60,000 62,232 49+)	(Chr11 62,233 47,470,445 49+)	(Chr11 47,470,446 47,477,141 49+)	(Chr11 47,477,142 50,815,234 49+)	(Chr11 50,815,235 51,078,348 49+)	(Chr11 51,078,349 51,099,659 centromere CEN11)	(Chr11 51,099,660 54,425,074 centromere CEN11)	(Chr11 54,425,075 122,869,959 50+)	(Chr11 122,869,960 122,869,960 51+)	(Chr11 122,869,961 122,873,172 52+)	(Chr11 122,873,173 135,068,991 52+)	(Chr11 135,068,992 135,076,621 52+)	(Chr11 135,076,622 135,086,621 telomere2 None)
--	-	(Chr11 62,233 47,470,445 solved_path 45+)	-	(Chr11 47,477,142 50,815,234 solved_path 46+)	-	-	(Chr11 51,099,660 54,425,074 solved_path 47+)	(Chr11 54,425,075 122,869,959 solved_path 47+)	(Chr11 122,869,960 122,869,960 solved_path 47+)	(Chr11 122,869,961 122,873,172 solved_path 47+)	(Chr11 122,873,173 135,068,991 solved_path 48+)	-	-
+(Chr11 0 59,999 telomere1 None)	(Chr11 60,000 62,232 49+)	(Chr11 62,233 47,470,445 49+)	(Chr11 47,470,446 47,477,141 49+)	(Chr11 47,477,142 50,815,234 49+)	(Chr11 50,815,235 51,078,348 49+)	(Chr11 51,078,349 51,099,659 centromere CEN11)	(Chr11 51,099,660 54,425,074 centromere CEN11)	(Chr11 54,425,075 122,869,959 50+)	(Chr11 122,869,960 122,869,960 51+)	(Chr11 122,869,961 122,873,172 52+)	(Chr11 122,873,173 135,068,991 52+)	(Chr11 135,068,992 135,076,621 52+)	(Chr11 135,076,622 135,086,621 telomere2 None)	
+-	-	(Chr11 62,233 47,470,445 solved_path 45+)	-	(Chr11 47,477,142 50,815,234 solved_path 46+)	-	-	(Chr11 51,099,660 54,425,074 solved_path 47+)	(Chr11 54,425,075 122,869,959 solved_path 47+)	(Chr11 122,869,960 122,869,960 solved_path 47+)	(Chr11 122,869,961 122,873,172 solved_path 47+)	(Chr11 122,873,173 135,068,991 solved_path 48+)	-	-	
 alignment between Chr11b, Path3: -65596951
 Alignment's Jaccard score: 0.0805
-(Chr11 0 59,999 telomere1 None)	(Chr11 60,000 62,232 49+)	(Chr11 62,233 47,470,445 49+)	(Chr11 47,470,446 47,477,141 49+)	(Chr11 47,477,142 50,815,234 49+)	(Chr11 50,815,235 51,078,348 49+)	(Chr11 51,078,349 51,099,659 centromere CEN11)	(Chr11 51,099,660 54,425,074 centromere CEN11)	(Chr11 54,425,075 122,869,959 50+)	-	-	-	(Chr2 18,195,499 23,932,327 ins: SV10 10+)	(Chr2 23,932,328 23,935,269 ins: SV10 10+)	-	-	-	(Chr11 122,869,960 122,869,960 51+)	(Chr11 122,869,961 122,873,172 52+)	(Chr11 122,873,173 135,076,621 52+)	(Chr11 135,076,622 135,086,621 telomere2 None)
--	-	(Chr11 62,233 47,470,445 solved_path 45-)	-	(Chr11 47,477,142 50,815,234 solved_path 46-)	-	-	(Chr11 51,099,660 54,425,074 solved_path 47-)	(Chr11 54,425,075 122,869,959 solved_path 47-)	(Chr11 122,869,960 122,869,960 solved_path 47-)	(Chr11 122,869,961 122,873,172 solved_path 47-)	(Chr2 18,194,786 18,195,498 solved_path 9-)	(Chr2 18,195,499 23,932,327 solved_path 9-)	(Chr2 23,932,328 23,935,269 solved_path 10-)	(Chr2 23,935,270 64,768,555 solved_path 10-)	(Chr2 64,768,556 74,056,400 solved_path 11-)	(Chr3 195,258,719 198,230,596 solved_path 16-)	-	-	-	-
+(Chr11 0 59,999 telomere1 None)	(Chr11 60,000 62,232 49+)	(Chr11 62,233 47,470,445 49+)	(Chr11 47,470,446 47,477,141 49+)	(Chr11 47,477,142 50,815,234 49+)	(Chr11 50,815,235 51,078,348 49+)	(Chr11 51,078,349 51,099,659 centromere CEN11)	(Chr11 51,099,660 54,425,074 centromere CEN11)	(Chr11 54,425,075 122,869,959 50+)	-	-	-	(Chr2 18,195,499 23,932,327 ins: SV10 10+)	(Chr2 23,932,328 23,935,269 ins: SV10 10+)	-	-	-	(Chr11 122,869,960 122,869,960 51+)	(Chr11 122,869,961 122,873,172 52+)	(Chr11 122,873,173 135,076,621 52+)	(Chr11 135,076,622 135,086,621 telomere2 None)	
+-	-	(Chr11 62,233 47,470,445 solved_path 45-)	-	(Chr11 47,477,142 50,815,234 solved_path 46-)	-	-	(Chr11 51,099,660 54,425,074 solved_path 47-)	(Chr11 54,425,075 122,869,959 solved_path 47-)	(Chr11 122,869,960 122,869,960 solved_path 47-)	(Chr11 122,869,961 122,873,172 solved_path 47-)	(Chr2 18,194,786 18,195,498 solved_path 9-)	(Chr2 18,195,499 23,932,327 solved_path 9-)	(Chr2 23,932,328 23,935,269 solved_path 10-)	(Chr2 23,935,270 64,768,555 solved_path 10-)	(Chr2 64,768,556 74,056,400 solved_path 11-)	(Chr3 195,258,719 198,230,596 solved_path 16-)	-	-	-	-	
 
 
-dependent component 9: Chr13
-component 9 (Chr13), #SV: 0, Jaccard Score: No Event
+dependent component 8: Chr13
+component 8 (Chr13), #SV: 0, Jaccard Score: No Event
 
 alignment between Chr13a, Path25: -2225
 Alignment's Jaccard score: No Event
-(Chr13 0 15,999,999 acrocentric None)	(Chr13 16,000,000 16,000,000 acrocentric 57+)	(Chr13 16,000,001 18,051,248 acrocentric CEN13)	(Chr13 18,051,249 18,051,249 acrocentric 58+)	(Chr13 18,051,250 114,352,102 58+)	(Chr13 114,352,103 114,354,327 58+)	(Chr13 114,354,328 114,364,327 telomere2 None)
-(Chr13 0 15,999,999 acrocentric 52+)	(Chr13 16,000,000 16,000,000 acrocentric 52+)	(Chr13 16,000,001 18,051,248 acrocentric 52+)	(Chr13 18,051,249 18,051,249 acrocentric 52+)	(Chr13 18,051,250 114,352,102 solved_path 52+)	-	-
+(Chr13 0 15,999,999 acrocentric None)	(Chr13 16,000,000 16,000,000 acrocentric 57+)	(Chr13 16,000,001 18,051,248 acrocentric CEN13)	(Chr13 18,051,249 18,051,249 acrocentric 58+)	(Chr13 18,051,250 114,352,102 58+)	(Chr13 114,352,103 114,354,327 58+)	(Chr13 114,354,328 114,364,327 telomere2 None)	
+(Chr13 0 15,999,999 acrocentric 52+)	(Chr13 16,000,000 16,000,000 acrocentric 52+)	(Chr13 16,000,001 18,051,248 acrocentric 52+)	(Chr13 18,051,249 18,051,249 acrocentric 52+)	(Chr13 18,051,250 114,352,102 solved_path 52+)	-	-	
 alignment between Chr13b, Path26: -2225
 Alignment's Jaccard score: No Event
-(Chr13 0 15,999,999 acrocentric None)	(Chr13 16,000,000 16,000,000 acrocentric 57+)	(Chr13 16,000,001 18,051,248 acrocentric CEN13)	(Chr13 18,051,249 18,051,249 acrocentric 58+)	(Chr13 18,051,250 114,352,102 58+)	(Chr13 114,352,103 114,354,327 58+)	(Chr13 114,354,328 114,364,327 telomere2 None)
-(Chr13 0 15,999,999 acrocentric 52-)	(Chr13 16,000,000 16,000,000 acrocentric 52-)	(Chr13 16,000,001 18,051,248 acrocentric 52-)	(Chr13 18,051,249 18,051,249 acrocentric 52-)	(Chr13 18,051,250 114,352,102 solved_path 52-)	-	-
+(Chr13 0 15,999,999 acrocentric None)	(Chr13 16,000,000 16,000,000 acrocentric 57+)	(Chr13 16,000,001 18,051,248 acrocentric CEN13)	(Chr13 18,051,249 18,051,249 acrocentric 58+)	(Chr13 18,051,250 114,352,102 58+)	(Chr13 114,352,103 114,354,327 58+)	(Chr13 114,354,328 114,364,327 telomere2 None)	
+(Chr13 0 15,999,999 acrocentric 52-)	(Chr13 16,000,000 16,000,000 acrocentric 52-)	(Chr13 16,000,001 18,051,248 acrocentric 52-)	(Chr13 18,051,249 18,051,249 acrocentric 52-)	(Chr13 18,051,250 114,352,102 solved_path 52-)	-	-	
 
 
-dependent component 10: Chr14
-component 10 (Chr14), #SV: 0, Jaccard Score: No Event
+dependent component 9: Chr14
+component 9 (Chr14), #SV: 0, Jaccard Score: No Event
 
 alignment between Chr14a, Path27: -10435
 Alignment's Jaccard score: No Event
-(Chr14 0 15,999,999 acrocentric None)	(Chr14 16,000,000 16,000,000 acrocentric 59+)	(Chr14 16,000,001 18,173,523 acrocentric CEN14)	(Chr14 18,173,524 18,173,524 acrocentric 60+)	(Chr14 18,173,525 106,873,282 60+)	(Chr14 106,873,283 106,883,717 60+)	(Chr14 106,883,718 107,043,717 telomere2 None)
-(Chr14 0 15,999,999 acrocentric 53+)	(Chr14 16,000,000 16,000,000 acrocentric 53+)	(Chr14 16,000,001 18,173,523 acrocentric 53+)	(Chr14 18,173,524 18,173,524 acrocentric 53+)	(Chr14 18,173,525 106,873,282 solved_path 53+)	-	-
+(Chr14 0 15,999,999 acrocentric None)	(Chr14 16,000,000 16,000,000 acrocentric 59+)	(Chr14 16,000,001 18,173,523 acrocentric CEN14)	(Chr14 18,173,524 18,173,524 acrocentric 60+)	(Chr14 18,173,525 106,873,282 60+)	(Chr14 106,873,283 106,883,717 60+)	(Chr14 106,883,718 107,043,717 telomere2 None)	
+(Chr14 0 15,999,999 acrocentric 53+)	(Chr14 16,000,000 16,000,000 acrocentric 53+)	(Chr14 16,000,001 18,173,523 acrocentric 53+)	(Chr14 18,173,524 18,173,524 acrocentric 53+)	(Chr14 18,173,525 106,873,282 solved_path 53+)	-	-	
 alignment between Chr14b, Path28: -10435
 Alignment's Jaccard score: No Event
-(Chr14 0 15,999,999 acrocentric None)	(Chr14 16,000,000 16,000,000 acrocentric 59+)	(Chr14 16,000,001 18,173,523 acrocentric CEN14)	(Chr14 18,173,524 18,173,524 acrocentric 60+)	(Chr14 18,173,525 106,873,282 60+)	(Chr14 106,873,283 106,883,717 60+)	(Chr14 106,883,718 107,043,717 telomere2 None)
-(Chr14 0 15,999,999 acrocentric 53-)	(Chr14 16,000,000 16,000,000 acrocentric 53-)	(Chr14 16,000,001 18,173,523 acrocentric 53-)	(Chr14 18,173,524 18,173,524 acrocentric 53-)	(Chr14 18,173,525 106,873,282 solved_path 53-)	-	-
+(Chr14 0 15,999,999 acrocentric None)	(Chr14 16,000,000 16,000,000 acrocentric 59+)	(Chr14 16,000,001 18,173,523 acrocentric CEN14)	(Chr14 18,173,524 18,173,524 acrocentric 60+)	(Chr14 18,173,525 106,873,282 60+)	(Chr14 106,873,283 106,883,717 60+)	(Chr14 106,883,718 107,043,717 telomere2 None)	
+(Chr14 0 15,999,999 acrocentric 53-)	(Chr14 16,000,000 16,000,000 acrocentric 53-)	(Chr14 16,000,001 18,173,523 acrocentric 53-)	(Chr14 18,173,524 18,173,524 acrocentric 53-)	(Chr14 18,173,525 106,873,282 solved_path 53-)	-	-	
 
 
-dependent component 11: Chr15
-component 11 (Chr15), #SV: 0, Jaccard Score: No Event
+dependent component 10: Chr15
+component 10 (Chr15), #SV: 0, Jaccard Score: No Event
 
 alignment between Chr15a, Path29: -4679
 Alignment's Jaccard score: No Event
-(Chr15 0 16,999,999 acrocentric None)	(Chr15 17,000,000 17,000,000 acrocentric 61+)	(Chr15 17,000,001 19,725,254 acrocentric CEN15)	(Chr15 19,725,255 19,725,255 acrocentric 62+)	(Chr15 19,725,256 101,976,509 62+)	(Chr15 101,976,510 101,981,188 62+)	(Chr15 101,981,189 101,991,188 telomere2 None)
-(Chr15 0 16,999,999 acrocentric 54+)	(Chr15 17,000,000 17,000,000 acrocentric 54+)	(Chr15 17,000,001 19,725,254 acrocentric 54+)	(Chr15 19,725,255 19,725,255 acrocentric 54+)	(Chr15 19,725,256 101,976,509 solved_path 54+)	-	-
+(Chr15 0 16,999,999 acrocentric None)	(Chr15 17,000,000 17,000,000 acrocentric 61+)	(Chr15 17,000,001 19,725,254 acrocentric CEN15)	(Chr15 19,725,255 19,725,255 acrocentric 62+)	(Chr15 19,725,256 101,976,509 62+)	(Chr15 101,976,510 101,981,188 62+)	(Chr15 101,981,189 101,991,188 telomere2 None)	
+(Chr15 0 16,999,999 acrocentric 54+)	(Chr15 17,000,000 17,000,000 acrocentric 54+)	(Chr15 17,000,001 19,725,254 acrocentric 54+)	(Chr15 19,725,255 19,725,255 acrocentric 54+)	(Chr15 19,725,256 101,976,509 solved_path 54+)	-	-	
 alignment between Chr15b, Path30: -4679
 Alignment's Jaccard score: No Event
-(Chr15 0 16,999,999 acrocentric None)	(Chr15 17,000,000 17,000,000 acrocentric 61+)	(Chr15 17,000,001 19,725,254 acrocentric CEN15)	(Chr15 19,725,255 19,725,255 acrocentric 62+)	(Chr15 19,725,256 101,976,509 62+)	(Chr15 101,976,510 101,981,188 62+)	(Chr15 101,981,189 101,991,188 telomere2 None)
-(Chr15 0 16,999,999 acrocentric 54-)	(Chr15 17,000,000 17,000,000 acrocentric 54-)	(Chr15 17,000,001 19,725,254 acrocentric 54-)	(Chr15 19,725,255 19,725,255 acrocentric 54-)	(Chr15 19,725,256 101,976,509 solved_path 54-)	-	-
+(Chr15 0 16,999,999 acrocentric None)	(Chr15 17,000,000 17,000,000 acrocentric 61+)	(Chr15 17,000,001 19,725,254 acrocentric CEN15)	(Chr15 19,725,255 19,725,255 acrocentric 62+)	(Chr15 19,725,256 101,976,509 62+)	(Chr15 101,976,510 101,981,188 62+)	(Chr15 101,981,189 101,991,188 telomere2 None)	
+(Chr15 0 16,999,999 acrocentric 54-)	(Chr15 17,000,000 17,000,000 acrocentric 54-)	(Chr15 17,000,001 19,725,254 acrocentric 54-)	(Chr15 19,725,255 19,725,255 acrocentric 54-)	(Chr15 19,725,256 101,976,509 solved_path 54-)	-	-	
 
 
-dependent component 12: Chr16
-component 12 (Chr16), #SV: 0, Jaccard Score: No Event
+dependent component 11: Chr16
+component 11 (Chr16), #SV: 0, Jaccard Score: No Event
 
 alignment between Chr16a, Path31: -3593
 Alignment's Jaccard score: No Event
-(Chr16 0 9,999 telomere1 None)	(Chr16 10,000 21,500,434 63+)	(Chr16 21,500,435 22,438,802 63+)	(Chr16 22,438,803 36,311,158 63+)	(Chr16 36,311,159 38,280,682 centromere CEN16)	(Chr16 38,280,683 90,224,751 64+)	(Chr16 90,224,752 90,228,344 64+)	(Chr16 90,228,345 90,338,344 telomere2 None)
-(Chr16 0 9,999 solved_path 55+)	(Chr16 10,000 21,500,434 solved_path 55+)	(Chr16 21,500,435 22,438,802 solved_path 56+)	(Chr16 22,438,803 36,311,158 solved_path 57+)	(Chr16 36,311,159 38,280,682 solved_path 57+)	(Chr16 38,280,683 90,224,751 solved_path 57+)	-	-
+(Chr16 0 9,999 telomere1 None)	(Chr16 10,000 21,500,434 63+)	(Chr16 21,500,435 22,438,802 63+)	(Chr16 22,438,803 36,311,158 63+)	(Chr16 36,311,159 38,280,682 centromere CEN16)	(Chr16 38,280,683 90,224,751 64+)	(Chr16 90,224,752 90,228,344 64+)	(Chr16 90,228,345 90,338,344 telomere2 None)	
+(Chr16 0 9,999 solved_path 55+)	(Chr16 10,000 21,500,434 solved_path 55+)	(Chr16 21,500,435 22,438,802 solved_path 56+)	(Chr16 22,438,803 36,311,158 solved_path 57+)	(Chr16 36,311,159 38,280,682 solved_path 57+)	(Chr16 38,280,683 90,224,751 solved_path 57+)	-	-	
 alignment between Chr16b, Path32: -3593
 Alignment's Jaccard score: No Event
-(Chr16 0 9,999 telomere1 None)	(Chr16 10,000 21,500,434 63+)	(Chr16 21,500,435 22,438,802 63+)	(Chr16 22,438,803 36,311,158 63+)	(Chr16 36,311,159 38,280,682 centromere CEN16)	(Chr16 38,280,683 90,224,751 64+)	(Chr16 90,224,752 90,228,344 64+)	(Chr16 90,228,345 90,338,344 telomere2 None)
-(Chr16 0 9,999 solved_path 55-)	(Chr16 10,000 21,500,434 solved_path 55-)	(Chr16 21,500,435 22,438,802 solved_path 56-)	(Chr16 22,438,803 36,311,158 solved_path 57-)	(Chr16 36,311,159 38,280,682 solved_path 57-)	(Chr16 38,280,683 90,224,751 solved_path 57-)	-	-
+(Chr16 0 9,999 telomere1 None)	(Chr16 10,000 21,500,434 63+)	(Chr16 21,500,435 22,438,802 63+)	(Chr16 22,438,803 36,311,158 63+)	(Chr16 36,311,159 38,280,682 centromere CEN16)	(Chr16 38,280,683 90,224,751 64+)	(Chr16 90,224,752 90,228,344 64+)	(Chr16 90,228,345 90,338,344 telomere2 None)	
+(Chr16 0 9,999 solved_path 55-)	(Chr16 10,000 21,500,434 solved_path 55-)	(Chr16 21,500,435 22,438,802 solved_path 56-)	(Chr16 22,438,803 36,311,158 solved_path 57-)	(Chr16 36,311,159 38,280,682 solved_path 57-)	(Chr16 38,280,683 90,224,751 solved_path 57-)	-	-	
 
 
-dependent component 13: Chr17
-component 13 (Chr17), #SV: 0, Jaccard Score: No Event
+dependent component 12: Chr17
+component 12 (Chr17), #SV: 0, Jaccard Score: No Event
 
 alignment between Chr17a, Path33: -36433
 Alignment's Jaccard score: No Event
-(Chr17 0 59,999 telomere1 None)	(Chr17 60,000 70,072 65+)	(Chr17 70,073 21,692,279 65+)	(Chr17 21,692,280 21,708,554 65+)	(Chr17 21,708,555 22,042,418 65+)	(Chr17 22,042,419 22,045,736 65+)	(Chr17 22,045,737 22,813,679 65+)	(Chr17 22,813,680 26,885,980 centromere CEN17)	(Chr17 26,885,981 83,240,673 66+)	(Chr17 83,240,674 83,247,440 66+)	(Chr17 83,247,441 83,257,440 telomere2 None)
--	-	(Chr17 70,073 21,692,279 solved_path 58+)	-	(Chr17 21,708,555 22,042,418 solved_path 59+)	-	(Chr17 22,045,737 22,813,679 solved_path 60+)	(Chr17 22,813,680 26,885,980 solved_path 60+)	(Chr17 26,885,981 83,240,673 solved_path 60+)	-	-
+(Chr17 0 59,999 telomere1 None)	(Chr17 60,000 70,072 65+)	(Chr17 70,073 21,692,279 65+)	(Chr17 21,692,280 21,708,554 65+)	(Chr17 21,708,555 22,042,418 65+)	(Chr17 22,042,419 22,045,736 65+)	(Chr17 22,045,737 22,813,679 65+)	(Chr17 22,813,680 26,885,980 centromere CEN17)	(Chr17 26,885,981 83,240,673 66+)	(Chr17 83,240,674 83,247,440 66+)	(Chr17 83,247,441 83,257,440 telomere2 None)	
+-	-	(Chr17 70,073 21,692,279 solved_path 58+)	-	(Chr17 21,708,555 22,042,418 solved_path 59+)	-	(Chr17 22,045,737 22,813,679 solved_path 60+)	(Chr17 22,813,680 26,885,980 solved_path 60+)	(Chr17 26,885,981 83,240,673 solved_path 60+)	-	-	
 alignment between Chr17b, Path34: -370297
 Alignment's Jaccard score: No Event
-(Chr17 0 59,999 telomere1 None)	(Chr17 60,000 70,072 65+)	(Chr17 70,073 21,692,279 65+)	(Chr17 21,692,280 22,045,736 65+)	(Chr17 22,045,737 22,813,679 65+)	(Chr17 22,813,680 26,885,980 centromere CEN17)	(Chr17 26,885,981 83,240,673 66+)	(Chr17 83,240,674 83,247,440 66+)	(Chr17 83,247,441 83,257,440 telomere2 None)
--	-	(Chr17 70,073 21,692,279 solved_path 58-)	-	(Chr17 22,045,737 22,813,679 solved_path 60-)	(Chr17 22,813,680 26,885,980 solved_path 60-)	(Chr17 26,885,981 83,240,673 solved_path 60-)	-	-
+(Chr17 0 59,999 telomere1 None)	(Chr17 60,000 70,072 65+)	(Chr17 70,073 21,692,279 65+)	(Chr17 21,692,280 22,045,736 65+)	(Chr17 22,045,737 22,813,679 65+)	(Chr17 22,813,680 26,885,980 centromere CEN17)	(Chr17 26,885,981 83,240,673 66+)	(Chr17 83,240,674 83,247,440 66+)	(Chr17 83,247,441 83,257,440 telomere2 None)	
+-	-	(Chr17 70,073 21,692,279 solved_path 58-)	-	(Chr17 22,045,737 22,813,679 solved_path 60-)	(Chr17 22,813,680 26,885,980 solved_path 60-)	(Chr17 26,885,981 83,240,673 solved_path 60-)	-	-	
 
 
-dependent component 14: Chr18
-component 14 (Chr18), #SV: 0, Jaccard Score: No Event
+dependent component 13: Chr18
+component 13 (Chr18), #SV: 0, Jaccard Score: No Event
 
 alignment between Chr18a, Path35: -6910
 Alignment's Jaccard score: No Event
-(Chr18 0 9,999 telomere1 None)	(Chr18 10,000 15,460,899 67+)	(Chr18 15,460,900 20,861,206 centromere CEN18)	(Chr18 20,861,207 80,256,374 68+)	(Chr18 80,256,375 80,263,284 68+)	(Chr18 80,263,285 80,373,284 telomere2 None)
-(Chr18 0 9,999 solved_path 61+)	(Chr18 10,000 15,460,899 solved_path 61+)	(Chr18 15,460,900 20,861,206 solved_path 61+)	(Chr18 20,861,207 80,256,374 solved_path 61+)	-	-
+(Chr18 0 9,999 telomere1 None)	(Chr18 10,000 15,460,899 67+)	(Chr18 15,460,900 20,861,206 centromere CEN18)	(Chr18 20,861,207 80,256,374 68+)	(Chr18 80,256,375 80,263,284 68+)	(Chr18 80,263,285 80,373,284 telomere2 None)	
+(Chr18 0 9,999 solved_path 61+)	(Chr18 10,000 15,460,899 solved_path 61+)	(Chr18 15,460,900 20,861,206 solved_path 61+)	(Chr18 20,861,207 80,256,374 solved_path 61+)	-	-	
 alignment between Chr18b, Path36: -6910
 Alignment's Jaccard score: No Event
-(Chr18 0 9,999 telomere1 None)	(Chr18 10,000 15,460,899 67+)	(Chr18 15,460,900 20,861,206 centromere CEN18)	(Chr18 20,861,207 80,256,374 68+)	(Chr18 80,256,375 80,263,284 68+)	(Chr18 80,263,285 80,373,284 telomere2 None)
-(Chr18 0 9,999 solved_path 61-)	(Chr18 10,000 15,460,899 solved_path 61-)	(Chr18 15,460,900 20,861,206 solved_path 61-)	(Chr18 20,861,207 80,256,374 solved_path 61-)	-	-
+(Chr18 0 9,999 telomere1 None)	(Chr18 10,000 15,460,899 67+)	(Chr18 15,460,900 20,861,206 centromere CEN18)	(Chr18 20,861,207 80,256,374 68+)	(Chr18 80,256,375 80,263,284 68+)	(Chr18 80,263,285 80,373,284 telomere2 None)	
+(Chr18 0 9,999 solved_path 61-)	(Chr18 10,000 15,460,899 solved_path 61-)	(Chr18 15,460,900 20,861,206 solved_path 61-)	(Chr18 20,861,207 80,256,374 solved_path 61-)	-	-	
 
 
-dependent component 15: Chr19
-component 15 (Chr19), #SV: 0, Jaccard Score: No Event
+dependent component 14: Chr19
+component 14 (Chr19), #SV: 0, Jaccard Score: No Event
 
 alignment between Chr19a, Path37: -1900
 Alignment's Jaccard score: No Event
-(Chr19 0 59,999 telomere1 None)	(Chr19 60,000 24,498,980 69+)	(Chr19 24,498,981 27,190,874 centromere CEN19)	(Chr19 27,190,875 58,605,715 70+)	(Chr19 58,605,716 58,607,615 70+)	(Chr19 58,607,616 58,617,615 telomere2 None)
-(Chr19 0 59,999 solved_path 62+)	(Chr19 60,000 24,498,980 solved_path 62+)	(Chr19 24,498,981 27,190,874 solved_path 62+)	(Chr19 27,190,875 58,605,715 solved_path 62+)	-	-
+(Chr19 0 59,999 telomere1 None)	(Chr19 60,000 24,498,980 69+)	(Chr19 24,498,981 27,190,874 centromere CEN19)	(Chr19 27,190,875 58,605,715 70+)	(Chr19 58,605,716 58,607,615 70+)	(Chr19 58,607,616 58,617,615 telomere2 None)	
+(Chr19 0 59,999 solved_path 62+)	(Chr19 60,000 24,498,980 solved_path 62+)	(Chr19 24,498,981 27,190,874 solved_path 62+)	(Chr19 27,190,875 58,605,715 solved_path 62+)	-	-	
 alignment between Chr19b, Path38: -1900
 Alignment's Jaccard score: No Event
-(Chr19 0 59,999 telomere1 None)	(Chr19 60,000 24,498,980 69+)	(Chr19 24,498,981 27,190,874 centromere CEN19)	(Chr19 27,190,875 58,605,715 70+)	(Chr19 58,605,716 58,607,615 70+)	(Chr19 58,607,616 58,617,615 telomere2 None)
-(Chr19 0 59,999 solved_path 62-)	(Chr19 60,000 24,498,980 solved_path 62-)	(Chr19 24,498,981 27,190,874 solved_path 62-)	(Chr19 27,190,875 58,605,715 solved_path 62-)	-	-
+(Chr19 0 59,999 telomere1 None)	(Chr19 60,000 24,498,980 69+)	(Chr19 24,498,981 27,190,874 centromere CEN19)	(Chr19 27,190,875 58,605,715 70+)	(Chr19 58,605,716 58,607,615 70+)	(Chr19 58,607,616 58,617,615 telomere2 None)	
+(Chr19 0 59,999 solved_path 62-)	(Chr19 60,000 24,498,980 solved_path 62-)	(Chr19 24,498,981 27,190,874 solved_path 62-)	(Chr19 27,190,875 58,605,715 solved_path 62-)	-	-	
 
 
-dependent component 16: Chr20
-component 16 (Chr20), #SV: 0, Jaccard Score: No Event
+dependent component 15: Chr20
+component 15 (Chr20), #SV: 0, Jaccard Score: No Event
 
 alignment between Chr20a, Path39: -448
 Alignment's Jaccard score: No Event
-(Chr20 0 59,999 telomere1 None)	(Chr20 60,000 26,436,232 71+)	(Chr20 26,436,233 30,038,348 centromere CEN20)	(Chr20 30,038,349 64,333,718 72+)	(Chr20 64,333,719 64,334,166 72+)	(Chr20 64,334,167 64,444,166 telomere2 None)
-(Chr20 0 59,999 solved_path 63+)	(Chr20 60,000 26,436,232 solved_path 63+)	(Chr20 26,436,233 30,038,348 solved_path 63+)	(Chr20 30,038,349 64,333,718 solved_path 63+)	-	-
+(Chr20 0 59,999 telomere1 None)	(Chr20 60,000 26,436,232 71+)	(Chr20 26,436,233 30,038,348 centromere CEN20)	(Chr20 30,038,349 64,333,718 72+)	(Chr20 64,333,719 64,334,166 72+)	(Chr20 64,334,167 64,444,166 telomere2 None)	
+(Chr20 0 59,999 solved_path 63+)	(Chr20 60,000 26,436,232 solved_path 63+)	(Chr20 26,436,233 30,038,348 solved_path 63+)	(Chr20 30,038,349 64,333,718 solved_path 63+)	-	-	
 alignment between Chr20b, Path40: -448
 Alignment's Jaccard score: No Event
-(Chr20 0 59,999 telomere1 None)	(Chr20 60,000 26,436,232 71+)	(Chr20 26,436,233 30,038,348 centromere CEN20)	(Chr20 30,038,349 64,333,718 72+)	(Chr20 64,333,719 64,334,166 72+)	(Chr20 64,334,167 64,444,166 telomere2 None)
-(Chr20 0 59,999 solved_path 63-)	(Chr20 60,000 26,436,232 solved_path 63-)	(Chr20 26,436,233 30,038,348 solved_path 63-)	(Chr20 30,038,349 64,333,718 solved_path 63-)	-	-
+(Chr20 0 59,999 telomere1 None)	(Chr20 60,000 26,436,232 71+)	(Chr20 26,436,233 30,038,348 centromere CEN20)	(Chr20 30,038,349 64,333,718 72+)	(Chr20 64,333,719 64,334,166 72+)	(Chr20 64,334,167 64,444,166 telomere2 None)	
+(Chr20 0 59,999 solved_path 63-)	(Chr20 60,000 26,436,232 solved_path 63-)	(Chr20 26,436,233 30,038,348 solved_path 63-)	(Chr20 30,038,349 64,333,718 solved_path 63-)	-	-	
 
 
-dependent component 17: Chr21
-component 17 (Chr21), #SV: 0, Jaccard Score: No Event
+dependent component 16: Chr21
+component 16 (Chr21), #SV: 0, Jaccard Score: No Event
 
 alignment between Chr21a, Path41: -2752
 Alignment's Jaccard score: No Event
-(Chr21 0 5,009,999 acrocentric None)	(Chr21 5,010,000 10,864,560 acrocentric 73+)	(Chr21 10,864,561 12,915,808 acrocentric CEN21)	(Chr21 12,915,809 12,915,809 acrocentric 74+)	(Chr21 12,915,810 46,697,230 74+)	(Chr21 46,697,231 46,699,982 74+)	(Chr21 46,699,983 46,709,982 telomere2 None)
-(Chr21 0 5,009,999 acrocentric 64+)	(Chr21 5,010,000 10,864,560 acrocentric 64+)	(Chr21 10,864,561 12,915,808 acrocentric 64+)	(Chr21 12,915,809 12,915,809 acrocentric 64+)	(Chr21 12,915,810 46,697,230 solved_path 64+)	-	-
+(Chr21 0 5,009,999 acrocentric None)	(Chr21 5,010,000 10,864,560 acrocentric 73+)	(Chr21 10,864,561 12,915,808 acrocentric CEN21)	(Chr21 12,915,809 12,915,809 acrocentric 74+)	(Chr21 12,915,810 46,697,230 74+)	(Chr21 46,697,231 46,699,982 74+)	(Chr21 46,699,983 46,709,982 telomere2 None)	
+(Chr21 0 5,009,999 acrocentric 64+)	(Chr21 5,010,000 10,864,560 acrocentric 64+)	(Chr21 10,864,561 12,915,808 acrocentric 64+)	(Chr21 12,915,809 12,915,809 acrocentric 64+)	(Chr21 12,915,810 46,697,230 solved_path 64+)	-	-	
 alignment between Chr21b, Path42: -2752
 Alignment's Jaccard score: No Event
-(Chr21 0 5,009,999 acrocentric None)	(Chr21 5,010,000 10,864,560 acrocentric 73+)	(Chr21 10,864,561 12,915,808 acrocentric CEN21)	(Chr21 12,915,809 12,915,809 acrocentric 74+)	(Chr21 12,915,810 46,697,230 74+)	(Chr21 46,697,231 46,699,982 74+)	(Chr21 46,699,983 46,709,982 telomere2 None)
-(Chr21 0 5,009,999 acrocentric 64-)	(Chr21 5,010,000 10,864,560 acrocentric 64-)	(Chr21 10,864,561 12,915,808 acrocentric 64-)	(Chr21 12,915,809 12,915,809 acrocentric 64-)	(Chr21 12,915,810 46,697,230 solved_path 64-)	-	-
+(Chr21 0 5,009,999 acrocentric None)	(Chr21 5,010,000 10,864,560 acrocentric 73+)	(Chr21 10,864,561 12,915,808 acrocentric CEN21)	(Chr21 12,915,809 12,915,809 acrocentric 74+)	(Chr21 12,915,810 46,697,230 74+)	(Chr21 46,697,231 46,699,982 74+)	(Chr21 46,699,983 46,709,982 telomere2 None)	
+(Chr21 0 5,009,999 acrocentric 64-)	(Chr21 5,010,000 10,864,560 acrocentric 64-)	(Chr21 10,864,561 12,915,808 acrocentric 64-)	(Chr21 12,915,809 12,915,809 acrocentric 64-)	(Chr21 12,915,810 46,697,230 solved_path 64-)	-	-	
 
 
-dependent component 18: Chr22
-component 18 (Chr22), #SV: 0, Jaccard Score: No Event
+dependent component 17: Chr22
+component 17 (Chr22), #SV: 0, Jaccard Score: No Event
 
 alignment between Chr22a, Path43: -2880
 Alignment's Jaccard score: No Event
-(Chr22 0 10,509,999 acrocentric None)	(Chr22 10,510,000 12,954,788 acrocentric 75+)	(Chr22 12,954,789 15,054,318 acrocentric CEN22)	(Chr22 15,054,319 15,054,319 acrocentric 76+)	(Chr22 15,054,320 50,805,587 76+)	(Chr22 50,805,588 50,808,467 76+)	(Chr22 50,808,468 50,818,467 telomere2 None)
-(Chr22 0 10,509,999 acrocentric 65+)	(Chr22 10,510,000 12,954,788 acrocentric 65+)	(Chr22 12,954,789 15,054,318 acrocentric 65+)	(Chr22 15,054,319 15,054,319 acrocentric 65+)	(Chr22 15,054,320 50,805,587 solved_path 65+)	-	-
+(Chr22 0 10,509,999 acrocentric None)	(Chr22 10,510,000 12,954,788 acrocentric 75+)	(Chr22 12,954,789 15,054,318 acrocentric CEN22)	(Chr22 15,054,319 15,054,319 acrocentric 76+)	(Chr22 15,054,320 50,805,587 76+)	(Chr22 50,805,588 50,808,467 76+)	(Chr22 50,808,468 50,818,467 telomere2 None)	
+(Chr22 0 10,509,999 acrocentric 65+)	(Chr22 10,510,000 12,954,788 acrocentric 65+)	(Chr22 12,954,789 15,054,318 acrocentric 65+)	(Chr22 15,054,319 15,054,319 acrocentric 65+)	(Chr22 15,054,320 50,805,587 solved_path 65+)	-	-	
 alignment between Chr22b, Path44: -2880
 Alignment's Jaccard score: No Event
-(Chr22 0 10,509,999 acrocentric None)	(Chr22 10,510,000 12,954,788 acrocentric 75+)	(Chr22 12,954,789 15,054,318 acrocentric CEN22)	(Chr22 15,054,319 15,054,319 acrocentric 76+)	(Chr22 15,054,320 50,805,587 76+)	(Chr22 50,805,588 50,808,467 76+)	(Chr22 50,808,468 50,818,467 telomere2 None)
-(Chr22 0 10,509,999 acrocentric 65-)	(Chr22 10,510,000 12,954,788 acrocentric 65-)	(Chr22 12,954,789 15,054,318 acrocentric 65-)	(Chr22 15,054,319 15,054,319 acrocentric 65-)	(Chr22 15,054,320 50,805,587 solved_path 65-)	-	-
+(Chr22 0 10,509,999 acrocentric None)	(Chr22 10,510,000 12,954,788 acrocentric 75+)	(Chr22 12,954,789 15,054,318 acrocentric CEN22)	(Chr22 15,054,319 15,054,319 acrocentric 76+)	(Chr22 15,054,320 50,805,587 76+)	(Chr22 50,805,588 50,808,467 76+)	(Chr22 50,808,468 50,818,467 telomere2 None)	
+(Chr22 0 10,509,999 acrocentric 65-)	(Chr22 10,510,000 12,954,788 acrocentric 65-)	(Chr22 12,954,789 15,054,318 acrocentric 65-)	(Chr22 15,054,319 15,054,319 acrocentric 65-)	(Chr22 15,054,320 50,805,587 solved_path 65-)	-	-	
 
 
-dependent component 19: ChrX
-component 19 (ChrX), #SV: 0, Jaccard Score: No Event
+dependent component 18: ChrX
+component 18 (ChrX), #SV: 0, Jaccard Score: No Event
 
 alignment between ChrXa, Path45: -5282
 Alignment's Jaccard score: No Event
-(ChrX 0 9,999 telomere1 None)	(ChrX 10,000 58,605,579 77+)	(ChrX 58,605,580 62,412,542 centromere CENX)	(ChrX 62,412,543 156,025,612 78+)	(ChrX 156,025,613 156,030,894 78+)	(ChrX 156,030,895 156,040,894 telomere2 None)
-(ChrX 0 9,999 solved_path 66+)	(ChrX 10,000 58,605,579 solved_path 66+)	(ChrX 58,605,580 62,412,542 solved_path 66+)	(ChrX 62,412,543 156,025,612 solved_path 66+)	-	-
+(ChrX 0 9,999 telomere1 None)	(ChrX 10,000 58,605,579 77+)	(ChrX 58,605,580 62,412,542 centromere CENX)	(ChrX 62,412,543 156,025,612 78+)	(ChrX 156,025,613 156,030,894 78+)	(ChrX 156,030,895 156,040,894 telomere2 None)	
+(ChrX 0 9,999 solved_path 66+)	(ChrX 10,000 58,605,579 solved_path 66+)	(ChrX 58,605,580 62,412,542 solved_path 66+)	(ChrX 62,412,543 156,025,612 solved_path 66+)	-	-	
 alignment between ChrXb, Path46: -5282
 Alignment's Jaccard score: No Event
-(ChrX 0 9,999 telomere1 None)	(ChrX 10,000 58,605,579 77+)	(ChrX 58,605,580 62,412,542 centromere CENX)	(ChrX 62,412,543 156,025,612 78+)	(ChrX 156,025,613 156,030,894 78+)	(ChrX 156,030,895 156,040,894 telomere2 None)
-(ChrX 0 9,999 solved_path 66-)	(ChrX 10,000 58,605,579 solved_path 66-)	(ChrX 58,605,580 62,412,542 solved_path 66-)	(ChrX 62,412,543 156,025,612 solved_path 66-)	-	-
+(ChrX 0 9,999 telomere1 None)	(ChrX 10,000 58,605,579 77+)	(ChrX 58,605,580 62,412,542 centromere CENX)	(ChrX 62,412,543 156,025,612 78+)	(ChrX 156,025,613 156,030,894 78+)	(ChrX 156,030,895 156,040,894 telomere2 None)	
+(ChrX 0 9,999 solved_path 66-)	(ChrX 10,000 58,605,579 solved_path 66-)	(ChrX 58,605,580 62,412,542 solved_path 66-)	(ChrX 62,412,543 156,025,612 solved_path 66-)	-	-	
 
 
-
-Process finished with exit code 0
