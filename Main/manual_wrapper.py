@@ -75,7 +75,5 @@ def batch_1026():
     translate_global_index_to_arm_index('Chr12', 64678139, 68251745, indexing_file)
 
 
-
-
 if __name__ == "__main__":
     batch_1026()

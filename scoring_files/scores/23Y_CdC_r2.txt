@@ -3,12 +3,12 @@ unaligned standard: (empty if none)
 chr_bin: Chr5, path_name: Chr5b, segments: (Chr5, 0, 9999, telomere1)(Chr5, 46485901, 50059807, centromere, CEN5)(Chr5, 50059808, 83800313, 14+)(Chr5, 83800314, 88024582, 15+)(Chr5, 88024583, 181478258, 16+)(Chr5, 181478259, 181538258, telomere2)
 chr_bin: Chr5, path_name: Chr5d, segments: (Chr5, 0, 9999, telomere1)(Chr5, 10000, 10000, 11+)(Chr5, 10001, 12533192, 12+)(Chr5, 12533193, 46485900, 13+)(Chr5, 46485901, 50059807, centromere, CEN5)(Chr5, 50059808, 83800313, 14+)(Chr5, 83800314, 88024582, 15+)(Chr5, 88024583, 181478258, 16+)(Chr5, 181478259, 181538258, telomere2)
 unaligned reconstruction: (empty if none)
-genome indel: 277865421
-genome Jaccard Score: 0.2336393057685649
+genome indel: 594466038
+genome Jaccard Score: 0.12562861321042085
 connected components' Jaccard Score:
 component 2 (Chr3), #SV: 1, Jaccard Score: 0.9836938325348824
-component 4 (Chr5), #SV: 2, Jaccard Score: 0.042563104375240926
-component 5 (Chr9,Chr6,Chr8), #SV: 4, Jaccard Score: 0.9973495420354362
+component 4 (Chr5), #SV: 2, Jaccard Score: 0.020493124031483546
+component 5 (Chr9,Chr8,Chr6), #SV: 4, Jaccard Score: 0.9973495420354362
 component 7 (Chr10), #SV: 1, Jaccard Score: 0.99727546229551
 component 10 (Chr13), #SV: 1, Jaccard Score: 0.9570908091069695
 component 15 (Chr18), #SV: 1, Jaccard Score: 0.9744975380367014
@@ -80,7 +80,7 @@ Alignment's Jaccard score: No Event
 
 
 dependent component 4: Chr5
-component 4 (Chr5), #SV: 2, Jaccard Score: 0.042563104375240926
+component 4 (Chr5), #SV: 2, Jaccard Score: 0.020493124031483546
 SV_name: SV0-{deletion from Chr5a to Chr5a}	SV_total: 12523192	SV_captured: 12512707	SV_capture_rate: 0.9992
 SV_name: SV9-{right duplication inversion from Chr5c to Chr5c}	SV_total: 4224269	SV_captured: 0	SV_capture_rate: 0.0000
 
@@ -96,8 +96,8 @@ Alignment's Jaccard score: 0.0000
 kt unaligned: chr_bin: Chr5, path_name: Chr5d, segments: (Chr5, 0, 9999, telomere1)(Chr5, 10000, 10000, 11+)(Chr5, 10001, 12533192, 12+)(Chr5, 12533193, 46485900, 13+)(Chr5, 46485901, 50059807, centromere, CEN5)(Chr5, 50059808, 83800313, 14+)(Chr5, 83800314, 88024582, 15+)(Chr5, 88024583, 181478258, 16+)(Chr5, 181478259, 181538258, telomere2)
 
 
-dependent component 5: Chr9,Chr6,Chr8
-component 5 (Chr9,Chr6,Chr8), #SV: 4, Jaccard Score: 0.9973495420354362
+dependent component 5: Chr9,Chr8,Chr6
+component 5 (Chr9,Chr8,Chr6), #SV: 4, Jaccard Score: 0.9973495420354362
 SV_name: SV3-{balanced reciprocal translocation from Chr6a to Chr9a}	SV_total: 10867448.0	SV_captured: 10865188.0	SV_capture_rate: 0.9998
 SV_name: SV2-{balanced reciprocal translocation from Chr9a to Chr6a}	SV_total: 19029646.0	SV_captured: 19021335.0	SV_capture_rate: 0.9996
 SV_name: SV11-{nonreciprocal translocation from Chr6a to Chr8a}	SV_total: 18995934	SV_captured: 18993981	SV_capture_rate: 0.9999

@@ -317,9 +317,14 @@ def generate_genome_from_KT(input_file: str, ordinal_info_included=False) -> Gen
 
 
 def get_segment_location(input_current_segment: Segment, input_segment_ordinal: int, input_chr: Chromosome):
+    # print(input_current_segment)
+    # print(input_segment_ordinal)
     output_segment_location = -1
     finder_ptr = 0
-    p_arm_exhausted = False
+    if len(input_chr.p_arm) == 0:
+        p_arm_exhausted = True
+    else:
+        p_arm_exhausted = False
     for occurrence in range(0, input_segment_ordinal):
         segment_not_matched = True
         while segment_not_matched:

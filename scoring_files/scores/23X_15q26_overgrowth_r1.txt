@@ -3,13 +3,13 @@ unaligned standard: (empty if none)
 chr_bin: Chr6, path_name: Chr6b, segments: (Chr6, 0, 59999, telomere1)(Chr6, 60000, 58553888, 21+)(Chr6, 58553889, 59829934, centromere, CEN6)(Chr6, 59829935, 131759479, 22+)(Chr6, 131759480, 138718199, 23+)(Chr6, 138718200, 163787259, 24+)(Chr6, 163787260, 170745978, 25+)(Chr6, 170745979, 170805978, telomere2)
 chr_bin: Chr13, path_name: Chr13a, segments: (Chr13, 0, 15999999, acrocentric)(Chr13, 16000000, 16000000, acrocentric, 42+)(Chr13, 16000001, 18051248, acrocentric, CEN13)(Chr13, 18051249, 18051249, acrocentric, 43+)(Chr13, 18051250, 43147307, 43+)(Chr13, 43147308, 52163584, 44+)(Chr13, 52163585, 105338051, 45+)(Chr13, 114354327, 105338052, inv: SV5, 46-)(Chr13, 114354328, 114364327, telomere2)
 unaligned reconstruction: (empty if none)
-genome indel: 261603065
-genome Jaccard Score: 0.43980576857983933
+genome indel: 546773372
+genome Jaccard Score: 0.27335262481200445
 connected components' Jaccard Score:
 component 1 (Chr15,Chr2), #SV: 3, Jaccard Score: 0.9855025270744501
 component 2 (Chr3), #SV: 1, Jaccard Score: 0.9935104741031334
 component 4 (Chr5), #SV: 1, Jaccard Score: 0.9911935401960287
-component 5 (Chr6), #SV: 1, Jaccard Score: 0.035204202161951054
+component 5 (Chr6), #SV: 1, Jaccard Score: 0.017985354119872968
 component 7 (Chr8), #SV: 1, Jaccard Score: 0.9908088661561036
 component 10 (Chr11), #SV: 1, Jaccard Score: 0.994776767792459
 
@@ -103,7 +103,7 @@ Alignment's Jaccard score: No Event
 
 
 dependent component 5: Chr6
-component 5 (Chr6), #SV: 1, Jaccard Score: 0.035204202161951054
+component 5 (Chr6), #SV: 1, Jaccard Score: 0.017985354119872968
 SV_name: SV2-{left duplication inversion from Chr6a to Chr6a}	SV_total: 6958719	SV_captured: 6280764	SV_capture_rate: 0.9026
 
 alignment between Chr6a, Path11: -171450778

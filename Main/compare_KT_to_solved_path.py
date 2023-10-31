@@ -102,6 +102,7 @@ def compare_paths(solved_path_file, kt_file, masking_file):
                 current_solved_path_index = chr_pairing[kt_path_index_itr]
             else:
                 bin_output_str += "kt unaligned: " + str(kt_path_list[kt_path_index_itr]) + "\n"
+                bin_indel -= len(kt_path_list[kt_path_index_itr].linear_path)  # count the missed chr as entirely indel
                 continue
 
             # re-perform alignment to get statistics
@@ -443,8 +444,8 @@ def align_paths(segment_list1, segment_list2):
 
 
 def test_compare_paths():
-    omkar_file = "../scoring_files/modified_OMKar/23Y_WAGR_11p13_deletion_r2.1.txt"
-    kt_file = "../scoring_files/modified_KT/23Y_WAGR_11p13_deletion_r2.kt.txt"
+    omkar_file = "../scoring_files/modified_OMKar/NF1_microdeletion_v2_r1.1.txt"
+    kt_file = "../scoring_files/modified_KT/NF1_microdeletion_v2_r1.kt.txt"
     masking_file = "../Metadata/merged_masking_unique.bed"
     compare_paths(omkar_file, kt_file, masking_file)
     # compare_paths(

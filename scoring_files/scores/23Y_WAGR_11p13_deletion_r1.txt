@@ -2,14 +2,14 @@
 unaligned standard: (empty if none)
 chr_bin: Chr9, path_name: Chr9b, segments: (Chr9, 0, 9999, telomere1)(Chr9, 43236168, 45518558, centromere, CEN9)(Chr9, 45518559, 138334716, 28+)(Chr9, 138334717, 138394716, telomere2)
 unaligned reconstruction: (empty if none)
-genome indel: 397123848
-genome Jaccard Score: 0.4049926622493278
+genome indel: 492292397
+genome Jaccard Score: 0.3555987310617953
 connected components' Jaccard Score:
 component 1 (Chr2), #SV: 3, Jaccard Score: 0.9909483836902269
 component 3 (Chr4), #SV: 1, Jaccard Score: 0.9838983176286076
 component 9 (Chr10), #SV: 1, Jaccard Score: 0.49212879767685547
-component 10 (Chr20,Chr11), #SV: 3, Jaccard Score: 0.2237934196861998
-component 11 (Chr12,Chr13), #SV: 2, Jaccard Score: 0.07582120635611442
+component 10 (Chr11,Chr20), #SV: 3, Jaccard Score: 0.2237934196861998
+component 11 (Chr13,Chr12), #SV: 2, Jaccard Score: 0.07582120635611442
 
 SV: 10 present, 8 captured
 SV_name: SV0-{deletion from Chr11a to Chr11a}	SV_total: 650751	SV_captured: 650751	SV_capture_rate: 1.0000
@@ -160,8 +160,8 @@ Alignment's Jaccard score: No Event
 -	-	(Chr10 19,074 39,607,821 solved_path 23-)	-	-	-	(Chr10 133,571,442 133,778,994 solved_path 25-)	-	-
 
 
-dependent component 10: Chr20,Chr11
-component 10 (Chr20,Chr11), #SV: 3, Jaccard Score: 0.2237934196861998
+dependent component 10: Chr11,Chr20
+component 10 (Chr11,Chr20), #SV: 3, Jaccard Score: 0.2237934196861998
 SV_name: SV0-{deletion from Chr11a to Chr11a}	SV_total: 650751	SV_captured: 650751	SV_capture_rate: 1.0000
 SV_name: SV11-{balanced reciprocal translocation from Chr11a to Chr20a}	SV_total: 4595982.0	SV_captured: 2297693.0	SV_capture_rate: 0.4999
 SV_name: SV10-{balanced reciprocal translocation from Chr20a to Chr11a}	SV_total: 8207444.0	SV_captured: 8200841.0	SV_capture_rate: 0.9992
@@ -184,8 +184,8 @@ Alignment's Jaccard score: No Event
 (Chr20 0 59,999 solved_path 50-)	(Chr20 60,000 26,436,232 solved_path 50-)	(Chr20 26,436,233 30,038,348 solved_path 50-)	(Chr20 30,038,349 42,458,374 solved_path 50-)	(Chr20 42,458,375 42,464,977 solved_path 50-)	(Chr20 42,464,978 46,562,096 solved_path 51-)	(Chr20 46,562,097 46,564,167 solved_path 51-)	(Chr11 127,009,480 135,068,991 solved_path 30-)	-	-
 
 
-dependent component 11: Chr12,Chr13
-component 11 (Chr12,Chr13), #SV: 2, Jaccard Score: 0.07582120635611442
+dependent component 11: Chr13,Chr12
+component 11 (Chr13,Chr12), #SV: 2, Jaccard Score: 0.07582120635611442
 SV_name: SV9-{nonreciprocal translocation from Chr13a to Chr12a}	SV_total: 16540974	SV_captured: 16540974	SV_capture_rate: 1.0000
 SV_name: SV2-{right duplication inversion from Chr13a to Chr13a}	SV_total: 8222550	SV_captured: 0	SV_capture_rate: 0.0000
 
