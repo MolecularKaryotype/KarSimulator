@@ -146,15 +146,15 @@ initialization
 	autosomal copy number: 1
 	sex chromosomes: ['ChrX']
 block 1: 22q11.2_distal_deletion
-	deletion on segments [66+], from Chr22a to Chr22a
+	deletion on segments [66+], from Chr22a to Chr22a	(del,65.1,67.1)
 block 2: random events
-	chromosomal duplication on segments [52+,CEN17+,53+], from Chr17a to Chr17a
-	nonreciprocal translocation on segments [26+], from Chr7a to Chr5a
-	deletion on segments [7+], from Chr2a to Chr2a
-	tandem duplication on segments [21+], from Chr5a to Chr5a
-	left duplication inversion on segments [13+], from Chr4a to Chr4a
-	arm deletion on segments [10+], from Chr3a to Chr3a
-	inversion on segments [35+], from Chr10a to Chr10a
-	left duplication inversion on segments [37+], from Chr11a to Chr11a
-	deletion on segments [19+], from Chr5a to Chr5a
-	nonreciprocal translocation on segments [62+], from Chr21a to Chr1a
+	chromosomal duplication on segments [52+,CEN17+,53+], from Chr17a to Chr17a	-
+	nonreciprocal translocation on segments [26+], from Chr7a to Chr5a	(del,25.1,27.1)(ins,26.1)
+	deletion on segments [7+], from Chr2a to Chr2a	(del,6.1,8.1)
+	tandem duplication on segments [21+], from Chr5a to Chr5a	(ins,21.2)
+	left duplication inversion on segments [13+], from Chr4a to Chr4a	(ins,13.1)
+	arm deletion on segments [10+], from Chr3a to Chr3a	(del,CEN,T2)
+	inversion on segments [35+], from Chr10a to Chr10a	(inv,35.1)
+	left duplication inversion on segments [37+], from Chr11a to Chr11a	(ins,37.1)
+	deletion on segments [19+], from Chr5a to Chr5a	(del,18.1,20.1)
+	nonreciprocal translocation on segments [62+], from Chr21a to Chr1a	(del,61.1,63.1)(ins,62.1)

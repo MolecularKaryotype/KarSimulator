@@ -443,10 +443,10 @@ def align_paths(segment_list1, segment_list2):
 
 
 def test_compare_paths():
-    compare_paths(
-        "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/23Y_Cri_du_Chat_r2.1/23Y_Cri_du_Chat_r2.1.txt",
-        "/scoring_files/modified_KT_archieve/23Y_Cri_du_Chat_r2.kt.txt",
-        "../Metadata/merged_masking_unique.bed")
+    omkar_file = "../scoring_files/modified_OMKar/23Y_WAGR_11p13_deletion_r2.1.txt"
+    kt_file = "../scoring_files/modified_KT/23Y_WAGR_11p13_deletion_r2.kt.txt"
+    masking_file = "../Metadata/merged_masking_unique.bed"
+    compare_paths(omkar_file, kt_file, masking_file)
     # compare_paths(
     #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/test_folder/23Xe10_r1.1.txt",
     #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/test_folder/23Xe10_r1.kt.txt",

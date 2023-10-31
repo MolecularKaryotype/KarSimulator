@@ -148,17 +148,17 @@ initialization
 	autosomal copy number: 1
 	sex chromosomes: ['ChrY']
 block 1: WAGR_11p13_deletion
-	deletion on segments [32+], from Chr11a to Chr11a
+	deletion on segments [32+], from Chr11a to Chr11a	(del,31.1,33.1)
 block 2: random events
-	deletion on segments [5+], from Chr2a to Chr2a
-	right duplication inversion on segments [43+], from Chr13a to Chr13a
-	inversion on segments [9+], from Chr2a to Chr2a
-	balanced reciprocal translocation on segments [17+], from Chr4a to Chr4a
-	balanced reciprocal translocation on segments [15+], from Chr4a to Chr4a
-	deletion on segments [7+], from Chr2a to Chr2a
-	arm deletion on segments [14+,17+,16+,15+,18+], from Chr4a to Chr4a
-	arm tandem duplication on segments [28+], from Chr9a to Chr9b
-	nonreciprocal translocation on segments [45+], from Chr13a to Chr12a
-	balanced reciprocal translocation on segments [61+], from Chr20a to Chr11a
-	balanced reciprocal translocation on segments [35+], from Chr11a to Chr20a
-	arm deletion on segments [30+], from Chr10a to Chr10a
+	deletion on segments [5+], from Chr2a to Chr2a	(del,4.1,6.1)
+	right duplication inversion on segments [43+], from Chr13a to Chr13a	(ins,43.2)
+	inversion on segments [9+], from Chr2a to Chr2a	(inv,9.1)
+	balanced reciprocal translocation on segments [17+], from Chr4a to Chr4a	-
+	balanced reciprocal translocation on segments [15+], from Chr4a to Chr4a	-
+	deletion on segments [7+], from Chr2a to Chr2a	(del,6.1,8.1)
+	arm deletion on segments [14+,17+,16+,15+,18+], from Chr4a to Chr4a	(del,CEN,T2)
+	arm tandem duplication on segments [28+], from Chr9a to Chr9b	-
+	nonreciprocal translocation on segments [45+], from Chr13a to Chr12a	(del,44.1,46.1)(ins,45.1)
+	balanced reciprocal translocation on segments [61+], from Chr20a to Chr11a	(del,60.1,62.1)(ins,61.1)
+	balanced reciprocal translocation on segments [35+], from Chr11a to Chr20a	(del,34.1,36.1)(ins,35.1)
+	arm deletion on segments [30+], from Chr10a to Chr10a	(del,CEN,T2)

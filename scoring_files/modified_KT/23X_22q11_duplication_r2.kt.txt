@@ -149,16 +149,16 @@ initialization
 	autosomal copy number: 1
 	sex chromosomes: ['ChrX']
 block 1: 22q11_duplication
-	tandem_duplication on segments [68+], from Chr22a to Chr22a
+	tandem_duplication on segments [68+], from Chr22a to Chr22a	(ins,68.2)
 block 2: random events
-	balanced reciprocal translocation on segments [19+], from Chr6a to Chr15a
-	balanced reciprocal translocation on segments [48+], from Chr15a to Chr6a
-	tandem duplication on segments [50+], from Chr15a to Chr15a
-	tandem duplication on segments [54+], from Chr16a to Chr16a
-	left duplication inversion on segments [9+], from Chr3a to Chr3a
-	tandem duplication on segments [38+], from Chr12a to Chr12a
-	right duplication inversion on segments [25+,26+], from Chr8a to Chr8a
-	inversion on segments [15+], from Chr5a to Chr5a
-	deletion on segments [3+], from Chr1a to Chr1a
-	nonreciprocal translocation on segments [44+], from Chr14a to ChrXa
-	deletion on segments [29+], from Chr8a to Chr8a
+	balanced reciprocal translocation on segments [19+], from Chr6a to Chr15a	(del,18.1,20.1)(ins,19.1)
+	balanced reciprocal translocation on segments [48+], from Chr15a to Chr6a	(del,47.1,49.1)(ins,48.1)
+	tandem duplication on segments [50+], from Chr15a to Chr15a	(ins,50.2)
+	tandem duplication on segments [54+], from Chr16a to Chr16a	(ins,54.2)
+	left duplication inversion on segments [9+], from Chr3a to Chr3a	(ins,9.1)
+	tandem duplication on segments [38+], from Chr12a to Chr12a	(ins,38.2)
+	right duplication inversion on segments [25+,26+], from Chr8a to Chr8a	(ins,25.2)(ins,26.2)
+	inversion on segments [15+], from Chr5a to Chr5a	(inv,15.1)
+	deletion on segments [3+], from Chr1a to Chr1a	(del,2.1,4.1)
+	nonreciprocal translocation on segments [44+], from Chr14a to ChrXa	(del,43.1,45.1)(ins,44.1)
+	deletion on segments [29+], from Chr8a to Chr8a	(del,28.1,T2)

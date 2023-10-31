@@ -152,17 +152,17 @@ initialization
 	autosomal copy number: 1
 	sex chromosomes: ['ChrY']
 block 1: WAGR_11p13_deletion
-	deletion on segments [38+], from Chr11a to Chr11a
+	deletion on segments [38+], from Chr11a to Chr11a	(del,37.1,39.1)
 block 2: random events
-	inversion on segments [59+], from Chr18a to Chr18a
-	inversion on segments [51+], from Chr15a to Chr15a
-	inversion on segments [61+], from Chr18a to Chr18a
-	inversion on segments [28+], from Chr10a to Chr10a
-	left duplication inversion on segments [9+], from Chr3a to Chr3a
-	nonreciprocal translocation on segments [13+], from Chr4a to Chr11a
-	balanced reciprocal translocation on segments [30+], from Chr10a to Chr10a
-	balanced reciprocal translocation on segments [33+], from Chr10a to Chr10a
-	chromosomal duplication on segments [67+,CEN21+,68+], from Chr21a to Chr21a
-	deletion on segments [4+], from Chr2a to Chr2a
-	balanced reciprocal translocation on segments [35+], from Chr10a to Chr10a
-	balanced reciprocal translocation on segments [26+], from Chr10a to Chr10a
+	inversion on segments [59+], from Chr18a to Chr18a	(inv,59.1)
+	inversion on segments [51+], from Chr15a to Chr15a	(inv,51.1)
+	inversion on segments [61+], from Chr18a to Chr18a	(inv,61.1)
+	inversion on segments [28+], from Chr10a to Chr10a	(inv,28.1)
+	left duplication inversion on segments [9+], from Chr3a to Chr3a	(ins,9.1)
+	nonreciprocal translocation on segments [13+], from Chr4a to Chr11a	(del,12.1,14.1)(ins,13.1)
+	balanced reciprocal translocation on segments [30+], from Chr10a to Chr10a	(del,29.1,31.1)(ins,30.1)
+	balanced reciprocal translocation on segments [33+], from Chr10a to Chr10a	(del,32.1,34.1)(ins,33.1)
+	chromosomal duplication on segments [67+,CEN21+,68+], from Chr21a to Chr21a	-
+	deletion on segments [4+], from Chr2a to Chr2a	(del,3.1,5.1)
+	balanced reciprocal translocation on segments [35+], from Chr10a to Chr10a	(del,34.1,36.1)(ins,35.1)
+	balanced reciprocal translocation on segments [26+], from Chr10a to Chr10a	(del,25.1,27.1)(ins,26.1)
