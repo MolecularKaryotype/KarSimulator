@@ -17,11 +17,14 @@ def compare_paths(solved_path_file, kt_file, masking_file):
     bin_list = bin_dependent_chr(kt_path_list)
 
     # debugging a specific alignment
-    current_kt_path = kt_path_list[4].duplicate()
-    current_solved_path = solved_path_list[4].duplicate()
-    current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
-    best_score, best_kt_alignment, best_solved_path_alignment, sv_total, sv_captured, jaccard = \
-        align_paths(current_kt_path.linear_path.segments, current_solved_path.linear_path.segments)
+    # current_kt_path = kt_path_list[16].duplicate()
+    # current_solved_path = solved_path_list[12].duplicate()
+    # current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
+    # best_score, best_kt_alignment, best_solved_path_alignment, sv_total, sv_captured, jaccard = \
+    #     align_paths(current_kt_path.linear_path.segments, current_solved_path.linear_path.segments)
+    # print("best score: " + str(best_score))
+    # print(best_kt_alignment)
+    # print(best_solved_path_alignment)
 
     chr_pairing = {}
     while len(kt_path_list) > len(chr_pairing) and len(solved_path_list) > len(chr_pairing.values()):
@@ -54,7 +57,7 @@ def compare_paths(solved_path_file, kt_file, masking_file):
                 current_solved_path.reverse()
                 current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
 
-                current_score, current_kt_alignment, current_solved_path_alignment, sv_total, sv_captured, jaccard= \
+                current_score, current_kt_alignment, current_solved_path_alignment, sv_total, sv_captured, jaccard = \
                     align_paths(current_kt_path.linear_path.segments,
                                 current_solved_path.linear_path.segments)
                 if current_score > best_score:
@@ -80,18 +83,28 @@ def compare_paths(solved_path_file, kt_file, masking_file):
             if path_index not in chr_pairing.values():
                 print(solved_path_list[path_index])
 
+    genome_output_str = ""
+    bin_jaccard_strs = []
+    genome_sv_captured = {}
+    genome_sv_total = {}
+    genome_indel = 0
     for bin_index in range(len(bin_list)):
-        chr_list_str = ""
-        for chr_itr in bin_list[bin_index][0]:
-            chr_list_str += chr_itr
-        print("\ndependent component " + str(bin_index) + ": " + chr_list_str)
+        bin_output_str = ""
+        bin_sv_captured = {}
+        bin_sv_total = {}
+        bin_indel = 0
+
+        chr_list_str = ",".join(bin_list[bin_index][0])
+        genome_output_str += "\ndependent component " + str(bin_index) + ": " + chr_list_str + "\n"
         for kt_path_index_itr in bin_list[bin_index][1]:
-            # output current pair
-            current_solved_path_index = -1
+            # record output for current pair
             if kt_path_index_itr in chr_pairing:
                 current_solved_path_index = chr_pairing[kt_path_index_itr]
             else:
-                print("kt unaligned: " + str(kt_path_list[kt_path_index_itr]))
+                bin_output_str += "kt unaligned: " + str(kt_path_list[kt_path_index_itr]) + "\n"
+                continue
+
+            # re-perform alignment to get statistics
             current_kt_path = kt_path_list[kt_path_index_itr].duplicate()
             current_solved_path = solved_path_list[current_solved_path_index].duplicate()
             current_kt_path.generate_mutual_breakpoints(other_path=current_solved_path, mutual=True)
@@ -99,18 +112,93 @@ def compare_paths(solved_path_file, kt_file, masking_file):
                 align_paths(current_kt_path.linear_path.segments,
                             current_solved_path.linear_path.segments)
 
-            print("alignment between {}, {}: {}".format(kt_path_list[kt_path_index_itr].path_name,
-                                                        solved_path_list[current_solved_path_index].path_name, best_score))
+            # append alignment for output
+            bin_output_str += "alignment between {}, {}: {}\n".format(kt_path_list[kt_path_index_itr].path_name,
+                                                                      solved_path_list[current_solved_path_index].path_name,
+                                                                      best_score)
+            bin_output_str += "Alignment's Jaccard score: {}\n".format(jaccard)
+            bin_output_str += best_kt_alignment + "\n"
+            bin_output_str += best_solved_path_alignment + "\n"
+
+            # append stats to dependent component (bin) level
+            bin_indel += best_score
             for sv_name in sv_total:
-                sv_capture_rate = sv_captured[sv_name] / sv_total[sv_name]
-                sv_capture_rate = "{:.4f}".format(sv_capture_rate)
-                sv_history_info = genome.history[int(sv_name.replace('SV', ''))]
-                sv_history_str = '{' + sv_history_info[0] + ' from ' + sv_history_info[2].name + " to " + sv_history_info[3].name + '}'
-                print("SV_name: {}-{}\tSV_total: {}\tSV_captured: {}\tSV_capture_rate: {}".format(sv_name, sv_history_str, str(sv_total[sv_name]),
-                                                                                                  str(sv_captured[sv_name]), sv_capture_rate))
-            print("jaccard score: {}".format(jaccard))
-            print(best_kt_alignment)
-            print(best_solved_path_alignment)
+                if sv_name not in bin_sv_total:
+                    bin_sv_total[sv_name] = 0
+                    bin_sv_captured[sv_name] = 0
+                bin_sv_total[sv_name] += sv_total[sv_name]
+                bin_sv_captured[sv_name] += sv_captured[sv_name]
+                # DEBUG
+                # print("sv_captured[sv_name]: " + str(sv_captured[sv_name]))
+                # print("bin_sv_captured[sv_name]: " + str(bin_sv_captured[sv_name]))
+                # print(bin_sv_total[sv_name])
+
+        bin_sv_str = ""
+        bin_jaccard_num = 0
+        bin_jaccard_denom = 0
+        for sv_name in bin_sv_total:
+            sv_capture_rate = bin_sv_captured[sv_name] / bin_sv_total[sv_name]
+            sv_capture_rate = "{:.4f}".format(sv_capture_rate)
+            sv_history_info = genome.history[int(sv_name.replace('SV', ''))]
+            sv_history_str = '{' + sv_history_info[0] + ' from ' + sv_history_info[2].name + " to " + sv_history_info[3].name + '}'
+            bin_sv_str += "SV_name: {}-{}\tSV_total: {}\tSV_captured: {}\tSV_capture_rate: {}\n".format(sv_name,
+                                                                                                            sv_history_str,
+                                                                                                            str(bin_sv_total[sv_name]),
+                                                                                                            str(bin_sv_captured[sv_name]),
+                                                                                                            sv_capture_rate)
+            bin_jaccard_num += bin_sv_captured[sv_name]
+            bin_jaccard_denom += bin_sv_total[sv_name]
+        bin_jaccard_denom += abs(bin_indel)
+        bin_jaccard = bin_jaccard_num / bin_jaccard_denom
+        bin_jaccard_str = "component {} ({}), #SV: {}, Jaccard Score: ".format(str(bin_index), chr_list_str, len(bin_sv_total))
+        if len(bin_sv_total) == 0:
+            bin_jaccard_str += 'No Event\n'
+        else:
+            bin_jaccard_str += str(bin_jaccard) + '\n'
+        genome_output_str += bin_jaccard_str + bin_sv_str + "\n" + bin_output_str + "\n"
+        if len(bin_sv_total) != 0:
+            bin_jaccard_strs.append(bin_jaccard_str)
+
+        # append stats to genome level
+        genome_indel += bin_indel
+        for sv_name in bin_sv_total:
+            if sv_name not in genome_sv_total:
+                genome_sv_total[sv_name] = 0
+                genome_sv_captured[sv_name] = 0
+            genome_sv_total[sv_name] += bin_sv_total[sv_name]
+            genome_sv_captured[sv_name] += bin_sv_captured[sv_name]
+
+    def custom_sort_sv_name(key):
+        return int(key[2:])
+    sorted_keys = sorted(genome_sv_total.keys(), key=custom_sort_sv_name)
+    genome_sv_str = ""
+    sv_captured_number = 0
+    genome_jaccard_num = 0
+    genome_jaccard_denom = 0
+    for sv_name in sorted_keys:
+        sv_capture_rate = genome_sv_captured[sv_name] / genome_sv_total[sv_name]
+        if sv_capture_rate > 0.5:
+            sv_captured_number += 1
+        sv_capture_rate = "{:.4f}".format(sv_capture_rate)
+        sv_history_info = genome.history[int(sv_name.replace('SV', ''))]
+        sv_history_str = '{' + sv_history_info[0] + ' from ' + sv_history_info[2].name + " to " + sv_history_info[3].name + '}'
+        genome_sv_str += "SV_name: {}-{}\tSV_total: {}\tSV_captured: {}\tSV_capture_rate: {}\n".format(sv_name,
+                                                                                                       sv_history_str,
+                                                                                                       str(genome_sv_total[sv_name]),
+                                                                                                       str(genome_sv_captured[sv_name]),
+                                                                                                       sv_capture_rate)
+        genome_jaccard_num += genome_sv_captured[sv_name]
+        genome_jaccard_denom += genome_sv_total[sv_name]
+
+    genome_jaccard_denom += abs(genome_indel)
+    genome_jaccard = genome_jaccard_num / genome_jaccard_denom
+    print("genome indel: {}".format(abs(genome_indel)))
+    print("genome Jaccard Score: {}".format(str(genome_jaccard)))
+    print("connected components' Jaccard Score: ")
+    print(''.join(bin_jaccard_strs))
+    print("SV: {} present, {} captured".format(str(len(sorted_keys)), str(sv_captured_number)))
+    print(genome_sv_str)
+    print(genome_output_str)
 
 
 def bin_dependent_chr(kt_path_list):
@@ -280,7 +368,8 @@ def align_paths(segment_list1, segment_list2):
         if backtrack_matrix[current_row][current_col] == "diag":
             alignment_1.insert(0, segment_list1[current_row - 1])
             alignment_2.insert(0, segment_list2[current_col - 1])
-            if segment_list1[current_row - 1].segment_type is not None and segment_list1[current_row - 1].segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
+            if segment_list1[current_row - 1].segment_type is not None and segment_list1[current_row - 1].segment_type not in ['telomere1', 'telomere2',
+                                                                                                                               'centromere', 'acrocentric']:
                 if not segment_list1[current_row - 1].segment_type.startswith('del'):
                     event_name = ': '.join(segment_list1[current_row - 1].segment_type.split(': ')[1:])
                     sv_captured[event_name] += len(segment_list1[current_row - 1])
@@ -289,7 +378,8 @@ def align_paths(segment_list1, segment_list2):
         elif backtrack_matrix[current_row][current_col] == "down":
             alignment_1.insert(0, segment_list1[current_row - 1])
             alignment_2.insert(0, "-")
-            if segment_list1[current_row - 1].segment_type is not None and segment_list1[current_row - 1].segment_type not in ['telomere1', 'telomere2', 'centromere', 'acrocentric']:
+            if segment_list1[current_row - 1].segment_type is not None and segment_list1[current_row - 1].segment_type not in ['telomere1', 'telomere2',
+                                                                                                                               'centromere', 'acrocentric']:
                 if segment_list1[current_row - 1].segment_type.startswith('del'):
                     event_name = ': '.join(segment_list1[current_row - 1].segment_type.split(': ')[1:])
                     sv_captured[event_name] += len(segment_list1[current_row - 1])
@@ -307,13 +397,13 @@ def align_paths(segment_list1, segment_list2):
         if index == "-":
             alignment_1_string += index
         else:
-            alignment_1_string += str(index)
+            alignment_1_string += index.alignment_output()
         alignment_1_string += "\t"
     for index in alignment_2:
         if index == "-":
             alignment_2_string += index
         else:
-            alignment_2_string += str(index)
+            alignment_2_string += index.alignment_output()
         alignment_2_string += "\t"
 
     # remove duplicate ghost segment's contribution in SV total and SV captured
@@ -346,29 +436,29 @@ def align_paths(segment_list1, segment_list2):
         denominator += sv_total[sv_name]
     jaccard = numerator / denominator
     if len(sv_total) == 0:
-        jaccard = "N/a"
+        jaccard = "No Event"
     else:
         jaccard = "{:.4f}".format(jaccard)
     return final_score, alignment_1_string, alignment_2_string, sv_total, sv_captured, jaccard
 
 
 def test_compare_paths():
-    # compare_paths(
-    #     "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/23Y_Cri_du_Chat_r2.1/23Y_Cri_du_Chat_r2.1.txt",
-    #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/modified_KT/23Y_Cri_du_Chat_r2.kt.txt",
-    #     "../Metadata/merged_masking_unique.bed")
+    compare_paths(
+        "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/23Y_Cri_du_Chat_r2.1/23Y_Cri_du_Chat_r2.1.txt",
+        "/scoring_files/modified_KT_archieve/23Y_Cri_du_Chat_r2.kt.txt",
+        "../Metadata/merged_masking_unique.bed")
     # compare_paths(
     #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/test_folder/23Xe10_r1.1.txt",
     #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/test_folder/23Xe10_r1.kt.txt",
     #     "../Metadata/merged_masking_unique.bed")
     # compare_paths(
     #     "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/23X_22q11-2_distal_deletion_r1.1/23X_22q11-2_distal_deletion_r1.1.txt",
-    #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/modified_KT/23X_22q11-2_distal_deletion_r1.kt.txt",
+    #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/scoring_files/23X_22q11-2_distal_deletion_r1.kt.txt",
     #     "../Metadata/merged_masking_unique.bed")
-    compare_paths(
-        "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/STS_r1.1/STS_r1.1.txt",
-        "/media/zhaoyang-new/workspace/KarSim/KarSimulator/modified_KT/STS_r1.kt.txt",
-        "../Metadata/merged_masking_unique.bed")
+    # compare_paths(
+    #     "/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final_v3/STS_r1.1/STS_r1.1.txt",
+    #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/scoring_files/STS_r1.kt.txt",
+    #     "../Metadata/merged_masking_unique.bed")
 
 
 def test_align_paths():

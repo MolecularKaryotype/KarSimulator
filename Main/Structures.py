@@ -71,6 +71,16 @@ class Segment:
         end_str = "{:,}".format(self.end)
         return "({}-{}-{}-{})".format(self.chr_name, start_str, end_str, self.segment_type)
 
+    def alignment_output(self):
+        start_str = "{:,}".format(self.start)
+        end_str = "{:,}".format(self.end)
+        if self.segment_type is None and self.kt_index is None:
+            return "({} {} {})".format(self.chr_name, start_str, end_str)
+        elif self.segment_type is None:
+            return "({} {} {} {})".format(self.chr_name, start_str, end_str, self.kt_index)
+        else:
+            return "({} {} {} {} {})".format(self.chr_name, start_str, end_str, self.segment_type, self.kt_index)
+
     def concise_str(self):
         if self.segment_type is None:
             s1 = ""
