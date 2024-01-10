@@ -89,11 +89,13 @@ def compare_paths(solved_path_file, kt_file, masking_file, output_file):
     genome_sv_captured = {}
     genome_sv_total = {}
     genome_indel = 0
+    genome_discont_bp = 0
     for bin_index in range(len(bin_list)):
         bin_output_str = ""
         bin_sv_captured = {}
         bin_sv_total = {}
         bin_indel = 0
+        bin_discont_bp = 0
 
         chr_list_str = ",".join(bin_list[bin_index][0])
         genome_output_str += "\ndependent component " + str(bin_index) + ": " + chr_list_str + "\n"
@@ -113,17 +115,20 @@ def compare_paths(solved_path_file, kt_file, masking_file, output_file):
             best_score, best_kt_alignment, best_solved_path_alignment, sv_total, sv_captured, jaccard = \
                 align_paths(current_kt_path.linear_path.segments,
                             current_solved_path.linear_path.segments)
+            best_discont_breakpoint_count = current_kt_path.count_discont_breakpoint()
 
             # append alignment for output
-            bin_output_str += "alignment between {}, {}: {}\n".format(kt_path_list[kt_path_index_itr].path_name,
-                                                                      solved_path_list[current_solved_path_index].path_name,
-                                                                      best_score)
+            bin_output_str += "alignment between {}, {}: {}, {}\n".format(kt_path_list[kt_path_index_itr].path_name,
+                                                                          solved_path_list[current_solved_path_index].path_name,
+                                                                          best_score,
+                                                                          best_discont_breakpoint_count)
             bin_output_str += "Alignment's Jaccard score: {}\n".format(jaccard)
             bin_output_str += best_kt_alignment + "\n"
             bin_output_str += best_solved_path_alignment + "\n"
 
             # append stats to dependent component (bin) level
             bin_indel += best_score
+            bin_discont_bp += best_discont_breakpoint_count
             for sv_name in sv_total:
                 if sv_name not in bin_sv_total:
                     bin_sv_total[sv_name] = 0
@@ -152,7 +157,7 @@ def compare_paths(solved_path_file, kt_file, masking_file, output_file):
             bin_jaccard_denom += bin_sv_total[sv_name]
         bin_jaccard_denom += abs(bin_indel)
         bin_jaccard = bin_jaccard_num / bin_jaccard_denom
-        bin_jaccard_str = "component {} ({}), #SV: {}, Jaccard Score: ".format(str(bin_index), chr_list_str, len(bin_sv_total))
+        bin_jaccard_str = "component {} ({}), #SV: {}, indel: {}, discont_bp: {}, Jaccard Score: ".format(str(bin_index), chr_list_str, len(bin_sv_total), str(abs(bin_indel)), str(bin_discont_bp))
         if len(bin_sv_total) == 0:
             bin_jaccard_str += 'No Event\n'
         else:
@@ -163,6 +168,7 @@ def compare_paths(solved_path_file, kt_file, masking_file, output_file):
 
         # append stats to genome level
         genome_indel += bin_indel
+        genome_discont_bp += bin_discont_bp
         for sv_name in bin_sv_total:
             if sv_name not in genome_sv_total:
                 genome_sv_total[sv_name] = 0
@@ -469,10 +475,10 @@ def align_paths(segment_list1, segment_list2):
 
 
 def single_run():
-    omkar_file = "../scoring_files/modified_OMKar/23X_22q11-2_distal_deletion_r1.1.txt"
+    omkar_file = "../scoring_files/modified_OMKar/modifications/archieve/23X_22q11-2_distal_deletion_r1.1.txt"
     kt_file = "../scoring_files/modified_KT/23X_22q11-2_distal_deletion_r1.kt.txt"
     masking_file = "../Metadata/merged_masking_unique.bed"
-    output_file = "../scoring_files/scores/23X_22q11-2_distal_deletion_r1.txt"
+    output_file = "../scoring_files/scores/archieve2/23X_22q11-2_distal_deletion_r1.txt"
     compare_paths(omkar_file, kt_file, masking_file, output_file)
     # compare_paths(
     #     "/media/zhaoyang-new/workspace/KarSim/KarSimulator/test_folder/23Xe10_r1.1.txt",
@@ -530,9 +536,11 @@ def batch_scoring():
             print(omkar_file_path)
             print(kt_file_path)
             print(output_file_path)
+            with open(output_file_path, 'w') as fp_write:
+                pass
             compare_paths(omkar_file_path, kt_file_path, masking_file_path, output_file_path)
             counter += 1
 
 
 if __name__ == "__main__":
-    single_run()
+    batch_scoring()
