@@ -1,0 +1,60 @@
+index	origin	start	end
+1	Chr1	10000	34658682
+2	Chr1	34658683	37085200
+3	Chr1	37085201	58164272
+4	Chr1	58164273	66349335
+5	Chr1	66349336	122026459
+CEN1	Chr1	122026460	125184587
+6	Chr1	125184588	244733214
+7	Chr1	244733215	247362505
+8	Chr1	247362506	248946421
+9	Chr3	10000	26957896
+10	Chr3	26957897	34359291
+11	Chr3	34359292	90772458
+CEN3	Chr3	90772459	93655574
+12	Chr3	93655575	143373072
+13	Chr3	143373073	145949940
+14	Chr3	145949941	198235558
+15	Chr5	10000	12533192
+16	Chr5	12533193	46485900
+CEN5	Chr5	46485901	50059807
+17	Chr5	50059808	59391752
+18	Chr5	59391753	61803264
+19	Chr5	61803265	88198728
+20	Chr5	88198729	95313558
+21	Chr5	95313559	101823178
+22	Chr5	101823179	110650658
+23	Chr5	110650659	174363429
+24	Chr5	174363430	181478258
+25	ChrX	10000	58605579
+CENX	ChrX	58605580	62412542
+26	ChrX	62412543	156030894
+---
+chromosome	KT	telo1_len	telo2_len
+Chr1a	1+,4+,3+,4+,5+,CEN1+,6+,7+,8+	10000	10000
+Chr1b	1+,2+,3+,4+,5+,CEN1+,6+,7+,8+	10000	10000
+Chr1c	1+,2+,3+,2+,5+,CEN1+,6+,7+,7+,8+	10000	10000
+Chr3a	9+,13+,11+,CEN3+,12+,10+,14+	10000	60000
+Chr3b	deleted	0	0
+Chr5a	16+,CEN5+,17+,22+,19+,20+,21+,18+,23+,24+,24+	10000	60000
+Chr5b	15+,16+,CEN5+,17+,18+,19+,20+,21+,22+,23+,24+	10000	60000
+ChrXa	25+,CENX+,26+	10000	10000
+---
+initialization
+	autosomes: ['Chr1', 'Chr3', 'Chr5']
+	autosomal copy number: 2
+	sex chromosomes: ['ChrX']
+block 1: Cri_du_Chat
+	deletion on segments [15+], from Chr5a to Chr5a
+block 2: random events 1
+	chromosomal deletion on segments [9+,10+,11+,CEN3+,12+,13+,14+], from Chr3b to Chr3b
+	chromosomal duplication on segments [1+,2+,3+,4+,5+,CEN1+,6+,7+,8+], from Chr1a to Chr1a
+block 3: random events 2: any non-aneuploidy events
+	balanced reciprocal translocation on segments [22+], from Chr5a to Chr5a
+	balanced reciprocal translocation on segments [18+], from Chr5a to Chr5a
+	balanced reciprocal translocation on segments [13+], from Chr3a to Chr3a
+	balanced reciprocal translocation on segments [10+], from Chr3a to Chr3a
+	tandem duplication on segments [7+], from Chr1c to Chr1c
+	balanced reciprocal translocation on segments [4+], from Chr1c to Chr1a
+	balanced reciprocal translocation on segments [2+], from Chr1a to Chr1c
+	tandem duplication on segments [24+], from Chr5a to Chr5a

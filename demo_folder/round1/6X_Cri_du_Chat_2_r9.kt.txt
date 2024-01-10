@@ -1,0 +1,53 @@
+index	origin	start	end
+1	Chr1	10000	26861606
+2	Chr1	26861607	36620785
+3	Chr1	36620786	122026459
+CEN1	Chr1	122026460	125184587
+4	Chr1	125184588	187600566
+5	Chr1	187600567	193211276
+6	Chr1	193211277	217656054
+7	Chr1	217656055	218101207
+8	Chr1	218101208	220575458
+9	Chr1	220575459	222606561
+10	Chr1	222606562	248946421
+11	Chr3	10000	14043288
+12	Chr3	14043289	18878019
+13	Chr3	18878020	90772458
+CEN3	Chr3	90772459	93655574
+14	Chr3	93655575	198235558
+15	Chr5	10000	12533192
+16	Chr5	12533193	46485900
+CEN5	Chr5	46485901	50059807
+17	Chr5	50059808	58241470
+18	Chr5	58241471	65685516
+19	Chr5	65685517	181478258
+20	ChrX	10000	58605579
+CENX	ChrX	58605580	62412542
+21	ChrX	62412543	156030894
+---
+chromosome	KT	telo1_len	telo2_len
+Chr1a	1+,2+,3+,CEN1+,4+,5+,6+,7+,8+,9+,7+,8+,9+,10+	10000	10000
+Chr1b	1+,2+,3+,CEN1+,4+,5+,6+,7+,8+,9+,10+	10000	10000
+Chr1c	1+,3+,CEN1+,4+,8+,6+,5+,7+,9+,10+	10000	10000
+Chr3a	11+,12-,13+,CEN3+,14+	10000	60000
+Chr3b	deleted	0	0
+Chr5a	16+,CEN5+,17+,18-,19+	10000	60000
+Chr5b	15+,16+,CEN5+,17+,18+,19+	10000	60000
+ChrXa	20+,CENX+,21+	10000	10000
+---
+initialization
+	autosomes: ['Chr1', 'Chr3', 'Chr5']
+	autosomal copy number: 2
+	sex chromosomes: ['ChrX']
+block 1: Cri_du_Chat
+	deletion on segments [15+], from Chr5a to Chr5a
+block 2: random events 1
+	chromosomal deletion on segments [11+,12+,13+,CEN3+,14+], from Chr3b to Chr3b
+	chromosomal duplication on segments [1+,2+,3+,CEN1+,4+,5+,6+,7+,8+,9+,10+], from Chr1a to Chr1a
+block 3: random events 2: any non-aneuploidy events
+	tandem duplication on segments [7+,8+,9+], from Chr1a to Chr1a
+	deletion on segments [2+], from Chr1c to Chr1c
+	inversion on segments [18+], from Chr5a to Chr5a
+	balanced reciprocal translocation on segments [5+], from Chr1c to Chr1c
+	balanced reciprocal translocation on segments [8+], from Chr1c to Chr1c
+	inversion on segments [12+], from Chr3a to Chr3a
