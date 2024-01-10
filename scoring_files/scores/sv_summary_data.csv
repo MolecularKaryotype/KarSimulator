@@ -1,0 +1,175 @@
+sample_name,sv_name,sv_size,sv_capture_rate
+12q14_microdeletion_v2_r2,inversion,2655841,1
+NF1_microdeletion_v2_r2,deletion,1156224,1
+CMT1A_v2_r2,duplication,1372992,1
+15q24_recurrent_microdeletion_v2_r1,balanced reciprocal translocation,19342824,1
+CMT1A_v2_r2,balanced reciprocal translocation,17737792,1
+15q24_recurrent_microdeletion_v2_r1,balanced reciprocal translocation,9443030,1
+15q24_recurrent_microdeletion_v2_r1,right duplication inversion,3646847,1
+CMT1A_v2_r2,balanced reciprocal translocation,11231576,1
+23X_22q11-2_distal_deletion_r1,inversion,5891112,1
+23X_22q11-2_distal_deletion_r1,deletion,6147529,1
+CMT1A_v2_r2,right duplication inversion,5402438,1
+23Y_Cri_du_Chat_r1,inversion,5575292,1
+NF1_microdeletion_v2_r1,tandem duplication,7159176,1
+23X_22q11-2_distal_deletion_r1,balanced reciprocal translocation,6676798,1
+23Y_Cri_du_Chat_r1,inversion,6745675,1
+23Y_Cri_du_Chat_r1,tandem duplication,4014993,1
+23Y_Cri_du_Chat_r1,deletion,6094836,1
+15q24_recurrent_microdeletion_v2_r1,arm deletion,104579984,1
+CMT1A_v2_r1,deletion,3413635,1
+23Y_2p15-16-1_microdeletion_r2,deletion,3660905,1
+23Y_WAGR_11p13_deletion_r2,deletion,5432296,1
+1q21-1_recurrent_microdeletion_v2_r2,tandem duplication,5813041,1
+NF1_microdeletion_v2_r1,tandem duplication,7048433,1
+1q21-1_recurrent_microdeletion_v2_r2,balanced reciprocal translocation,12206716,1
+NF1_microdeletion_v2_r1,arm deletion,122016460,1
+NF1_microdeletion_v2_r1,arm deletion,138460603,1
+NF1_microdeletion_v2_r1,deletion,7273493,1
+23Y_WAGR_11p13_deletion_r2,inversion,4482170,1
+12q14_microdeletion_v2_r2,balanced reciprocal translocation,9992771,1
+1q21-1_recurrent_microdeletion_v2_r2,nonreciprocal translocation,18558840,1
+12q14_microdeletion_v2_r2,deletion,3573607,1
+NF1_microdeletion_v2_r2,balanced reciprocal translocation,6648178,1
+NF1_microdeletion_v2_r2,tandem duplication,9012880,1
+NF1_microdeletion_v2_r2,deletion,6694787,1
+23Y_Cri_du_Chat_r1,deletion,12523192,1
+23Y_WAGR_11p13_deletion_r2,balanced reciprocal translocation,12197390,1
+23X_22q11-2_distal_deletion_r1,deletion,1817431,1
+NF1_microdeletion_v2_r1,arm deletion,56361460,1
+23Y_Cri_du_Chat_r2,inversion,5169135,1
+23Y_WAGR_11p13_deletion_r1,deletion,9105272,1
+23Y_Cri_du_Chat_r2,inversion,4582755,1
+23X_22q11_duplication_r2,tandem duplication,2437985,1
+23Y_WAGR_11p13_deletion_r1,deletion,6288845,1
+23X_22q11_duplication_r2,tandem duplication,8359875,1
+23X_22q11_duplication_r2,balanced reciprocal translocation,7551034,1
+23X_22q11-2_distal_deletion_r2,deletion,1817431,1
+CMT1A_v2_r2,deletion,7356652,1
+23X_22q11_duplication_r2,balanced reciprocal translocation,9523542,1
+23X_22q11-2_distal_deletion_r2,deletion,8333342,1
+23Y_Cri_du_Chat_r2,tandem duplication,3279330,1
+23X_22q11-2_distal_deletion_r2,tandem duplication,8178020,1
+23Y_WAGR_11p13_deletion_r1,arm deletion,138460603,1
+23X_22q11-2_distal_deletion_r2,arm deletion,104579984,1
+23X_15q26_overgrowth_r1,inversion,4299271,1
+1q21-1_recurrent_microdeletion_v2_r2,deletion,3165191,1
+CMT1A_v2_r2,tandem duplication,5258559,1
+CMT1A_v2_r1,duplication,1372992,1
+23Y_Cri_du_Chat_r2,deletion,12523192,1
+23Y_2p15-16-1_microdeletion_r2,deletion,7368784,1
+23X_15q26_overgrowth_r1,nonreciprocal translocation,7705688,1
+23X_22q11_duplication_r2,deletion,9653869,1
+23Y_2p15-16-1_microdeletion_r2,deletion,2534120,1
+23X_22q11-2_distal_deletion_r2,nonreciprocal translocation,17507140,1
+23Y_WAGR_11p13_deletion_r1,nonreciprocal translocation,16540974,1
+23X_22q11-2_distal_deletion_r2,deletion,5145863,1
+23Y_WAGR_11p13_deletion_r1,balanced reciprocal translocation,4595982,0.9999
+NF1_microdeletion_v2_r1,inversion,7528315,0.9999
+NF1_microdeletion_v2_r2,balanced reciprocal translocation,13790542,0.9999
+23Y_WAGR_11p13_deletion_r1,inversion,3750990,0.9999
+1q21-1_recurrent_microdeletion_v2_r2,balanced reciprocal translocation,10507294,0.9999
+23Y_2p15-16-1_microdeletion_r2,nonreciprocal translocation,16428352,0.9999
+15q24_recurrent_microdeletion_v2_r1,balanced reciprocal translocation,10047544,0.9999
+15q24_recurrent_microdeletion_v2_r1,balanced reciprocal translocation,18804142,0.9999
+23Y_2p15-16-1_microdeletion_r2,balanced reciprocal translocation,13302878,0.9999
+CMT1A_v2_r2,inversion,6466718,0.9999
+1q21-1_recurrent_microdeletion_v2_r2,balanced reciprocal translocation,15122418,0.9999
+15q24_recurrent_microdeletion_v2_r1,nonreciprocal translocation,17333984,0.9999
+23Y_Cri_du_Chat_r1,balanced reciprocal translocation,17731376,0.9999
+23Y_2p15-16-1_microdeletion_r2,nonreciprocal translocation,6907368,0.9999
+23Y_Cri_du_Chat_r1,balanced reciprocal translocation,15794158,0.9999
+23Y_Cri_du_Chat_r1,balanced reciprocal translocation,16374826,0.9998
+1q21-1_recurrent_microdeletion_v2_r2,balanced reciprocal translocation,12971800,0.9998
+23X_22q11-2_distal_deletion_r2,inversion,7981819,0.9998
+23Y_Cri_du_Chat_r2,balanced reciprocal translocation,10867448,0.9998
+NF1_microdeletion_v2_r2,nonreciprocal translocation,14289906,0.9998
+15q24_recurrent_microdeletion_v2_r1,tandem duplication,7437391,0.9998
+23Y_WAGR_11p13_deletion_r2,balanced reciprocal translocation,8572518,0.9998
+23Y_WAGR_11p13_deletion_r2,balanced reciprocal translocation,5504088,0.9998
+23X_22q11-2_distal_deletion_r1,balanced reciprocal translocation,4140884,0.9998
+23Y_Cri_du_Chat_r1,balanced reciprocal translocation,12008040,0.9997
+NF1_microdeletion_v2_r2,nonreciprocal translocation,14370768,0.9997
+1q21-1_recurrent_microdeletion_v2_r2,nonreciprocal translocation,11479542,0.9997
+23Y_Cri_du_Chat_r1,balanced reciprocal translocation,13204510,0.9997
+23X_22q11_duplication_r2,right duplication inversion,7709092,0.9997
+CMT1A_v2_r1,nonreciprocal translocation,14006376,0.9996
+23X_22q11-2_distal_deletion_r1,balanced reciprocal translocation,10695156,0.9996
+12q14_microdeletion_v2_r2,inversion,7205388,0.9996
+23X_22q11-2_distal_deletion_r2,nonreciprocal translocation,15780584,0.9995
+NF1_microdeletion_v2_r1,inversion,6796184,0.9995
+23Y_WAGR_11p13_deletion_r2,inversion,6501915,0.9995
+23X_22q11_duplication_r2,inversion,5887954,0.9995
+15q24_recurrent_microdeletion_v2_r1,nonreciprocal translocation,17795950,0.9995
+NF1_microdeletion_v2_r2,nonreciprocal translocation,9770784,0.9995
+12q14_microdeletion_v2_r2,inversion,4591096,0.9994
+15q24_recurrent_microdeletion_v2_r1,inversion,3720613,0.9994
+1q21-1_recurrent_microdeletion_v2_r2,balanced reciprocal translocation,4609954,0.9994
+23Y_WAGR_11p13_deletion_r2,inversion,5446033,0.9994
+23Y_2p15-16-1_microdeletion_r2,tandem duplication,5440410,0.9994
+NF1_microdeletion_v2_r2,balanced reciprocal translocation,13350114,0.9994
+15q24_recurrent_microdeletion_v2_r1,balanced reciprocal translocation,17434516,0.9993
+12q14_microdeletion_v2_r2,balanced reciprocal translocation,2759938,0.9993
+NF1_microdeletion_v2_r2,balanced reciprocal translocation,13044428,0.9993
+23X_15q26_overgrowth_r1,tandem duplication,8945419,0.9993
+23Y_Cri_du_Chat_r2,balanced reciprocal translocation,19029646,0.9993
+23Y_WAGR_11p13_deletion_r1,balanced reciprocal translocation,8207444,0.9992
+1q21-1_recurrent_microdeletion_v2_r2,balanced reciprocal translocation,4290666,0.9991
+12q14_microdeletion_v2_r2,nonreciprocal translocation,14464846,0.9991
+23Y_Cri_du_Chat_r2,deletion,4353105,0.999
+NF1_microdeletion_v2_r2,balanced reciprocal translocation,6012008,0.999
+NF1_microdeletion_v2_r1,balanced reciprocal translocation,19202768,0.999
+23Y_Cri_du_Chat_r1,tandem duplication,6150348,0.9989
+23Y_WAGR_11p13_deletion_r2,balanced reciprocal translocation,15409528,0.9989
+23X_15q26_overgrowth_r1,inversion,3102224,0.9989
+23X_22q11_duplication_r2,tandem duplication,2662502,0.9985
+23Y_WAGR_11p13_deletion_r2,inversion,5081489,0.9984
+23X_15q26_overgrowth_r1,arm deletion,165208849,0.9981
+23Y_2p15-16-1_microdeletion_r2,balanced reciprocal translocation,11041382,0.998
+23X_15q26_overgrowth_r1,deletion,7322601,0.9978
+23Y_WAGR_11p13_deletion_r1,arm deletion,92193900,0.9977
+23Y_2p15-16-1_microdeletion_r2,nonreciprocal translocation,12875862,0.9976
+23Y_WAGR_11p13_deletion_r2,nonreciprocal translocation,11063454,0.997
+15q24_recurrent_microdeletion_v2_r1,deletion,1560269,0.9967
+23X_22q11_duplication_r2,left duplication inversion,3176370,0.9965
+23Y_WAGR_11p13_deletion_r1,deletion,650751,0.9942
+12q14_microdeletion_v2_r2,left duplication inversion,7913183,0.9934
+23Y_WAGR_11p13_deletion_r2,deletion,650751,0.9915
+23X_15q26_overgrowth_r1,tandem_duplication,3166448,0.9909
+23Y_Cri_du_Chat_r2,left duplication inversion,7351978,0.9907
+NF1_microdeletion_v2_r2,left duplication inversion,7125750,0.9847
+15q24_recurrent_microdeletion_v2_r1,arm deletion,59402078,0.9844
+23X_22q11-2_distal_deletion_r1,left duplication inversion,6990756,0.9842
+23Y_Cri_du_Chat_r1,left duplication inversion,9032177,0.9812
+23X_22q11_duplication_r2,deletion,8171508,0.9772
+23X_22q11-2_distal_deletion_r1,deletion,7194565,0.9741
+1q21-1_recurrent_microdeletion_v2_r2,right duplication inversion,2528930,0.9735
+23Y_WAGR_11p13_deletion_r2,left duplication inversion,6463889,0.973
+23X_22q11_duplication_r2,tandem_duplication,2075878,0.9465
+CMT1A_v2_r2,left duplication inversion,3072530,0.9218
+23X_15q26_overgrowth_r1,left duplication inversion,6958719,0.903
+23Y_Cri_du_Chat_r1,left duplication inversion,3888311,0.7787
+CMT1A_v2_r1,left duplication inversion,3610997,0.7009
+23X_22q11_duplication_r2,nonreciprocal translocation,4672158,0.5
+NF1_microdeletion_v2_r2,balanced reciprocal translocation,19601658,0.5
+NF1_microdeletion_v2_r2,balanced reciprocal translocation,6116720,0.5
+NF1_microdeletion_v2_r2,balanced reciprocal translocation,13851008,0.5
+1q21-1_recurrent_microdeletion_v2_r2,nonreciprocal translocation,18040538,0.5
+23Y_Cri_du_Chat_r2,nonreciprocal translocation,18995934,0.4999
+12q14_microdeletion_v2_r2,nonreciprocal translocation,8516260,0.4997
+23Y_2p15-16-1_microdeletion_r2,tandem duplication,5422006,0.3521
+23Y_2p15-16-1_microdeletion_r2,left duplication inversion,2501313,0.0722
+23X_22q11-2_distal_deletion_r2,left duplication inversion,2679466,0
+1q21-1_recurrent_microdeletion_v2_r2,deletion,1349392,0
+23Y_WAGR_11p13_deletion_r1,right duplication inversion,8222550,0
+CMT1A_v2_r2,inversion,9747981,0
+CMT1A_v2_r2,deletion,3890974,0
+CMT1A_v2_r2,right duplication inversion,8146903,0
+23X_22q11-2_distal_deletion_r1,left duplication inversion,9105239,0
+23X_22q11-2_distal_deletion_r2,left duplication inversion,6032015,0
+CMT1A_v2_r1,right duplication inversion,4682480,0
+23Y_2p15-16-1_microdeletion_r2,right duplication inversion,7662727,0
+NF1_microdeletion_v2_r1,deletion,1156224,0
+23X_22q11-2_distal_deletion_r1,left duplication inversion,9206837,0
+23X_22q11-2_distal_deletion_r1,tandem duplication,3613809,0
+NF1_microdeletion_v2_r1,right duplication inversion,9096140,0
