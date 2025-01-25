@@ -1,6 +1,6 @@
 # KarSimulator
 
-### Version v0.1
+### Version v1.0
 
 ## Table of contents:
 1. [Known Issues](#known-issues)
@@ -48,8 +48,8 @@ Then, select the karyotype of interest and output the corresponding FASTA.
 `git clone https://github.com/Zhaoyang-Jia/KarSimulator.git`
 
 ## Prerequisites
-1. Python 3.9+
-2. Genome file deposited in `Genomes/` (`gunzip ./Genomes/hg38.fasta.gz` to unzip prepared hg38 genome)
+1. Python 3.8+
+2. Genome file deposited in `Genomes/` (Genome can be downloaded from https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.40/)
 3. Genome Index file deposited in `Genomes/` (hg38 indexing file is included)
 4. Dgenies (Optional for alignment plot)
 
@@ -66,7 +66,7 @@ Then, select the karyotype of interest and output the corresponding FASTA.
 | `--auto`  | [STR] | (default: all 22 autosomes) <br /> `[all]` for all 22 autosomes, `[Chr1, Chr2, etc.]` for custom selection |
 | `--sex`   | [STR] | (default: female) <br /> `[male]`, `[female]` for XY and XX,  `[ChrX, ChrY, etc.]` for custom selection    |
 | `--index` | FILE  | (default: pre-compiled hg38 index) <br /> Genome Index File                                                |
-| `-o`      | PATH  | (default: current directory) <br /> output directory                                                       |
+| `-o`      | DIR   | (default: current directory) <br /> output directory                                                       |
 
 ### Work on an input genome
 - Full random mode: `python KarSimulator.py random`
@@ -121,4 +121,4 @@ and Chr1:150,000-250,000): <br />
 | `--name`   | STR  | (default: the prefix of the input kar file) <br /> name of the output FASTA file |
 | `--genome` | FILE | (default: gh38 in ./Genomes/) Genome FASTA file                                  |
 | `--kar`    | FILE | Karyotype file containing the input karyotype                                    |
-| `-o`       | FILE | (default: same directory as Karyotype file) output directory                     |
+| `-o`       | DIR  | (default: same directory as Karyotype file) output directory                     |

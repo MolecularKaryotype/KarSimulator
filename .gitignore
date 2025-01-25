@@ -1,2 +1,10 @@
+# pycharm config files
+**/.idea/workspace.xml
+**/.idea/tasks.xml
+*.iws
+
+*.DS_Store
 *.fasta
 *.fasta.gz
+/__pycache__/
+/test_install_output/

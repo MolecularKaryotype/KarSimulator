@@ -71,34 +71,34 @@ CENX	ChrX	58605580	62412542
 47	ChrX	62412543	156030894
 ---
 chromosome	KT	telo1_len	telo2_len
-Chr1a	deleted	0	0
-Chr2a	deleted	0	0
-Chr3a	deleted	0	0
-Chr4a	7+,CEN4+,8+	10000	10000
-Chr4b	7+,CEN4+,8+	10000	10000
+Chr1a	1+,CEN1+,2+	10000	10000
+Chr2a	3+,CEN2+,4+	10000	10000
+Chr3a	5+,CEN3+,6+	10000	60000
+Chr4a	deleted	0	0
 Chr5a	10+,CEN5+,11+	10000	60000
-Chr6a	12+,CEN6+,13+	60000	60000
-Chr6b	12+,CEN6+,13+	60000	60000
+Chr6a	deleted	0	0
 Chr7a	14+,CEN7+,15+	10000	10000
-Chr8a	16+,CEN8+,17+	60000	60000
+Chr7b	14+,CEN7+,15+	10000	10000
+Chr8a	deleted	0	0
 Chr9a	18+,CEN9+,19+	10000	60000
-Chr9b	deleted	0	0
-Chr10a	20+,CEN10+,21+	10000	10000
+Chr9b	18+,CEN9+,19+	10000	60000
+Chr10a	deleted	0	0
+Chr10b	20+,CEN10+,21+	10000	10000
+Chr10c	20+,CEN10+,21+	10000	10000
 Chr11a	22+,CEN11+,23+	60000	10000
 Chr12a	24+,CEN12+,25+	10000	10000
 Chr12b	24+,CEN12+,25+	10000	10000
-Chr12c	24+,CEN12+,25+	10000	10000
-Chr13a	deleted	0	0
+Chr13a	26+,CEN13+,27+	16000000	10000
 Chr14a	28+,CEN14+,29+	16000000	160000
 Chr15a	30+,CEN15+,31+	17000000	10000
 Chr16a	32+,CEN16+,33+	10000	110000
 Chr17a	34+,CEN17+,35+	60000	10000
-Chr18a	36+,CEN18+,37+	10000	110000
-Chr19a	deleted	0	0
-Chr20a	40+,CEN20+,41+	60000	110000
+Chr18a	deleted	0	0
+Chr19a	38+,CEN19+,39+	60000	10000
+Chr20a	deleted	0	0
 Chr21a	42+,CEN21+,43+	5010000	10000
 Chr22a	44+,CEN22+,45+	10510000	10000
-ChrXa	46+,CENX+,47+	10000	10000
+ChrXa	deleted	0	0
 ---
 initialization
 	autosomes: ['Chr1', 'Chr2', 'Chr3', 'Chr4', 'Chr5', 'Chr6', 'Chr7', 'Chr8', 'Chr9', 'Chr10', 'Chr11', 'Chr12', 'Chr13', 'Chr14', 'Chr15', 'Chr16', 'Chr17', 'Chr18', 'Chr19', 'Chr20', 'Chr21', 'Chr22']
@@ -107,15 +107,16 @@ initialization
 block 1: Cri_du_Chat
 	deletion on segments [9+], from Chr5a to Chr5a
 block 2: test_random1
+	chromosomal deletion on segments [46+,CENX+,47+], from ChrXa to ChrXa
+	chromosomal deletion on segments [12+,CEN6+,13+], from Chr6a to Chr6a
 	chromosomal duplication on segments [24+,CEN12+,25+], from Chr12a to Chr12a
-	chromosomal duplication on segments [24+,CEN12+,25+], from Chr12a to Chr12a
-	chromosomal deletion on segments [5+,CEN3+,6+], from Chr3a to Chr3a
+	chromosomal deletion on segments [7+,CEN4+,8+], from Chr4a to Chr4a
+	chromosomal deletion on segments [16+,CEN8+,17+], from Chr8a to Chr8a
+	chromosomal deletion on segments [36+,CEN18+,37+], from Chr18a to Chr18a
+	chromosomal duplication on segments [20+,CEN10+,21+], from Chr10a to Chr10a
+	chromosomal duplication on segments [20+,CEN10+,21+], from Chr10a to Chr10a
+	chromosomal duplication on segments [14+,CEN7+,15+], from Chr7a to Chr7a
 	chromosomal duplication on segments [18+,CEN9+,19+], from Chr9a to Chr9a
-	chromosomal deletion on segments [3+,CEN2+,4+], from Chr2a to Chr2a
-	chromosomal deletion on segments [26+,CEN13+,27+], from Chr13a to Chr13a
-	chromosomal deletion on segments [1+,CEN1+,2+], from Chr1a to Chr1a
-	chromosomal deletion on segments [38+,CEN19+,39+], from Chr19a to Chr19a
-	chromosomal deletion on segments [18+,CEN9+,19+], from Chr9b to Chr9b
-	chromosomal duplication on segments [7+,CEN4+,8+], from Chr4a to Chr4a
-block 3: temporary backup, should not be in final KT
-	chromosomal duplication on segments [12+,CEN6+,13+], from Chr6a to Chr6a
+block 3: test_random2
+	chromosomal deletion on segments [40+,CEN20+,41+], from Chr20a to Chr20a
+	chromosomal deletion on segments [20+,CEN10+,21+], from Chr10a to Chr10a

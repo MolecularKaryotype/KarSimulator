@@ -5,7 +5,8 @@ import os
 import shutil
 import sys
 
-sys.path.insert(1, '/media/zhaoyang-new/workspace/KarSim/KarSimulator/Main')
+script_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(1, f'{script_dir}/Main/')
 from Main.Start_Genome import *
 from Main.read_masking_regions import read_masking_regions
 
@@ -15,9 +16,11 @@ class IllegalIndexException(Exception):
 
 
 def rawGenome_mode(args):
-    # TODO: update all address calls to use the Code's folder as absolute path; this fixes dependencies of where the
-    #  code is called
+    # TODO: update all address calls to use the Code's folder as absolute path; this fixes dependencies of where the code is called
     print("Running rawGenome mode with arguments:", args)
+    # prep output env
+    os.makedirs(args.output_dir, exist_ok=True)
+
     autosome_list = args.autosomes.replace('[', '').replace(']', '').split(',')
     sex_chromosome_list = args.sex_chromosomes.replace('[', '').replace(']', '').split(',')
     genome = generate_raw_genome(args.copy_number, autosome_list, sex_chromosome_list, args.index_file)
@@ -49,6 +52,9 @@ def random_mode(args):
     event_settings = instruction['event_setting']
     number_of_events = instruction['number_of_events']
     number_of_iterations = instruction['number_of_iterations']
+
+    # prep output env
+    os.makedirs(instruction['output_directory'], exist_ok=True)
 
     # scale event weights
     sum_weight = 0.0
