@@ -1,0 +1,5 @@
+`new_output.kt.txt` corresponds with the `old_output.kt.txt`
+`omkar_output_format.kt.txt` does not correspond with either and is just there for reference
+
+Please distinguish the difference b/w space and tab.
+You can check by ctrl+f for space or \t

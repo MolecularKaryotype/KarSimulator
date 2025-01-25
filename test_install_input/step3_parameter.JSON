@@ -1,35 +1,35 @@
 {
-  "job_name": "test_random2",
+  "job_name": "random2_nonchr_events",
   "output_file_name": "after_random2",
   "template_KT": "./test_install_output/step2_output/after_random1_r1.kt.txt",
   "output_directory": "./test_install_output/step3_output/",
   "number_of_iterations": 5,
-  "number_of_events": 2,
+  "number_of_events": 5,
   "event_setting": [
     {
       "type": "deletion",
-      "likelihood_weight": 0,
+      "likelihood_weight": 1,
       "min_size": 100000,
       "max_size": 200000,
       "terminal_occurrence_likelihood": 0.5
     },
     {
       "type": "inversion",
-      "likelihood_weight": 0,
+      "likelihood_weight": 1,
       "min_size": 100000,
       "max_size": 200000,
       "terminal_occurrence_likelihood": 0.5
     },
     {
       "type": "tandem_duplication",
-      "likelihood_weight": 0,
+      "likelihood_weight": 1,
       "min_size": 100000,
       "max_size": 200000,
       "terminal_occurrence_likelihood": 0.5
     },
     {
       "type": "duplication_inversion",
-      "likelihood_weight": 0,
+      "likelihood_weight": 1,
       "min_size": 100000,
       "max_size": 200000,
       "left_dupinv_to_right_dupinv_likelihood": 0.5,
@@ -76,11 +76,11 @@
     },
     {
       "type": "chromosomal_deletion",
-      "likelihood_weight": 1
+      "likelihood_weight": 0
     },
     {
       "type": "chromosomal_duplication",
-      "likelihood_weight": 1
+      "likelihood_weight": 0
     }
   ]
 }

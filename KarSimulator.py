@@ -99,7 +99,7 @@ def random_mode(args):
                     if current_history_length > previous_history_length:
                         genome.mark_history('temporary backup, should not be in final KT')
                     genome.output_KT('error_logs/temp_KT')
-                    if genome.history_block_markings[current_history_length - 1] == \
+                    if current_history_length!= 0 and genome.history_block_markings[current_history_length - 1] == \
                             'temporary backup, should not be in final KT':
                         genome.pop_last_history_marking()
 

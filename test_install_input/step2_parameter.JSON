@@ -1,10 +1,10 @@
 {
-  "job_name": "test_random1",
+  "job_name": "random1_chr_events",
   "output_file_name": "after_random1",
   "template_KT": "./Precompiled_Kar/23X_Cri_du_Chat.kt.txt",
   "output_directory": "./test_install_output/step2_output/",
   "number_of_iterations": 10,
-  "number_of_events": 10,
+  "number_of_events": 2,
   "event_setting": [
     {
       "type": "deletion",

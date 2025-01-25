@@ -1,0 +1,39 @@
+index	origin	start	end
+1	Chr1	10000	122026459
+CEN1	Chr1	122026460	125184587
+2	Chr1	125184588	248946421
+3	Chr2	10000	92188145
+CEN2	Chr2	92188146	94090557
+4	Chr2	94090558	119327576
+5	Chr2	119327577	119521369
+6	Chr2	119521370	194547584
+7	Chr2	194547585	194655785
+8	Chr2	194655786	241989736
+9	Chr2	241989737	242183528
+10	Chr3	10000	19565456
+11	Chr3	19565457	19756465
+12	Chr3	19756466	90772458
+CEN3	Chr3	90772459	93655574
+13	Chr3	93655575	198235558
+14	ChrX	10000	58605579
+CENX	ChrX	58605580	62412542
+15	ChrX	62412543	156030894
+---
+chromosome	KT	telo1_len	telo2_len
+Chr1a	1+,CEN1+,2+	10000	10000
+Chr1b	1+,CEN1+,2+	10000	10000
+Chr2a	3+,CEN2+,4+,5+,6+,7+,8+,9+	10000	10000
+Chr2b	3+,CEN2+,4+,5+,6+,7-,8+,9-	10000	10000
+Chr3a	10+,11+,12+,CEN3+,13+	10000	60000
+Chr3b	10+,12+,CEN3+,13+	10000	60000
+ChrXa	14+,CENX+,15+	10000	10000
+ChrXb	14+,CENX+,15+	10000	10000
+---
+initialization
+	autosomes: ['Chr1', 'Chr2', 'Chr3']
+	autosomal copy number: 2
+	sex chromosomes: ['ChrX', 'ChrX']
+block 1: o1
+	inversion on segments [9+], from Chr2b to Chr2b
+	inversion on segments [7+], from Chr2b to Chr2b
+	deletion on segments [11+], from Chr3b to Chr3b
