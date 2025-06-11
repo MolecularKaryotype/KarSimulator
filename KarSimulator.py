@@ -52,6 +52,7 @@ def random_mode(args):
     event_settings = instruction['event_setting']
     number_of_events = instruction['number_of_events']
     number_of_iterations = instruction['number_of_iterations']
+    masking_file = instruction['masking_file']
 
     # prep output env
     os.makedirs(instruction['output_directory'], exist_ok=True)
@@ -84,7 +85,10 @@ def random_mode(args):
         previous_history_length = len(genome.history)
         full_output_file_path = output_file_prefix + "_r" + str(event_iteration_index + 1) + ".kt.txt"
 
-        masking_arm = read_masking_regions('Metadata/merged_masking_unique.bed')
+        if masking_file:
+            masking_arm = read_masking_regions(masking_file)
+        else:
+            masking_arm = Arm([], 'masking_regions')
 
         for event_index in range(number_of_events):
             # choose event
@@ -99,7 +103,7 @@ def random_mode(args):
                     if current_history_length > previous_history_length:
                         genome.mark_history('temporary backup, should not be in final KT')
                     genome.output_KT('error_logs/temp_KT')
-                    if current_history_length!= 0 and genome.history_block_markings[current_history_length - 1] == \
+                    if len(genome.history_block_markings) >= 1 and genome.history_block_markings[current_history_length - 1] == \
                             'temporary backup, should not be in final KT':
                         genome.pop_last_history_marking()
 
@@ -181,6 +185,7 @@ def random_mode(args):
                         # arm and chromosomal events don't have a starting index
                         # re-roll when arm size insufficient
                         if len(current_arm1) < current_event1_length:
+                            print('arm has insufficient length for event, re-rerolling')
                             raise IllegalIndexException
 
                         current_event_start_location1 = random.randint(0, len(current_arm1) - current_event1_length - 1)
@@ -190,7 +195,7 @@ def random_mode(args):
                             genome.locate_segments_for_event(current_arm1, current_event_start_location1,
                                                              current_event_start_location1 + current_event1_length)
                         if Arm(current_segments_1, 'event_segments').arm_intersection(masking_arm):
-                            print('segment 1 masked')
+                            print('segment 1 masked, re-rerolling')
                             raise IllegalIndexException
 
                         if current_event in translocation_events:
@@ -206,6 +211,7 @@ def random_mode(args):
 
                                 # re-roll when arm insufficient length to host both segments
                                 if left_leftover_len < current_event2_length and right_leftover_len < current_event2_length:
+                                    print('arm has insufficient length for event, re-rerolling')
                                     raise IllegalIndexException
 
                                 leftover_selection = random.choices(['left', 'right'],
@@ -227,7 +233,7 @@ def random_mode(args):
                                 genome.locate_segments_for_event(current_arm2, current_event_start_location2,
                                                                  current_event_start_location2 + current_event2_length)
                             if Arm(current_segments_2, 'event_segments').arm_intersection(masking_arm):
-                                print('segment 2 masked')
+                                print('segment 2 masked, re-rerolling')
                                 raise IllegalIndexException
 
                     def run_terminal_likelihood():
@@ -457,7 +463,7 @@ def random_mode(args):
                     # recover the previous KT version
                     genome = generate_genome_from_KT('error_logs/temp_KT')
                     current_history_length = len(genome.history)
-                    if genome.history_block_markings[current_history_length - 1] == \
+                    if len(genome.history_block_markings) >= 1 and genome.history_block_markings[current_history_length - 1] == \
                             'temporary backup, should not be in final KT':
                         genome.pop_last_history_marking()
                     continue

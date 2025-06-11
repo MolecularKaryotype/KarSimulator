@@ -13,7 +13,7 @@ def read_masking_regions(masking_file) -> Arm:
 
 
 def test():
-    print(read_masking_regions('../Metadata/merged_masking_unique.bed'))
+    print(read_masking_regions('../Metadata/hg38_merged_masking_unique.bed'))
 
 
 if __name__ == "__main__":

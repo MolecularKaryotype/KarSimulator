@@ -149,7 +149,7 @@ def report_centromere_anomaly(path_list):
 
 def test():
     path_list = read_solved_path("/media/zhaoyang-new/workspace/KarSim/OMKar_outputs/simulation_final/1q21-1_recurrent_microdeletion_r1.1/1q21-1_recurrent_microdeletion_r1.1.txt")
-    path_list = rotate_and_bin_path(path_list, "../Metadata/merged_masking_unique.bed")
+    path_list = rotate_and_bin_path(path_list, "../Metadata/hg38_merged_masking_unique.bed")
     # report_centromere_anomaly(path_list)
     for path in path_list:
         print(path)

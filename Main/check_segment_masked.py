@@ -12,33 +12,33 @@ def check_regions_masked(input_arm: Arm, masking_file):
 
 def test():
     return_value = check_regions_masked(Arm([Segment('Chr2', 147400000, 148000000)], 'test_arm'),
-                                        '../Metadata/merged_masking_unique.bed')
+                                        '../Metadata/hg38_merged_masking_unique.bed')
     print(return_value)
 
 
 def one_time_usage():
     return_value = check_regions_masked(Arm([Segment('Chr15', 74120302, 75680570)], 'test_arm'),
-                                        '../Metadata/merged_masking_unique.bed')
+                                        '../Metadata/hg38_merged_masking_unique.bed')
     print(return_value)
 
     return_value = check_regions_masked(Arm([Segment('Chr12', 64678139, 68251745)], 'test_arm'),
-                                        '../Metadata/merged_masking_unique.bed')
+                                        '../Metadata/hg38_merged_masking_unique.bed')
     print(return_value)
 
     return_value = check_regions_masked(Arm([Segment('Chr17', 30780079, 31936302)], 'test_arm'),
-                                        '../Metadata/merged_masking_unique.bed')
+                                        '../Metadata/hg38_merged_masking_unique.bed')
     print(return_value)
 
     return_value = check_regions_masked(Arm([Segment('Ch17', 36459259, 37856298)], 'test_arm'),
-                                        '../Metadata/merged_masking_unique.bed')
+                                        '../Metadata/hg38_merged_masking_unique.bed')
     print(return_value)
 
     return_value = check_regions_masked(Arm([Segment('Chr17', 14194598, 15567589)], 'test_arm'),
-                                        '../Metadata/merged_masking_unique.bed')
+                                        '../Metadata/hg38_merged_masking_unique.bed')
     print(return_value)
 
     return_value = check_regions_masked(Arm([Segment('Chr1', 147061832, 148411223)], 'test_arm'),
-                                        '../Metadata/merged_masking_unique.bed')
+                                        '../Metadata/hg38_merged_masking_unique.bed')
     print(return_value)
 
 
@@ -48,7 +48,7 @@ def cmd():
     parser.add_argument("--segment", type=str, dest='input_segment', help="in format (Chr1,10000,20000)")
     args = parser.parse_args()
 
-    masking_file = '../Metadata/merged_masking_unique.bed'
+    masking_file = '../Metadata/hg38_merged_masking_unique.bed'
     total_input = args.input_segment.split('(')
     for segment_index in range(1, len(total_input)):
         input_parsed = total_input[segment_index]
@@ -58,7 +58,7 @@ def cmd():
 
 
 def batch_check_masked_1020():
-    masking_file = '../Metadata/merged_masking_unique.bed'
+    masking_file = '../Metadata/hg38_merged_masking_unique.bed'
 
     # 22q11.2 distal deletion syndrome
     input_segment = Segment('Chr22', 21562828, 23380258)
@@ -86,7 +86,7 @@ def batch_check_masked_1020():
 
 
 def batch_check_masked_1025():
-    masking_file = '../Metadata/merged_masking_unique.bed'
+    masking_file = '../Metadata/hg38_merged_masking_unique.bed'
 
     print('CMT1A')
     input_segment = Segment('Chr17', 14194598, 15567589)
@@ -122,7 +122,7 @@ def batch_check_masked_1025():
 
 
 def batch_check_masked_ddd():
-    masking_file = '../Metadata/merged_masking_unique.bed'
+    masking_file = '../Metadata/hg38_merged_masking_unique.bed'
 
     print('\n26674')
     input_segment = Segment('Chr8', 7167369, 8173892)
@@ -166,7 +166,7 @@ def batch_check_masked_ddd():
 
 
 def batch_check_masked_1026():
-    masking_file = '../Metadata/merged_masking_unique.bed'
+    masking_file = '../Metadata/hg38_merged_masking_unique.bed'
 
     print('\n8q21.11 Microdeletion Syndrome')
     input_segment = Segment('Chr8', 76314229, 76854003)
@@ -200,7 +200,7 @@ def batch_check_masked_1026():
 
 
 def check_sunnyside():
-    masking_file = '../Metadata/merged_masking_unique.bed'
+    masking_file = '../Metadata/hg38_merged_masking_unique.bed'
 
     # 204
     input_segment = Segment('Chr15', 19024883, 22276055)
@@ -222,7 +222,7 @@ def check_sunnyside():
 
 
 def check_keyhole():
-    masking_file = '../Metadata/merged_masking_unique.bed'
+    masking_file = '../Metadata/hg38_merged_masking_unique.bed'
 
     # 1878
     input_segment = Segment('Chr9', 28188952, 28352275)

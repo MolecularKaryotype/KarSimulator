@@ -1210,7 +1210,7 @@ def break_masking_file():
             superdup_length += len(segment)
     print(superdup_length)
 
-    with open("../Metadata/merged_masking_unique.bed", "w") as fp_write:
+    with open("../Metadata/hg38_merged_masking_unique.bed", "w") as fp_write:
         fp_write.write("Chr\tStartPos\tEndPos\tType\n")
         for segment in masking_path.linear_path.segments:
             fp_write.write("{}\t{}\t{}\t{}\n".format(segment.chr_name, segment.start, segment.end,

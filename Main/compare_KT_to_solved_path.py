@@ -477,7 +477,7 @@ def align_paths(segment_list1, segment_list2):
 def single_run():
     omkar_file = "../scoring_files/modified_OMKar/modifications/archieve/23X_22q11-2_distal_deletion_r1.1.txt"
     kt_file = "../scoring_files/modified_KT/23X_22q11-2_distal_deletion_r1.kt.txt"
-    masking_file = "../Metadata/merged_masking_unique.bed"
+    masking_file = "../Metadata/hg38_merged_masking_unique.bed"
     output_file = "../scoring_files/scores/archieve2/23X_22q11-2_distal_deletion_r1.txt"
     compare_paths(omkar_file, kt_file, masking_file, output_file)
     # compare_paths(
@@ -513,7 +513,7 @@ def test_align_paths():
 
 def batch_scoring():
     import os
-    masking_file_path = "../Metadata/merged_masking_unique.bed"
+    masking_file_path = "../Metadata/hg38_merged_masking_unique.bed"
     kt_folder = "../scoring_files/modified_KT/"
     omkar_folder = "../scoring_files/modified_OMKar/"
     output_folder = "../scoring_files/scores/"

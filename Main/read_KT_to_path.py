@@ -201,7 +201,7 @@ def get_centromere_index(input_segment_list: [Segment]):
 
 def test():
     return_list = read_KT_to_path("/Users/zhaoyangjia/Library/CloudStorage/OneDrive-UCSanDiego/Bafna_Lab/KarSimulator/test_folder/23Xe10_r1.kt.txt",
-                                  "../Metadata/merged_masking_unique.bed")
+                                  "../Metadata/hg38_merged_masking_unique.bed")
     for path in return_list:
         print(path.concise_str())
 
