@@ -119,6 +119,6 @@ and Chr1:150,000-250,000): <br />
 | Argument   | Type | Description                                                                      |
 |------------|------|----------------------------------------------------------------------------------|
 | `--name`   | STR  | (default: the prefix of the input kar file) <br /> name of the output FASTA file |
-| `--genome` | FILE | (default: gh38 in ./Genomes/) Genome FASTA file                                  |
+| `--genome` | FILE | (default: hg38 in ./Genomes/) Genome FASTA file                                  |
 | `--kar`    | FILE | Karyotype file containing the input karyotype                                    |
 | `-o`       | DIR  | (default: same directory as Karyotype file) output directory                     |
