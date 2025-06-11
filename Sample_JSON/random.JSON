@@ -3,6 +3,7 @@
   "output_file_name": "demo_after_random1",
   "template_KT": "./demo_folder/demo.kt.txt",
   "output_directory": "./demo_folder/round1/",
+  "masking_file": "",
   "number_of_iterations": 10,
   "number_of_events": 10,
   "event_setting": [
