@@ -11,7 +11,8 @@ def read_FASTA(genome_path: str, chr_of_interest: [str]):
                 if line[1:].replace('\n', '') in chr_of_interest or chr_of_interest[0].lower() == 'all':
                     recording = True
                     segment_sequence = []
-                    header = line[1:].replace('\n', '')
+                    header = line[1:].replace('\n', '').split(' ')[0]
+                    header = header[0].upper() + header[1:]
             else:
                 # sequence line
                 if recording:
