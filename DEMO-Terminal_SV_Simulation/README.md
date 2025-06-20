@@ -19,10 +19,11 @@ Steps
 2. (Optional) Modify the `Terminal_SV_configs.JSON` with the desired random parameters. Current setup is the following:
    1. tandem-duplications and duplication-inversions ONLY, with 50-50 probability
    2. all SVs are terminal SVs
-   3. a total of 10 SVs per karyotype
-   4. duplication-inversions are 50-50 probability to be left/right foldbacks
+   3. a total of 20 SVs per karyotype
+   4. duplication-inversions are left foldback when on p-terminal and right foldback when on q-terminal
    5. sizes of event are between 200,000 and 5,000,000 bp, and it is sampled from a uniform distribution
    6. no masking region selected (if given a masking region file, no SV will intersect with regions from this file)
+   7. no compounding events
 3. Run random SV generator by `python KarSimulator.py random --json DEMO-Terminal_SV_Simulation/Terminal_SV_configs.JSON`
 4. Select desired karyotype to output the FASTA by `python KarSimulator.py fasta --name <output file name prefix> --genome <path to hg19 .fa/.fasta genome> --kar <path to karyotype file> -o <output DIR>`
    1. e.g. `python Karsimulator.py fasta --name demo1 --genome Genomes/hg19.fa --kar DEMO-Terminal_SV_Simulation/hg19_demo_files/terminal_duplications_46XX_r1.kt.txt -o DEMO-Terminal_SV_Simulation/hg19_demo_files/`

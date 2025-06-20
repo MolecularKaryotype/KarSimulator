@@ -53,6 +53,8 @@ def random_mode(args):
     number_of_events = instruction['number_of_events']
     number_of_iterations = instruction['number_of_iterations']
     masking_file = instruction['masking_file']
+    allow_compounding_events = instruction['allow_compounding_events']
+    max_patience = instruction['max_reroll_patience']
 
     # prep output env
     os.makedirs(instruction['output_directory'], exist_ok=True)
@@ -76,7 +78,6 @@ def random_mode(args):
         random_parameter_error_logs = os.path.join(error_logs_path, 'random_parameters.txt')
         open(random_parameter_error_logs, 'w').close()
 
-        # TODO: make error log append concise
         def error_log_tostring(function_name, *function_args):
             params = ', '.join(map(str, function_args))
             return f"{function_name}: {params}"
@@ -94,9 +95,35 @@ def random_mode(args):
             # choose event
             current_event = random.choices(supported_SVs, weights=event_likelihoods)[0]
 
+            def run_terminal_likelihood():
+                terminal_likelihood = \
+                    event_settings[access_setting_events[current_event]]['terminal_occurrence_likelihood']
+                non_terminal_likelihood = 1 - terminal_likelihood
+                terminal_status = \
+                    random.choices([True, False], [terminal_likelihood, non_terminal_likelihood])[0]
+                return terminal_status
+
+            def check_compound_event(reg):
+                ## check if the region selected overlap with previous event region
+                # tally all regions with previous events
+                prev_segs = []
+                for hist in genome.history:
+                    prev_seg = hist[1].segments
+                    prev_segs += prev_seg
+                history_event_arm = Arm(prev_segs, 'previous_event_segments')
+                return Arm(reg, 'event_segments').arm_intersection(history_event_arm)
+
+            # determine if event is terminal
+            event_with_terminal_likelihood = ['deletion', 'inversion', 'tandem_duplication', 'duplication_inversion', 'segmental_duplication']
+            if current_event in event_with_terminal_likelihood:
+                terminal_event = run_terminal_likelihood()
+            else:
+                terminal_event = False
+
             # re-roll locations until legal location is found
             executed_in_this_cycle = False
-            while not executed_in_this_cycle:
+            failed_execution = 0
+            while not executed_in_this_cycle and failed_execution < max_patience:
                 try:
                     # backup genome
                     current_history_length = len(genome.history)
@@ -180,7 +207,7 @@ def random_mode(args):
 
                     # choose start location
                     current_event_start_location1 = -1
-                    current_event_start_location2 = -1
+
                     if current_event not in [*arm_events, *chromosomal_events]:
                         # arm and chromosomal events don't have a starting index
                         # re-roll when arm size insufficient
@@ -188,26 +215,36 @@ def random_mode(args):
                             print('arm has insufficient length for event, re-rerolling')
                             raise IllegalIndexException
 
-                        current_event_start_location1 = random.randint(0, len(current_arm1) - current_event1_length - 1)
+                        if terminal_event:
+                            if current_arm1 == current_chr1.p_arm:
+                                current_event_start_location1 = 0
+                            else:
+                                current_event_start_location1 = len(current_arm1) - current_event1_length
+                        else:
+                            current_event_start_location1 = random.randint(0, len(current_arm1) - current_event1_length - 1)
 
                         # re-roll if event segment 1 is in the masking region
-                        current_segments_1, _ = \
-                            genome.locate_segments_for_event(current_arm1, current_event_start_location1,
-                                                             current_event_start_location1 + current_event1_length)
+                        current_segments_1, _ = genome.locate_segments_for_event(current_arm1, current_event_start_location1,
+                                                                                 current_event_start_location1 + current_event1_length)
                         if Arm(current_segments_1, 'event_segments').arm_intersection(masking_arm):
                             print('segment 1 masked, re-rerolling')
                             raise IllegalIndexException
 
+                        if not allow_compounding_events:
+                            conflict_with_prev_events = check_compound_event(current_segments_1)
+                            if conflict_with_prev_events:
+                                print(f'segment 1 has compound event intersection, re-rerolling')
+                                raise IllegalIndexException
+
+                        current_event_start_location2 = -1
                         if current_event in translocation_events:
                             # reciprocal translocations have a second set of range
                             if current_arm1 != current_arm2:
-                                current_event_start_location2 = random.randint(0,
-                                                                               len(current_arm2) - current_event2_length - 1)
+                                current_event_start_location2 = random.randint(0, len(current_arm2) - current_event2_length - 1)
                             else:
                                 # make sure the two regions do not overlap
                                 left_leftover_len = current_event_start_location1
-                                right_leftover_len = len(
-                                    current_arm2) - current_event_start_location1 - current_event1_length
+                                right_leftover_len = len(current_arm2) - current_event_start_location1 - current_event1_length
 
                                 # re-roll when arm insufficient length to host both segments
                                 if left_leftover_len < current_event2_length and right_leftover_len < current_event2_length:
@@ -236,22 +273,8 @@ def random_mode(args):
                                 print('segment 2 masked, re-rerolling')
                                 raise IllegalIndexException
 
-                    def run_terminal_likelihood():
-                        terminal_likelihood = \
-                            event_settings[access_setting_events[current_event]]['terminal_occurrence_likelihood']
-                        non_terminal_likelihood = 1 - terminal_likelihood
-                        terminal_status = \
-                            random.choices([True, False], [terminal_likelihood, non_terminal_likelihood])[0]
-                        return terminal_status
-
                     # perform event
                     if current_event == 'deletion':
-                        terminal_event = run_terminal_likelihood()
-                        if terminal_event:
-                            if current_arm1 == current_chr1.p_arm:
-                                current_event_start_location1 = 0
-                            else:
-                                current_event_start_location1 = len(current_arm1) - current_event1_length
 
                         with open(random_parameter_error_logs, 'a') as fp_write:
                             command_append = error_log_tostring('deletion', current_arm1,
@@ -264,12 +287,6 @@ def random_mode(args):
                         genome.append_history('deletion', event_segments, current_chr1, current_chr1)
 
                     elif current_event == 'inversion':
-                        terminal_event = run_terminal_likelihood()
-                        if terminal_event:
-                            if current_arm1 == current_chr1.p_arm:
-                                current_event_start_location1 = 0
-                            else:
-                                current_event_start_location1 = len(current_arm1) - current_event1_length
 
                         with open(random_parameter_error_logs, 'a') as fp_write:
                             command_append = error_log_tostring('inversion', current_arm1,
@@ -282,12 +299,6 @@ def random_mode(args):
                         genome.append_history('inversion', event_segments, current_chr1, current_chr1)
 
                     elif current_event == 'tandem_duplication':
-                        terminal_event = run_terminal_likelihood()
-                        if terminal_event:
-                            if current_arm1 == current_chr1.p_arm:
-                                current_event_start_location1 = 0
-                            else:
-                                current_event_start_location1 = len(current_arm1) - current_event1_length
 
                         with open(random_parameter_error_logs, 'a') as fp_write:
                             command_append = error_log_tostring('tandem duplication', current_arm1,
@@ -300,12 +311,6 @@ def random_mode(args):
                         genome.append_history('tandem duplication', event_segments, current_chr1, current_chr1)
 
                     elif current_event == 'duplication_inversion':
-                        terminal_event = run_terminal_likelihood()
-                        if terminal_event:
-                            if current_arm1 == current_chr1.p_arm:
-                                current_event_start_location1 = 0
-                            else:
-                                current_event_start_location1 = len(current_arm1) - current_event1_length
                         left_dup_inv_likelihood = \
                             event_settings[access_setting_events[current_event]][
                                 'left_dupinv_to_right_dupinv_likelihood']
@@ -340,13 +345,6 @@ def random_mode(args):
 
                     # FIXME: waiting for bug fix
                     elif current_event == 'segmental_duplication':
-                        terminal_event = run_terminal_likelihood()
-                        if terminal_event:
-                            if current_arm1 == current_chr1.p_arm:
-                                current_event_start_location1 = 0
-                            else:
-                                current_event_start_location1 = len(current_arm1) - current_event1_length
-
                         with open(random_parameter_error_logs, 'a') as fp_write:
                             command_append = error_log_tostring('segmental duplication', current_arm1,
                                                                 current_event_start_location1,
@@ -466,8 +464,11 @@ def random_mode(args):
                     if len(genome.history_block_markings) >= 1 and genome.history_block_markings[current_history_length - 1] == \
                             'temporary backup, should not be in final KT':
                         genome.pop_last_history_marking()
+                    failed_execution += 1
                     continue
                 executed_in_this_cycle = True
+            if not executed_in_this_cycle:
+                print(f'max reroll patience ({max_patience}) reached, skipping this SV iteration')
 
         # output for this random file
         genome.mark_history(job_name)

@@ -1,11 +1,13 @@
 {
   "job_name": "random terminal SVs: tandem duplications + duplication inversions",
-  "output_file_name": "terminal_duplications_46XX",
-  "template_KT": "/media/zhaoyang-new/workspace/Molecular_Karyotype/KarSimulator/DEMO-Terminal_SV_Simulation/hg19_WT_46XX.kt.txt",
-  "output_directory": "/media/zhaoyang-new/workspace/Molecular_Karyotype/KarSimulator/DEMO-Terminal_SV_Simulation/hg19_demo_files/",
+  "output_file_name": "terminal_duplications_23X",
+  "template_KT": "DEMO-Terminal_SV_Simulation/hg19_WT_23X.kt.txt",
+  "output_directory": "DEMO-Terminal_SV_Simulation/hg19_demo_files/",
   "masking_file": "",
   "number_of_iterations": 10,
-  "number_of_events": 10,
+  "number_of_events": 20,
+  "allow_compounding_events": false,
+  "max_reroll_patience": 500,
   "event_setting": [
     {
       "type": "deletion",
