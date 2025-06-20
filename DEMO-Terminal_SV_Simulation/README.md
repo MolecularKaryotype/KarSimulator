@@ -1,5 +1,11 @@
 ## Example usage to create karyotypes with terminal tandem duplications and duplication inversions
 
+Intended Goal:
+- Create terminal tandem duplications and duplication inversions
+- Generate SVs only on one haploid genome
+- Left duplication inversion only on p-terminal and right duplication inversion only on q-terminal
+- No compounded events
+
 Preparation:
 - Download hg19 genome and unzip it
 - Recommend downloading from https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/ `hg19.fa.gz` to avoid chromosome name issue
@@ -7,9 +13,9 @@ Preparation:
 Please run all code exactly at the `Karsimulator/` directory.
 
 Steps
-1. (Optional) Initialize WT genome template. 46XY and 46XX are already prepared with the following commands. Optionally, you can create haploid genome or genomes with specific set of chromosomes. (e.g. when you want to test functionality on a specific chromosome only). 
-   1. `python KarSimulator.py rawGenome --name hg19_WT_46XY --sex [male] --index Genomes/hg19_index.txt -o DEMO-Terminal_SV_Simulation/`
-   2. `python KarSimulator.py rawGenome --name hg19_WT_46XX --sex [female] --index Genomes/hg19_index.txt -o DEMO-Terminal_SV_Simulation/`
+1. (Optional) Initialize WT haploid genome template. 23X and 23Y are already prepared with the following commands. Optionally, you can create haploid genome or genomes with specific set of chromosomes. (e.g. when you want to test functionality on a specific chromosome only). 
+   1. `python KarSimulator.py rawGenome --name hg19_WT_23X --sex [ChrX] --copy 1 --index Genomes/hg19_index.txt -o DEMO-Terminal_SV_Simulation/`
+   2. `python KarSimulator.py rawGenome --name hg19_WT_23Y --sex [ChrY] --copy 1 --index Genomes/hg19_index.txt -o DEMO-Terminal_SV_Simulation/`
 2. (Optional) Modify the `Terminal_SV_configs.JSON` with the desired random parameters. Current setup is the following:
    1. tandem-duplications and duplication-inversions ONLY, with 50-50 probability
    2. all SVs are terminal SVs
