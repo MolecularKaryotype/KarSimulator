@@ -212,7 +212,7 @@ def random_mode(args):
                         # arm and chromosomal events don't have a starting index
                         # re-roll when arm size insufficient
                         if len(current_arm1) < current_event1_length:
-                            print('arm has insufficient length for event, re-rerolling')
+                            print(f'{event_iteration_index}, {event_index}: arm has insufficient length for event, re-rerolling')
                             raise IllegalIndexException
 
                         if terminal_event:
@@ -227,13 +227,13 @@ def random_mode(args):
                         current_segments_1, _ = genome.locate_segments_for_event(current_arm1, current_event_start_location1,
                                                                                  current_event_start_location1 + current_event1_length)
                         if Arm(current_segments_1, 'event_segments').arm_intersection(masking_arm):
-                            print('segment 1 masked, re-rerolling')
+                            print(f'{event_iteration_index}, {event_index}: segment 1 masked, re-rerolling')
                             raise IllegalIndexException
 
                         if not allow_compounding_events:
                             conflict_with_prev_events = check_compound_event(current_segments_1)
                             if conflict_with_prev_events:
-                                print(f'segment 1 has compound event intersection, re-rerolling')
+                                print(f'{event_iteration_index}, {event_index}: segment 1 has compound event intersection, re-rerolling')
                                 raise IllegalIndexException
 
                         current_event_start_location2 = -1
@@ -248,7 +248,7 @@ def random_mode(args):
 
                                 # re-roll when arm insufficient length to host both segments
                                 if left_leftover_len < current_event2_length and right_leftover_len < current_event2_length:
-                                    print('arm has insufficient length for event, re-rerolling')
+                                    print(f'{event_iteration_index}, {event_index}: arm has insufficient length for event, re-rerolling')
                                     raise IllegalIndexException
 
                                 leftover_selection = random.choices(['left', 'right'],
@@ -270,8 +270,14 @@ def random_mode(args):
                                 genome.locate_segments_for_event(current_arm2, current_event_start_location2,
                                                                  current_event_start_location2 + current_event2_length)
                             if Arm(current_segments_2, 'event_segments').arm_intersection(masking_arm):
-                                print('segment 2 masked, re-rerolling')
+                                print(f'{event_iteration_index}, {event_index}: segment 2 masked, re-rerolling')
                                 raise IllegalIndexException
+
+                            if not allow_compounding_events:
+                                conflict_with_prev_events = check_compound_event(current_segments_2)
+                                if conflict_with_prev_events:
+                                    print(f'{event_iteration_index}, {event_index}: segment 2 has compound event intersection, re-rerolling')
+                                    raise IllegalIndexException
 
                     # perform event
                     if current_event == 'deletion':
@@ -468,7 +474,7 @@ def random_mode(args):
                     continue
                 executed_in_this_cycle = True
             if not executed_in_this_cycle:
-                print(f'max reroll patience ({max_patience}) reached, skipping this SV iteration')
+                print(f'{event_iteration_index}, {event_index}: max reroll patience ({max_patience}) reached, skipping this SV iteration')
 
         # output for this random file
         genome.mark_history(job_name)
