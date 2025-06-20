@@ -212,7 +212,7 @@ def random_mode(args):
                         # arm and chromosomal events don't have a starting index
                         # re-roll when arm size insufficient
                         if len(current_arm1) < current_event1_length:
-                            print(f'{event_iteration_index}, {event_index}: arm has insufficient length for event, re-rerolling')
+                            print(f'{event_iteration_index}, {event_index}: arm has insufficient length for event, rerolling')
                             raise IllegalIndexException
 
                         if terminal_event:
@@ -227,13 +227,13 @@ def random_mode(args):
                         current_segments_1, _ = genome.locate_segments_for_event(current_arm1, current_event_start_location1,
                                                                                  current_event_start_location1 + current_event1_length)
                         if Arm(current_segments_1, 'event_segments').arm_intersection(masking_arm):
-                            print(f'{event_iteration_index}, {event_index}: segment 1 masked, re-rerolling')
+                            print(f'{event_iteration_index}, {event_index}: segment 1 masked, rerolling')
                             raise IllegalIndexException
 
                         if not allow_compounding_events:
                             conflict_with_prev_events = check_compound_event(current_segments_1)
                             if conflict_with_prev_events:
-                                print(f'{event_iteration_index}, {event_index}: segment 1 has compound event intersection, re-rerolling')
+                                print(f'{event_iteration_index}, {event_index}: segment 1 has compound event intersection, rerolling')
                                 raise IllegalIndexException
 
                         current_event_start_location2 = -1
@@ -248,7 +248,7 @@ def random_mode(args):
 
                                 # re-roll when arm insufficient length to host both segments
                                 if left_leftover_len < current_event2_length and right_leftover_len < current_event2_length:
-                                    print(f'{event_iteration_index}, {event_index}: arm has insufficient length for event, re-rerolling')
+                                    print(f'{event_iteration_index}, {event_index}: arm has insufficient length for event, rerolling')
                                     raise IllegalIndexException
 
                                 leftover_selection = random.choices(['left', 'right'],
@@ -270,13 +270,13 @@ def random_mode(args):
                                 genome.locate_segments_for_event(current_arm2, current_event_start_location2,
                                                                  current_event_start_location2 + current_event2_length)
                             if Arm(current_segments_2, 'event_segments').arm_intersection(masking_arm):
-                                print(f'{event_iteration_index}, {event_index}: segment 2 masked, re-rerolling')
+                                print(f'{event_iteration_index}, {event_index}: segment 2 masked, rerolling')
                                 raise IllegalIndexException
 
                             if not allow_compounding_events:
                                 conflict_with_prev_events = check_compound_event(current_segments_2)
                                 if conflict_with_prev_events:
-                                    print(f'{event_iteration_index}, {event_index}: segment 2 has compound event intersection, re-rerolling')
+                                    print(f'{event_iteration_index}, {event_index}: segment 2 has compound event intersection, rerolling')
                                     raise IllegalIndexException
 
                     # perform event
@@ -317,12 +317,11 @@ def random_mode(args):
                         genome.append_history('tandem duplication', event_segments, current_chr1, current_chr1)
 
                     elif current_event == 'duplication_inversion':
+                        dup_inv_likelihood_idx = 0 if current_arm1_value == 'p' else 1
                         left_dup_inv_likelihood = \
-                            event_settings[access_setting_events[current_event]][
-                                'left_dupinv_to_right_dupinv_likelihood']
+                            event_settings[access_setting_events[current_event]]['left_dupinv_to_right_dupinv_likelihood'][dup_inv_likelihood_idx]
                         right_dup_inv_likelihood = 1 - left_dup_inv_likelihood
-                        event_direction = \
-                            random.choices(['left', 'right'], [left_dup_inv_likelihood, right_dup_inv_likelihood])[0]
+                        event_direction = random.choices(['left', 'right'], [left_dup_inv_likelihood, right_dup_inv_likelihood])[0]
 
                         if event_direction == 'left':
                             with open(random_parameter_error_logs, 'a') as fp_write:

@@ -5,7 +5,7 @@
   "output_directory": "DEMO-Terminal_SV_Simulation/hg19_demo_files/",
   "masking_file": "",
   "number_of_iterations": 10,
-  "number_of_events": 20,
+  "number_of_events": 30,
   "allow_compounding_events": false,
   "max_reroll_patience": 500,
   "event_setting": [
@@ -35,7 +35,7 @@
       "likelihood_weight": 1,
       "min_size": 200000,
       "max_size": 5000000,
-      "left_dupinv_to_right_dupinv_likelihood": 0.5,
+      "left_dupinv_to_right_dupinv_likelihood": [1, 0],
       "terminal_occurrence_likelihood": 1
     },
     {

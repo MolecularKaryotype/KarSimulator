@@ -1,0 +1,161 @@
+index	origin	start	end
+1	Chr1	10000	2220791
+2	Chr1	2220792	121535434
+CEN1	Chr1	121535435	124535433
+3	Chr1	124535434	249240621
+4	Chr2	10000	2945246
+5	Chr2	2945247	92326171
+CEN2	Chr2	92326172	95326170
+6	Chr2	95326171	241607690
+7	Chr2	241607691	243189373
+8	Chr3	10000	1878586
+9	Chr3	1878587	90504854
+CEN3	Chr3	90504855	93504853
+10	Chr3	93504854	193228940
+11	Chr3	193228941	198012430
+12	Chr4	10000	945400
+13	Chr4	945401	49660117
+CEN4	Chr4	49660118	52660116
+14	Chr4	52660117	190393244
+15	Chr4	190393245	191144276
+16	Chr5	10000	767927
+17	Chr5	767928	46405641
+CEN5	Chr5	46405642	49405640
+18	Chr5	49405641	179839474
+19	Chr5	179839475	180905260
+20	Chr6	10000	3017533
+21	Chr6	3017534	58830166
+CEN6	Chr6	58830167	61830165
+22	Chr6	61830166	170464096
+23	Chr6	170464097	171105067
+24	Chr7	10000	822869
+25	Chr7	822870	58054331
+CEN7	Chr7	58054332	61054330
+26	Chr7	61054331	154151436
+27	Chr7	154151437	159128663
+28	Chr8	10000	43838887
+CEN8	Chr8	43838888	46838886
+29	Chr8	46838887	144191500
+30	Chr8	144191501	146354022
+31	Chr9	10000	2388204
+32	Chr9	2388205	47367679
+CEN9	Chr9	47367680	50367678
+33	Chr9	50367679	140689024
+34	Chr9	140689025	141203431
+35	Chr10	10000	2631492
+36	Chr10	2631493	39254935
+CEN10	Chr10	39254936	42254934
+37	Chr10	42254935	133522066
+38	Chr10	133522067	135524747
+39	Chr11	10000	2242164
+40	Chr11	2242165	51644205
+CEN11	Chr11	51644206	54644204
+41	Chr11	54644205	131327173
+42	Chr11	131327174	134996516
+43	Chr12	10000	34856694
+CEN12	Chr12	34856695	37856693
+44	Chr12	37856694	132793985
+45	Chr12	132793986	133841895
+46	Chr13	16000000	16000000
+CEN13	Chr13	16000001	18999999
+47	Chr13	19000000	112971365
+48	Chr13	112971366	115159878
+49	Chr14	16000000	16000000
+CEN14	Chr14	16000001	18999999
+50	Chr14	19000000	106250606
+51	Chr14	106250607	107339540
+52	Chr15	17000000	17000000
+CEN15	Chr15	17000001	19999999
+53	Chr15	20000000	99798570
+54	Chr15	99798571	102521392
+55	Chr16	10000	35335801
+CEN16	Chr16	35335802	38335800
+56	Chr16	38335801	87147926
+57	Chr16	87147927	90344753
+58	Chr17	10000	1901088
+59	Chr17	1901089	22263006
+CEN17	Chr17	22263007	25263005
+60	Chr17	25263006	81185210
+61	Chr18	10000	2696581
+62	Chr18	2696582	15460898
+CEN18	Chr18	15460899	18460897
+63	Chr18	18460898	76420579
+64	Chr18	76420580	78067248
+65	Chr19	10000	24681782
+CEN19	Chr19	24681783	27681781
+66	Chr19	27681782	59118983
+67	Chr20	10000	26369569
+CEN20	Chr20	26369570	29369568
+68	Chr20	29369569	59133544
+69	Chr20	59133545	63015520
+70	Chr21	5211193	11288129
+CEN21	Chr21	11288130	14288128
+71	Chr21	14288129	48119895
+72	Chr22	13000000	13000000
+CEN22	Chr22	13000001	15999999
+73	Chr22	16000000	51294566
+74	ChrX	10000	1120900
+75	ChrX	1120901	58632012
+CENX	ChrX	58632013	61632011
+76	ChrX	61632012	155260560
+---
+chromosome	KT	telo1_len	telo2_len
+Chr1a	1+,1+,2+,CEN1+,3+	10000	10000
+Chr2a	4+,4+,5+,CEN2+,6+,7+,7+	10000	10000
+Chr3a	8-,8+,9+,CEN3+,10+,11+,11-	10000	10000
+Chr4a	12-,12+,13+,CEN4+,14+,15+,15+	10000	10000
+Chr5a	16+,16+,17+,CEN5+,18+,19+,19-	10000	10000
+Chr6a	20+,20+,21+,CEN6+,22+,23+,23+	10000	10000
+Chr7a	24-,24+,25+,CEN7+,26+,27+,27-	10000	10000
+Chr8a	28+,CEN8+,29+,30+,30+	10000	10000
+Chr9a	31-,31+,32+,CEN9+,33+,34+,34+	10000	10000
+Chr10a	35+,35+,36+,CEN10+,37+,38+,38-	10000	10000
+Chr11a	39-,39+,40+,CEN11+,41+,42+,42-	10000	10000
+Chr12a	43+,CEN12+,44+,45+,45-	10000	10000
+Chr13a	46+,CEN13+,47+,48+,48-	16000000	10000
+Chr14a	49+,CEN14+,50+,51+,51-	16000000	10000
+Chr15a	52+,CEN15+,53+,54+,54-	17000000	10000
+Chr16a	55+,CEN16+,56+,57+,57-	10000	10000
+Chr17a	58-,58+,59+,CEN17+,60+	10000	10000
+Chr18a	61-,61+,62+,CEN18+,63+,64+,64-	10000	10000
+Chr19a	65+,CEN19+,66+	10000	10000
+Chr20a	67+,CEN20+,68+,69+,69+	10000	10000
+Chr21a	70+,CEN21+,71+	5211193	10000
+Chr22a	72+,CEN22+,73+	13000000	10000
+ChrXa	74-,74+,75+,CENX+,76+	10000	10000
+---
+initialization
+	autosomes: ['Chr1', 'Chr2', 'Chr3', 'Chr4', 'Chr5', 'Chr6', 'Chr7', 'Chr8', 'Chr9', 'Chr10', 'Chr11', 'Chr12', 'Chr13', 'Chr14', 'Chr15', 'Chr16', 'Chr17', 'Chr18', 'Chr19', 'Chr20', 'Chr21', 'Chr22']
+	autosomal copy number: 1
+	sex chromosomes: ['ChrX']
+block 1: random terminal SVs: tandem duplications + duplication inversions
+	right duplication inversion on segments [48+], from Chr13a to Chr13a
+	right duplication inversion on segments [38+], from Chr10a to Chr10a
+	right duplication inversion on segments [27+], from Chr7a to Chr7a
+	tandem duplication on segments [15+], from Chr4a to Chr4a
+	left duplication inversion on segments [12+], from Chr4a to Chr4a
+	tandem duplication on segments [34+], from Chr9a to Chr9a
+	right duplication inversion on segments [54+], from Chr15a to Chr15a
+	right duplication inversion on segments [42+], from Chr11a to Chr11a
+	left duplication inversion on segments [31+], from Chr9a to Chr9a
+	right duplication inversion on segments [57+], from Chr16a to Chr16a
+	right duplication inversion on segments [19+], from Chr5a to Chr5a
+	left duplication inversion on segments [39+], from Chr11a to Chr11a
+	tandem duplication on segments [30+], from Chr8a to Chr8a
+	right duplication inversion on segments [64+], from Chr18a to Chr18a
+	left duplication inversion on segments [8+], from Chr3a to Chr3a
+	tandem duplication on segments [69+], from Chr20a to Chr20a
+	left duplication inversion on segments [74+], from ChrXa to ChrXa
+	tandem duplication on segments [23+], from Chr6a to Chr6a
+	tandem duplication on segments [16+], from Chr5a to Chr5a
+	tandem duplication on segments [20+], from Chr6a to Chr6a
+	left duplication inversion on segments [24+], from Chr7a to Chr7a
+	right duplication inversion on segments [51+], from Chr14a to Chr14a
+	right duplication inversion on segments [11+], from Chr3a to Chr3a
+	tandem duplication on segments [1+], from Chr1a to Chr1a
+	right duplication inversion on segments [45+], from Chr12a to Chr12a
+	left duplication inversion on segments [61+], from Chr18a to Chr18a
+	tandem duplication on segments [35+], from Chr10a to Chr10a
+	tandem duplication on segments [7+], from Chr2a to Chr2a
+	tandem duplication on segments [4+], from Chr2a to Chr2a
+	left duplication inversion on segments [58+], from Chr17a to Chr17a

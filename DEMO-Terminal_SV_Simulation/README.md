@@ -27,6 +27,7 @@ Steps
 3. Run random SV generator by `python KarSimulator.py random --json DEMO-Terminal_SV_Simulation/Terminal_SV_configs.JSON`
 4. Select desired karyotype to output the FASTA by `python KarSimulator.py fasta --name <output file name prefix> --genome <path to hg19 .fa/.fasta genome> --kar <path to karyotype file> -o <output DIR>`
    1. e.g. `python Karsimulator.py fasta --name demo1 --genome Genomes/hg19.fa --kar DEMO-Terminal_SV_Simulation/hg19_demo_files/terminal_duplications_46XX_r1.kt.txt -o DEMO-Terminal_SV_Simulation/hg19_demo_files/`
+5. Generate the WT haploid 23X FASTA, run your read simulator separately on the two haploids and combine the coverage
 
 ## Optional Verification
 You can verify each FASTA by installing and running Dgenies to align and dotplot each chromosome against the reference assembly. This was already done during testing to ensure each SV is indeed present in the FASTA file as intended (https://dgenies.toulouse.inra.fr/). If the fasta files are too big, you can use `Main/split_fasta.sh` to split each fasta into separate chromosomes for alignment.
