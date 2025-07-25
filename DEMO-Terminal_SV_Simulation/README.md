@@ -7,8 +7,8 @@ Intended Goal:
 - No compounded events
 
 Preparation:
-- Download hg19 genome and unzip it
-- Recommend downloading from https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/ `hg19.fa.gz` to avoid chromosome name issue
+- Download hg19 genome and unzip it (recommend downloading from https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/ `hg19.fa.gz` to avoid chromosome name issue)
+- Download CHM13v2.0 genome and unzip it (recommend downloading from https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/analysis_set/chm13v2.0.fa.gz to avoid chromosome name issue)
 
 Please run all code exactly at the `Karsimulator/` directory.
 

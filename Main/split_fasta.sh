@@ -2,8 +2,8 @@
 ## Used for dotplotting in dgenies
 
 
-input="/media/zhaoyang-new/workspace/Molecular_Karyotype/KarSimulator/DEMO-Terminal_SV_Simulation/hg19_demo_files/hg19_46XX_demo1.fasta"
-output_dir="/media/zhaoyang-new/workspace/Molecular_Karyotype/KarSimulator/DEMO-Terminal_SV_Simulation/hg19_demo_files/demo1_header_split/"
+input=$1
+output_dir=$2
 
 mkdir -p "$output_dir"  # create output directory if it doesn't exist
 
