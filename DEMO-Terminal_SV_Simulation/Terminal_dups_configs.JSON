@@ -6,7 +6,8 @@
   "masking_file": "",
   "number_of_iterations": 10,
   "number_of_events": 30,
-  "allow_compounding_events": false,
+  "allow_segment_compounding_events": false,
+  "terminal_deletion_lock": true,
   "max_reroll_patience": 500,
   "event_setting": [
     {

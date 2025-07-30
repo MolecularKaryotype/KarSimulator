@@ -53,11 +53,15 @@ def random_mode(args):
     number_of_events = instruction['number_of_events']
     number_of_iterations = instruction['number_of_iterations']
     masking_file = instruction['masking_file']
-    allow_compounding_events = instruction['allow_compounding_events']
+    allow_compounding_events = instruction['allow_segment_compounding_events']
+    terminal_deletion_lock = instruction['terminal_deletion_lock']
     max_patience = instruction['max_reroll_patience']
 
     # prep output env
     os.makedirs(instruction['output_directory'], exist_ok=True)
+
+    # intialize terminal_deletion_lock
+    terminal_deletion_lock_list = []
 
     # scale event weights
     sum_weight = 0.0
@@ -213,13 +217,24 @@ def random_mode(args):
                         # re-roll when arm size insufficient
                         if len(current_arm1) < current_event1_length:
                             print(f'{event_iteration_index}, {event_index}: arm has insufficient length for event, rerolling')
-                            raise IllegalIndexException
+                            raise IllegalIndexException3
 
                         if terminal_event:
                             if current_arm1 == current_chr1.p_arm:
                                 current_event_start_location1 = 0
                             else:
+                                # q-arm
                                 current_event_start_location1 = len(current_arm1) - current_event1_length
+                            ## prevent addition of SV on this arm since a deletion has already occured (if lock param is present)
+                            if terminal_deletion_lock:
+                                if current_arm1 == current_chr1.p_arm:
+                                    current_arm1_code = f"{current_chr1.name}p"
+                                else:
+                                    current_arm1_code = f"{current_chr1.name}q"
+                                if current_arm1_code in terminal_deletion_lock_list:
+                                    print(f'{event_iteration_index}, {event_index}: terminal deletion locked, rerolling')
+                                    raise IllegalIndexException
+
                         else:
                             current_event_start_location1 = random.randint(0, len(current_arm1) - current_event1_length - 1)
 
@@ -291,6 +306,11 @@ def random_mode(args):
                                                          current_event_start_location1,
                                                          current_event_start_location1 + current_event1_length)
                         genome.append_history('deletion', event_segments, current_chr1, current_chr1)
+                        if terminal_event:
+                            if current_arm1 == current_chr1.p_arm:
+                                terminal_deletion_lock_list.append(f"{current_chr1.name}p")
+                            else:
+                                terminal_deletion_lock_list.append(f"{current_chr1.name}q")
 
                     elif current_event == 'inversion':
 
